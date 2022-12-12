@@ -20,6 +20,9 @@ import ToDoScreen from "./screens/ToDoScreen";
 import WelcomeScreen from "./screens/WelcomeScreen";
 import SignInScreen from "./screens/SignInScreen";
 import SignUpScreen from "./screens/SignUpScreen";
+import TripScreen from "./screens/TripScreen";
+import FavoriteScreen from "./screens/FavoriteScreen";
+import SettingsScreen from "./screens/SettingsScreen";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -49,10 +52,11 @@ const TabNavigator = () => {
         headerShown: false,
       })}
     >
+      
+
       <Tab.Screen name="Accueil" component={HomeScreen} />
+      <Tab.Screen name="Itinéraires" component={TripScreen} />
       <Tab.Screen name="Chat" component={ChatScreen} />
-      <Tab.Screen name="Profil" component={ProfilScreen} />
-      <Tab.Screen name="ToDo" component={ToDoScreen} />
     </Tab.Navigator>
   );
 };
@@ -60,6 +64,7 @@ const TabNavigator = () => {
 export default function App() {
   return (
     <NavigationContainer>
+<<<<<<< HEAD
       <Provider store={store}>
         <Stack.Navigator screenOptions={{ headerShown: false }}>
           <Stack.Screen name="Welcome" component={WelcomeScreen} />
@@ -70,6 +75,18 @@ export default function App() {
           <Stack.Screen name="TabNavigator" component={TabNavigator} />
         </Stack.Navigator>
       </Provider>
+=======
+      <Stack.Navigator screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="Welcome" component={WelcomeScreen} />
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="Sign in" component={SignInScreen} />
+        <Stack.Screen name="Sign up" component={SignUpScreen} />
+        <Stack.Screen name="TabNavigator" component={TabNavigator} />
+        <Stack.Screen name="Profil" component={ProfilScreen} />
+        <Stack.Screen name="Favorites" component={FavoriteScreen} />
+        <Stack.Screen name="Settings" component={SettingsScreen} />
+      </Stack.Navigator>
+>>>>>>> aab566ee1337aad1c93c181ce5871114b1943251
     </NavigationContainer>
   );
 }
