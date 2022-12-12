@@ -10,12 +10,18 @@ export default function WelcomeScreen({ navigation }) {
             <Text style={styles.textButton}>CLICK TO ACCESS TRAVELHACK</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.signInBtn}>
-        <Text style={styles.textButton}>SIGN IN</Text>
+        <TouchableOpacity
+            style={styles.button}
+            activeOpacity={0.8}
+            onPress={() => navigation.navigate('Sign in')}>
+            <Text style={styles.textButton}>Sign in</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.signupBtn}>
-        <Text style={styles.textButton}>SIGN UP</Text>
+        <TouchableOpacity
+            style={styles.button}
+            activeOpacity={0.8}
+            onPress={() => navigation.navigate('Sign up')}>
+            <Text style={styles.textButton}>Sign up</Text>
         </TouchableOpacity>
    </View>
  );

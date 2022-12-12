@@ -13,6 +13,8 @@ import ProfilScreen from "./screens/ProfilScreen";
 import ChatScreen from "./screens/ChatScreen";
 import ToDoScreen from "./screens/ToDoScreen";
 import WelcomeScreen from "./screens/WelcomeScreen";
+import SignInScreen from "./screens/SignInScreen";
+import SignUpScreen from "./screens/SignUpScreen";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -53,7 +55,9 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="Sign in/Sign up" component={WelcomeScreen} />
+        <Stack.Screen name="Welcome" component={WelcomeScreen} />
+        <Stack.Screen name="Sign in" component={SignInScreen} />
+        <Stack.Screen name="Sign up" component={SignUpScreen} />
         <Stack.Screen name="TabNavigator" component={TabNavigator} />
       </Stack.Navigator>
     </NavigationContainer>
