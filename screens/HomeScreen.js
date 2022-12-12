@@ -1,9 +1,15 @@
-import { Button, StyleSheet, Text, View } from 'react-native';
+import { Button, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 
-export default function HomeScreen() {
+export default function HomeScreen({navigation}) {
     return (
         <View style={styles.container}>
             <Text>home page</Text>
+            <TouchableOpacity
+            style={styles.button}
+            activeOpacity={0.8}
+            onPress={() => navigation.navigate('TabNavigator')}>
+            <Text style={styles.textButton}>Sign in</Text>
+        </TouchableOpacity>
         </View>
     )
 }

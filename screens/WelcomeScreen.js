@@ -6,23 +6,13 @@ export default function WelcomeScreen({ navigation }) {
         <TouchableOpacity
             style={styles.button}
             activeOpacity={0.8}
-            onPress={() => navigation.navigate('TabNavigator')}>
-            <Text style={styles.textButton}>CLICK TO ACCESS TRAVELHACK</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-            style={styles.button}
-            activeOpacity={0.8}
             onPress={() => navigation.navigate('Sign in')}>
-            <Text style={styles.textButton}>Sign in</Text>
+            <Text style={styles.textButton}>Slide to access Travelhack</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity
-            style={styles.button}
-            activeOpacity={0.8}
-            onPress={() => navigation.navigate('Sign up')}>
-            <Text style={styles.textButton}>Sign up</Text>
-        </TouchableOpacity>
+        
+
+        
    </View>
  );
 }
