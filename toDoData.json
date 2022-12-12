@@ -1,0 +1,107 @@
+[
+    {
+        "documents": [
+            "Passport, visa",
+            "Tickets for airline,boat,train,bus",
+            "Copies of passport, tickets etc",
+            "Boarding pass",
+            "Drivers licence",
+            "Health insurance card",
+            "List of medications, letter prescriber",
+            "Travel insurance",
+            "Student card"
+        ]
+    },
+    {
+        "financial": [
+            "Foreign currency",
+            "Emergency money",
+            "Credit card, debit card",
+            "Extra wallet",
+            "Money belt"
+        ]
+    },
+    {
+        "clothes": [
+            "Underwear",
+            "Socks",
+            "Sleepwear",
+            "Shirts, polos",
+            "Jeans, trousers, shorts",
+            "Dresses, skirts",
+            "Shoes, sneakers",
+            "Flipflops, slippers",
+            "Jackets, coats, raincoats",
+            "Belts, ties",
+            "Scarves, hats, gloves"
+        ]
+    },
+    {
+        "health": [
+            "Medications, pain reliever",
+            "First aid kit",
+            "Insect repellent",
+            "Oral Rehydration Solution (ORS)",
+            "Mosquito net",
+            "Birth control, condoms",
+            "Vaccines, health/dental checkup",
+            "Vitamins",
+            "Hand sanatizer/desinfectant"
+        ]
+    },
+    {
+        "travelAids": [
+            "Suitcases, backpack",
+            "Itinerary",
+            "Maps and directions",
+            "Language guide",
+            "Travel guide",
+            "Travel pillow, sleeping mask, earplugs",
+            "Travel locks",
+            "Luggage tags",
+            "Pens and paper",
+            "Snacks, drinks",
+            "Small pocket knife (not in carry-on!)",
+            "Rope, expandable clothesline"
+        ]
+    },
+    {
+        "appliances": [
+            "Cellphone, charger",
+            "Photo camera, memorycard, charger",
+            "Laptop, iPad or Tablet, E-reader, chargers",
+            "Travel adapter and converter",
+            "Travel iron",
+            "Flashlight",
+            "Headphones"
+        ]
+    },
+    {
+        "toiletries": [
+            "Toothbrush, paste, dental floss",
+            "Deodorant",
+            "Tweezers (not in carry-on!)",
+            "Soap, shampoo, conditioner",
+            "Towels",
+            "Nailcare",
+            "Tissues, toilet roll",
+            "Feminine hygiene",
+            "Makeup, makeup remover",
+            "Shaving supplies",
+            "Skin products",
+            "Brush, comb, hairproducts",
+            "Glasses, contact lenses, supplies"
+        ]
+    },
+    {
+        "generalActivities": [
+            "Swimsuit and big towel",
+            "Walking shoes",
+            "Sunglasses",
+            "Sunscreen",
+            "Umbrella",
+            "Daypack",
+            "Books, e-books, magazines"
+        ]
+    }
+]
