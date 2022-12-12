@@ -1,58 +1,55 @@
-import { Button, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { Button, StyleSheet, Text, View, TouchableOpacity, ImageBackground, SafeAreaView } from 'react-native';
 
 export default function WelcomeScreen({ navigation }) {
- return (
-   <View style={styles.container}>
+
+return (
+<View style={styles.container}>
+<ImageBackground source={require('../assets/welcome-background.png')} style={styles.background}/>
+
+<SafeAreaView style={styles.container}>
+        <Text style={styles.title}>Welcome to Travel Hack !</Text>
         <TouchableOpacity
             style={styles.button}
             activeOpacity={0.8}
             onPress={() => navigation.navigate('Sign in')}>
-            <Text style={styles.textButton}>Slide to access Travelhack</Text>
+            <Text style={styles.textButton}>Slide to travel</Text>
         </TouchableOpacity>
-
-        
-
-        
-   </View>
- );
+        </SafeAreaView>
+</View>
+);
 }
 
 const styles = StyleSheet.create({
     container: {
-      flex: 1,
-      backgroundColor: '#fff',
-      alignItems: 'center',
-      justifyContent: 'center',
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    background: {
+        width: '100%',
+        height: '100%',
+        position: 'absolute',
+        top: 0,
+        resizeMode: 'repeat',
     },
     button: {
-        display: 'flex',
         alignItems: 'center',
         paddingTop: 15,
         paddingBottom: 15,
-        width: '80%',
-        backgroundColor: 'red',
-        borderRadius: 10,
+        paddingLeft: 80,
+        paddingRight:80,
+        backgroundColor: 'white',
+        borderRadius: 20,
     },
     textButton: {
-        color: 'white',
+        color: '#20b08e',
         fontSize: 20,
+        fontWeight: 'bold',
+        fontFamily: 'Futura',
     },
-    signInBtn: {
-        display: 'flex',
-        alignItems: 'center',
-        paddingTop: 15,
-        paddingBottom: 15,
-        width: '80%',
-        backgroundColor: 'black',
-        borderRadius: 10,
+    title: {
+        fontSize: '50',
+        flex: 1,
+        fontWeight: 'bold',
     },
-    signupBtn: {
-        display: 'flex',
-        alignItems: 'center',
-        paddingTop: 15,
-        paddingBottom: 15,
-        width: '80%',
-        backgroundColor: 'black',
-        borderRadius: 10,
-    }
-  });
+});

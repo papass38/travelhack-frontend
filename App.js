@@ -15,6 +15,9 @@ import ToDoScreen from "./screens/ToDoScreen";
 import WelcomeScreen from "./screens/WelcomeScreen";
 import SignInScreen from "./screens/SignInScreen";
 import SignUpScreen from "./screens/SignUpScreen";
+import TripScreen from "./screens/TripScreen";
+import FavoriteScreen from "./screens/FavoriteScreen";
+import SettingsScreen from "./screens/SettingsScreen";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -43,10 +46,11 @@ const TabNavigator = () => {
         headerShown: false,
       })}
     >
+      
+
       <Tab.Screen name="Accueil" component={HomeScreen} />
+      <Tab.Screen name="Itinéraires" component={TripScreen} />
       <Tab.Screen name="Chat" component={ChatScreen} />
-      <Tab.Screen name="Profil" component={ProfilScreen} />
-      <Tab.Screen name="ToDo" component={ToDoScreen} />
     </Tab.Navigator>
   );
 };
@@ -60,7 +64,9 @@ export default function App() {
         <Stack.Screen name="Sign in" component={SignInScreen} />
         <Stack.Screen name="Sign up" component={SignUpScreen} />
         <Stack.Screen name="TabNavigator" component={TabNavigator} />
-        
+        <Stack.Screen name="Profil" component={ProfilScreen} />
+        <Stack.Screen name="Favorites" component={FavoriteScreen} />
+        <Stack.Screen name="Settings" component={SettingsScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

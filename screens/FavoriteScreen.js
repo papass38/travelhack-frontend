@@ -1,13 +1,13 @@
 import { Button, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 
-export default function HomeScreen({navigation}) {
+export default function FavoriteScreen({navigation}) {
     return (
         <View style={styles.container}>
             <TouchableOpacity
             style={styles.button}
             activeOpacity={0.8}
             onPress={() => navigation.navigate('Profil')}>
-            <Text>Profil</Text>
+            <Text style={styles.textButton}>Retour au profil</Text>
         </TouchableOpacity>
         </View>
     )
