@@ -1,6 +1,11 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
 
+import React from "react";
+import { Provider } from "react-redux";
+import { createStore } from "redux";
+import user from "../frontend/reducers/user";
+
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -18,6 +23,7 @@ import SignUpScreen from "./screens/SignUpScreen";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
+const store = createStore(user);
 
 const TabNavigator = () => {
   return (
@@ -54,14 +60,16 @@ const TabNavigator = () => {
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="Welcome" component={WelcomeScreen} />
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Sign in" component={SignInScreen} />
-        <Stack.Screen name="Sign up" component={SignUpScreen} />
-        <Stack.Screen name="TabNavigator" component={TabNavigator} />
-        
-      </Stack.Navigator>
+      <Provider store={store}>
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="Welcome" component={WelcomeScreen} />
+          <Stack.Screen name="Home" component={HomeScreen} />
+          <Stack.Screen name="Sign in" component={SignInScreen} />
+
+          <Stack.Screen name="Sign up" component={SignUpScreen} />
+          <Stack.Screen name="TabNavigator" component={TabNavigator} />
+        </Stack.Navigator>
+      </Provider>
     </NavigationContainer>
   );
 }
