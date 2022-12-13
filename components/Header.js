@@ -11,7 +11,7 @@ export default function Header({ navigation }) {
         name="user-circle-o"
         size={38}
         color="#fff"
-        onPress={() => navigation.navigate("Accueil")}
+        onPress={() => navigation.navigate("TabNavigator")}
       />
       <Text>Welcome {user.username}</Text>
       <Feather name="menu" size={32} color="#fff" />
