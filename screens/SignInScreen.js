@@ -10,7 +10,6 @@ import {
   TextInput,
   Pressable,
 } from "react-native";
-import { AuthSession } from "expo";
 
 export default function SignInScreen({ navigation }) {
   const dispatch = useDispatch();
@@ -19,7 +18,7 @@ export default function SignInScreen({ navigation }) {
   const [signInPassword, setSignInPassword] = useState("");
 
   const handleConnection = () => {
-    fetch("http://localhost:3000/users/signin", {
+    fetch("http://172.16.191.9:3000/users/signin", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -52,6 +51,8 @@ export default function SignInScreen({ navigation }) {
           placeholder="Password"
           onChangeText={(e) => setSignInPassword(e)}
           value={signInPassword}
+          secureTextEntry={true}
+          textContentType={"password"}
         />
 
         <Pressable style={styles.button} onPress={() => handleConnection()}>

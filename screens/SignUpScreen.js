@@ -21,7 +21,7 @@ export default function SignUpScreen({ navigation }) {
   const [signUpEmail, setSignUpEmail] = useState("");
 
   const handleRegister = () => {
-    fetch("http://localhost:3000/users/signup", {
+    fetch("http://172.16.191.9:3000/users/signup", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -48,11 +48,7 @@ export default function SignUpScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <View
-        style={styles.button}
-        activeOpacity={0.8}
-        
-      >
+      <View style={styles.button} activeOpacity={0.8}>
         <View style={styles.registerSection}>
           <TextInput
             style={styles.input}
@@ -83,6 +79,8 @@ export default function SignUpScreen({ navigation }) {
             placeholder="Password"
             onChangeText={(e) => setSignUpPassword(e)}
             value={signUpPassword}
+            secureTextEntry={true}
+            textContentType={"password"}
           />
 
           <Pressable style={styles.button} onPress={() => handleRegister()}>
