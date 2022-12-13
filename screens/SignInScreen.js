@@ -10,7 +10,6 @@ import {
   TextInput,
   Pressable,
 } from "react-native";
-import { AuthSession } from "expo";
 
 export default function SignInScreen({ navigation }) {
   const dispatch = useDispatch();
@@ -19,7 +18,7 @@ export default function SignInScreen({ navigation }) {
   const [signInPassword, setSignInPassword] = useState("");
 
   const handleConnection = () => {
-    fetch("http://172.16.188.138:3000/users/signin", {
+    fetch("http://172.16.191.9:3000/users/signin", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -40,6 +39,8 @@ export default function SignInScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
+      <Text style={styles.title}>Sign In</Text>
+      <Text style={styles.subtitle}>Access to your acount</Text>
       <View style={styles.connectionSection}>
         <TextInput
           style={styles.input}
@@ -52,19 +53,25 @@ export default function SignInScreen({ navigation }) {
           placeholder="Password"
           onChangeText={(e) => setSignInPassword(e)}
           value={signInPassword}
+          secureTextEntry={true}
+          textContentType={"password"}
         />
 
-        <Pressable style={styles.button} onPress={() => handleConnection()}>
-          <Text style={styles.buttonText}>Sign In</Text>
-        </Pressable>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => handleConnection()}
+        >
+          <Text style={styles.signInButton}>Sign In</Text>
+        </TouchableOpacity>
       </View>
+      <Text style={styles.orText}>Or Sign in With</Text>
 
-      <Text style={styles.textButton}>Don't have an account?</Text>
+      <Text style={styles.text}>Don't have an account?</Text>
       <TouchableOpacity
         style={styles.button}
         onPress={() => navigation.navigate("Sign up")}
       >
-        <Text style={styles.textButton}>Sign up</Text>
+        <Text style={styles.signUpButton}>Sign up</Text>
       </TouchableOpacity>
     </View>
   );
@@ -75,29 +82,47 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
+    padding: 20,
+    width: "100%",
+  },
+  title: {
+    fontSize: 24,
+    marginBottom: 10,
+  },
+  subtitle: {
+    fontSize: 18,
+    color: "grey",
   },
   input: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    width: "80%",
+    width: "100%",
     height: 40,
-    borderColor: "gray",
+    borderColor: "grey",
     borderWidth: 1,
     marginBottom: 20,
     padding: 10,
-    borderRadius: "20px",
+    borderRadius: 20,
     backgroundColor: "#F6F6F6",
   },
   button: {
     backgroundColor: "#20B08E",
-    padding: 10,
-    width: "80%",
-    borderRadius: "20px",
+    paddingVertical: 10,
+    width: "100%",
+    borderRadius: 20,
+    alignItems: "center",
   },
-  buttonText: {
-    color: "white",
-    textAlign: "center",
+  signUpButton: {
+    color: "F6F6F6",
     fontSize: 18,
+  },
+  orText: {
+    marginVertical: 10,
+  },
+  signInButton: {
+    color: "F6F6F6",
+    fontSize: 18,
+  },
+
+  connectionSection: {
+    width: "100%",
   },
 });
