@@ -9,6 +9,12 @@ export default function HomeScreen({navigation}) {
             onPress={() => navigation.navigate('Profil')}>
             <Text>Profil</Text>
         </TouchableOpacity>
+        <TouchableOpacity
+            style={styles.button}
+            activeOpacity={0.8}
+            onPress={() => navigation.navigate('CountrySearch')}>
+            <Text>New Trip</Text>
+        </TouchableOpacity>
         </View>
     )
 }
