@@ -60,13 +60,13 @@ export default function ToDoScreen({ navigation }) {
           <Entypo
             name="circle-with-cross"
             size={24}
-            color="#21A37C"
+            color="#fff"
             onPress={() => setModalVisible(false)}
           />
           {todo.map((elmt, index) => {
             return (
               <View key={index} style={styles.modalChoice}>
-                <Text style={{ color: "#fff" }}>{elmt}</Text>
+                <Text style={{ color: "#20B08E" }}>{elmt}</Text>
               </View>
             );
           })}
@@ -108,19 +108,25 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "60%",
   },
+  button: {
+    backgroundColor: "#20B08E",
+    height: "10%",
+    justifyContent: "center",
+    alignItems: "center",
+    width: "100%",
+    borderRadius: 15,
+  },
   modal: {
-    flex: 1,
+    backgroundColor: "#20B08E",
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#fff",
+    height: "100%",
   },
   modalChoice: {
-    backgroundColor: "#21A37C",
-    width: "90%",
-    height: 35,
+    backgroundColor: "#fff",
+    width: "80%",
     marginTop: 5,
-    padding: 5,
+    padding: 10,
     borderRadius: 5,
-    justifyContent: "center",
   },
 });
