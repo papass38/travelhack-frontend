@@ -36,7 +36,6 @@ export default function SignUpScreen({ navigation }) {
       .then((data) => {
         if (data.result) {
           dispatch(login({ username: signUpUsername, token: data.token }));
-          navigation.navigate("Home");
           setSignUpUsername("");
           setSignUpFirstName("");
           setSignUpLastName("");
@@ -84,7 +83,6 @@ export default function SignUpScreen({ navigation }) {
             onChangeText={(e) => setSignUpPassword(e)}
             value={signUpPassword}
           />
-
           <Pressable style={styles.button} onPress={() => handleRegister()}>
             <Text style={styles.buttonText}>Sign Up</Text>
           </Pressable>
@@ -95,7 +93,7 @@ export default function SignUpScreen({ navigation }) {
         style={styles.button}
         onPress={() => navigation.navigate("Sign in")}
       >
-        <Text style={styles.buttonText}>Sign in</Text>
+        <Text style={styles.textButton}>Sign in</Text>
       </TouchableOpacity>
     </View>
   );
@@ -104,31 +102,18 @@ export default function SignUpScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
   },
-  input: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    width: "80%",
-    height: 40,
-    borderColor: "gray",
-    borderWidth: 1,
-    marginBottom: 20,
-    padding: 10,
-    borderRadius: "20px",
-    backgroundColor: "#F6F6F6",
-  },
+  registerSection: {},
   button: {
-    backgroundColor: "#20B08E",
-    padding: 10,
+    display: "flex",
+    alignItems: "center",
+    paddingTop: 15,
+    paddingBottom: 15,
     width: "80%",
-    borderRadius: "20px",
-  },
-  buttonText: {
-    color: "white",
-    textAlign: "center",
-    fontSize: 18,
+    backgroundColor: "#20B08E",
+    borderRadius: 10,
   },
 });

@@ -31,7 +31,7 @@ export default function SignInScreen({ navigation }) {
       .then((data) => {
         if (data.result) {
           dispatch(login({ username: signInUsername, token: data.token }));
-          navigation.navigate("Home");
+          navigation.navigate("TabNavigator");
           setSignInUsername("");
           setSignInPassword("");
         }
