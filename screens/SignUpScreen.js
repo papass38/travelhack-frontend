@@ -47,11 +47,7 @@ export default function SignUpScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <View
-        style={styles.button}
-        activeOpacity={0.8}
-        
-      >
+      <View style={styles.button} activeOpacity={0.8}>
         <View style={styles.registerSection}>
           <TextInput
             style={styles.input}

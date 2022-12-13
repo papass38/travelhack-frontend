@@ -1,12 +1,14 @@
 import { View, StyleSheet, Text } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
+import { useSelector } from "react-redux";
 
 export default function Header() {
+  const user = useSelector((state) => state.user.value);
   return (
     <View style={styles.container}>
       <FontAwesome name="user-circle-o" size={38} color="#fff" />
-      <Text>Welcome Julien !</Text>
+      <Text>Welcome {user.username}</Text>
       <Feather name="menu" size={32} color="#fff" />
     </View>
   );
