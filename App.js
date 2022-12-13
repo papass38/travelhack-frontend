@@ -3,6 +3,7 @@ import { StyleSheet, Text, View } from "react-native";
 
 import React from "react";
 import user from "./reducers/user";
+import todo from "./reducers/toDo";
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -31,38 +32,38 @@ const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
 const store = configureStore({
-  reducer: { trip, user },
+  reducer: { trip, user, todo },
 });
 
 const TabNavigator = () => {
   return (
     <Provider store={store}>
-    <Tab.Navigator
-      screenOptions={({ route }) => ({
-        tabBarIcon: ({ color, size }) => {
-          let iconName = "";
+      <Tab.Navigator
+        screenOptions={({ route }) => ({
+          tabBarIcon: ({ color, size }) => {
+            let iconName = "";
 
-          if (route.name === "Accueil") {
-            iconName = "person-circle-outline";
-          } else if (route.name === "Profil") {
-            iconName = "person-circle-outline";
-          } else if (route.name === "Chat") {
-            iconName = "person-circle-outline";
-          } else if (route.name) {
-            iconName = "person-circle-outline";
-          }
-          return <Ionicons name={iconName} size={size} color={color} />;
-        },
+            if (route.name === "Accueil") {
+              iconName = "person-circle-outline";
+            } else if (route.name === "Profil") {
+              iconName = "person-circle-outline";
+            } else if (route.name === "Chat") {
+              iconName = "person-circle-outline";
+            } else if (route.name) {
+              iconName = "person-circle-outline";
+            }
+            return <Ionicons name={iconName} size={size} color={color} />;
+          },
 
-        tabBarActiveTintColor: "blue",
-        tabBarInactiveTintColor: "black",
-        headerShown: false,
-      })}
-    >
-      <Tab.Screen name="Accueil" component={HomeScreen} />
-      {/* <Tab.Screen name="Itinéraires" component={TripScreen} /> */}
-      <Tab.Screen name="Chat" component={ChatScreen} />
-    </Tab.Navigator>
+          tabBarActiveTintColor: "blue",
+          tabBarInactiveTintColor: "black",
+          headerShown: false,
+        })}
+      >
+        <Tab.Screen name="Accueil" component={HomeScreen} />
+        {/* <Tab.Screen name="Itinéraires" component={TripScreen} /> */}
+        <Tab.Screen name="Chat" component={ChatScreen} />
+      </Tab.Navigator>
     </Provider>
   );
 };
@@ -82,7 +83,7 @@ export default function App() {
           <Stack.Screen name="Profil" component={ProfilScreen} />
           <Stack.Screen name="Favorites" component={FavoriteScreen} />
           <Stack.Screen name="Settings" component={SettingsScreen} />
-          <Stack.Screen name='To Do' component={ToDoScreen}/>
+          <Stack.Screen name="To Do" component={ToDoScreen} />
         </Stack.Navigator>
       </Provider>
     </NavigationContainer>
