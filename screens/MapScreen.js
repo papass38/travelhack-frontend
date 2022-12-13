@@ -12,9 +12,12 @@ import {
 import MapView, { Marker } from "react-native-maps";
 import { useEffect, useState } from "react";
 import MapViewDirections from "react-native-maps-directions";
-import dataCost from "../data.json";
+import dataCost from "../costData.json";
 import { AntDesign, Entypo } from "@expo/vector-icons";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
+import Modal from "react-native-modal";
+import Header from "../components/Header";
+import ModalContent from "../components/ModalContent";
 
 // API attraction touristique : https://rapidapi.com/opentripmap/api/places1 (feed?)
 
@@ -28,13 +31,14 @@ import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplet
 
 // Place : https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-33.8670522%2C151.1957362&radius=1500&type=hotel&keyword=hotel&key=AIzaSyCx5Hb0tUovjDU45HZUySMkSN7vz_RVGC4
 
-export default function MapScreen() {
+export default function MapScreen({ navigation }) {
   const dispatch = useDispatch();
   // const [coordinates, setCoordinates] = useState([]);
   const GOOGLE_MAPS_APIKEY = "AIzaSyCx5Hb0tUovjDU45HZUySMkSN7vz_RVGC4";
   const [adress, setAdress] = useState("");
   const [distance, setDistance] = useState(0);
   const [newRegion, setRegion] = useState(initialMapView);
+  const [isModalVisible, setModalVisible] = useState(false);
   // const [step, setStep] = useState([]);
 
   //region initial de la carte par defaut : France
@@ -49,7 +53,7 @@ export default function MapScreen() {
     (state) => state.trip.value.initialDestination
   );
   const tripList = useSelector((state) => state.trip.value.trip);
-
+  console.log(tripList);
   let coordMarkers;
   let way;
   let steps;
@@ -97,13 +101,13 @@ export default function MapScreen() {
     getAdressFromString(initialSearch.adress);
   }, []);
 
+  //generation des destination
   if (tripList.length > 0) {
-    //generation des destination
     steps = tripList.map((e, i) => {
       return (
         <View style={styles.destinations}>
           <Text style={{ textAlign: "flex-start", width: "80%" }} key={i}>
-            {i +1} - {e.name}
+            {i + 1} - {e.name}
           </Text>
           <View
             style={{
@@ -113,7 +117,12 @@ export default function MapScreen() {
               justifyContent: "space-around",
             }}
           >
-            <AntDesign name="infocirlce" size={20} color="#20B08E" />
+            <AntDesign
+              name="infocirlce"
+              size={20}
+              color="#20B08E"
+              onPress={() => toggleModal()}
+            />
             <Entypo
               name="circle-with-cross"
               size={24}
@@ -182,14 +191,24 @@ export default function MapScreen() {
     )
       .then((response) => response.json())
       .then((data) => {
-        setAdress(
-          data.results[0].formatted_address.split(", ").slice(-2).join(", ")
-        );
-        const splitAdress = adress.split(" ");
+        const newAdress = data.results[0].formatted_address
+          .split(", ")
+          .slice(-2)
+          .join(", ");
+        setAdress(newAdress);
+        const splitAdress = newAdress.split(" ");
         //setStep([...step, data.results[0].formatted_address]);
         const getBudgetCountry = dataCost.find((e) =>
           e.City.includes(splitAdress[splitAdress.length - 1])
         );
+        let mealBudget = "?";
+        let roomBudget = "?";
+
+        if (getBudgetCountry) {
+          mealBudget = getBudgetCountry["Meal, Inexpensive Restaurant"] * 2;
+          roomBudget =
+            getBudgetCountry["Apartment (3 bedrooms) in City Centre"] / 31;
+        }
         //console.log(getBudgetCountry)
         // récupère les infos relatives au voyage pour les stocker
         dispatch(
@@ -200,9 +219,8 @@ export default function MapScreen() {
               .join(", "),
             coordinates: newCoords,
             budget: {
-              meal: getBudgetCountry["Meal, Inexpensive Restaurant"] * 2,
-              room:
-                getBudgetCountry["Apartment (3 bedrooms) in City Centre"] / 31,
+              meal: mealBudget,
+              room: roomBudget,
             },
             distanceFromPrevious: distance,
           })
@@ -215,8 +233,25 @@ export default function MapScreen() {
     getAdressFromString(newAdress);
   };
 
+  const toggleModal = () => {
+    setModalVisible(!isModalVisible);
+  };
+
   return (
     <View style={styles.container}>
+      <Header navigation={navigation} />
+      <Modal visible={isModalVisible} style={styles.modal}>
+        <View style={styles.modalContent}>
+          <ModalContent name={adress} />
+          <TouchableOpacity
+            onPress={() => toggleModal()}
+            style={styles.modalButton}
+          >
+            <Text style={styles.buttonText}>Close</Text>
+          </TouchableOpacity>
+        </View>
+      </Modal>
+
       <MapView
         initialRegion={newRegion}
         region={newRegion}
@@ -226,10 +261,10 @@ export default function MapScreen() {
         {coordMarkers}
         {way}
       </MapView>
-      
-        <Text style={{ textAlign: "center", fontStyle: "italic", padding : 5 }}>
-          Click on the map to create your itinerary.
-        </Text>
+
+      <Text style={{ textAlign: "center", fontStyle: "italic", padding: 5 }}>
+        Click on the map to create your itinerary.
+      </Text>
 
       <KeyboardAvoidingView style={styles.inputView}>
         <GooglePlacesAutocomplete
@@ -237,14 +272,12 @@ export default function MapScreen() {
           query={{ key: GOOGLE_MAPS_APIKEY }}
           fetchDetails={true}
           onChangeText={(value) => setAdress(value)}
-          onPress={(data, details = null) =>
-            setAdress(data.description)
-          }
+          onPress={(data, details = null) => setAdress(data.description)}
           onFail={(error) => console.log(error)}
           onNotFound={() => console.log("no results")}
           styles={{
             textInputContainer: {
-              marginBottom : 0,
+              marginBottom: 0,
               backgroundColor: "white",
               width: "90%",
               textAlign: "center",
@@ -280,20 +313,21 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     width: "100%",
+    height: "100%",
     alignItems: "center",
     justifyContent: "flexStart",
     backgroundColor: "white",
   },
   inputView: {
     //width: "100%",
-    padding : 10,
-    flexDirection : "row",
-    justifyContent : "center",
-    alignItems : "center",
+    padding: 10,
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
     height: "15%",
   },
   map: {
-    marginTop: "25%",
+    marginTop: "0%",
     width: "100%",
     height: "30%",
   },
@@ -337,6 +371,33 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.22,
     shadowRadius: 2.22,
     elevation: 3,
+  },
+  modal: {
+    flex: 1,
+    height: "100%",
+    width: "100%",
+    margin: 0,
+    backgroundColor: "rgba(27, 25, 26, 0.5)",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  modalContent: {
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "white",
+    height: "80%",
+    width: "80%",
+    padding: 20,
+    borderRadius: 20,
+  },
+  modalButton: {
+    marginTop: 10,
+    backgroundColor: "#20B08E",
+    justifyContent: "center",
+    alignItems: "center",
+    width: 100,
+    height: "10%",
+    borderRadius: 5,
   },
 });
 
