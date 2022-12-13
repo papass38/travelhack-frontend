@@ -1,14 +1,26 @@
 import { useState } from "react";
 import { View, Text, Pressable, StyleSheet } from "react-native";
 import { CheckBox } from "react-native-elements";
+import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { addTodo, filterTodo } from "../reducers/toDo";
 
 export default function CheckBoxData({ props }) {
+  const dispatch = useDispatch();
+  const todo = useSelector((state) => state.todo.value);
+
   const listingData = props.data.map((elmt, index) => {
     const [checked, setChecked] = useState(false);
-
     const handleClick = (e) => {
-      if (e === elmt) {
-        setChecked(!checked);
+      if (e === elmt && checked === false) {
+        dispatch(addTodo(elmt));
+        setChecked(true);
+        // console.log(todo);
+      } else {
+        setChecked(false);
+        dispatch(filterTodo(elmt));
+        // console.log(todo);
       }
     };
     return (

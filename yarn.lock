@@ -1349,9 +1349,10 @@
   dependencies:
     cross-spawn "^7.0.3"
 
-"@expo/vector-icons@^13.0.0", "@expo/vector-icons@expo/vector-icons":
+"@expo/vector-icons@^13.0.0":
   version "13.0.0"
-  resolved "https://codeload.github.com/expo/vector-icons/tar.gz/ef0f0e7654cae597a41843836cca950bf5ffaaeb"
+  resolved "https://registry.yarnpkg.com/@expo/vector-icons/-/vector-icons-13.0.0.tgz#e2989b85e95a82bce216f88cf8fb583ab050ec95"
+  integrity sha512-TI+l71+5aSKnShYclFa14Kum+hQMZ86b95SH6tQUG3qZEmLTarvWpKwqtTwQKqvlJSJrpFiSFu3eCuZokY6zWA==
 
 "@expo/xcpretty@^4.2.1":
   version "4.2.2"
@@ -3191,7 +3192,7 @@ expo-status-bar@~1.4.2:
   resolved "https://registry.yarnpkg.com/expo-status-bar/-/expo-status-bar-1.4.2.tgz#14f2b9a6dc7d550578421f07e0046f5fafc2b403"
   integrity sha512-ZWjO6D4ARGYfAd3SWDD3STNudHDhyBZDZjhhseqoEmsf7bS9ykny8KKOhlzJW24qIQNPhkgdvHhaw9fQwMJy3Q==
 
-expo@~47.0.8:
+expo@^47.0.8:
   version "47.0.8"
   resolved "https://registry.yarnpkg.com/expo/-/expo-47.0.8.tgz#80390fd63f8305103445069c647011915f7c32dd"
   integrity sha512-PGNCIvrnYwHH4TDFsVocq/xhWZ5DW8N3bLkZJPZZgX6VgjtVLNsbZ+0lm1inLCZHP+6xSpSKRccjGHO/QQoMBQ==

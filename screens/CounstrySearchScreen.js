@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   ScrollView,
   SafeAreaView,
+  TouchableHighlight,
 } from "react-native";
 import Header from "../components/Header"
 import { useState } from "react";
@@ -15,6 +16,10 @@ import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplet
 import { useDispatch } from "react-redux";
 import { initializeTrip } from "../reducers/trips";
 import { useSelector } from "react-redux";
+
+import { Ionicons } from '@expo/vector-icons';
+import { FontAwesome } from "@expo/vector-icons";
+
 
 export default function CountrySearchScreen({ navigation }) {
   const dispatch = useDispatch();
@@ -32,6 +37,15 @@ export default function CountrySearchScreen({ navigation }) {
     <View style={styles.container}>
       <Header></Header>
       <KeyboardAvoidingView style={styles.searchPlace}>
+
+
+<TouchableHighlight onPress={() => navigation.navigate('TabNavigator')}>
+     <View>
+     <Ionicons name="arrow-back" size={50} color="#20b08e" />      
+     </View>
+ </TouchableHighlight>
+
+
         <Text style={styles.title}>Select your destination</Text>
         <GooglePlacesAutocomplete
           placeholder="What is your destination ? "
