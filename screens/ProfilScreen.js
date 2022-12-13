@@ -54,10 +54,9 @@ const styles = StyleSheet.create({
   button: {
     display: "flex",
     alignItems: "center",
-    paddingTop: 15,
-    paddingBottom: 15,
     backgroundColor: "#20B08E",
     borderRadius: 10,
+    padding: 10,
   },
   textButton: {
     color: "white",
@@ -80,9 +79,9 @@ const styles = StyleSheet.create({
   },
   navButtons: {
     flexDirection: "row",
-    width: "30%",
+    width: "100%",
     height: "10%",
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "space-around",
   },
 });
