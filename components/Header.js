@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 
 export default function Header({ navigation }) {
   const user = useSelector((state) => state.user.value);
+  const trip = useSelector((state) => state.trip.value);
   return (
     <View style={styles.container}>
       <FontAwesome
@@ -14,6 +15,7 @@ export default function Header({ navigation }) {
         onPress={() => navigation.navigate("TabNavigator")}
       />
       <Text>Welcome {user.username}</Text>
+      <Text>Travel : {trip.initialDestination.adress}</Text>
       <Feather name="menu" size={32} color="#fff" />
     </View>
   );

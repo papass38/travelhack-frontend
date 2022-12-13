@@ -10,15 +10,14 @@ import {
   SafeAreaView,
   TouchableHighlight,
 } from "react-native";
-import Header from "../components/Header";
 import { useState } from "react";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 import { useDispatch } from "react-redux";
 import { initializeTrip } from "../reducers/trips";
-import { useSelector } from "react-redux";
 
-import { Ionicons } from "@expo/vector-icons";
+import { Ionicons } from '@expo/vector-icons';
 import { FontAwesome } from "@expo/vector-icons";
+
 
 export default function CountrySearchScreen({ navigation }) {
   const dispatch = useDispatch();
@@ -33,9 +32,17 @@ export default function CountrySearchScreen({ navigation }) {
   };
 
   return (
-    <View style={styles.container}>
-      <Header navigation={navigation} />
+    <SafeAreaView style={styles.container}>
       <KeyboardAvoidingView style={styles.searchPlace}>
+
+
+<TouchableHighlight onPress={() => navigation.navigate('TabNavigator')}>
+     <View>
+     <Ionicons name="arrow-back" size={50} color="#20b08e" />      
+     </View>
+ </TouchableHighlight>
+
+
         <Text style={styles.title}>Select your destination</Text>
         <GooglePlacesAutocomplete
           placeholder="What is your destination ? "
@@ -54,7 +61,7 @@ export default function CountrySearchScreen({ navigation }) {
             textInputContainer: {
               marginBottom: 0,
               width: "100%",
-              marginTop: 50,
+              marginTop: 100,
               borderWidth: 1,
             },
             textInput: {
@@ -74,7 +81,7 @@ export default function CountrySearchScreen({ navigation }) {
           <Text style={styles.buttonText}>Submit</Text>
         </TouchableOpacity>
       </KeyboardAvoidingView>
-    </View>
+    </SafeAreaView>
   );
 }
 
@@ -82,7 +89,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    justifyContent: "flex-start",
+    justifyContent: "center",
     backgroundColor: "white",
   },
   searchPlace: {
@@ -94,7 +101,7 @@ const styles = StyleSheet.create({
   title: {
     marginTop: 50,
     fontFamily: "Ubuntu",
-    fontSize: 55,
+    fontSize: 60,
     color: "#20B08E",
   },
   button: {
@@ -104,7 +111,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     width: "100%",
     borderRadius: 15,
-    marginBottom: 90,
   },
   buttonText: {
     color: "white",

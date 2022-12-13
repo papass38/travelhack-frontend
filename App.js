@@ -62,6 +62,7 @@ const TabNavigator = () => {
       >
         <Tab.Screen name="Accueil" component={HomeScreen} />
         {/* <Tab.Screen name="Itinéraires" component={TripScreen} /> */}
+        <Tab.Screen name='Itineraires' component={CountrySearchScreen}/>
         <Tab.Screen name="Chat" component={ChatScreen} />
       </Tab.Navigator>
     </Provider>
