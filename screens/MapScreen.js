@@ -12,9 +12,12 @@ import {
 import MapView, { Marker } from "react-native-maps";
 import { useEffect, useState } from "react";
 import MapViewDirections from "react-native-maps-directions";
-import dataCost from "../data.json";
+import dataCost from "../costData.json";
 import { AntDesign, Entypo } from "@expo/vector-icons";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
+import Modal from "react-native-modal";
+import Header from "../components/Header"
+import ModalContent from "../components/ModalContent";
 
 // API attraction touristique : https://rapidapi.com/opentripmap/api/places1 (feed?)
 
@@ -35,6 +38,7 @@ export default function MapScreen() {
   const [adress, setAdress] = useState("");
   const [distance, setDistance] = useState(0);
   const [newRegion, setRegion] = useState(initialMapView);
+  const [isModalVisible, setModalVisible] = useState(false)
   // const [step, setStep] = useState([]);
 
   //region initial de la carte par defaut : France
@@ -49,7 +53,7 @@ export default function MapScreen() {
     (state) => state.trip.value.initialDestination
   );
   const tripList = useSelector((state) => state.trip.value.trip);
-
+    console.log(tripList)
   let coordMarkers;
   let way;
   let steps;
@@ -97,8 +101,8 @@ export default function MapScreen() {
     getAdressFromString(initialSearch.adress);
   }, []);
 
+  //generation des destination
   if (tripList.length > 0) {
-    //generation des destination
     steps = tripList.map((e, i) => {
       return (
         <View style={styles.destinations}>
@@ -113,7 +117,7 @@ export default function MapScreen() {
               justifyContent: "space-around",
             }}
           >
-            <AntDesign name="infocirlce" size={20} color="#20B08E" />
+            <AntDesign name="infocirlce" size={20} color="#20B08E" onPress={() => toggleModal()}/>
             <Entypo
               name="circle-with-cross"
               size={24}
@@ -182,14 +186,22 @@ export default function MapScreen() {
     )
       .then((response) => response.json())
       .then((data) => {
+        const newAdress = data.results[0].formatted_address.split(", ").slice(-2).join(", ")
         setAdress(
-          data.results[0].formatted_address.split(", ").slice(-2).join(", ")
+          newAdress
         );
-        const splitAdress = adress.split(" ");
+        const splitAdress = newAdress.split(" ");
         //setStep([...step, data.results[0].formatted_address]);
         const getBudgetCountry = dataCost.find((e) =>
           e.City.includes(splitAdress[splitAdress.length - 1])
         );
+          let mealBudget = "?" 
+          let roomBudget = "?"
+
+        if(getBudgetCountry){
+          mealBudget = getBudgetCountry["Meal, Inexpensive Restaurant"] * 2 
+          roomBudget = getBudgetCountry["Apartment (3 bedrooms) in City Centre"] / 31
+        }
         //console.log(getBudgetCountry)
         // récupère les infos relatives au voyage pour les stocker
         dispatch(
@@ -200,9 +212,9 @@ export default function MapScreen() {
               .join(", "),
             coordinates: newCoords,
             budget: {
-              meal: getBudgetCountry["Meal, Inexpensive Restaurant"] * 2,
+              meal: mealBudget,
               room:
-                getBudgetCountry["Apartment (3 bedrooms) in City Centre"] / 31,
+                roomBudget
             },
             distanceFromPrevious: distance,
           })
@@ -215,17 +227,31 @@ export default function MapScreen() {
     getAdressFromString(newAdress);
   };
 
+
+const toggleModal = () => {
+  setModalVisible(!isModalVisible);
+};
+
   return (
     <View style={styles.container}>
+        <Header></Header>
+        <Modal visible={isModalVisible} style={styles.modal}>
+          <View style = {styles.modalContent}>
+          <ModalContent name = {adress}/>
+          <TouchableOpacity onPress={() => toggleModal()} style = {styles.modalButton}><Text style={styles.buttonText}>Close</Text></TouchableOpacity>
+          </View>
+        </Modal>
+
       <MapView
         initialRegion={newRegion}
         region={newRegion}
         style={styles.map}
         onLongPress={(e) => handleLongPress(e.nativeEvent.coordinate)}
-      >
+        >
         {coordMarkers}
         {way}
       </MapView>
+       
       
         <Text style={{ textAlign: "center", fontStyle: "italic", padding : 5 }}>
           Click on the map to create your itinerary.
@@ -280,6 +306,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     width: "100%",
+    height: "100%",
     alignItems: "center",
     justifyContent: "flexStart",
     backgroundColor: "white",
@@ -293,7 +320,7 @@ const styles = StyleSheet.create({
     height: "15%",
   },
   map: {
-    marginTop: "25%",
+    marginTop: "0%",
     width: "100%",
     height: "30%",
   },
@@ -338,6 +365,33 @@ const styles = StyleSheet.create({
     shadowRadius: 2.22,
     elevation: 3,
   },
+  modal: {
+    flex : 1, 
+    height : "100%",
+    width : "100%",
+    margin : 0,
+    backgroundColor : "rgba(27, 25, 26, 0.5)", 
+    justifyContent : "center", 
+    alignItems : "center", 
+  }, 
+  modalContent: {
+    alignItems : "center", 
+    justifyContent : "center",
+    backgroundColor : "white", 
+    height : "80%", 
+    width : "80%",
+    padding : 20,
+    borderRadius : 20
+  }, 
+  modalButton: {
+    marginTop : 10,
+    backgroundColor: "#20B08E",
+    justifyContent: "center",
+    alignItems: "center",
+    width  : 100,
+    height: "10%",
+    borderRadius: 5,
+  }
 });
 
 //box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;

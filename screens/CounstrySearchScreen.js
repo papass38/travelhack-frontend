@@ -9,10 +9,12 @@ import {
   ScrollView,
   SafeAreaView,
 } from "react-native";
+import Header from "../components/Header"
 import { useState } from "react";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 import { useDispatch } from "react-redux";
 import { initializeTrip } from "../reducers/trips";
+import { useSelector } from "react-redux";
 
 export default function CountrySearchScreen({ navigation }) {
   const dispatch = useDispatch();
@@ -27,7 +29,8 @@ export default function CountrySearchScreen({ navigation }) {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
+      <Header></Header>
       <KeyboardAvoidingView style={styles.searchPlace}>
         <Text style={styles.title}>Select your destination</Text>
         <GooglePlacesAutocomplete
@@ -47,7 +50,7 @@ export default function CountrySearchScreen({ navigation }) {
             textInputContainer: {
               marginBottom: 0,
               width: "100%",
-              marginTop: 100,
+              marginTop: 50,
               borderWidth: 1,
             },
             textInput: {
@@ -67,7 +70,7 @@ export default function CountrySearchScreen({ navigation }) {
           <Text style={styles.buttonText}>Submit</Text>
         </TouchableOpacity>
       </KeyboardAvoidingView>
-    </SafeAreaView>
+    </View>
   );
 }
 
@@ -75,7 +78,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "flex-start",
     backgroundColor: "white",
   },
   searchPlace: {
@@ -87,7 +90,7 @@ const styles = StyleSheet.create({
   title: {
     marginTop: 50,
     fontFamily: "Ubuntu",
-    fontSize: 60,
+    fontSize: 55,
     color: "#20B08E",
   },
   button: {
@@ -97,6 +100,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     width: "100%",
     borderRadius: 15,
+    marginBottom : 90
   },
   buttonText: {
     color: "white",
