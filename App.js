@@ -4,7 +4,7 @@ import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { Provider } from "react-redux";
 import { createStore } from "redux";
-import user from "../frontend/reducers/user";
+import user from "./reducers/user";
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
