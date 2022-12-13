@@ -72,6 +72,7 @@ export default function App() {
           <Stack.Screen name="Profil" component={ProfilScreen} />
           <Stack.Screen name="Favorites" component={FavoriteScreen} />
           <Stack.Screen name="Settings" component={SettingsScreen} />
+          <Stack.Screen name='To Do' component={ToDoScreen}/>
         </Stack.Navigator>
       </Provider>
     </NavigationContainer>

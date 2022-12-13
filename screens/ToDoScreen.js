@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { View, StyleSheet, Text, ScrollView, Pressable } from "react-native";
+import { View, StyleSheet, Text, ScrollView, Pressable, TouchableOpacity } from "react-native";
 import CheckBoxData from "../components/CheckBoxData";
 import ChoiceCheckList from "../components/ChoiceCheckList";
 import Header from "../components/Header";
@@ -39,6 +39,12 @@ export default function ToDoScreen() {
       <ScrollView>
         <View style={styles.choiceCheckList}>{listingCheckBox}</View>
       </ScrollView>
+      <TouchableOpacity
+            style={styles.button}
+            activeOpacity={0.8}
+            onPress={() => navigation.navigate('Profil')}>
+            <Text style={styles.textButton}>Retour au profil</Text>
+        </TouchableOpacity>
     </View>
   );
 }
