@@ -1,6 +1,9 @@
 [
-    {
-        "documents": [
+    {   
+        "id" : 1,
+        "name" : "documents",
+        "icone" : "passport",
+        "data": [
             "Passport, visa",
             "Tickets for airline,boat,train,bus",
             "Copies of passport, tickets etc",
@@ -13,7 +16,10 @@
         ]
     },
     {
-        "financial": [
+        "id" : 2,
+        "name" : "financials",
+        "icone": "money-bill-alt",
+        "data": [
             "Foreign currency",
             "Emergency money",
             "Credit card, debit card",
@@ -22,7 +28,10 @@
         ]
     },
     {
-        "clothes": [
+        "id" : 3,
+        "name" : "clothes",
+        "icone": "shoe-prints",
+        "data": [
             "Underwear",
             "Socks",
             "Sleepwear",
@@ -37,7 +46,10 @@
         ]
     },
     {
-        "health": [
+        "id" : 4,
+        "name" : "health",
+        "icone" : "heartbeat",
+        "data": [
             "Medications, pain reliever",
             "First aid kit",
             "Insect repellent",
@@ -50,7 +62,10 @@
         ]
     },
     {
-        "travelAids": [
+        "id" : 5,
+        "name" : "travelAids",
+        "icone" : "info",
+        "data": [
             "Suitcases, backpack",
             "Itinerary",
             "Maps and directions",
@@ -66,7 +81,10 @@
         ]
     },
     {
-        "appliances": [
+        "id" : 6,
+        "name" : "appliances",
+        "icone": "headphones-alt",
+        "data": [
             "Cellphone, charger",
             "Photo camera, memorycard, charger",
             "Laptop, iPad or Tablet, E-reader, chargers",
@@ -77,7 +95,10 @@
         ]
     },
     {
-        "toiletries": [
+        "id" : 7,
+        "name" : "toiletries",
+        "icone" : "toilet-paper",
+        "data": [
             "Toothbrush, paste, dental floss",
             "Deodorant",
             "Tweezers (not in carry-on!)",
@@ -94,7 +115,10 @@
         ]
     },
     {
-        "generalActivities": [
+        "id" : 8,
+        "name" : "generalActivities",
+        "icone" : "align-center",
+        "data": [
             "Swimsuit and big towel",
             "Walking shoes",
             "Sunglasses",
