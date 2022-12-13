@@ -2,15 +2,19 @@ import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
 
 import React from "react";
-import { Provider } from "react-redux";
-import { createStore } from "redux";
-import user from "../frontend/reducers/user";
+import user from "./reducers/user";
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import FontAwesome from "react-native-vector-icons/FontAwesome";
+
+import MapScreen from "./screens/MapScreen";
+import CountrySearchScreen from "./screens/CounstrySearchScreen";
+import { Provider } from "react-redux";
+import { configureStore } from "@reduxjs/toolkit";
+import trip from "./reducers/trips";
 import { Ionicons } from "@expo/vector-icons";
 
 import HomeScreen from "./screens/HomeScreen";
@@ -20,16 +24,19 @@ import ToDoScreen from "./screens/ToDoScreen";
 import WelcomeScreen from "./screens/WelcomeScreen";
 import SignInScreen from "./screens/SignInScreen";
 import SignUpScreen from "./screens/SignUpScreen";
-import TripScreen from "./screens/TripScreen";
 import FavoriteScreen from "./screens/FavoriteScreen";
 import SettingsScreen from "./screens/SettingsScreen";
 
-const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
-const store = createStore(user);
+const Stack = createNativeStackNavigator();
+
+const store = configureStore({
+  reducer: { trip, user },
+});
 
 const TabNavigator = () => {
   return (
+    <Provider store={store}>
     <Tab.Navigator
       screenOptions={({ route }) => ({
         tabBarIcon: ({ color, size }) => {
@@ -53,9 +60,10 @@ const TabNavigator = () => {
       })}
     >
       <Tab.Screen name="Accueil" component={HomeScreen} />
-      <Tab.Screen name="Itinéraires" component={TripScreen} />
+      {/* <Tab.Screen name="Itinéraires" component={TripScreen} /> */}
       <Tab.Screen name="Chat" component={ChatScreen} />
     </Tab.Navigator>
+    </Provider>
   );
 };
 
@@ -66,6 +74,8 @@ export default function App() {
         <Stack.Navigator screenOptions={{ headerShown: false }}>
           <Stack.Screen name="Welcome" component={WelcomeScreen} />
           <Stack.Screen name="Home" component={HomeScreen} />
+          <Stack.Screen name="CountrySearch" component={CountrySearchScreen} />
+          <Stack.Screen name="Map" component={MapScreen} />
           <Stack.Screen name="Sign in" component={SignInScreen} />
           <Stack.Screen name="Sign up" component={SignUpScreen} />
           <Stack.Screen name="TabNavigator" component={TabNavigator} />
