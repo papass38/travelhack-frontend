@@ -48,10 +48,10 @@ export default function SignUpScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity
+      <View
         style={styles.button}
         activeOpacity={0.8}
-        onPress={() => navigation.navigate("TabNavigator")}
+        
       >
         <View style={styles.registerSection}>
           <TextInput
@@ -89,7 +89,7 @@ export default function SignUpScreen({ navigation }) {
             <Text style={styles.buttonText}>Sign Up</Text>
           </Pressable>
         </View>
-      </TouchableOpacity>
+      </View>
       <Text>Already have an account?</Text>
       <TouchableOpacity
         style={styles.button}

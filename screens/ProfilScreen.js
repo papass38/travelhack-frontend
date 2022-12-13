@@ -21,6 +21,12 @@ export default function ProfilScreen({navigation}) {
             onPress={() => navigation.navigate('Settings')}>
             <Text style={styles.textButton}>Settings</Text>
         </TouchableOpacity>
+        <TouchableOpacity
+            style={styles.button}
+            activeOpacity={0.8}
+            onPress={() => navigation.navigate('To Do')}>
+            <Text style={styles.textButton}>To Do</Text>
+        </TouchableOpacity>
         </View>
     )
 }
