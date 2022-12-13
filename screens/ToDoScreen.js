@@ -11,7 +11,7 @@ const dataCheckList = require("../toDoData.json");
 //   console.log(elmt.documents);
 // });
 
-export default function ToDoScreen() {
+export default function ToDoScreen({navigation}) {
   const [dataId, setDataId] = useState(0);
   const listingDataCheckList = dataCheckList.map((elmt) => {
     return (
@@ -69,5 +69,13 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     width: "100%",
     height: "60%",
+  },
+  button: {
+    backgroundColor: "#20B08E",
+    height: "10%",
+    justifyContent: "center",
+    alignItems: "center",
+    width: "100%",
+    borderRadius: 15,
   },
 });

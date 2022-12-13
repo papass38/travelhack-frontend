@@ -14,6 +14,7 @@ import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplet
 import { useDispatch } from "react-redux";
 import { initializeTrip } from "../reducers/trips";
 
+
 export default function CountrySearchScreen({ navigation }) {
   const dispatch = useDispatch();
   const [destination, setDestination] = useState();
@@ -29,6 +30,14 @@ export default function CountrySearchScreen({ navigation }) {
   return (
     <SafeAreaView style={styles.container}>
       <KeyboardAvoidingView style={styles.searchPlace}>
+
+      <TouchableOpacity
+            style={styles.button}
+            activeOpacity={0.8}
+            onPress={() => navigation.navigate('TabNavigator')}>
+            <Text style={styles.textButton}>Back home</Text>
+        </TouchableOpacity>
+
         <Text style={styles.title}>Select your destination</Text>
         <GooglePlacesAutocomplete
           placeholder="What is your destination ? "
