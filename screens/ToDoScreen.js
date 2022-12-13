@@ -45,7 +45,7 @@ export default function ToDoScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <Header />
+      <Header navigation={navigation} />
 
       <View style={styles.containerCheckList}>
         <ScrollView horizontal={true}>{listingDataCheckList}</ScrollView>
