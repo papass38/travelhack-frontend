@@ -10,7 +10,6 @@ import {
   TextInput,
   Pressable,
 } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
 
 export default function SignInScreen({ navigation }) {
   const dispatch = useDispatch();
@@ -57,6 +56,7 @@ export default function SignInScreen({ navigation }) {
           secureTextEntry={true}
           textContentType={"password"}
         />
+<<<<<<< HEAD
         <TouchableOpacity
           style={styles.buttonRadient}
           onPress={() => handleConnection()}
@@ -69,11 +69,20 @@ export default function SignInScreen({ navigation }) {
           >
             <Text style={styles.signInButton}>Sign In</Text>
           </LinearGradient>
+=======
+
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => handleConnection()}
+        >
+          <Text style={styles.signInButton}>Sign In</Text>
+>>>>>>> mapBranch
         </TouchableOpacity>
       </View>
       <Text style={styles.orText}>Or Sign in With</Text>
 
       <Text style={styles.text}>Don't have an account?</Text>
+<<<<<<< HEAD
 
       <TouchableOpacity
         style={styles.buttonRadient}
@@ -87,6 +96,13 @@ export default function SignInScreen({ navigation }) {
         >
           <Text style={styles.signUpButton}>Sign up</Text>
         </LinearGradient>
+=======
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => navigation.navigate("Sign up")}
+      >
+        <Text style={styles.signUpButton}>Sign up</Text>
+>>>>>>> mapBranch
       </TouchableOpacity>
     </View>
   );
@@ -121,14 +137,14 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     marginBottom: 20,
     padding: 10,
-    borderRadius: 10,
+    borderRadius: 20,
     backgroundColor: "#F6F6F6",
   },
   button: {
     backgroundColor: "#20B08E",
     paddingVertical: 10,
     width: "100%",
-    borderRadius: 10,
+    borderRadius: 20,
     alignItems: "center",
   },
   signUpButton: {

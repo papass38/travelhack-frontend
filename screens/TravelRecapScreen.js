@@ -10,23 +10,42 @@ import {
   SafeAreaView,
   TouchableHighlight,
 } from "react-native";
-import DateTimePicker from "@react-native-community/datetimepicker";
 import Header from "../components/Header";
 import { useState } from "react";
-import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
-import { useDispatch } from "react-redux";
-import { initializeTrip } from "../reducers/trips";
 import { useSelector } from "react-redux";
-import { Ionicons } from "@expo/vector-icons";
-import { AntDesign } from "@expo/vector-icons";
-import { Entypo } from "@expo/vector-icons";
 import DestinationInfos from "../components/DestinationInfos";
+import DateTimePickerModal from "react-native-modal-datetime-picker";
+import moment from 'moment'
 
 export default function TravelRecapScreen({ navigation }) {
   const tripList = useSelector((state) => state.trip.value.trip);
   const user = useSelector((state) => state.user.value.username);
-  const [date, setDate] = useState(new Date());
-  const [open, setOpen] = useState(false);
+  const [dateType, setDateType] = useState("")
+  const [arrivalDate, setArrivalDate] = useState("");
+  const [departureDate, setDepartureDate] = useState("");
+
+  const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+
+  const showDatePicker = (value) => {
+    setDateType(value)
+    setDatePickerVisibility(true);
+  };
+
+  const hideDatePicker = () => {
+    setDatePickerVisibility(false);
+  };
+
+  const handleConfirm = (date) => {
+    if(dateType === "start"){
+        setArrivalDate(date)
+    }
+    if(dateType === "end"){
+        setDepartureDate(date)
+    }
+    console.warn(date);
+    hideDatePicker();
+  };
+
   const destinationsList = tripList.map((data, i) => {
     return (
       <View style = {styles.destinationsInfos}>
@@ -34,10 +53,43 @@ export default function TravelRecapScreen({ navigation }) {
       </View>
     );
   });
-
+  console.log(arrivalDate)
   return (
     <View style={styles.container}>
       <Header navigation={navigation} />
+      <View>
+        <View style = {{flexDirection : "row", alignItems : "center"}}>
+      <Button title="Start Date" onPress={() => showDatePicker("start")} />
+       <Text>{moment(arrivalDate).format("DD MMM YY")}</Text>
+        </View>
+      <DateTimePickerModal
+        isVisible={isDatePickerVisible}
+        mode="date"
+        isDarkModeEnabled = "false"
+        onConfirm={handleConfirm}
+        display ={"inline"}
+        onCancel={hideDatePicker}
+      />
+    </View>
+    <View>
+        <View style = {{flexDirection : "row", alignItems : "center"}}>
+      <Button title="End Date" onPress={() => showDatePicker("end")} />
+      <Text>{moment(departureDate).format("DD MMM YYYY")}</Text>
+        </View>
+      <DateTimePickerModal
+        isVisible={isDatePickerVisible}
+        mode="date"
+        isDarkModeEnabled = "false"
+        onConfirm={handleConfirm}
+        display ={"inline"}
+        onCancel={hideDatePicker}
+      />
+    </View>
+      <View>
+        <View>
+
+    </View>
+      </View>
       <ScrollView>{destinationsList}</ScrollView>
       <TouchableOpacity onPress={() =>  navigation.navigate("Map")}><Text>Back</Text></TouchableOpacity>
         <TouchableOpacity><Text>Next</Text></TouchableOpacity>

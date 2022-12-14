@@ -53,13 +53,11 @@ export default function MapScreen({ navigation }) {
     (state) => state.trip.value.initialDestination
   );
   const tripList = useSelector((state) => state.trip.value.trip);
-  console.log(tripList);
   let coordMarkers;
   let way;
   let steps;
 
   const addPins = (info, coords) => {
-    console.log(coords)
     const newAdress = info.results[0].formatted_address
           .split(", ")
           .slice(-2)
