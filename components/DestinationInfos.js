@@ -11,15 +11,20 @@ import {
     TouchableHighlight,
   } from "react-native";
   import { AntDesign } from "@expo/vector-icons";
+import {addDate} from "../reducers/trips";
 import { Entypo } from "@expo/vector-icons";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+
 
 export default function DestinationInfos({props}){
     const [budget, setBudget] = useState(props.budget.meal + props.budget.room)
     const [arrivalDate, setArrivalDate] = useState("")
     const [departureDate, setDepartureDate] = useState("")
     const tripList = useSelector((state) => state.trip.value.trip);
+    const dispatch = useDispatch()
+
+    console.log(tripList)
     
     useEffect(() => {
         const totalBudget = props.budget.meal + props.budget.room
@@ -29,6 +34,7 @@ export default function DestinationInfos({props}){
         <View>
         <View style={styles.destinationName}>
           <Text style={styles.text}>{props.name}</Text>
+          <Entypo name="calendar" size={18} color="black" onPress={() => {dispatch(addDate({index : props.index, date :"hello" }))}}/>
         </View>
         <View style={styles.destinationDetails}>
           {/* <DestinationDetails/>   */}
