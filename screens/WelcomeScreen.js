@@ -2,7 +2,6 @@
 import { Button, StyleSheet, Text, View, TouchableOpacity, ImageBackground, SafeAreaView } from 'react-native';
 
 export default function WelcomeScreen({ navigation }) {
-
 return (
 <View style={styles.container}>
 <ImageBackground source={require('../assets/welcome-background.png')} style={styles.background}/>
@@ -46,11 +45,13 @@ const styles = StyleSheet.create({
         color: '#20b08e',
         fontSize: 20,
         fontWeight: 'bold',
+        fontFamily: 'Verdana',
     },
     title: {
         fontSize: '50',
         flex: 1,
         fontWeight: 'bold',
-        fontFamily: 'Ubuntu-Regular',
+        fontFamily: 'Verdana',
+        letterSpacing: -1,
     },
 });
