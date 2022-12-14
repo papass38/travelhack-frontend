@@ -13,9 +13,12 @@ import CheckBoxData from "../components/CheckBoxData";
 import ChoiceCheckList from "../components/ChoiceCheckList";
 import Header from "../components/Header";
 import { Entypo } from "@expo/vector-icons";
+import { useEffect } from "react";
+import { FontAwesome5 } from "@expo/vector-icons";
 
 // get file data toDoData.json
 const dataCheckList = require("../toDoData.json");
+const dataVaccins = require("../vaccins.json");
 
 // dataCheckList.map((elmt) => {
 //   console.log(elmt.documents);
@@ -24,8 +27,26 @@ const dataCheckList = require("../toDoData.json");
 export default function ToDoScreen({ navigation }) {
   const [modalVisible, setModalVisible] = useState(false);
   const [dataId, setDataId] = useState(0);
+  const [tripData, setTripData] = useState("");
+  const [vaccins, setVaccins] = useState();
   const todo = useSelector((state) => state.todo.value);
   const trip = useSelector((state) => state.trip.value);
+
+  useEffect(() => {
+    if (trip.initialDestination.adress === undefined) {
+      setTripData("");
+    } else {
+      setTripData(trip.initialDestination.adress.split(" ")[1].toUpperCase());
+    }
+  });
+
+  useEffect(() => {
+    dataVaccins.map((elmt) => {
+      if (tripData === elmt.country) {
+        setVaccins(elmt.vaccinations.name);
+      }
+    });
+  });
 
   const listingDataCheckList = dataCheckList.map((elmt) => {
     return (
@@ -58,26 +79,44 @@ export default function ToDoScreen({ navigation }) {
 
       <Modal animationType="slide" visible={modalVisible} transparent={true}>
         <View style={styles.modal}>
-          <Entypo
-            name="circle-with-cross"
-            size={24}
-            color="#fff"
-            onPress={() => setModalVisible(false)}
-          />
           <View
             style={{
-              height: 100,
-              flexDirection: "row",
+              paddingBottom: 20,
               alignItems: "center",
               justifyContent: "space-around",
-              width: "80%",
+              height: 200,
             }}
           >
-            <Entypo name="info-with-circle" size={24} color="#fff" />
-            <Text style={{ color: "#fff" }}>
-              Vaccines recommended for :{" "}
-              {trip.initialDestination.adress.substr(7)}
-            </Text>
+            <Entypo
+              name="circle-with-cross"
+              size={24}
+              color="#fff"
+              onPress={() => setModalVisible(false)}
+            />
+            <View
+              style={{
+                height: 50,
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "space-around",
+                width: "80%",
+              }}
+            >
+              <Text style={{ color: "#fff" }}>
+                Vaccines recommended for : {tripData}
+              </Text>
+              <View
+                style={{
+                  flexDirection: "row",
+                  alignItems: "center",
+                  width: "70%",
+                  justifyContent: "space-evenly",
+                }}
+              >
+                <FontAwesome5 name="syringe" size={20} color="#fff" />
+                <Text style={{ color: "#fff", fontSize: 18 }}>{vaccins}</Text>
+              </View>
+            </View>
           </View>
 
           {todo.map((elmt, index) => {
