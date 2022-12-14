@@ -13,7 +13,7 @@ return (
             style={styles.button}
             activeOpacity={0.8}
             onPress={() => navigation.navigate('Sign in')}>
-            <Text style={styles.textButton}>Slide to travel</Text>
+            <Text style={styles.textButton}>Get started</Text>
         </TouchableOpacity>
         </SafeAreaView>
 </View>
@@ -46,11 +46,11 @@ const styles = StyleSheet.create({
         color: '#20b08e',
         fontSize: 20,
         fontWeight: 'bold',
-        fontFamily: 'Futura',
     },
     title: {
         fontSize: '50',
         flex: 1,
         fontWeight: 'bold',
+        fontFamily: 'Ubuntu-Regular',
     },
 });

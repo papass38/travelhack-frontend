@@ -10,15 +10,16 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import FontAwesome from "react-native-vector-icons/FontAwesome";
+import { FontAwesome5 } from '@expo/vector-icons';
+import { Ionicons } from "@expo/vector-icons";
 
-import MapScreen from "./screens/MapScreen";
-import CountrySearchScreen from "./screens/CounstrySearchScreen";
 import { Provider } from "react-redux";
 import { configureStore } from "@reduxjs/toolkit";
 import trip from "./reducers/trips";
-import { Ionicons } from "@expo/vector-icons";
 
 import HomeScreen from "./screens/HomeScreen";
+import CountrySearchScreen from "./screens/CounstrySearchScreen";
+import MapScreen from "./screens/MapScreen";
 import ProfilScreen from "./screens/ProfilScreen";
 import ChatScreen from "./screens/ChatScreen";
 import ToDoScreen from "./screens/ToDoScreen";
@@ -44,25 +45,27 @@ const TabNavigator = () => {
             let iconName = "";
 
             if (route.name === "Accueil") {
-              iconName = "person-circle-outline";
-            } else if (route.name === "Profil") {
-              iconName = "person-circle-outline";
-            } else if (route.name === "Chat") {
-              iconName = "person-circle-outline";
-            } else if (route.name) {
-              iconName = "person-circle-outline";
+              iconName = "home-sharp";
+              return <Ionicons name={iconName} size={size} color={color} />
+            } 
+            if (route.name === "Itinéraires") {
+              iconName = "route";
+              return <FontAwesome5 name={iconName} size={size} color={color} />
             }
-            return <Ionicons name={iconName} size={size} color={color} />;
+            if (route.name === "Chat") {
+              iconName = "chatbubble-ellipses";
+              return <Ionicons name={iconName} size={size} color={color} />
+            } 
           },
 
-          tabBarActiveTintColor: "blue",
+          tabBarActiveTintColor: '#20B08E',
           tabBarInactiveTintColor: "black",
           headerShown: false,
         })}
       >
         <Tab.Screen name="Accueil" component={HomeScreen} />
         {/* <Tab.Screen name="Itinéraires" component={TripScreen} /> */}
-        <Tab.Screen name='Itineraires' component={CountrySearchScreen}/>
+        <Tab.Screen name='Itinéraires' component={CountrySearchScreen}/>
         <Tab.Screen name="Chat" component={ChatScreen} />
       </Tab.Navigator>
     </Provider>
