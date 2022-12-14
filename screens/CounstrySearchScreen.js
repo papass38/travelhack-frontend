@@ -15,10 +15,10 @@ import { useState } from "react";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 import { useDispatch } from "react-redux";
 import { initializeTrip } from "../reducers/trips";
-import { useSelector } from "react-redux";
 
 import { Ionicons } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
+import { useSelector } from "react-redux";
 
 export default function CountrySearchScreen({ navigation }) {
   const dispatch = useDispatch();

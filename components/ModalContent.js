@@ -5,11 +5,10 @@ import { SelectList } from "react-native-dropdown-select-list";
 import PlaceAround from "./PlaceAround";
 import { useEffect, useState } from "react";
 
-
 export default function ModalContent(props) {
   const [selected, setSelected] = useState("");
   const [around, setAround] = useState([]);
-  const [website, setWebsite] = useState([])
+  const [website, setWebsite] = useState([]);
   const tripList = useSelector((state) => state.trip.value.trip);
 
   const place = tripList.find((e) => e.name.includes(props.name));
@@ -26,7 +25,7 @@ export default function ModalContent(props) {
   ];
 
   useEffect(() => {
-    setAround("")
+    setAround("");
     if (selected === "Restaurants") {
       fetch(
         `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${place.coordinates.latitude}%2C${place.coordinates.longitude}&radius=10000&types=restaurant&key=AIzaSyCx5Hb0tUovjDU45HZUySMkSN7vz_RVGC4`
@@ -53,23 +52,22 @@ export default function ModalContent(props) {
   }, [selected]);
 
   let aroundList;
-  
 
   if (around.length > 0) {
     aroundList = around.map((e, i) => {
-    //   fetch(
-    //     `https://maps.googleapis.com/maps/api/place/details/json?place_id=${e.place_id}&fields=website%2Cname%2Crating&key=AIzaSyCx5Hb0tUovjDU45HZUySMkSN7vz_RVGC4`
-    //   )
-    //     .then((res) => res.json())
-    //     .then((data) => {
-    //         setWebsite([...website, {name : data.result.name, website : data.result.website, rating : data.result.rating }])
-    //         return 
-    //     })
-        return <PlaceAround placeId = {e.place_id}></PlaceAround>
+      //   fetch(
+      //     `https://maps.googleapis.com/maps/api/place/details/json?place_id=${e.place_id}&fields=website%2Cname%2Crating&key=AIzaSyCx5Hb0tUovjDU45HZUySMkSN7vz_RVGC4`
+      //   )
+      //     .then((res) => res.json())
+      //     .then((data) => {
+      //         setWebsite([...website, {name : data.result.name, website : data.result.website, rating : data.result.rating }])
+      //         return
+      //     })
+      return <PlaceAround placeId={e.place_id}></PlaceAround>;
     });
   }
 
-  console.log(website)
+  console.log(website);
   return (
     <View style={styles.container}>
       <Text style={styles.modalTitle}>About {props.name}</Text>

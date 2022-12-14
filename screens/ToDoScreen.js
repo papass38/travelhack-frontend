@@ -25,6 +25,7 @@ export default function ToDoScreen({ navigation }) {
   const [modalVisible, setModalVisible] = useState(false);
   const [dataId, setDataId] = useState(0);
   const todo = useSelector((state) => state.todo.value);
+  const trip = useSelector((state) => state.trip.value);
 
   const listingDataCheckList = dataCheckList.map((elmt) => {
     return (
@@ -63,6 +64,22 @@ export default function ToDoScreen({ navigation }) {
             color="#fff"
             onPress={() => setModalVisible(false)}
           />
+          <View
+            style={{
+              height: 100,
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "space-around",
+              width: "80%",
+            }}
+          >
+            <Entypo name="info-with-circle" size={24} color="#fff" />
+            <Text style={{ color: "#fff" }}>
+              Vaccines recommended for :{" "}
+              {trip.initialDestination.adress.substr(7)}
+            </Text>
+          </View>
+
           {todo.map((elmt, index) => {
             return (
               <View key={index} style={styles.modalChoice}>

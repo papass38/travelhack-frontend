@@ -1,0 +1,871 @@
+[{
+    "country": "AFGHANISTAN",
+    "vaccinations": 
+      {
+        "name": "Fièvre jaune",
+        "required": true
+      }
+},
+    {
+        "country":"AFRIQUE DU SUD", 
+        "vaccinations": 
+        {
+            "name" : ["Fièvre jaune ", "Paludisme"],
+            "required": true
+        }
+},
+{
+    "country":"ALBANIE", 
+    "vaccinations": 
+    {
+        "name" : "Fièvre jaune ",
+        "required": true
+    }
+},
+{
+    "country":"ALGERIE", 
+    "vaccinations": 
+    {
+        "name" : ["Fièvre jaune ", "Paludisme"],
+        "required": true
+    }
+},
+{
+    "country":"ALLEMAGNE", 
+    "vaccinations": 
+    {
+        "name" : ""
+    }
+},
+{
+    "country":"ANDORRE", 
+    "vaccinations": 
+    {
+        "name" : ""
+    }
+},
+{
+    "country":"ANGOLA", 
+    "vaccinations": 
+    {
+        "name" : ["Fièvre jaune ", "Paludisme"],
+        "required": true
+    }
+},
+{
+    "country":"ANTIGUA - ET- BARBUDA", 
+    "vaccinations": 
+    {
+        "name" : "Fièvre jaune ",
+        "required": true
+    }
+},
+{
+    "country":"ANTILLES NÉERLANDAISES", 
+    "vaccinations": 
+    {
+        "name" : "Fièvre jaune ",
+        "required": true
+    }
+},
+{
+    "country":"ARABIE SAOUDITE", 
+    "vaccinations": 
+    {
+        "name" : ["Fièvre jaune ", "Paludisme"],
+        "required": true
+    }
+},
+{
+    "country":"ARGENTINE", 
+    "vaccinations": 
+    {
+        "name" : "Paludisme ",
+        "required": true
+    }
+},
+{
+    "country":"ARMÉNIE", 
+    "vaccinations": 
+    {
+        "name" : "Paludisme ",
+        "required": true
+    }
+},
+{
+    "country":"AUSTRALIE", 
+    "vaccinations": 
+    {
+        "name" : "Fièvre jaune ",
+        "required": true
+    }
+},
+{
+    "country":"AUTRICHE", 
+    "vaccinations": 
+    {
+        "name" : "",
+        "required": false
+    }
+},
+{
+    "country":"AZERBAÏDJAN", 
+    "vaccinations": 
+    {
+        "name" : "Paludisme ",
+        "required": true
+    }
+},
+{
+    "country":"BAHAMAS", 
+    "vaccinations": 
+    {
+        "name" : "Fièvre jaune",
+        "required": true
+    }
+},
+{
+    "country":"BAHREÏN", 
+    "vaccinations": 
+    {
+        "name" : "",
+        "required": false
+    }
+},
+{
+    "country":"BANGLADESH", 
+    "vaccinations": 
+    {
+        "name" : ["Fièvre jaune ", "Paludisme"],
+        "required": true
+    }
+},
+{
+    "country":"BARBADE", 
+    "vaccinations": 
+    {
+        "name" : "Fièvre jaune",
+        "required": true
+    }
+},
+{
+    "country":"BÉLARUS", 
+    "vaccinations": 
+    {
+        "name" : "",
+        "required": false
+    }
+},
+{
+    "country":"BELGIQUE", 
+    "vaccinations": 
+    {
+        "name" : "",
+        "required": false
+    }
+},
+{
+    "country":"BELIZE", 
+    "vaccinations": 
+    {
+        "name" : ["Fièvre jaune ", "Paludisme"],
+        "required": true
+    }
+},
+{
+    "country":"BENIN", 
+    "vaccinations": 
+    {
+        "name" : ["Fièvre jaune ", "Paludisme"],
+        "required": true
+    }
+},
+{
+    "country":"BERMUDES", 
+    "vaccinations": 
+    {
+        "name" : "",
+        "required": false
+    }
+},
+{
+    "country":"BHOUTAN", 
+    "vaccinations": 
+    {
+        "name" : ["Fièvre jaune ", "Paludisme"],
+        "required": true
+    }
+},
+{
+    "country":"BOLIVIE", 
+    "vaccinations": 
+    {
+        "name" : ["Fièvre jaune ", "Paludisme"],
+        "required": true
+    }
+},
+{
+    "country":"BOTSWANA", 
+    "vaccinations": 
+    {
+        "name" :  "Paludisme",
+        "required": true
+    }
+},
+{
+    "country":"BRÉSIL", 
+    "vaccinations": 
+    {
+        "name" :  ["Fièvre jaune ", "Paludisme"],
+        "required": true
+    }
+},
+{
+    "country":"BULGARIE", 
+    "vaccinations": 
+    {
+        "name" :  "",
+        "required": false
+    }
+},
+{
+    "country":"BURKINA FASO", 
+    "vaccinations": 
+    {
+        "name" :  ["Fièvre jaune ", "Paludisme"],
+        "required": true
+    }
+},
+{
+    "country":"BURUNDI", 
+    "vaccinations": 
+    {
+        "name" :  ["Fièvre jaune ", "Paludisme"],
+        "required": true
+    }
+},
+{
+    "country":"CAMBODGE", 
+    "vaccinations": 
+    {
+        "name" :  ["Fièvre jaune ", "Paludisme"],
+        "required": true
+    }
+},
+{
+    "country":"CAMEROUN", 
+    "vaccinations": 
+    {
+        "name" :  ["Fièvre jaune ", "Paludisme"],
+        "required": true
+    }
+},
+{
+    "country":"CAP-VERT", 
+    "vaccinations": 
+    {
+        "name" :  ["Fièvre jaune ", "Paludisme"],
+        "required": true
+    }
+},
+{
+    "country":"CHINE", 
+    "vaccinations": 
+    {
+        "name" :  ["Fièvre jaune ", "Paludisme"],
+        "required": true
+    }
+},
+{
+    "country":"COLOMBIE", 
+    "vaccinations": 
+    {
+        "name" :  ["Fièvre jaune ", "Paludisme"],
+        "required": true
+    }
+},
+{
+    "country":"COMORES", 
+    "vaccinations": 
+    {
+        "name" :  "Paludisme",
+        "required": true
+    }
+},
+{
+    "country":"CONGO", 
+    "vaccinations": 
+    {
+        "name" :  "Fièvre jaune",
+        "required": true
+    }
+},
+{
+    "country":"COSTA-RICA", 
+    "vaccinations": 
+    {
+        "name" :  "Paludisme",
+        "required": true
+    }
+},
+{
+    "country":"COTE D'IVOIRE", 
+    "vaccinations": 
+    {
+        "name" :  ["Fièvre jaune ", "Paludisme"],
+        "required": true
+    }
+},
+{
+    "country":"CROATIE", 
+    "vaccinations": 
+    {
+        "name" :  "",
+        "required": false
+    }
+},
+{
+    "country":"CUBA", 
+    "vaccinations": 
+    {
+        "name" :  "",
+        "required": false
+    }
+},
+{
+    "country":"DANEMARK", 
+    "vaccinations": 
+    {
+        "name" :  "",
+        "required": false
+    }
+},
+{
+    "country":"DJIBOUTI", 
+    "vaccinations": 
+    {
+        "name" :  ["Fièvre jaune ", "Paludisme"],
+        "required": true
+    }
+},
+{
+    "country":"DOMINIQUE", 
+    "vaccinations": 
+    {
+        "name" :  "Fièvre jaune",
+        "required": true
+    }
+},
+{
+    "country":"EGYPTE", 
+    "vaccinations": 
+    {
+        "name" :  ["Fièvre jaune ", "Paludisme"],
+        "required": true
+    }
+},
+{
+    "country":"LE SALVADOR", 
+    "vaccinations": 
+    {
+        "name" :  ["Fièvre jaune ", "Paludisme"],
+        "required": true
+    }
+},
+{
+    "country":"ÉMIRATS ARABES UNIS", 
+    "vaccinations": 
+    {
+        "name" :  "Paludisme",
+        "required": true
+    }
+},
+{
+    "country":"EQUATEUR", 
+    "vaccinations": 
+    {
+        "name" :  ["Fièvre jaune ", "Paludisme"],
+        "required": true
+    }
+},
+{
+    "country":"ÉRYTHRÉE", 
+    "vaccinations": 
+    {
+        "name" :  ["Fièvre jaune ", "Paludisme"],
+        "required": true
+    }
+},
+{
+    "country":"ESPAGNE", 
+    "vaccinations": 
+    {
+        "name" :  "",
+        "required": false
+    }
+},
+{
+    "country":"ESTONIE", 
+    "vaccinations": 
+    {
+        "name" :  "",
+        "required": false
+    }
+},
+{
+    "country":"ÉTATS-UNIS D'AMÉRIQUE", 
+    "vaccinations": 
+    {
+        "name" :  "",
+        "required": false
+    }
+},
+{
+    "country":"ÉTHIOPIE", 
+    "vaccinations": 
+    {
+        "name" :  ["Fièvre jaune ", "Paludisme"],
+        "required": true
+    }
+},
+{
+    "country":"FIDJI", 
+    "vaccinations": 
+    {
+        "name" :  "Fièvre jaune",
+        "required": true
+    }
+},
+{
+    "country":"FINLANDE", 
+    "vaccinations": 
+    {
+        "name" :  "",
+        "required": false
+    }
+},
+{
+    "country":"FRANCE", 
+    "vaccinations": 
+    {
+        "name" :  "",
+        "required": false
+    }
+},
+{
+    "country":"GABON", 
+    "vaccinations": 
+    {
+        "name" :  ["Fièvre jaune ", "Paludisme"],
+        "required": true
+    }
+},
+{
+    "country":"GAMBIE", 
+    "vaccinations": 
+    {
+        "name" :  ["Fièvre jaune ", "Paludisme"],
+        "required": true
+    }
+},
+{
+    "country":"GEORGIE", 
+    "vaccinations": 
+    {
+        "name" :  "",
+        "required": false
+    }
+},
+{
+    "country":"GHANA", 
+    "vaccinations": 
+    {
+        "name" :  ["Fièvre jaune ", "Paludisme"],
+        "required": true
+    }
+},
+{
+    "country":"GIBRALTAR", 
+    "vaccinations": 
+    {
+        "name" :  "",
+        "required": false
+    }
+},
+{
+    "country":"GRECE", 
+    "vaccinations": 
+    {
+        "name" :  "",
+        "required": false
+    }
+},
+{
+    "country":"GRENADE", 
+    "vaccinations": 
+    {
+        "name" :  "",
+        "required": false
+    }
+},
+{
+    "country":"GROENLAND", 
+    "vaccinations": 
+    {
+        "name" :  "",
+        "required": false
+    }
+},
+{
+    "country":"GUAM", 
+    "vaccinations": 
+    {
+        "name" :  "",
+        "required": false
+    }
+},
+{
+    "country":"GUADELOUPE", 
+    "vaccinations": 
+    {
+        "name" :  "Fièvre jaune",
+        "required": true
+    }
+},
+{
+    "country":"GUATEMALA", 
+    "vaccinations": 
+    {
+        "name" :  ["Fièvre jaune ", "Paludisme"],
+        "required": true
+    }
+},
+{
+    "country":"GUINEE", 
+    "vaccinations": 
+    {
+        "name" :  ["Fièvre jaune ", "Paludisme"],
+        "required": true
+    }
+},
+{
+    "country":"GUINEE BISSAU", 
+    "vaccinations": 
+    {
+        "name" :  ["Fièvre jaune ", "Paludisme"],
+        "required": true
+    }
+},
+{
+    "country":"GUINEE EQUATORIALE", 
+    "vaccinations": 
+    {
+        "name" :  ["Fièvre jaune ", "Paludisme"],
+        "required": true
+    }
+},
+{
+    "country":"GUYANE", 
+    "vaccinations": 
+    {
+        "name" :  ["Fièvre jaune ", "Paludisme"],
+        "required": true
+    }
+},
+{
+    "country":"HAITI", 
+    "vaccinations": 
+    {
+        "name" :  ["Fièvre jaune ", "Paludisme"],
+        "required": true
+    }
+},
+{
+    "country":"HONDURAS", 
+    "vaccinations": 
+    {
+        "name" :  ["Fièvre jaune ", "Paludisme"],
+        "required": true
+    }
+},
+{
+    "country":"HONG-KONG", 
+    "vaccinations": 
+    {
+        "name" :  "Paludisme",
+        "required": true
+    }
+},
+{
+    "country":"INDE", 
+    "vaccinations": 
+    {
+        "name" :  ["Fièvre jaune ", "Paludisme"],
+        "required": true
+    }
+},
+{
+    "country":"INDONESIE", 
+    "vaccinations": 
+    {
+        "name" :  ["Fièvre jaune ", "Paludisme"],
+        "required": true
+    }
+},
+{
+    "country":"IRAN", 
+    "vaccinations": 
+    {
+        "name" :  ["Fièvre jaune ", "Paludisme"],
+        "required": true
+    }
+},
+{
+    "country":"IRAQ", 
+    "vaccinations": 
+    {
+        "name" :  ["Fièvre jaune ", "Paludisme"],
+        "required": true
+    }
+},
+{
+    "country":"IRLANDE", 
+    "vaccinations": 
+    {
+        "name" :  "",
+        "required": false
+    }
+},
+{
+    "country":"ISLANDE", 
+    "vaccinations": 
+    {
+        "name" :  "",
+        "required": false
+    }
+},
+{
+    "country":"ISRAEL", 
+    "vaccinations": 
+    {
+        "name" :  "",
+        "required": false
+    }
+},
+{
+    "country":"ITALIE", 
+    "vaccinations":
+    {
+        "name" :  "",
+        "required": false
+    }
+},
+{
+    "country":"JAPON", 
+    "vaccinations": 
+    {
+        "name" :  "",
+        "required": false
+    }
+},
+{
+    "country":"JAMAIQUE", 
+    "vaccinations": 
+    {
+        "name" :  "Fièvre jaune",
+        "required": true
+    }
+},
+{
+    "country":"JORDANIE", 
+    "vaccinations": 
+    {
+        "name" :  "Fièvre jaune",
+        "required": true
+    }
+},
+{
+    "country":"KAZAKHSTAN", 
+    "vaccinations": 
+    {
+        "name" :  "Fièvre jaune",
+        "required": true
+    }
+},
+{
+    "country":"KENYA", 
+    "vaccinations": 
+    {
+        "name" :  ["Fièvre jaune ", "Paludisme"],
+        "required": true
+    }
+},
+{
+    "country":"KIRGHIZISTAN", 
+    "vaccinations": 
+    {
+        "name" :  "",
+        "required": false
+    }
+},
+{
+    "country":"KOWEIT", 
+    "vaccinations": 
+    {
+        "name" :  "",
+        "required": false
+    }
+},
+{
+    "country":"LETTONIE", 
+    "vaccinations": 
+    {
+        "name" :  "",
+        "required": false
+    }
+},
+{
+    "country":"LIBAN", 
+    "vaccinations": 
+    {
+        "name" :  "Fièvre jaune",
+        "required": true
+    }
+},
+{
+    "country":"LIBERIA", 
+    "vaccinations": 
+    {
+        "name" :  ["Fièvre jaune ", "Paludisme"],
+        "required": true
+    }
+},
+{
+    "country":"LIECHTENSTEIN", 
+    "vaccinations": 
+    {
+        "name" :  "",
+        "required": false
+    }
+},
+{
+    "country":"LITUANIE", 
+    "vaccinations": 
+    {
+        "name" :  "",
+        "required": false
+    }
+},
+{
+    "country":"LUXEMBOURG", 
+    "vaccinations": 
+    {
+        "name" :  "",
+        "required": false
+    }
+},
+{
+    "country":"MACAO", 
+    "vaccinations": 
+    {
+        "name" :  "",
+        "required": false
+    }
+},
+{
+    "country":"MADAGASCAR", 
+    "vaccinations": 
+    {
+        "name" :  ["Fièvre jaune ", "Paludisme"],
+        "required": true
+    }
+},
+{
+    "country":"MALAISIE", 
+    "vaccinations": 
+    {
+        "name" :  ["Fièvre jaune ", "Paludisme"],
+        "required": true
+    }
+},
+{
+    "country":"MALAWI", 
+    "vaccinations": 
+    {
+        "name" :  ["Fièvre jaune ", "Paludisme"],
+        "required": true
+    }
+},
+{
+    "country":"MALI", 
+    "vaccinations": 
+    {
+        "name" :  ["Fièvre jaune ", "Paludisme"],
+        "required": true
+    }
+},
+{
+    "country":"MALDIVES", 
+    "vaccinations": 
+    {
+        "name" :  "Fièvre jaune",
+        "required": true
+    }
+},
+{
+    "country":"MALTE", 
+    "vaccinations": 
+    {
+        "name" :  "Fièvre jaune",
+        "required": true
+    }
+},
+{
+    "country":"MAROC", 
+    "vaccinations": 
+    {
+        "name" :  "Fièvre jaune",
+        "required": true
+    }
+},
+{
+    "country":"MARTINIQUE", 
+    "vaccinations": 
+    {
+        "name" :  "Fièvre jaune",
+        "required": true
+    }
+},
+{
+    "country":"MAURICE", 
+    "vaccinations": 
+    {
+        "name" :  ["Fièvre jaune ", "Paludisme"],
+        "required": true
+    }
+},
+{
+    "country":"MAURITANIE", 
+    "vaccinations": 
+    {
+        "name" :  ["Fièvre jaune ", "Paludisme"],
+        "required": true
+    }
+},
+{
+    "country":"MEXIQUE", 
+    "vaccinations": 
+    {
+        "name" :  "Fièvre jaune",
+        "required": true
+    }
+},
+{
+    "country":"MAYOTTE", 
+    "vaccinations": 
+    {
+        "name" :  "Paludisme",
+        "required": true
+    }
+}
+]
