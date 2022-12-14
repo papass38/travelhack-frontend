@@ -1,5 +1,5 @@
 Arguments: 
-  /usr/local/bin/node /usr/local/bin/yarn add @react-native-community
+  /usr/local/bin/node /usr/local/bin/yarnpkg add expo-auth-sessions
 
 PATH: 
   /opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin:/opt/homebrew/bin:/opt/homebrew/sbin
@@ -14,8 +14,8 @@ Platform:
   darwin arm64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/@react-native-community: Request "https://registry.yarnpkg.com/@react-native-community" returned a 405
-      at Request.params.callback [as _callback] (/usr/local/lib/node_modules/yarn/lib/cli.js:66154:18)
+  Error: https://registry.yarnpkg.com/expo-auth-sessions: Not found
+      at Request.params.callback [as _callback] (/usr/local/lib/node_modules/yarn/lib/cli.js:66145:18)
       at Request.self.callback (/usr/local/lib/node_modules/yarn/lib/cli.js:140890:22)
       at Request.emit (node:events:513:28)
       at Request.<anonymous> (/usr/local/lib/node_modules/yarn/lib/cli.js:141862:10)
@@ -44,6 +44,7 @@ npm manifest:
       "@react-navigation/bottom-tabs": "6",
       "@react-navigation/native": "6",
       "@react-navigation/native-stack": "6",
+      "@react-oauth/google": "^0.5.1",
       "@reduxjs/toolkit": "^1.9.1",
       "expo": "^47.0.8",
       "expo-app-loading": "^2.1.1",
@@ -52,6 +53,7 @@ npm manifest:
       "expo-linear-gradient": "^12.0.1",
       "expo-location": "~15.0.1",
       "expo-status-bar": "~1.4.2",
+      "jwt-decode": "^3.1.2",
       "radio-buttons-react-native": "^1.0.4",
       "react": "18.1.0",
       "react-native": "0.70.5",
@@ -1906,6 +1908,11 @@ Lockfile:
     integrity sha512-JzMRiRRu8J0yUMC7BV8wOVzevjkHnIPONbpCTL/vH5yceTm+dSH/U3esIObgk8wYYbov+jYlVhwUQNGRb2to6g==
     dependencies:
       nanoid "^3.1.23"
+  
+  "@react-oauth/google@^0.5.1":
+    version "0.5.1"
+    resolved "https://registry.yarnpkg.com/@react-oauth/google/-/google-0.5.1.tgz#fc5cf33bff5d59583c5b0ed387431350216dd907"
+    integrity sha512-XCMMke24klAHIVnrZAMibodyjSUsxBOJ+vO5yvRptWC2Vnq02uLUnydjtIdCzCUIAxbvbFbQWZxG0xF0Y8GtHA==
   
   "@reduxjs/toolkit@^1.9.1":
     version "1.9.1"
@@ -4417,6 +4424,11 @@ Lockfile:
       universalify "^2.0.0"
     optionalDependencies:
       graceful-fs "^4.1.6"
+  
+  jwt-decode@^3.1.2:
+    version "3.1.2"
+    resolved "https://registry.yarnpkg.com/jwt-decode/-/jwt-decode-3.1.2.tgz#3fb319f3675a2df0c2895c8f5e9fa4b67b04ed59"
+    integrity sha512-UfpWE/VZn0iP50d8cz9NrZLM9lSWhcJ+0Gt/nm4by88UL+J1SiKN8/5dkjMmbEzwL2CAe+67GsegCbIKtbp75A==
   
   kind-of@^3.0.2, kind-of@^3.0.3, kind-of@^3.2.0:
     version "3.2.2"
