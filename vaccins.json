@@ -34,14 +34,14 @@
     "country":"ALLEMAGNE", 
     "vaccinations": 
     {
-        "name" : ""
+        "name" : "no vaccines required"
     }
 },
 {
     "country":"ANDORRE", 
     "vaccinations": 
     {
-        "name" : ""
+        "name" : "no vaccines required"
     }
 },
 {
@@ -104,7 +104,7 @@
     "country":"AUTRICHE", 
     "vaccinations": 
     {
-        "name" : "",
+        "name" : "no vaccines required",
         "required": false
     }
 },
@@ -128,7 +128,7 @@
     "country":"BAHREÏN", 
     "vaccinations": 
     {
-        "name" : "",
+        "name" : "no vaccines required",
         "required": false
     }
 },
@@ -152,7 +152,7 @@
     "country":"BÉLARUS", 
     "vaccinations": 
     {
-        "name" : "",
+        "name" : "no vaccines required",
         "required": false
     }
 },
@@ -160,7 +160,7 @@
     "country":"BELGIQUE", 
     "vaccinations": 
     {
-        "name" : "",
+        "name" : "no vaccines required",
         "required": false
     }
 },
@@ -184,7 +184,7 @@
     "country":"BERMUDES", 
     "vaccinations": 
     {
-        "name" : "",
+        "name" : "no vaccines required",
         "required": false
     }
 },
@@ -224,7 +224,7 @@
     "country":"BULGARIE", 
     "vaccinations": 
     {
-        "name" :  "",
+        "name" :  "no vaccines required",
         "required": false
     }
 },
@@ -320,7 +320,7 @@
     "country":"CROATIE", 
     "vaccinations": 
     {
-        "name" :  "",
+        "name" :  "no vaccines required",
         "required": false
     }
 },
@@ -328,7 +328,7 @@
     "country":"CUBA", 
     "vaccinations": 
     {
-        "name" :  "",
+        "name" :  "no vaccines required",
         "required": false
     }
 },
@@ -336,7 +336,7 @@
     "country":"DANEMARK", 
     "vaccinations": 
     {
-        "name" :  "",
+        "name" :  "no vaccines required",
         "required": false
     }
 },
@@ -400,7 +400,7 @@
     "country":"ESPAGNE", 
     "vaccinations": 
     {
-        "name" :  "",
+        "name" :  "no vaccines required",
         "required": false
     }
 },
@@ -408,7 +408,7 @@
     "country":"ESTONIE", 
     "vaccinations": 
     {
-        "name" :  "",
+        "name" :  "no vaccines required",
         "required": false
     }
 },
@@ -416,7 +416,7 @@
     "country":"ÉTATS-UNIS D'AMÉRIQUE", 
     "vaccinations": 
     {
-        "name" :  "",
+        "name" :  "no vaccines required",
         "required": false
     }
 },
@@ -440,7 +440,7 @@
     "country":"FINLANDE", 
     "vaccinations": 
     {
-        "name" :  "",
+        "name" :  "no vaccines required",
         "required": false
     }
 },
@@ -448,7 +448,7 @@
     "country":"FRANCE", 
     "vaccinations": 
     {
-        "name" :  "",
+        "name" :  "no vaccines required",
         "required": false
     }
 },
@@ -472,7 +472,7 @@
     "country":"GEORGIE", 
     "vaccinations": 
     {
-        "name" :  "",
+        "name" :  "no vaccines required",
         "required": false
     }
 },
@@ -488,7 +488,7 @@
     "country":"GIBRALTAR", 
     "vaccinations": 
     {
-        "name" :  "",
+        "name" :  "no vaccines required",
         "required": false
     }
 },
@@ -496,7 +496,7 @@
     "country":"GRECE", 
     "vaccinations": 
     {
-        "name" :  "",
+        "name" :  "no vaccines required",
         "required": false
     }
 },
@@ -504,7 +504,7 @@
     "country":"GRENADE", 
     "vaccinations": 
     {
-        "name" :  "",
+        "name" :  "no vaccines required",
         "required": false
     }
 },
@@ -512,7 +512,7 @@
     "country":"GROENLAND", 
     "vaccinations": 
     {
-        "name" :  "",
+        "name" :  "no vaccines required",
         "required": false
     }
 },
@@ -520,7 +520,7 @@
     "country":"GUAM", 
     "vaccinations": 
     {
-        "name" :  "",
+        "name" :  "no vaccines required",
         "required": false
     }
 },
@@ -632,7 +632,7 @@
     "country":"IRLANDE", 
     "vaccinations": 
     {
-        "name" :  "",
+        "name" :  "no vaccines required",
         "required": false
     }
 },
@@ -640,7 +640,7 @@
     "country":"ISLANDE", 
     "vaccinations": 
     {
-        "name" :  "",
+        "name" :  "no vaccines required",
         "required": false
     }
 },
@@ -648,7 +648,7 @@
     "country":"ISRAEL", 
     "vaccinations": 
     {
-        "name" :  "",
+        "name" :  "no vaccines required",
         "required": false
     }
 },
@@ -656,7 +656,7 @@
     "country":"ITALIE", 
     "vaccinations":
     {
-        "name" :  "",
+        "name" :  "no vaccines required",
         "required": false
     }
 },
@@ -664,7 +664,7 @@
     "country":"JAPON", 
     "vaccinations": 
     {
-        "name" :  "",
+        "name" :  "no vaccines required",
         "required": false
     }
 },
@@ -704,7 +704,7 @@
     "country":"KIRGHIZISTAN", 
     "vaccinations": 
     {
-        "name" :  "",
+        "name" :  "no vaccines required",
         "required": false
     }
 },
@@ -712,7 +712,7 @@
     "country":"KOWEIT", 
     "vaccinations": 
     {
-        "name" :  "",
+        "name" :  "no vaccines required",
         "required": false
     }
 },
@@ -720,7 +720,7 @@
     "country":"LETTONIE", 
     "vaccinations": 
     {
-        "name" :  "",
+        "name" :  "no vaccines required",
         "required": false
     }
 },
@@ -744,7 +744,7 @@
     "country":"LIECHTENSTEIN", 
     "vaccinations": 
     {
-        "name" :  "",
+        "name" :  "no vaccines required",
         "required": false
     }
 },
@@ -752,7 +752,7 @@
     "country":"LITUANIE", 
     "vaccinations": 
     {
-        "name" :  "",
+        "name" :  "no vaccines required",
         "required": false
     }
 },
@@ -760,7 +760,7 @@
     "country":"LUXEMBOURG", 
     "vaccinations": 
     {
-        "name" :  "",
+        "name" :  "no vaccines required",
         "required": false
     }
 },
@@ -768,7 +768,7 @@
     "country":"MACAO", 
     "vaccinations": 
     {
-        "name" :  "",
+        "name" :  "no vaccines required",
         "required": false
     }
 },
