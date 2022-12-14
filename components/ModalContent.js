@@ -29,21 +29,21 @@ export default function ModalContent(props) {
     setAround("")
     if (selected === "Restaurants") {
       fetch(
-        `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${place.coordinates.latitude}%2C${place.coordinates.longitude}&radius=10000&types=restaurant&key=AIzaSyCx5Hb0tUovjDU45HZUySMkSN7vz_RVGC4`
+        `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${place.coordinates.latitude}%2C${place.coordinates.longitude}&radius=2500&types=restaurant&key=AIzaSyCx5Hb0tUovjDU45HZUySMkSN7vz_RVGC4`
       )
         .then((res) => res.json())
         .then((data) => setAround(data.results));
     }
     if (selected === "Hotels") {
       fetch(
-        `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${place.coordinates.latitude}%2C${place.coordinates.longitude}&radius=5000&types=hotel&key=AIzaSyCx5Hb0tUovjDU45HZUySMkSN7vz_RVGC4`
+        `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${place.coordinates.latitude}%2C${place.coordinates.longitude}&radius=2500&types=hotel&key=AIzaSyCx5Hb0tUovjDU45HZUySMkSN7vz_RVGC4`
       )
         .then((res) => res.json())
         .then((data) => setAround(data.results.slice(1)));
     }
     if (selected === "Points of interests") {
       fetch(
-        `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${place.coordinates.latitude}%2C${place.coordinates.longitude}&radius=5000&types=tourist_attraction&key=AIzaSyCx5Hb0tUovjDU45HZUySMkSN7vz_RVGC4`
+        `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${place.coordinates.latitude}%2C${place.coordinates.longitude}&radius=2500&types=tourist_attraction&key=AIzaSyCx5Hb0tUovjDU45HZUySMkSN7vz_RVGC4`
       )
         .then((res) => res.json())
         .then((data) => setAround(data.results));
@@ -71,7 +71,7 @@ export default function ModalContent(props) {
 
   console.log(website)
   return (
-    <View style={styles.container}>
+    <View style={styles.container} >
       <Text style={styles.modalTitle}>About {props.name}</Text>
       <View>
         <Text> Estimated Budget per day</Text>
@@ -98,7 +98,7 @@ export default function ModalContent(props) {
         </View>
       </View>
       <View>
-        <View style={{ marginTop: 10 }}>
+        <View style={{ marginVertical: 10 }}>
           <SelectList
             placeholder="See Around"
             setSelected={(e) => setSelected(e)}
@@ -106,7 +106,9 @@ export default function ModalContent(props) {
             save="value"
           />
         </View>
+        <View style ={{height : "78%", }}>
         <ScrollView>{aroundList}</ScrollView>
+        </View>
       </View>
     </View>
   );
@@ -116,6 +118,7 @@ const styles = StyleSheet.create({
   container: {
     //width : 300,
     flex: 1,
+    overflow : "hidden"
   },
   modalTitle: {
     fontSize: 25,

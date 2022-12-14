@@ -27,6 +27,7 @@ import SignInScreen from "./screens/SignInScreen";
 import SignUpScreen from "./screens/SignUpScreen";
 import FavoriteScreen from "./screens/FavoriteScreen";
 import SettingsScreen from "./screens/SettingsScreen";
+import TravelRecapScreen from "./screens/TravelRecapScreen"
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -77,6 +78,7 @@ export default function App() {
           <Stack.Screen name="Home" component={HomeScreen} />
           <Stack.Screen name="CountrySearch" component={CountrySearchScreen} />
           <Stack.Screen name="Map" component={MapScreen} />
+          <Stack.Screen name="Recap" component={TravelRecapScreen} />
           <Stack.Screen name="Sign in" component={SignInScreen} />
           <Stack.Screen name="Sign up" component={SignUpScreen} />
           <Stack.Screen name="TabNavigator" component={TabNavigator} />
