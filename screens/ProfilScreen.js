@@ -1,6 +1,7 @@
 import { Button, StyleSheet, Text, View, TouchableOpacity, Image, SafeAreaView } from "react-native";
 import Header from "../components/Header";
 import { FontAwesome } from "@expo/vector-icons";
+import { FontAwesome5 } from '@expo/vector-icons';
 import { Feather } from "@expo/vector-icons";
 import { Ionicons } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
@@ -61,6 +62,17 @@ export default function ProfilScreen({ navigation }) {
         style={styles.image}
         source={require('../assets/mappemonde.jpg')} />
       </View>
+      <View style={styles.countries}>
+        <Text style={styles.textCountries}>Visited countries :｛counter｝</Text>
+        <View style={styles.flags}>
+        <FontAwesome5 name="flag" size={40} color="black" />
+        <FontAwesome5 name="flag" size={40} color="black" />
+        <FontAwesome5 name="flag" size={40} color="black" />
+        <FontAwesome5 name="flag" size={40} color="black" />
+        <FontAwesome5 name="flag" size={40} color="black" />
+        <FontAwesome5 name="flag" size={40} color="black" />
+        </View>
+      </View>
     </View>
   );
 }
@@ -100,7 +112,24 @@ const styles = StyleSheet.create({
   },
   image: {
     width: '100%',
-    height: '60%',
+    height: '80%',
   },
-
+  countries: {
+    marginBottom: 10,
+    width: '100%',
+  },
+  textCountries: {
+    fontSize: 30,
+    fontWeight: "bold",
+    backgroundColor: '#20B08E',
+    overflow: "hidden",
+    textAlign: "center",
+  },
+  flags: {
+    marginTop: 20,
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignItems: "center",
+    marginBottom: 30,
+  },
 });
