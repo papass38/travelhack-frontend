@@ -12,7 +12,7 @@ export default function Header({ navigation }) {
         name="user-circle-o"
         size={38}
         color="#fff"
-        onPress={() => navigation.navigate("TabNavigator")}
+        onPress={() => navigation.navigate("Profil")}
       />
       <Text>Welcome {user.username}</Text>
       <Text>Travel : {trip.initialDestination.adress}</Text>
