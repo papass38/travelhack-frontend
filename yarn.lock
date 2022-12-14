@@ -1743,10 +1743,10 @@
     prompts "^2.4.0"
     semver "^6.3.0"
 
-"@react-native-community/datetimepicker@^6.7.1":
-  version "6.7.1"
-  resolved "https://registry.yarnpkg.com/@react-native-community/datetimepicker/-/datetimepicker-6.7.1.tgz#a52eed9512898adef323b2fa78c6ac4611af5502"
-  integrity sha512-NPW1YITG7N+3TsqXc4LZV3c5IEpTD5iX18r0bvFsHdIblo5qi0ykpeK3TffmMM5gbTjgKJ4DNVHOjLiWKxFUxw==
+"@react-native-community/datetimepicker@6.5.2":
+  version "6.5.2"
+  resolved "https://registry.yarnpkg.com/@react-native-community/datetimepicker/-/datetimepicker-6.5.2.tgz#d2c0df9f2c6acce39f7e957743dd811547656098"
+  integrity sha512-9K3zhIH1zmpIGSG3GJTWLIoAx+sR4kJ1wqpGKMwWJ5IYXBsFxMdvGw023t0pz2CQStlnNbbNhnZY/HMYFBCsCg==
   dependencies:
     invariant "^2.2.4"
 
@@ -1825,6 +1825,11 @@
   integrity sha512-JzMRiRRu8J0yUMC7BV8wOVzevjkHnIPONbpCTL/vH5yceTm+dSH/U3esIObgk8wYYbov+jYlVhwUQNGRb2to6g==
   dependencies:
     nanoid "^3.1.23"
+
+"@react-oauth/google@^0.5.1":
+  version "0.5.1"
+  resolved "https://registry.yarnpkg.com/@react-oauth/google/-/google-0.5.1.tgz#fc5cf33bff5d59583c5b0ed387431350216dd907"
+  integrity sha512-XCMMke24klAHIVnrZAMibodyjSUsxBOJ+vO5yvRptWC2Vnq02uLUnydjtIdCzCUIAxbvbFbQWZxG0xF0Y8GtHA==
 
 "@reduxjs/toolkit@^1.9.1":
   version "1.9.1"
@@ -4337,6 +4342,11 @@ jsonfile@^6.0.1:
   optionalDependencies:
     graceful-fs "^4.1.6"
 
+jwt-decode@^3.1.2:
+  version "3.1.2"
+  resolved "https://registry.yarnpkg.com/jwt-decode/-/jwt-decode-3.1.2.tgz#3fb319f3675a2df0c2895c8f5e9fa4b67b04ed59"
+  integrity sha512-UfpWE/VZn0iP50d8cz9NrZLM9lSWhcJ+0Gt/nm4by88UL+J1SiKN8/5dkjMmbEzwL2CAe+67GsegCbIKtbp75A==
+
 kind-of@^3.0.2, kind-of@^3.0.3, kind-of@^3.2.0:
   version "3.2.2"
   resolved "https://registry.yarnpkg.com/kind-of/-/kind-of-3.2.2.tgz#31ea21a734bab9bbb0f32466d893aea51e4a3c64"
@@ -5765,6 +5775,11 @@ react-shallow-renderer@^16.15.0:
   dependencies:
     object-assign "^4.1.1"
     react-is "^16.12.0 || ^17.0.0 || ^18.0.0"
+
+react-world-map@^2.4.0:
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/react-world-map/-/react-world-map-2.4.0.tgz#c7bc0de55c9d83187d26732e8d64d4704b470655"
+  integrity sha512-oBvS9eRnajrwoAuVh/WTlk6gfjKbXYHwYPFya/2dguH7bt7T12Z/V3OkYkl7yGA7/qiCufU+L/p6XsFnoBAzgQ==
 
 react@18.1.0:
   version "18.1.0"

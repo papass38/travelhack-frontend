@@ -24,7 +24,7 @@ export default function SignUpScreen({ navigation }) {
   const [signUpEmail, setSignUpEmail] = useState("");
 
   const handleRegister = () => {
-    fetch("http://172.16.190.7:3000/users/signup", {
+    fetch("http://172.16.190.135:3000/users/signup", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -76,7 +76,7 @@ export default function SignUpScreen({ navigation }) {
         </View>
       </View>
       <View style={styles.registerSection} activeOpacity={0.8}>
-        <View style={styles.button}>
+        <View style={styles.buttonContainer}>
           <TextInput
             style={styles.input}
             placeholder="Username"
@@ -109,9 +109,19 @@ export default function SignUpScreen({ navigation }) {
             secureTextEntry={true}
             textContentType={"password"}
           />
-          <Pressable style={styles.button} onPress={() => handleRegister()}>
-            <Text style={styles.buttonText}>Sign Up</Text>
-          </Pressable>
+          <TouchableOpacity
+            style={styles.buttonRadient}
+            onPress={() => handleRegister()}
+          >
+            <LinearGradient
+              colors={["#20B08E", "white"]}
+              start={{ x: 0, y: 0.2 }}
+              end={{ x: 0, y: 1.7 }}
+              style={styles.button}
+            >
+              <Text style={styles.buttonText}>Sign Up</Text>
+            </LinearGradient>
+          </TouchableOpacity>
         </View>
       </View>
     </LinearGradient>
@@ -122,43 +132,54 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    justifyContent: "flex-end",
+    justifyContent: "flex-start",
     width: "100%",
   },
   titleContainer: {
-    paddingTop: 120,
+    paddingTop: 150,
     alignItems: "center",
+    justifyContent: "center",
   },
   signinHeaderSection: {
     height: "50%",
     width: "100%",
     alignItems: "flex-end",
     justifyContent: "flex-start",
-    padding: 30,
+    paddingTop: 60,
+    paddingRight: 20,
   },
   title: {
     fontSize: 40,
     marginBottom: 10,
   },
-  input: {
+  buttonContainer: {
     width: "100%",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  input: {
+    width: "70%",
     height: 40,
-    borderWidth: 1,
-    borderColor: "grey",
-    borderWidth: 1,
+    borderWidth: "transparent",
     marginBottom: 20,
     padding: 10,
     borderRadius: 10,
     backgroundColor: "#F6F6F6",
   },
   registerSection: {
-    paddingVertical: 40,
+    paddingVertical: 70,
     width: "100%",
     borderTopRightRadius: 40,
     borderTopLeftRadius: 40,
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "rgba(246, 246, 246, 0.7)",
+  },
+  buttonRadient: {
+    width: "100%",
+    borderRadius: 10,
+    justifyContent: "center",
+    alignItems: "center",
   },
   buttonText: {
     color: "#black",
@@ -167,5 +188,13 @@ const styles = StyleSheet.create({
 
   button: {
     width: "80%",
+    paddingVertical: 5,
+    borderRadius: 10,
+    alignItems: "center",
+  },
+  buttonGoogle: {
+    height: "62%",
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
