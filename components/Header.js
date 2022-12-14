@@ -2,10 +2,15 @@ import { View, StyleSheet, Text } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
 import { useSelector } from "react-redux";
+import { SimpleLineIcons } from "@expo/vector-icons";
+import { logout } from "../reducers/user";
+import { useDispatch } from "react-redux";
+import { initializeTrip } from "../reducers/trips";
 
 export default function Header({ navigation }) {
   const user = useSelector((state) => state.user.value);
   const trip = useSelector((state) => state.trip.value);
+  const dispatch = useDispatch();
   return (
     <View style={styles.container}>
       <FontAwesome
@@ -14,9 +19,28 @@ export default function Header({ navigation }) {
         color="#fff"
         onPress={() => navigation.navigate("TabNavigator")}
       />
-      <Text>Welcome {user.username}</Text>
-      <Text>Travel : {trip.initialDestination.adress}</Text>
-      <Feather name="menu" size={32} color="#fff" />
+      <View style={{ alignItems: "center" }}>
+        <Text style={{ fontSize: 16, color: "#fff" }}>
+          Welcome {user.username} !
+        </Text>
+        <Text style={{ fontSize: 12 }}>
+          Travel : {trip.initialDestination.adress}
+        </Text>
+      </View>
+
+      <View style={{ alignItems: "center" }}>
+        <SimpleLineIcons
+          name="logout"
+          size={24}
+          color="#fff"
+          onPress={() => {
+            dispatch(initializeTrip(""));
+            dispatch(logout());
+            navigation.navigate("Sign in");
+          }}
+        />
+        <Text style={{ color: "#fff", fontSize: 12 }}>Logout</Text>
+      </View>
     </View>
   );
 }
