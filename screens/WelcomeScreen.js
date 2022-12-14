@@ -2,7 +2,6 @@
 import { Button, StyleSheet, Text, View, TouchableOpacity, ImageBackground, SafeAreaView } from 'react-native';
 
 export default function WelcomeScreen({ navigation }) {
-
 return (
 <View style={styles.container}>
 <ImageBackground source={require('../assets/welcome-background.png')} style={styles.background}/>
@@ -13,7 +12,7 @@ return (
             style={styles.button}
             activeOpacity={0.8}
             onPress={() => navigation.navigate('Sign in')}>
-            <Text style={styles.textButton}>Slide to travel</Text>
+            <Text style={styles.textButton}>Get started</Text>
         </TouchableOpacity>
         </SafeAreaView>
 </View>
@@ -46,11 +45,13 @@ const styles = StyleSheet.create({
         color: '#20b08e',
         fontSize: 20,
         fontWeight: 'bold',
-        fontFamily: 'Futura',
+        fontFamily: 'Verdana',
     },
     title: {
         fontSize: '50',
         flex: 1,
         fontWeight: 'bold',
+        fontFamily: 'Verdana',
+        letterSpacing: -1,
     },
 });

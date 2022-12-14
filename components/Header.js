@@ -17,7 +17,7 @@ export default function Header({ navigation }) {
         name="user-circle-o"
         size={38}
         color="#fff"
-        onPress={() => navigation.navigate("TabNavigator")}
+        onPress={() => navigation.navigate("Profil")}
       />
       <View style={{ alignItems: "center" }}>
         <Text style={{ fontSize: 16, color: "#fff" }}>
