@@ -27,10 +27,10 @@ export default function TravelRecapScreen({ navigation }) {
   const user = useSelector((state) => state.user.value.username);
   const [date, setDate] = useState(new Date());
   const [open, setOpen] = useState(false);
-  const destinationsList = tripList.map((data) => {
+  const destinationsList = tripList.map((data, i) => {
     return (
       <View style = {styles.destinationsInfos}>
-        <DestinationInfos props = {data}/>
+        <DestinationInfos props = {data} index = {i}/>
       </View>
     );
   });
