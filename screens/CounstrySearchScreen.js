@@ -15,20 +15,22 @@ import { useState } from "react";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 import { useDispatch } from "react-redux";
 import { initializeTrip } from "../reducers/trips";
-import { useSelector } from "react-redux";
 
 import { Ionicons } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
+import { useSelector } from "react-redux";
 
 export default function CountrySearchScreen({ navigation }) {
   const dispatch = useDispatch();
   const [destination, setDestination] = useState();
   const GOOGLE_MAPS_APIKEY = "AIzaSyCx5Hb0tUovjDU45HZUySMkSN7vz_RVGC4";
+  // const trip = useSelector((state) => state.trip.value);
 
   const handleValidation = () => {
     if (destination) {
       dispatch(initializeTrip(destination));
       navigation.navigate("Map");
+      // console.log(trip.initialDestination.adress.split(" ").length);
     }
   };
 

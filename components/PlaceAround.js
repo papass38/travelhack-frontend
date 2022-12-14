@@ -22,14 +22,25 @@ export default function PlaceAround(props){
     });
    
     return(
-        <View>
+        <View style={styles.infoCards}>
             <Text>{placeInfo.name}</Text>
             <TouchableOpacity onPress={() => handlePress()}>
-            <Text>visit website</Text></TouchableOpacity>
-            <View>
-            <AntDesign name="star" size={24} color="black" />
+            <Text style={{textDecorationLine : "underline"}}>visit website</Text></TouchableOpacity>
+            <View style={{flexDirection : "row"}}>
+            <AntDesign name="star" size={14} color="#21A37C" />
             <Text>{placeInfo.rating}/5</Text>
             </View>
         </View>
     )
 }
+
+const styles = StyleSheet.create({
+    infoCards: {
+        marginVertical : 5, 
+        alignItems : "left",
+        backgroundColor : "#Eeeeee",
+        padding : 10,
+        borderRadius : 10, 
+        justifyContent : "space-between"
+    }
+  });
