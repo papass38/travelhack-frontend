@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import Header from "../components/Header";
 import { FontAwesome } from "@expo/vector-icons";
+import { FontAwesome5 } from '@expo/vector-icons';
 import { Feather } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
@@ -78,6 +79,17 @@ export default function ProfilScreen({ navigation }) {
           onLongPress={(e) => console.log(e.nativeEvent.position)}
         />
       </View>
+      <View style={styles.countries}>
+        <Text style={styles.textCountries}>Visited countries :｛counter｝</Text>
+        <View style={styles.flags}>
+        <FontAwesome5 name="flag" size={40} color="black" />
+        <FontAwesome5 name="flag" size={40} color="black" />
+        <FontAwesome5 name="flag" size={40} color="black" />
+        <FontAwesome5 name="flag" size={40} color="black" />
+        <FontAwesome5 name="flag" size={40} color="black" />
+        <FontAwesome5 name="flag" size={40} color="black" />
+        </View>
+      </View>
     </View>
   );
 }
@@ -119,7 +131,25 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   image: {
-    width: "100%",
-    height: "60%",
+    width: '100%',
+    height: '80%',
+  },
+  countries: {
+    marginBottom: 10,
+    width: '100%',
+  },
+  textCountries: {
+    fontSize: 30,
+    fontWeight: "bold",
+    backgroundColor: '#20B08E',
+    overflow: "hidden",
+    textAlign: "center",
+  },
+  flags: {
+    marginTop: 20,
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignItems: "center",
+    marginBottom: 30,
   },
 });
