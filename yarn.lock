@@ -5776,6 +5776,11 @@ react-shallow-renderer@^16.15.0:
     object-assign "^4.1.1"
     react-is "^16.12.0 || ^17.0.0 || ^18.0.0"
 
+react-world-map@^2.4.0:
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/react-world-map/-/react-world-map-2.4.0.tgz#c7bc0de55c9d83187d26732e8d64d4704b470655"
+  integrity sha512-oBvS9eRnajrwoAuVh/WTlk6gfjKbXYHwYPFya/2dguH7bt7T12Z/V3OkYkl7yGA7/qiCufU+L/p6XsFnoBAzgQ==
+
 react@18.1.0:
   version "18.1.0"
   resolved "https://registry.yarnpkg.com/react/-/react-18.1.0.tgz#6f8620382decb17fdc5cc223a115e2adbf104890"

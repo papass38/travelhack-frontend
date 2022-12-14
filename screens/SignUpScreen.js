@@ -122,7 +122,6 @@ export default function SignUpScreen({ navigation }) {
               <Text style={styles.buttonText}>Sign Up</Text>
             </LinearGradient>
           </TouchableOpacity>
-          <Text style={styles.buttonGoogle}>Google connect</Text>
         </View>
       </View>
     </LinearGradient>

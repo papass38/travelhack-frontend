@@ -867,5 +867,13 @@
         "name" :  "Paludisme",
         "required": true
     }
+},
+{
+    "country":"POLOGNE", 
+    "vaccinations": 
+    {
+        "name" :  "no vaccines required",
+        "required": false
+    }
 }
 ]
