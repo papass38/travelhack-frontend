@@ -10,6 +10,9 @@ import {
   TextInput,
   Pressable,
 } from "react-native";
+import { LinearGradient } from "expo-linear-gradient";
+import { Octicons } from "@expo/vector-icons";
+import { FontAwesome } from "@expo/vector-icons";
 
 export default function SignUpScreen({ navigation }) {
   const dispatch = useDispatch();
@@ -21,7 +24,7 @@ export default function SignUpScreen({ navigation }) {
   const [signUpEmail, setSignUpEmail] = useState("");
 
   const handleRegister = () => {
-    fetch("http://172.16.191.9:3000/users/signup", {
+    fetch("http://172.16.191.15:3000/users/signup", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -47,9 +50,33 @@ export default function SignUpScreen({ navigation }) {
   };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.button} activeOpacity={0.8}>
-        <View style={styles.registerSection}>
+    <LinearGradient
+      colors={["#20B08E", "white"]}
+      start={{ x: 0, y: 0.2 }}
+      end={{ x: 0, y: 1.7 }}
+      style={styles.container}
+    >
+      <View style={styles.signinHeaderSection}>
+        <View>
+          <Text>Already have an account?</Text>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => navigation.navigate("Sign in")}
+          >
+            <FontAwesome
+              style={styles.textButton}
+              name="sign-in"
+              color="black"
+              size={30}
+            />
+          </TouchableOpacity>
+        </View>
+        <View style={styles.titleContainer}>
+          <Text style={styles.title}>Travel Hack</Text>
+        </View>
+      </View>
+      <View style={styles.registerSection} activeOpacity={0.8}>
+        <View style={styles.button}>
           <TextInput
             style={styles.input}
             placeholder="Username"
@@ -87,14 +114,7 @@ export default function SignUpScreen({ navigation }) {
           </Pressable>
         </View>
       </View>
-      <Text>Already have an account?</Text>
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => navigation.navigate("Sign in")}
-      >
-        <Text style={styles.textButton}>Sign in</Text>
-      </TouchableOpacity>
-    </View>
+    </LinearGradient>
   );
 }
 
@@ -102,11 +122,24 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    justifyContent: "center",
-    padding: 20,
+    justifyContent: "flex-end",
     width: "100%",
   },
-  registerSection: {},
+  titleContainer: {
+    paddingTop: 120,
+    alignItems: "center",
+  },
+  signinHeaderSection: {
+    height: "50%",
+    width: "100%",
+    alignItems: "flex-end",
+    justifyContent: "flex-start",
+    padding: 30,
+  },
+  title: {
+    fontSize: 40,
+    marginBottom: 10,
+  },
   input: {
     width: "100%",
     height: 40,
@@ -115,25 +148,24 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     marginBottom: 20,
     padding: 10,
-    borderRadius: 20,
+    borderRadius: 10,
     backgroundColor: "#F6F6F6",
   },
-  button: {
-    marginTop: 10,
-    display: "flex",
+  registerSection: {
+    paddingVertical: 40,
+    width: "100%",
+    borderTopRightRadius: 40,
+    borderTopLeftRadius: 40,
     alignItems: "center",
-    paddingTop: 15,
-    paddingBottom: 15,
-    width: "80%",
-    backgroundColor: "#20B08E",
-    borderRadius: 10,
+    justifyContent: "center",
+    backgroundColor: "rgba(246, 246, 246, 0.7)",
   },
   buttonText: {
-    color: "white",
-    fontWeight: "bold",
+    color: "#black",
+    fontSize: 18,
   },
-  textButton: {
-    color: "#white",
-    fontWeight: "bold",
+
+  button: {
+    width: "80%",
   },
 });
