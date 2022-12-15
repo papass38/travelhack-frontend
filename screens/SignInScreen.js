@@ -19,7 +19,11 @@ export default function SignInScreen({ navigation }) {
   const [signInPassword, setSignInPassword] = useState("");
 
   const handleConnection = () => {
+<<<<<<< HEAD
     fetch("http://172.16.190.137:3000/users/signin", {
+=======
+    fetch("http://172.16.188.154:3000/users/signin", {
+>>>>>>> b4b2f6a6dca604b791151e3bb5aa211601caa0cb
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -121,14 +125,14 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     marginBottom: 20,
     padding: 10,
-    borderRadius: 10,
+    borderRadius: 20,
     backgroundColor: "#F6F6F6",
   },
   button: {
     backgroundColor: "#20B08E",
     paddingVertical: 10,
     width: "100%",
-    borderRadius: 10,
+    borderRadius: 20,
     alignItems: "center",
   },
   signUpButton: {

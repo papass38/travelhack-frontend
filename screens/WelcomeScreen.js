@@ -2,18 +2,30 @@
 import { Button, StyleSheet, Text, View, TouchableOpacity, ImageBackground, SafeAreaView } from 'react-native';
 
 export default function WelcomeScreen({ navigation }) {
+    let touchX
 return (
-<View style={styles.container}>
+<View style={styles.container}
+
+  >
+
 <ImageBackground source={require('../assets/welcome-background.png')} style={styles.background}/>
 
 <SafeAreaView style={styles.container}>
         <Text style={styles.title}>Welcome to Travel Hack !</Text>
-        <TouchableOpacity
+        <View
+        onTouchStart={(e) => {
+            touchX = e.nativeEvent.pageX;
+          }}
+          onTouchEnd={(e) => {
+            if (touchX + e.nativeEvent.pageX > 20) {
+              navigation.navigate("Sign in");
+            }
+          }}
             style={styles.button}
             activeOpacity={0.8}
-            onPress={() => navigation.navigate('Sign in')}>
-            <Text style={styles.textButton}>Get started</Text>
-        </TouchableOpacity>
+           >
+            <Text style={styles.textButton}>Swipe left to get started</Text>
+        </View>
         </SafeAreaView>
 </View>
 );
@@ -42,8 +54,8 @@ const styles = StyleSheet.create({
         borderRadius: 20,
     },
     textButton: {
-        color: '#20b08e',
-        fontSize: 20,
+        color: 'black',
+        fontSize: 15,
         fontWeight: 'bold',
         fontFamily: 'Verdana',
     },
