@@ -13,9 +13,17 @@ import { Feather } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import MapView from "react-native-maps";
+import MapView, { Marker } from "react-native-maps";
+import { useState } from "react";
 
 export default function ProfilScreen({ navigation }) {
+  const [lat, setLat] = useState();
+  const [long, setLong] = useState();
+
+  const handleClick = () => {
+    return <Marker coordinate={{ longitude: long, latitude: lat }} />;
+  };
+
   return (
     <View style={styles.container}>
       {/* <View style={styles.header}>
@@ -75,8 +83,12 @@ export default function ProfilScreen({ navigation }) {
             latitudeDelta: 180,
             longitudeDelta: 180,
           }}
-          onLongPress={(e) => console.log(e.nativeEvent.position)}
-        />
+          onLongPress={(e) => {
+            setLong(e.nativeEvent.coordinate.longitude);
+            setLat(e.nativeEvent.coordinate.latitude);
+            handleClick();
+          }}
+        ></MapView>
       </View>
     </View>
   );
