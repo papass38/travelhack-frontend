@@ -29,6 +29,7 @@ import SignUpScreen from "./screens/SignUpScreen";
 import FavoriteScreen from "./screens/FavoriteScreen";
 import SettingsScreen from "./screens/SettingsScreen";
 import TravelRecapScreen from "./screens/TravelRecapScreen"
+import WishlistScreen from "./screens/WishlistScreen";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -49,10 +50,10 @@ const TabNavigator = () => {
               iconName = "home-sharp";
               return <Ionicons name={iconName} size={size} color={color} />
             } 
-            if (route.name === "Itinéraires") {
-              iconName = "route";
-              return <FontAwesome5 name={iconName} size={size} color={color} />
-            }
+            // if (route.name === "Itinéraires") {
+            //   iconName = "route";
+            //   return <FontAwesome5 name={iconName} size={size} color={color} />
+            // }
             if (route.name === "Chat") {
               iconName = "chatbubble-ellipses";
               return <Ionicons name={iconName} size={size} color={color} />
@@ -66,7 +67,7 @@ const TabNavigator = () => {
       >
         <Tab.Screen name="Accueil" component={HomeScreen} />
         {/* <Tab.Screen name="Itinéraires" component={TripScreen} /> */}
-        <Tab.Screen name='Itinéraires' component={CountrySearchScreen}/>
+        {/* <Tab.Screen name='Itinéraires' component={CountrySearchScreen}/> */}
         <Tab.Screen name="Chat" component={ChatScreen} />
       </Tab.Navigator>
     </Provider>
@@ -90,6 +91,7 @@ export default function App() {
           <Stack.Screen name="Favorites" component={FavoriteScreen} />
           <Stack.Screen name="Settings" component={SettingsScreen} />
           <Stack.Screen name="To Do" component={ToDoScreen} />
+          <Stack.Screen name="Wishlist" component={WishlistScreen} />
         </Stack.Navigator>
       </Provider>
     </NavigationContainer>
