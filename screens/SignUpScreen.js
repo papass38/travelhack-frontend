@@ -16,6 +16,7 @@ import { FontAwesome } from "@expo/vector-icons";
 import * as WebBrowser from "expo-web-browser";
 import * as Google from "expo-auth-session/providers/google";
 import * as React from "react";
+import { AntDesign } from "@expo/vector-icons";
 
 WebBrowser.maybeCompleteAuthSession();
 
@@ -41,7 +42,7 @@ export default function SignUpScreen({ navigation }) {
   const [signUpEmail, setSignUpEmail] = useState("");
 
   const handleRegister = () => {
-    fetch("http://172.16.190.18:3000/users/signup", {
+    fetch("http://172.16.191.12:3000/users/signup", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -132,13 +133,7 @@ export default function SignUpScreen({ navigation }) {
             secureTextEntry={true}
             textContentType={"password"}
           />
-          <Button
-            disabled={!request}
-            title="Login"
-            onPress={() => {
-              promptAsync();
-            }}
-          />
+
           <TouchableOpacity
             style={styles.buttonRadient}
             onPress={() => handleRegister()}
@@ -151,6 +146,16 @@ export default function SignUpScreen({ navigation }) {
             >
               <Text style={styles.buttonText}>Sign Up</Text>
             </LinearGradient>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.buttonGoogle}
+            onPress={() => {
+              promptAsync();
+            }}
+            disabled={!request}
+          >
+            <AntDesign name="google" size={32} color="black" title="Login" />
+            <Text> SignUp with Google</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -166,7 +171,7 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   titleContainer: {
-    paddingTop: 150,
+    paddingTop: 110,
     alignItems: "center",
     justifyContent: "center",
   },
@@ -180,8 +185,8 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 40,
-    marginBottom: 10,
     alignItems: "center",
+    marginRight: 80,
   },
   buttonContainer: {
     width: "100%",
@@ -198,7 +203,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#F6F6F6",
   },
   registerSection: {
-    paddingVertical: 70,
+    paddingVertical: 30,
     width: "100%",
     borderTopRightRadius: 40,
     borderTopLeftRadius: 40,
@@ -222,10 +227,17 @@ const styles = StyleSheet.create({
     paddingVertical: 5,
     borderRadius: 10,
     alignItems: "center",
+    marginBottom: 10,
   },
   buttonGoogle: {
-    height: "62%",
-    justifyContent: "center",
+    backgroundColor: "white",
+    width: "80%",
+    paddingVertical: 0,
+    borderRadius: 10,
+    flexDirection: "row",
     alignItems: "center",
+    justifyContent: "center",
+    color: "#black",
+    fontSize: 18,
   },
 });

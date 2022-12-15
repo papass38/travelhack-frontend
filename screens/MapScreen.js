@@ -46,7 +46,7 @@ export default function MapScreen({ navigation }) {
   let way;
   let steps;
 
-  // fonction d'ajout des markers 
+  // fonction d'ajout des markers
   const addPins = (info, coords) => {
     const newAdress = info.results[0].formatted_address
       .split(", ")
@@ -65,7 +65,7 @@ export default function MapScreen({ navigation }) {
       roomBudget =
         getBudgetCountry["Apartment (3 bedrooms) in City Centre"] / 31;
     }
-   
+
     // récupère les infos relatives au voyage pour les stocker dans le store
     dispatch(
       addTrip({
@@ -90,7 +90,6 @@ export default function MapScreen({ navigation }) {
     )
       .then((response) => response.json())
       .then((data) => {
-
         // Si c'est un Pays, delta + elevé (zoom -) + pas de marker
         if (data.results[0].types.find((e) => e === "country")) {
           setRegion({
@@ -115,7 +114,7 @@ export default function MapScreen({ navigation }) {
             latitude: data.results[0].geometry.location.lat,
             longitude: data.results[0].geometry.location.lng,
           });
-        } 
+        }
         //zoom par defaut + ajout du marker via la fonction addpin()
         else {
           setRegion({
@@ -159,8 +158,9 @@ export default function MapScreen({ navigation }) {
               size={20}
               color="#20B08E"
               onPress={() => {
-                setAdress(e.name)
-                toggleModal()}}
+                setAdress(e.name);
+                toggleModal();
+              }}
             />
             <Entypo
               name="circle-with-cross"
@@ -248,7 +248,7 @@ export default function MapScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <Header navigation={navigation} />
-     
+
       <Modal visible={isModalVisible} style={styles.modal}>
         <View style={styles.modalContent}>
           <ModalContent name={adress} />
@@ -308,8 +308,14 @@ export default function MapScreen({ navigation }) {
       <ScrollView style={styles.markedPlaces}>
         <View style={styles.listContainer}>{steps}</View>
       </ScrollView>
-      <TouchableOpacity style= {styles.footer} onPress={() => {tripList.length > 0 && navigation.navigate("Recap")}}> 
-      <AntDesign name="arrowright" size={34} color="white" /></TouchableOpacity>
+      <TouchableOpacity
+        style={styles.footer}
+        onPress={() => {
+          tripList.length > 0 && navigation.navigate("Recap");
+        }}
+      >
+        <AntDesign name="arrowright" size={34} color="white" />
+      </TouchableOpacity>
     </View>
   );
 }
