@@ -17,6 +17,7 @@ import * as WebBrowser from "expo-web-browser";
 import * as Google from "expo-auth-session/providers/google";
 import * as React from "react";
 import { AntDesign } from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
 
 WebBrowser.maybeCompleteAuthSession();
 
@@ -82,8 +83,18 @@ export default function SignUpScreen({ navigation }) {
     >
       <View style={styles.signinHeaderSection}>
         <View>
-          <Text>Already have an account?</Text>
+          <Text style={styles.signInBtnText}>Already have an account?</Text>
           <TouchableOpacity
+            style={styles.signInBackBtn}
+            onPress={() => navigation.navigate("Sign in")}>
+            <Ionicons
+              name="chevron-back"
+              size={50}
+              color="white"
+            />
+            <Text style={styles.text}>Sign In</Text>
+          </TouchableOpacity>
+          {/* <TouchableOpacity
             style={styles.button}
             onPress={() => navigation.navigate("Sign in")}
           >
@@ -93,7 +104,7 @@ export default function SignUpScreen({ navigation }) {
               color="black"
               size={30}
             />
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
         <View style={styles.titleContainer}>
           <Text style={styles.title}>Travel Hack</Text>
@@ -178,15 +189,13 @@ const styles = StyleSheet.create({
   signinHeaderSection: {
     height: "50%",
     width: "100%",
-    alignItems: "flex-end",
-    justifyContent: "flex-start",
     paddingTop: 60,
     paddingRight: 20,
+    marginLeft: 10,
   },
   title: {
     fontSize: 40,
-    alignItems: "center",
-    marginRight: 80,
+    textAlign: "center",
   },
   buttonContainer: {
     width: "100%",
@@ -240,4 +249,21 @@ const styles = StyleSheet.create({
     color: "#black",
     fontSize: 18,
   },
+  signInBackBtn: {
+    flexDirection: "row",
+    alignItems: "center",
+    borderRadius: 10,
+    textAlign: "center",
+    width: '45%',
+   
+  },
+  text: {
+    color: "white",
+    fontSize: 30,
+  
+  },
+  signInBtnText: {
+    color: 'white',
+    fontWeight: "bold",
+  }
 });

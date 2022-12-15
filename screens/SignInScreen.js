@@ -41,7 +41,7 @@ export default function SignInScreen({ navigation }) {
         } else if (data.error === "Missing or empty fields") {
           setMessageError("Missing or empty fields");
         } else if (data.error === "User not found or wrong password") {
-          setMessageError("User not found");
+          setMessageError("User not found or incorrect password");
         }
       });
   };
