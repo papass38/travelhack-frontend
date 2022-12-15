@@ -1,16 +1,38 @@
-import { Button, StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import {
+  Button,
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  SafeAreaView,
+  Pressable
+} from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 
 export default function FavoriteScreen({ navigation }) {
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <TouchableOpacity
-        style={styles.button}
-        activeOpacity={0.8}
-        onPress={() => navigation.navigate("Profil")}
-      >
-        <Text style={styles.textButton}>Retour au profil</Text>
+        style={styles.header}
+        onPress={() => navigation.navigate("Profil")}>
+        <Ionicons
+          name="chevron-back"
+          size={50}
+          color="#20B08E"
+        />
+        <Text style={styles.text}>Profil</Text>
       </TouchableOpacity>
-    </View>
+      <TouchableOpacity
+        style={styles.header}
+        onPress={() => navigation.navigate("Wishlist")}>
+        <Ionicons
+          name="ios-heart"
+          size={50}
+          color="red"
+        />
+        <Text style={styles.text}>Wishlist</Text>
+      </TouchableOpacity>
+    </SafeAreaView>
   );
 }
 
@@ -18,20 +40,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
   },
-  button: {
-    display: "flex",
+  header: {
+    flexDirection: "row",
     alignItems: "center",
-    paddingTop: 15,
-    paddingBottom: 15,
-    width: "80%",
-    backgroundColor: "red",
-    borderRadius: 10,
+    width: '35%',
   },
-  textButton: {
-    color: "white",
-    fontSize: 20,
+  text: {
+    color: "#20B08E",
+    fontSize: 30,
   },
 });

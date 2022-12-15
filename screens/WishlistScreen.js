@@ -1,18 +1,18 @@
 import { Button, StyleSheet, Text, View, TouchableOpacity, SafeAreaView } from 'react-native';
 import { Ionicons } from "@expo/vector-icons";
 
-export default function SettingsScreen({navigation}) {
+export default function WishlistScreen({navigation}) {
     return (
         <SafeAreaView style={styles.container}>
           <TouchableOpacity
             style={styles.header}
-            onPress={() => navigation.navigate("Profil")}>
+            onPress={() => navigation.navigate("Favorites")}>
             <Ionicons
               name="chevron-back"
               size={50}
               color="#20B08E"
             />
-            <Text style={styles.text}>Profil</Text>
+            <Text style={styles.text}>Favorites</Text>
           </TouchableOpacity>
         </SafeAreaView>
       );
