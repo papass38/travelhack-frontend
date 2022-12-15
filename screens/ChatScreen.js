@@ -71,7 +71,7 @@ export default function Chat() {
 
   //GET ALL MESSAGE FROM A CHANNEL
   useEffect(() => {
-    fetch(`http://172.16.190.143:3000/chat/channel/${locationName}`)
+    fetch(`http://172.16.190.137:3000/chat/channel/${locationName}`)
       .then((res) => res.json())
       .then((data) => {
         if (data.result) {
@@ -124,7 +124,7 @@ export default function Chat() {
       return;
     }
 
-    fetch("http://172.16.190.143:3000/chat/newChat", {
+    fetch("http://172.16.190.137:3000/chat/newChat", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
