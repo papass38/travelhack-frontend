@@ -17,6 +17,7 @@ export default function SignInScreen({ navigation }) {
 
   const [signInUsername, setSignInUsername] = useState("");
   const [signInPassword, setSignInPassword] = useState("");
+  const [messageError, setMessageError] = useState('')
 
   const handleConnection = () => {
     fetch("http://172.16.190.18:3000/users/signin", {
@@ -30,10 +31,15 @@ export default function SignInScreen({ navigation }) {
       .then((response) => response.json())
       .then((data) => {
         if (data.result) {
+          setMessageError('')
           dispatch(login({ username: signInUsername, token: data.token }));
           navigation.navigate("TabNavigator");
           setSignInUsername("");
           setSignInPassword("");
+        } else if (data.error === "Missing or empty fields") {
+          setMessageError("Missing or empty fields")
+        } else if (data.error === "User not found or wrong password") {
+          setMessageError("User not found")
         }
       });
   };
@@ -57,6 +63,7 @@ export default function SignInScreen({ navigation }) {
           secureTextEntry={true}
           textContentType={"password"}
         />
+        <Text style={{color: 'red', fontWeight: "bold", textAlign: "center"}} >{messageError}</Text>
         <TouchableOpacity
           style={styles.buttonRadient}
           onPress={() => handleConnection()}
