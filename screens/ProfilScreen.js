@@ -16,14 +16,29 @@ import { AntDesign } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import MapView, { Marker } from "react-native-maps";
 import { useState } from "react";
+import { useSelector } from "react-redux";
+import CountryFlag from "react-native-country-flag";
+
+const dataVaccins = require("../vaccins.json");
 
 export default function ProfilScreen({ navigation }) {
   const [lat, setLat] = useState();
   const [long, setLong] = useState();
+  const trip = useSelector((state) => state.trip.value);
 
-  const handleClick = () => {
-    return <Marker coordinate={{ longitude: long, latitude: lat }} />;
-  };
+  const listingTrip = trip.trip.map((elmt) => {
+    return dataVaccins.map((count) => {
+      // console.log(`elmt : ${elmt.name.toUpperCase().split(" ")[1]}`);
+      // console.log(count.country);
+      if (count.country === elmt.name.toUpperCase().split(" ")[1]) {
+        return (
+          <View style={{ alignItems: "center" }}>
+            <CountryFlag isoCode={count.code} size={40} />
+          </View>
+        );
+      }
+    });
+  });
 
   return (
     <View style={styles.container}>
@@ -87,20 +102,11 @@ export default function ProfilScreen({ navigation }) {
           onLongPress={(e) => {
             setLong(e.nativeEvent.coordinate.longitude);
             setLat(e.nativeEvent.coordinate.latitude);
-            handleClick();
           }}
         ></MapView>
       </View>
       <View style={styles.countries}>
-        <Text style={styles.textCountries}>Visited countries :｛counter｝</Text>
-        <View style={styles.flags}>
-          <FontAwesome5 name="flag" size={40} color="black" />
-          <FontAwesome5 name="flag" size={40} color="black" />
-          <FontAwesome5 name="flag" size={40} color="black" />
-          <FontAwesome5 name="flag" size={40} color="black" />
-          <FontAwesome5 name="flag" size={40} color="black" />
-          <FontAwesome5 name="flag" size={40} color="black" />
-        </View>
+        <View style={styles.flags}>{listingTrip}</View>
       </View>
     </View>
   );
@@ -147,8 +153,8 @@ const styles = StyleSheet.create({
     height: "80%",
   },
   countries: {
-    marginBottom: 10,
     width: "100%",
+    backgroundColor: "#21A37C",
   },
   textCountries: {
     fontSize: 30,
