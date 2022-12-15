@@ -31,7 +31,8 @@
     }
 },
 {
-    "country":"ALLEMAGNE", 
+    "country":"GERMANY", 
+    "code": "DE",
     "vaccinations": 
     {
         "name" : "no vaccines required"
@@ -213,7 +214,8 @@
     }
 },
 {
-    "country":"BRÉSIL", 
+    "country":"BRESIL", 
+    "code" : "BR",
     "vaccinations": 
     {
         "name" :  ["Fièvre jaune, ", "Paludisme"],
@@ -397,7 +399,8 @@
     }
 },
 {
-    "country":"ESPAGNE", 
+    "country":"SPAIN", 
+    "code" : "ES",
     "vaccinations": 
     {
         "name" :  "no vaccines required",
@@ -446,6 +449,7 @@
 },
 {
     "country":"FRANCE", 
+    "code" : "FR",
     "vaccinations": 
     {
         "name" :  "no vaccines required",
@@ -821,7 +825,8 @@
     }
 },
 {
-    "country":"MAROC", 
+    "country":"MAROC",
+    "code": "MA", 
     "vaccinations": 
     {
         "name" :  "Fièvre jaune",
