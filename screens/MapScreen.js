@@ -53,15 +53,12 @@ export default function MapScreen({ navigation }) {
     (state) => state.trip.value.initialDestination
   );
   const tripList = useSelector((state) => state.trip.value.trip);
+  console.log(tripList);
   let coordMarkers;
   let way;
   let steps;
 
   const addPins = (info, coords) => {
-<<<<<<< HEAD
-    console.log(coords);
-=======
->>>>>>> b4b2f6a6dca604b791151e3bb5aa211601caa0cb
     const newAdress = info.results[0].formatted_address
       .split(", ")
       .slice(-2)
@@ -169,7 +166,9 @@ export default function MapScreen({ navigation }) {
               name="infocirlce"
               size={20}
               color="#20B08E"
-              onPress={() => toggleModal()}
+              onPress={() => {
+                setAdress(e.name)
+                toggleModal()}}
             />
             <Entypo
               name="circle-with-cross"
@@ -313,14 +312,8 @@ export default function MapScreen({ navigation }) {
       <ScrollView style={styles.markedPlaces}>
         <View style={styles.listContainer}>{steps}</View>
       </ScrollView>
-      <TouchableOpacity
-        style={styles.footer}
-        onPress={() => {
-          tripList.length > 0 && navigation.navigate("Recap");
-        }}
-      >
-        <Text style={styles.footerText}>Next</Text>
-      </TouchableOpacity>
+      <TouchableOpacity style= {styles.footer} onPress={() => {tripList.length > 0 && navigation.navigate("Recap")}}> 
+      <AntDesign name="arrowright" size={34} color="white" /></TouchableOpacity>
     </View>
   );
 }
