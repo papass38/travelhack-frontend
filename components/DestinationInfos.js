@@ -21,6 +21,7 @@ export default function DestinationInfos({ props, index }) {
   const tripList = useSelector((state) => state.trip.value.trip);
   const dispatch = useDispatch();
 
+  // calcul du budget journalier par destination
   useEffect(() => {
     const destinationBudget = (props.budget.meal + props.budget.room);
     setBudget(destinationBudget.toFixed(2));
@@ -70,6 +71,5 @@ const styles = StyleSheet.create({
     padding: 10,
     backgroundColor: "#Eeeeee",
     marginBottom: 20,
-    //width : "100%"
   },
 });

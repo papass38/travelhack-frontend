@@ -26,17 +26,19 @@ export default function TravelRecapScreen({ navigation }) {
   const [departureDate, setDepartureDate] = useState("");
   const [numberOfDays, setNumberOfDays] = useState(0)
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
-  //const [totalBudget, setTotalBudget] = useState(0)
 
+  // fait apparaitre le date picker
   const showDatePicker = (value) => {
     setDateType(value);
     setDatePickerVisibility(true);
   };
 
+  // cache le datepicker
   const hideDatePicker = () => {
     setDatePickerVisibility(false);
   };
 
+  // modifie la date
   const handleConfirm = (date) => {
     if (dateType === "start") {
       setArrivalDate(date);
@@ -49,6 +51,7 @@ export default function TravelRecapScreen({ navigation }) {
 
   let budget = 0
 
+  // generation des infos des destinations depuis les infos stockées dans le store
   const destinationsList = tripList.map((data, i) => {
     budget += (data.budget.meal + data.budget.room)
     return (
@@ -58,12 +61,14 @@ export default function TravelRecapScreen({ navigation }) {
     );
   });
 
+  // calcul du nombre de jour de voyage à partir des dates renseignées 
   useEffect(() => {
     if(departureDate){
       setNumberOfDays((departureDate - arrivalDate) / (1000 * 60 * 60 * 24))
     }
   }, [departureDate])
 
+  // calcul du budget total
   const totalBudget = budget/tripList.length * numberOfDays
 
   return (

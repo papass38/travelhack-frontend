@@ -19,29 +19,16 @@ import Modal from "react-native-modal";
 import Header from "../components/Header";
 import ModalContent from "../components/ModalContent";
 
-// API attraction touristique : https://rapidapi.com/opentripmap/api/places1 (feed?)
-
-// https://developers.google.com/maps/documentation/geocoding/requests-geocoding
-//https://maps.googleapis.com/maps/api/geocode/json?address=Paris&key=${GOOGLE_MAPS_APIKEY} cherche les coordonnées d'un endroit à partir de son nom
-
-// https://developers.google.com/maps/documentation/geocoding/requests-reverse-geocoding
-// https://maps.googleapis.com/maps/api/geocode/json?latlng=40.714224,-73.961452&key=${GOOGLE_MAPS_APIKEY} cherche le nom en fonction de ses coordonées
-
-// https://developers.google.com/maps/documentation/places/web-service/details
-
-// Place : https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-33.8670522%2C151.1957362&radius=1500&type=hotel&keyword=hotel&key=AIzaSyCx5Hb0tUovjDU45HZUySMkSN7vz_RVGC4
-
 export default function MapScreen({ navigation }) {
   const dispatch = useDispatch();
-  // const [coordinates, setCoordinates] = useState([]);
   const GOOGLE_MAPS_APIKEY = "AIzaSyCx5Hb0tUovjDU45HZUySMkSN7vz_RVGC4";
   const [adress, setAdress] = useState("");
   const [distance, setDistance] = useState(0);
   const [newRegion, setRegion] = useState(initialMapView);
   const [isModalVisible, setModalVisible] = useState(false);
-  // const [step, setStep] = useState([]);
 
-  //region initial de la carte par defaut : France
+  //region initial de la carte par defaut si problème au chargement : France
+
   const initialMapView = {
     latitude: 48.866667,
     longitude: 2.333333,
@@ -49,6 +36,7 @@ export default function MapScreen({ navigation }) {
     longitudeDelta: 20,
   };
 
+  // récupération de la destination rensegnée dans le précédent screen (countrysearch)
   const initialSearch = useSelector(
     (state) => state.trip.value.initialDestination
   );
@@ -58,6 +46,7 @@ export default function MapScreen({ navigation }) {
   let way;
   let steps;
 
+  // fonction d'ajout des markers 
   const addPins = (info, coords) => {
     const newAdress = info.results[0].formatted_address
       .split(", ")
@@ -65,7 +54,6 @@ export default function MapScreen({ navigation }) {
       .join(", ");
     setAdress(newAdress);
     const splitAdress = newAdress.split(" ");
-    //setStep([...step, data.results[0].formatted_address]);
     const getBudgetCountry = dataCost.find((e) =>
       e.City.includes(splitAdress[splitAdress.length - 1])
     );
@@ -77,8 +65,8 @@ export default function MapScreen({ navigation }) {
       roomBudget =
         getBudgetCountry["Apartment (3 bedrooms) in City Centre"] / 31;
     }
-    //console.log(getBudgetCountry)
-    // récupère les infos relatives au voyage pour les stocker
+   
+    // récupère les infos relatives au voyage pour les stocker dans le store
     dispatch(
       addTrip({
         name: info.results[0].formatted_address
@@ -95,14 +83,15 @@ export default function MapScreen({ navigation }) {
     );
   };
 
+  // récupération des coordonées depuis l'adresse renseignées
   const getAdressFromString = (place) => {
     fetch(
       `https://maps.googleapis.com/maps/api/geocode/json?address=${place}&key=${GOOGLE_MAPS_APIKEY}&language=en`
     )
       .then((response) => response.json())
       .then((data) => {
-        //console.log(data.results[0].types);
-        // Si c'est un Pays, delta + elevé
+
+        // Si c'est un Pays, delta + elevé (zoom -) + pas de marker
         if (data.results[0].types.find((e) => e === "country")) {
           setRegion({
             latitude: data.results[0].geometry.location.lat,
@@ -110,7 +99,7 @@ export default function MapScreen({ navigation }) {
             latitudeDelta: 10,
             longitudeDelta: 10,
           });
-        } // Si route ou adresse précise : Gros Zoom
+        } // Si route ou adresse précise : Gros Zoom + ajout du marker via la fonction addpin()
         else if (
           data.results[0].types[0] === "street_number" ||
           data.results[0].types[0] === "route" ||
@@ -126,7 +115,9 @@ export default function MapScreen({ navigation }) {
             latitude: data.results[0].geometry.location.lat,
             longitude: data.results[0].geometry.location.lng,
           });
-        } else {
+        } 
+        //zoom par defaut + ajout du marker via la fonction addpin()
+        else {
           setRegion({
             latitude: data.results[0].geometry.location.lat,
             longitude: data.results[0].geometry.location.lng,
@@ -141,12 +132,13 @@ export default function MapScreen({ navigation }) {
       });
   };
 
+  // au chargement => récupération de l'adresse stockée dans le store + génération du premier marker
   useEffect(() => {
     setAdress(initialSearch.adress);
     getAdressFromString(initialSearch.adress);
   }, []);
 
-  //generation des destination
+  //generation des Views destination
   if (tripList.length > 0) {
     steps = tripList.map((e, i) => {
       return (
@@ -180,6 +172,7 @@ export default function MapScreen({ navigation }) {
         </View>
       );
     });
+
     //generation des markers
     coordMarkers = tripList.map((item, index) => {
       return (
@@ -196,7 +189,7 @@ export default function MapScreen({ navigation }) {
     });
   }
 
-  // generation des directions(par groupe de 2 marker)
+  // generation des chemins (par groupe de 2 marker)
   if (tripList.length > 1) {
     way = tripList.map((item, index) => {
       if (index > 0) {
@@ -231,8 +224,6 @@ export default function MapScreen({ navigation }) {
 
   // au clic sur la carte -> ajout du Pin + récupération de l'adresse depuis les coordonées (en EN pour communiquer avec la data (cost/country))
   const handleLongPress = (newCoords) => {
-    //setCoordinates([...coordinates, newCoords]);
-    //console.log(coordinates)
     fetch(
       `https://maps.googleapis.com/maps/api/geocode/json?latlng=${newCoords.latitude},${newCoords.longitude}&key=${GOOGLE_MAPS_APIKEY}&language=en`
     )
@@ -242,11 +233,13 @@ export default function MapScreen({ navigation }) {
       });
   };
 
+  // au clic sur le bouton -> changement de l'adress pour qu'elle s'adapte au parametre demandé par l'API google + appel a la fonction get adress from string
   const handlePress = () => {
     const newAdress = adress.replace(" ", "%");
     getAdressFromString(newAdress);
   };
 
+  // fait apparaitre / disparaitre la modale
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
   };
@@ -254,6 +247,7 @@ export default function MapScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <Header navigation={navigation} />
+     
       <Modal visible={isModalVisible} style={styles.modal}>
         <View style={styles.modalContent}>
           <ModalContent name={adress} />
@@ -275,6 +269,7 @@ export default function MapScreen({ navigation }) {
         {coordMarkers}
         {way}
       </MapView>
+
       <KeyboardAvoidingView style={styles.inputView}>
         <GooglePlacesAutocomplete
           placeholder="Where are you going next ?"
@@ -304,6 +299,7 @@ export default function MapScreen({ navigation }) {
             },
           }}
         ></GooglePlacesAutocomplete>
+
         <TouchableOpacity onPress={() => handlePress()} style={styles.button}>
           <Text style={styles.buttonText}>Search</Text>
         </TouchableOpacity>

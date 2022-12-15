@@ -24,6 +24,7 @@ export default function ModalContent(props) {
     },
   ];
 
+  // récupération des données aux allentour dans un rayon de 2.5 km à partir du paramètre choisi par l'utlisateur
   useEffect(() => {
     setAround("");
     if (selected === "Restaurants") {
@@ -55,19 +56,11 @@ export default function ModalContent(props) {
 
   if (around.length > 0) {
     aroundList = around.map((e, i) => {
-      //   fetch(
-      //     `https://maps.googleapis.com/maps/api/place/details/json?place_id=${e.place_id}&fields=website%2Cname%2Crating&key=AIzaSyCx5Hb0tUovjDU45HZUySMkSN7vz_RVGC4`
-      //   )
-      //     .then((res) => res.json())
-      //     .then((data) => {
-      //         setWebsite([...website, {name : data.result.name, website : data.result.website, rating : data.result.rating }])
-      //         return
-      //     })
       return <PlaceAround placeId={e.place_id}></PlaceAround>;
     });
   }
 
-  console.log(website);
+ 
   return (
     <View style={styles.container} >
       <Text style={styles.modalTitle}>About {props.name}</Text>
