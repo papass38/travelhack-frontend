@@ -58,10 +58,6 @@ export default function MapScreen({ navigation }) {
   let steps;
 
   const addPins = (info, coords) => {
-<<<<<<< HEAD
-    console.log(coords);
-=======
->>>>>>> b4b2f6a6dca604b791151e3bb5aa211601caa0cb
     const newAdress = info.results[0].formatted_address
       .split(", ")
       .slice(-2)

@@ -27,5 +27,6 @@ export const tripSlice = createSlice({
   },
 });
 
-export const { initializeTrip, addTrip, removeTrip, addDate } = tripSlice.actions;
+export const { initializeTrip, addTrip, removeTrip, addDate } =
+  tripSlice.actions;
 export default tripSlice.reducer;
