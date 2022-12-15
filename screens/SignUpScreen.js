@@ -11,10 +11,26 @@ import {
   Pressable,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import { Octicons } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
+import * as WebBrowser from "expo-web-browser";
+import * as Google from "expo-auth-session/providers/google";
+import * as React from "react";
+
+WebBrowser.maybeCompleteAuthSession();
+
+//web 90077612632-sqq87ue9rnpj7njp6abht7iv26gj2sg0.apps.googleusercontent.com
+//ios 90077612632-1fng2dqhhtvjc8d320p0ulv79j7mv00l.apps.googleusercontent.com
+//android
 
 export default function SignUpScreen({ navigation }) {
+  const [accessToken, setAccessToken] = React.useState(null);
+  const [user, setUser] = React.useState(null);
+  const [request, response, promptAsync] = Google.useIdTokenAuthrequest({
+    clientId:
+      "90077612632 - sqq87ue9rnpj7njp6abht7iv26gj2sg0.apps.googleusercontent.com",
+    iosClientId:
+      "90077612632-1fng2dqhhtvjc8d320p0ulv79j7mv00l.apps.googleusercontent.com",
+  });
   const dispatch = useDispatch();
 
   const [signUpUsername, setSignUpUsername] = useState("");
@@ -48,6 +64,16 @@ export default function SignUpScreen({ navigation }) {
         }
       });
   };
+
+  React.useEffect(() => {
+    if (response?.type === "success") {
+      setAccessToken(response.authentification.accessToken);
+    }
+  }, []);
+
+  async function fetchUserInfo() {
+    let response;
+  }
 
   return (
     <LinearGradient
@@ -151,6 +177,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 40,
     marginBottom: 10,
+    alignItems: "center",
   },
   buttonContainer: {
     width: "100%",

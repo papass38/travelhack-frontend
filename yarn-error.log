@@ -14,12 +14,26 @@ Platform:
   darwin x64
 
 Trace: 
+<<<<<<< HEAD
   SyntaxError: /Users/marionthm1/Desktop/TRAVELHACK/travelhack-frontend/package.json: Unexpected token < in JSON at position 831
       at JSON.parse (<anonymous>)
       at /usr/local/lib/node_modules/yarn/lib/cli.js:1629:59
       at Generator.next (<anonymous>)
       at step (/usr/local/lib/node_modules/yarn/lib/cli.js:310:30)
       at /usr/local/lib/node_modules/yarn/lib/cli.js:321:13
+=======
+  Error: https://registry.yarnpkg.com/expo-auth-sessions: Not found
+      at Request.params.callback [as _callback] (/usr/local/lib/node_modules/yarn/lib/cli.js:66145:18)
+      at Request.self.callback (/usr/local/lib/node_modules/yarn/lib/cli.js:140890:22)
+      at Request.emit (node:events:513:28)
+      at Request.<anonymous> (/usr/local/lib/node_modules/yarn/lib/cli.js:141862:10)
+      at Request.emit (node:events:513:28)
+      at IncomingMessage.<anonymous> (/usr/local/lib/node_modules/yarn/lib/cli.js:141784:12)
+      at Object.onceWrapper (node:events:627:28)
+      at IncomingMessage.emit (node:events:525:35)
+      at endReadableNT (node:internal/streams/readable:1358:12)
+      at processTicksAndRejections (node:internal/process/task_queues:83:21)
+>>>>>>> travelhackbranch
 
 npm manifest: 
   {
@@ -48,11 +62,15 @@ npm manifest:
       "expo-linear-gradient": "^12.0.1",
       "expo-location": "~15.0.1",
       "expo-status-bar": "~1.4.2",
+<<<<<<< HEAD
   <<<<<<< HEAD
       "jwt-decode": "^3.1.2",
   =======
       "moment": "^2.29.4",
   >>>>>>> mapBranch
+=======
+      "jwt-decode": "^3.1.2",
+>>>>>>> travelhackbranch
       "radio-buttons-react-native": "^1.0.4",
       "react": "18.1.0",
       "react-native": "0.70.5",
