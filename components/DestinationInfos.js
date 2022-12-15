@@ -10,41 +10,32 @@ import {
   SafeAreaView,
   TouchableHighlight,
 } from "react-native";
-import { AntDesign } from "@expo/vector-icons";
 import { addDate } from "../reducers/trips";
-import { Entypo } from "@expo/vector-icons";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import DatePicker from 'react-native-datepicker';
 
-export default function DestinationInfos({ props }) {
-  const [budget, setBudget] = useState(props.budget.meal + props.budget.room);
+
+export default function DestinationInfos({ props, index }) {
+  console.log(props)
+  const [budget, setBudget] = useState(0);
   const tripList = useSelector((state) => state.trip.value.trip);
   const dispatch = useDispatch();
 
-  const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
-
   useEffect(() => {
-    const totalBudget = props.budget.meal + props.budget.room;
-    setBudget(totalBudget.toFixed(2));
+    const destinationBudget = (props.budget.meal + props.budget.room);
+    setBudget(destinationBudget.toFixed(2));
   }, []);
 
   const today = new Date()
 
+
   return (
     <View>
       <View style={styles.destinationName}>
-        <Text style={styles.text}>{props.name}</Text>
-        <Entypo
-          name="calendar"
-          size={18}
-          color="black"
-        />
+        <Text style={styles.text}>{index + 1} - {props.name}</Text>
       </View>
       <View style={styles.destinationDetails}>
-        {/* <DestinationDetails/>   */}
-        <Text style={styles.text}>Estimated Budget : {budget} € </Text>
-        <AntDesign name="caretdown" size={18} color="black" />
+        <Text style={styles.text}>{budget }€ / day </Text>
       </View>
     </View>
   );
