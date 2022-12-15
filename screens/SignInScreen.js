@@ -63,7 +63,7 @@ export default function SignInScreen({ navigation }) {
           secureTextEntry={true}
           textContentType={"password"}
         />
-        <Text style={{color: 'red', fontWeight: "bold", textAlign: "center"}} >{messageError}</Text>
+        <Text style={{color: 'red', fontWeight: "bold", textAlign: "center", paddingBottom: 15}} >{messageError}</Text>
         <TouchableOpacity
           style={styles.buttonRadient}
           onPress={() => handleConnection()}
