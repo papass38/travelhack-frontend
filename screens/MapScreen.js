@@ -58,41 +58,45 @@ export default function MapScreen({ navigation }) {
   let steps;
 
   const addPins = (info, coords) => {
+<<<<<<< HEAD
+    console.log(coords);
+=======
+>>>>>>> b4b2f6a6dca604b791151e3bb5aa211601caa0cb
     const newAdress = info.results[0].formatted_address
+      .split(", ")
+      .slice(-2)
+      .join(", ");
+    setAdress(newAdress);
+    const splitAdress = newAdress.split(" ");
+    //setStep([...step, data.results[0].formatted_address]);
+    const getBudgetCountry = dataCost.find((e) =>
+      e.City.includes(splitAdress[splitAdress.length - 1])
+    );
+    let mealBudget = "?";
+    let roomBudget = "?";
+
+    if (getBudgetCountry) {
+      mealBudget = getBudgetCountry["Meal, Inexpensive Restaurant"] * 2;
+      roomBudget =
+        getBudgetCountry["Apartment (3 bedrooms) in City Centre"] / 31;
+    }
+    //console.log(getBudgetCountry)
+    // récupère les infos relatives au voyage pour les stocker
+    dispatch(
+      addTrip({
+        name: info.results[0].formatted_address
           .split(", ")
           .slice(-2)
-          .join(", ");
-        setAdress(newAdress);
-        const splitAdress = newAdress.split(" ");
-        //setStep([...step, data.results[0].formatted_address]);
-        const getBudgetCountry = dataCost.find((e) =>
-          e.City.includes(splitAdress[splitAdress.length - 1])
-        );
-        let mealBudget = "?";
-        let roomBudget = "?";
-
-        if (getBudgetCountry) {
-          mealBudget = getBudgetCountry["Meal, Inexpensive Restaurant"] * 2;
-          roomBudget =
-            getBudgetCountry["Apartment (3 bedrooms) in City Centre"] / 31;
-        }
-        //console.log(getBudgetCountry)
-        // récupère les infos relatives au voyage pour les stocker
-        dispatch(
-          addTrip({
-            name: info.results[0].formatted_address
-              .split(", ")
-              .slice(-2)
-              .join(", "),
-            coordinates: coords,
-            budget: {
-              meal: mealBudget,
-              room: roomBudget,
-            },
-            distanceFromPrevious: distance,
-          })
-        );
-  }
+          .join(", "),
+        coordinates: coords,
+        budget: {
+          meal: mealBudget,
+          room: roomBudget,
+        },
+        distanceFromPrevious: distance,
+      })
+    );
+  };
 
   const getAdressFromString = (place) => {
     fetch(
@@ -121,8 +125,10 @@ export default function MapScreen({ navigation }) {
             latitudeDelta: 0.0004,
             longitudeDelta: 0.0008,
           });
-          addPins(data, {latitude: data.results[0].geometry.location.lat,
-            longitude: data.results[0].geometry.location.lng})
+          addPins(data, {
+            latitude: data.results[0].geometry.location.lat,
+            longitude: data.results[0].geometry.location.lng,
+          });
         } else {
           setRegion({
             latitude: data.results[0].geometry.location.lat,
@@ -130,8 +136,10 @@ export default function MapScreen({ navigation }) {
             latitudeDelta: 0.04,
             longitudeDelta: 0.08,
           });
-          addPins(data, {latitude: data.results[0].geometry.location.lat,
-            longitude: data.results[0].geometry.location.lng})
+          addPins(data, {
+            latitude: data.results[0].geometry.location.lat,
+            longitude: data.results[0].geometry.location.lng,
+          });
         }
       });
   };
@@ -231,7 +239,7 @@ export default function MapScreen({ navigation }) {
     )
       .then((response) => response.json())
       .then((data) => {
-        addPins(data, newCoords)
+        addPins(data, newCoords);
       });
   };
 
@@ -296,8 +304,7 @@ export default function MapScreen({ navigation }) {
               color: "#1faadb",
             },
           }}
-        >
-        </GooglePlacesAutocomplete>
+        ></GooglePlacesAutocomplete>
         <TouchableOpacity onPress={() => handlePress()} style={styles.button}>
           <Text style={styles.buttonText}>Search</Text>
         </TouchableOpacity>
@@ -306,8 +313,14 @@ export default function MapScreen({ navigation }) {
       <ScrollView style={styles.markedPlaces}>
         <View style={styles.listContainer}>{steps}</View>
       </ScrollView>
-      <TouchableOpacity style= {styles.footer} onPress={() => {tripList.length > 0 && navigation.navigate("Recap")}}> 
-      <Text style={styles.footerText}>Next</Text></TouchableOpacity>
+      <TouchableOpacity
+        style={styles.footer}
+        onPress={() => {
+          tripList.length > 0 && navigation.navigate("Recap");
+        }}
+      >
+        <Text style={styles.footerText}>Next</Text>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -350,8 +363,8 @@ const styles = StyleSheet.create({
   markedPlaces: {
     flex: 1,
     width: "100%",
-    backgroundColor : "#Eeeeee",
-    paddingBottom : 20
+    backgroundColor: "#Eeeeee",
+    paddingBottom: 20,
   },
   listContainer: {
     paddingTop: 5,
@@ -404,18 +417,18 @@ const styles = StyleSheet.create({
     height: "10%",
     borderRadius: 5,
   },
-  footer : { 
-    height : "10%", 
-    width : "100%", 
-    alignItems : "center", 
-    justifyContent : "center",
-    backgroundColor : "#20B08E"
-  }, 
-  footerText : {
-    fontSize : 25, 
-    color : "white",
-    fontWeight : "bold"
-  }
+  footer: {
+    height: "10%",
+    width: "100%",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#20B08E",
+  },
+  footerText: {
+    fontSize: 25,
+    color: "white",
+    fontWeight: "bold",
+  },
 });
 
 //box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;

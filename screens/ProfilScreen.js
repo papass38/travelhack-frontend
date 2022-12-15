@@ -9,14 +9,22 @@ import {
 } from "react-native";
 import Header from "../components/Header";
 import { FontAwesome } from "@expo/vector-icons";
-import { FontAwesome5 } from '@expo/vector-icons';
+import { FontAwesome5 } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import MapView from "react-native-maps";
+import MapView, { Marker } from "react-native-maps";
+import { useState } from "react";
 
 export default function ProfilScreen({ navigation }) {
+  const [lat, setLat] = useState();
+  const [long, setLong] = useState();
+
+  const handleClick = () => {
+    return <Marker coordinate={{ longitude: long, latitude: lat }} />;
+  };
+
   return (
     <View style={styles.container}>
       {/* <View style={styles.header}>
@@ -76,18 +84,22 @@ export default function ProfilScreen({ navigation }) {
             latitudeDelta: 180,
             longitudeDelta: 180,
           }}
-          onLongPress={(e) => console.log(e.nativeEvent.position)}
-        />
+          onLongPress={(e) => {
+            setLong(e.nativeEvent.coordinate.longitude);
+            setLat(e.nativeEvent.coordinate.latitude);
+            handleClick();
+          }}
+        ></MapView>
       </View>
       <View style={styles.countries}>
         <Text style={styles.textCountries}>Visited countries :｛counter｝</Text>
         <View style={styles.flags}>
-        <FontAwesome5 name="flag" size={40} color="black" />
-        <FontAwesome5 name="flag" size={40} color="black" />
-        <FontAwesome5 name="flag" size={40} color="black" />
-        <FontAwesome5 name="flag" size={40} color="black" />
-        <FontAwesome5 name="flag" size={40} color="black" />
-        <FontAwesome5 name="flag" size={40} color="black" />
+          <FontAwesome5 name="flag" size={40} color="black" />
+          <FontAwesome5 name="flag" size={40} color="black" />
+          <FontAwesome5 name="flag" size={40} color="black" />
+          <FontAwesome5 name="flag" size={40} color="black" />
+          <FontAwesome5 name="flag" size={40} color="black" />
+          <FontAwesome5 name="flag" size={40} color="black" />
         </View>
       </View>
     </View>
@@ -131,17 +143,17 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   image: {
-    width: '100%',
-    height: '80%',
+    width: "100%",
+    height: "80%",
   },
   countries: {
     marginBottom: 10,
-    width: '100%',
+    width: "100%",
   },
   textCountries: {
     fontSize: 30,
     fontWeight: "bold",
-    backgroundColor: '#20B08E',
+    backgroundColor: "#20B08E",
     overflow: "hidden",
     textAlign: "center",
   },
