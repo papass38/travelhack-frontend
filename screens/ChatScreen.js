@@ -49,7 +49,7 @@ export default function Chat() {
 
       if (status === "granted") {
         Location.watchPositionAsync({ distanceInterval: 1000 }, (location) => {
-          fetch("http://172.16.190.143:3000/chat/location", {
+          fetch("http://172.16.190.137:3000/chat/location", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({

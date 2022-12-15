@@ -3327,11 +3327,7 @@ expo-asset@~8.6.2:
     path-browserify "^1.0.0"
     url-parse "^1.5.9"
 
-<<<<<<< HEAD
-expo-auth-session@~3.7.3:
-=======
 expo-auth-session@^3.7.3:
->>>>>>> frontBranch
   version "3.7.3"
   resolved "https://registry.yarnpkg.com/expo-auth-session/-/expo-auth-session-3.7.3.tgz#ded1afbbf88e0c6e4098e59920b4f13927fc1f3d"
   integrity sha512-0mX47j6WdpEoaFVxU36VBRkEjJKwAkqnRyNdd5g+Ab1fHXQJJK3nzjOjxuBzgE8mKSS9NGHr/At9IGY6MLrg2g==
