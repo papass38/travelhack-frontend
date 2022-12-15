@@ -1,75 +1,75 @@
 import {
-    StyleSheet,
-    Text,
-    View,
-    TextInput,
-    Button,
-    KeyboardAvoidingView,
-    TouchableOpacity,
-    ScrollView,
-    SafeAreaView,
-    TouchableHighlight,
-  } from "react-native";
-  import { AntDesign } from "@expo/vector-icons";
-import { Entypo } from "@expo/vector-icons";
+  StyleSheet,
+  Text,
+  View,
+  TextInput,
+  Button,
+  KeyboardAvoidingView,
+  TouchableOpacity,
+  ScrollView,
+  SafeAreaView,
+  TouchableHighlight,
+} from "react-native";
+import { addDate } from "../reducers/trips";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-export default function DestinationInfos({props}){
-    const [budget, setBudget] = useState(props.budget.meal + props.budget.room)
-    const [arrivalDate, setArrivalDate] = useState("")
-    const [departureDate, setDepartureDate] = useState("")
-    const tripList = useSelector((state) => state.trip.value.trip);
-    
-    useEffect(() => {
-        const totalBudget = props.budget.meal + props.budget.room
-        setBudget(totalBudget.toFixed(2))
-    }, [])
-    return (
-        <View>
-        <View style={styles.destinationName}>
-          <Text style={styles.text}>{props.name}</Text>
-        </View>
-        <View style={styles.destinationDetails}>
-          {/* <DestinationDetails/>   */}
-          <Text style={styles.text}>Estimated Budget : {budget} € </Text>
-          <AntDesign name="caretdown" size={18} color="black" />
-        </View>
-        </View>
-    )
+
+export default function DestinationInfos({ props, index }) {
+  console.log(props)
+  const [budget, setBudget] = useState(0);
+  const tripList = useSelector((state) => state.trip.value.trip);
+  const dispatch = useDispatch();
+
+  // calcul du budget journalier par destination
+  useEffect(() => {
+    const destinationBudget = (props.budget.meal + props.budget.room);
+    setBudget(destinationBudget.toFixed(2));
+  }, []);
+
+  const today = new Date()
+
+
+  return (
+    <View>
+      <View style={styles.destinationName}>
+        <Text style={styles.text}>{index + 1} - {props.name}</Text>
+      </View>
+      <View style={styles.destinationDetails}>
+        <Text style={styles.text}>{budget }€ / day </Text>
+      </View>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      alignItems: "center",
-      justifyContent: "flex-start",
-      backgroundColor: "white",
-    },
-    text: {
-      fontSize: 18,
-    },
-    destinationsInfos : {
-      //width : "100%"
-    },
-    destinationName: {
-      flexDirection: "row",
-      justifyContent: "space-between",
-      padding : 10, 
-      borderStyle : "solid", 
-      borderColor : "#Eeeeee", 
-      borderWidth : 1, 
-      marginVertical : 10,
-      width : 330
-    },
-    destinationDetails: {
-      flexDirection: "row",
-      justifyContent: "space-between",
-      padding : 10, 
-      backgroundColor : "#Eeeeee", 
-      marginBottom : 20,
-      //width : "100%"
-  
-    },
-    
-  });
+  container: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "flex-start",
+    backgroundColor: "white",
+  },
+  text: {
+    fontSize: 18,
+  },
+  destinationsInfos: {
+    //width : "100%"
+  },
+  destinationName: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    padding: 10,
+    borderStyle: "solid",
+    borderColor: "#Eeeeee",
+    borderWidth: 1,
+    marginVertical: 10,
+    width: 330,
+  },
+  destinationDetails: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    padding: 10,
+    backgroundColor: "#Eeeeee",
+    marginBottom: 20,
+  },
+});

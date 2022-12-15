@@ -8,6 +8,7 @@ import { AntDesign } from '@expo/vector-icons';
 export default function PlaceAround(props){
     const[placeInfo, setPlaceInfo] = useState({})
 
+    // récupération des infos détaillées par etablissement, necessaire pour la récuperation des sites web 
     useEffect(() => {
         fetch(
                 `https://maps.googleapis.com/maps/api/place/details/json?place_id=${props.placeId}&fields=website%2Cname%2Crating&key=AIzaSyCx5Hb0tUovjDU45HZUySMkSN7vz_RVGC4`
@@ -17,6 +18,7 @@ export default function PlaceAround(props){
               })
     }, [])
 
+    // permet la redirection sur la page de l'établissement
     const handlePress = () => Linking.canOpenURL(placeInfo.website).then(() => {
         Linking.openURL(placeInfo.website);
     });

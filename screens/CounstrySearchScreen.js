@@ -24,17 +24,17 @@ export default function CountrySearchScreen({ navigation }) {
   const dispatch = useDispatch();
   const [destination, setDestination] = useState();
   const GOOGLE_MAPS_APIKEY = "AIzaSyCx5Hb0tUovjDU45HZUySMkSN7vz_RVGC4";
-  // const trip = useSelector((state) => state.trip.value);
-
+  
+  // stock la destination saisie dans le store et redirige vers mapscreen
   const handleValidation = () => {
     if (destination) {
       dispatch(initializeTrip(destination));
       navigation.navigate("Map");
-      // console.log(trip.initialDestination.adress.split(" ").length);
     }
   };
 
   return (
+
     <View style={styles.container}>
       <Header navigation={navigation} />
       <KeyboardAvoidingView style={styles.searchPlace}>

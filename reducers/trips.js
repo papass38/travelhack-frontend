@@ -24,11 +24,9 @@ export const tripSlice = createSlice({
         (e) => e.name !== action.payload
       );
     },
-    addDate: (state, action) => {
-      state.value.trip[action.payload.index].dates = action.payload.date
-    }
   },
 });
 
-export const { initializeTrip, addTrip, removeTrip } = tripSlice.actions;
+export const { initializeTrip, addTrip, removeTrip, addDate } =
+  tripSlice.actions;
 export default tripSlice.reducer;

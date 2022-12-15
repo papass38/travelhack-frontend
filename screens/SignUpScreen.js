@@ -9,12 +9,29 @@ import {
   TouchableOpacity,
   TextInput,
   Pressable,
+  Image,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import { Octicons } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
+import * as WebBrowser from "expo-web-browser";
+import * as Google from "expo-auth-session/providers/google";
+import * as React from "react";
+
+WebBrowser.maybeCompleteAuthSession();
+
+//web 90077612632-sqq87ue9rnpj7njp6abht7iv26gj2sg0.apps.googleusercontent.com
+//ios 90077612632-1fng2dqhhtvjc8d320p0ulv79j7mv00l.apps.googleusercontent.com
+//android
 
 export default function SignUpScreen({ navigation }) {
+  const [accessToken, setAccessToken] = React.useState(null);
+  const [user, setUser] = React.useState(null);
+  const [request, response, promptAsync] = Google.useAuthRequest({
+    clientId:
+      "90077612632-sqq87ue9rnpj7njp6abht7iv26gj2sg0.apps.googleusercontent.com",
+    iosClientId:
+      "90077612632-1fng2dqhhtvjc8d320p0ulv79j7mv00l.apps.googleusercontent.com",
+  });
   const dispatch = useDispatch();
 
   const [signUpUsername, setSignUpUsername] = useState("");
@@ -24,7 +41,11 @@ export default function SignUpScreen({ navigation }) {
   const [signUpEmail, setSignUpEmail] = useState("");
 
   const handleRegister = () => {
+<<<<<<< HEAD
     fetch("http://localhost:3000/users/signup", {
+=======
+    fetch("http://172.16.190.143:3000/users/signup", {
+>>>>>>> 9093b6b6cc2b1477423b38320a51e3a3a33387b0
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -48,6 +69,12 @@ export default function SignUpScreen({ navigation }) {
         }
       });
   };
+
+  React.useEffect(() => {
+    if (response?.type === "success") {
+      const { authentication } = response;
+    }
+  }, [response]);
 
   return (
     <LinearGradient
@@ -109,6 +136,13 @@ export default function SignUpScreen({ navigation }) {
             secureTextEntry={true}
             textContentType={"password"}
           />
+          <Button
+            disabled={!request}
+            title="Login"
+            onPress={() => {
+              promptAsync();
+            }}
+          />
           <TouchableOpacity
             style={styles.buttonRadient}
             onPress={() => handleRegister()}
@@ -151,6 +185,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 40,
     marginBottom: 10,
+    alignItems: "center",
   },
   buttonContainer: {
     width: "100%",
