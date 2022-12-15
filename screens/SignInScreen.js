@@ -19,7 +19,7 @@ export default function SignInScreen({ navigation }) {
   const [signInPassword, setSignInPassword] = useState("");
 
   const handleConnection = () => {
-    fetch("http://172.16.190.143:3000/users/signin", {
+    fetch("http://192.168.1.15:3000/users/signin", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -57,31 +57,37 @@ export default function SignInScreen({ navigation }) {
           secureTextEntry={true}
           textContentType={"password"}
         />
+        <TouchableOpacity
+          style={styles.buttonRadient}
+          onPress={() => handleConnection()}
+        >
+          <LinearGradient
+            colors={["#20B08E", "white"]}
+            start={{ x: 0, y: 0.2 }}
+            end={{ x: 0, y: 1.7 }}
+            style={styles.button}
+          >
+            <Text style={styles.signInButton}>Sign In</Text>
+          </LinearGradient>
+        </TouchableOpacity>
+      </View>
+      <Text style={styles.orText}>Or Sign in With</Text>
+
+      <Text style={styles.text}>Don't have an account?</Text>
+
+      <TouchableOpacity
+        style={styles.buttonRadient}
+        onPress={() => navigation.navigate("Sign up")}
+      >
         <LinearGradient
           colors={["#20B08E", "white"]}
           start={{ x: 0, y: 0.2 }}
           end={{ x: 0, y: 1.7 }}
           style={styles.button}
         >
-          <TouchableOpacity onPress={() => handleConnection()}>
-            <Text style={styles.signInButton}>Sign In</Text>
-          </TouchableOpacity>
-        </LinearGradient>
-      </View>
-      <Text style={styles.orText}>Or Sign in With</Text>
-
-      <Text style={styles.text}>Don't have an account?</Text>
-
-      <LinearGradient
-        colors={["#20B08E", "white"]}
-        start={{ x: 0, y: 0.2 }}
-        end={{ x: 0, y: 1.7 }}
-        style={styles.button}
-      >
-        <TouchableOpacity onPress={() => navigation.navigate("Sign up")}>
           <Text style={styles.signUpButton}>Sign up</Text>
-        </TouchableOpacity>
-      </LinearGradient>
+        </LinearGradient>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -98,6 +104,12 @@ const styles = StyleSheet.create({
     fontSize: 24,
     marginBottom: 10,
   },
+  buttonRadient: {
+    backgroundColor: "#20B08E",
+    width: "100%",
+    borderRadius: 10,
+    alignItems: "center",
+  },
   subtitle: {
     fontSize: 18,
     color: "grey",
@@ -109,14 +121,14 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     marginBottom: 20,
     padding: 10,
-    borderRadius: 10,
+    borderRadius: 20,
     backgroundColor: "#F6F6F6",
   },
   button: {
     backgroundColor: "#20B08E",
     paddingVertical: 10,
     width: "100%",
-    borderRadius: 10,
+    borderRadius: 20,
     alignItems: "center",
   },
   signUpButton: {

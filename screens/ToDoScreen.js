@@ -35,8 +35,10 @@ export default function ToDoScreen({ navigation }) {
   useEffect(() => {
     if (trip.initialDestination.adress === undefined) {
       setTripData("");
-    } else {
+    } else if (trip.initialDestination.adress.split(" ").length === 2) {
       setTripData(trip.initialDestination.adress.split(" ")[1].toUpperCase());
+    } else if (trip.initialDestination.adress.split(" ").length === 1) {
+      setTripData(trip.initialDestination.adress.split(" ")[0].toUpperCase());
     }
   });
 
