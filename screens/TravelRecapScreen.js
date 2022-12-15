@@ -29,8 +29,8 @@ export default function TravelRecapScreen({ navigation }) {
   const [open, setOpen] = useState(false);
   const destinationsList = tripList.map((data, i) => {
     return (
-      <View style = {styles.destinationsInfos}>
-        <DestinationInfos props = {data} index = {i}/>
+      <View style={styles.destinationsInfos} key={i}>
+        <DestinationInfos props={data} index={i} />
       </View>
     );
   });
@@ -39,8 +39,12 @@ export default function TravelRecapScreen({ navigation }) {
     <View style={styles.container}>
       <Header navigation={navigation} />
       <ScrollView>{destinationsList}</ScrollView>
-      <TouchableOpacity onPress={() =>  navigation.navigate("Map")}><Text>Back</Text></TouchableOpacity>
-        <TouchableOpacity><Text>Next</Text></TouchableOpacity>
+      <TouchableOpacity onPress={() => navigation.navigate("Map")}>
+        <Text>Back</Text>
+      </TouchableOpacity>
+      <TouchableOpacity>
+        <Text>Next</Text>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -55,27 +59,25 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 18,
   },
-  destinationsInfos : {
+  destinationsInfos: {
     //width : "100%"
   },
   destinationName: {
     flexDirection: "row",
     justifyContent: "space-between",
-    padding : 10, 
-    borderStyle : "solid", 
-    borderColor : "#Eeeeee", 
-    borderWidth : 1, 
-    marginVertical : 10,
-    width : 330
+    padding: 10,
+    borderStyle: "solid",
+    borderColor: "#Eeeeee",
+    borderWidth: 1,
+    marginVertical: 10,
+    width: 330,
   },
   destinationDetails: {
     flexDirection: "row",
     justifyContent: "space-between",
-    padding : 10, 
-    backgroundColor : "#Eeeeee", 
-    marginBottom : 20,
+    padding: 10,
+    backgroundColor: "#Eeeeee",
+    marginBottom: 20,
     //width : "100%"
-
   },
-  
 });
