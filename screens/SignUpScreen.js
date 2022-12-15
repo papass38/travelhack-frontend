@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
   TextInput,
   Pressable,
+  Image,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { FontAwesome } from "@expo/vector-icons";
@@ -25,9 +26,9 @@ WebBrowser.maybeCompleteAuthSession();
 export default function SignUpScreen({ navigation }) {
   const [accessToken, setAccessToken] = React.useState(null);
   const [user, setUser] = React.useState(null);
-  const [request, response, promptAsync] = Google.useIdTokenAuthrequest({
+  const [request, response, promptAsync] = Google.useAuthRequest({
     clientId:
-      "90077612632 - sqq87ue9rnpj7njp6abht7iv26gj2sg0.apps.googleusercontent.com",
+      "90077612632-sqq87ue9rnpj7njp6abht7iv26gj2sg0.apps.googleusercontent.com",
     iosClientId:
       "90077612632-1fng2dqhhtvjc8d320p0ulv79j7mv00l.apps.googleusercontent.com",
   });
@@ -67,13 +68,9 @@ export default function SignUpScreen({ navigation }) {
 
   React.useEffect(() => {
     if (response?.type === "success") {
-      setAccessToken(response.authentification.accessToken);
+      const { authentication } = response;
     }
-  }, []);
-
-  async function fetchUserInfo() {
-    let response;
-  }
+  }, [response]);
 
   return (
     <LinearGradient
@@ -134,6 +131,13 @@ export default function SignUpScreen({ navigation }) {
             value={signUpPassword}
             secureTextEntry={true}
             textContentType={"password"}
+          />
+          <Button
+            disabled={!request}
+            title="Login"
+            onPress={() => {
+              promptAsync();
+            }}
           />
           <TouchableOpacity
             style={styles.buttonRadient}
