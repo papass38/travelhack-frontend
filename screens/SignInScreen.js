@@ -9,6 +9,8 @@ import {
   TouchableOpacity,
   TextInput,
   Pressable,
+  KeyboardAvoidingView,
+  Platform
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 
@@ -20,7 +22,7 @@ export default function SignInScreen({ navigation }) {
   const [messageError, setMessageError] = useState("");
 
   const handleConnection = () => {
-    fetch("http://172.16.191.12:3000/users/signin", {
+    fetch("http://172.16.190.18:3000/users/signin", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -45,6 +47,9 @@ export default function SignInScreen({ navigation }) {
   };
 
   return (
+    <KeyboardAvoidingView style={styles.container} behavior={Platform.OS === 'ios' ? 'padding': 'height'}>
+
+    
     <LinearGradient
       colors={["#20B08E", "white"]}
       start={{ x: 0, y: 0.2 }}
@@ -71,7 +76,7 @@ export default function SignInScreen({ navigation }) {
           secureTextEntry={true}
           textContentType={"password"}
         />
-        <Text style={{ color: "red", fontWeight: "bold", textAlign: "center" }}>
+        <Text style={{ color: "red", fontWeight: "bold", textAlign: "center", paddingBottom: 15 }}>
           {messageError}
         </Text>
         <TouchableOpacity
@@ -106,7 +111,7 @@ export default function SignInScreen({ navigation }) {
           </LinearGradient>
         </TouchableOpacity>
       </View>
-    </LinearGradient>
+    </LinearGradient></KeyboardAvoidingView>
   );
 }
 
