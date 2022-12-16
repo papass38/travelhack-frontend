@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   Image,
   SafeAreaView,
+  Share,
 } from "react-native";
 import Header from "../components/Header";
 import { FontAwesome } from "@expo/vector-icons";
