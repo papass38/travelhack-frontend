@@ -25,6 +25,16 @@ export default function ProfilScreen({ navigation }) {
   const [lat, setLat] = useState();
   const [long, setLong] = useState();
   const trip = useSelector((state) => state.trip.value);
+  const visitedCountries = [
+    {
+      latitude: 38,
+      longitude: 97,
+    },
+    {
+      latitude: 48.85,
+      longitude: 2.35,
+    },
+  ];
 
   const listingTrip = trip.trip.map((elmt) => {
     return dataVaccins.map((count) => {
@@ -103,7 +113,17 @@ export default function ProfilScreen({ navigation }) {
             setLong(e.nativeEvent.coordinate.longitude);
             setLat(e.nativeEvent.coordinate.latitude);
           }}
-        ></MapView>
+        >
+          {visitedCountries.map((country) => (
+            <Marker
+              coordinate={country}
+              title={country.name}
+              description={country.description}
+              // Set the opacity of the marker to 0.5 to make it appear greyed out
+              pinColor="#20B08E"
+            />
+          ))}
+        </MapView>
       </View>
       <View style={styles.countries}>
         <View style={styles.flags}>{listingTrip}</View>
