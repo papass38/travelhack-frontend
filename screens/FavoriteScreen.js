@@ -18,7 +18,7 @@ export default function FavoriteScreen({ navigation }) {
   const [infoUser, setInfoUser] = useState({ username: null, email: null });
 
   useEffect(() => {
-    fetch(`http://172.16.190.137:3000/users/${user.username}`)
+    fetch(`http://172.16.190.140:3000/users/${user.username}`)
       .then((res) => res.json())
       .then((data) => {
         if (data.result) {
