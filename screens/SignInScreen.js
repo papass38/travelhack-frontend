@@ -22,7 +22,7 @@ export default function SignInScreen({ navigation }) {
   const [messageError, setMessageError] = useState("");
 
   const handleConnection = () => {
-    fetch("http://172.16.190.137:3000/users/signin", {
+    fetch("http://172.16.190.140:3000/users/signin", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
