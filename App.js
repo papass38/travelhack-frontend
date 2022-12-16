@@ -5,6 +5,8 @@ import React from "react";
 import user from "./reducers/user";
 import todo from "./reducers/toDo";
 
+import SwipeButton from 'rn-swipe-button'
+
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
