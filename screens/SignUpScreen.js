@@ -166,6 +166,7 @@ export default function SignUpScreen({ navigation }) {
             style={styles.buttonGoogle}
             onPress={() => {
               promptAsync();
+              navigation.navigate("TabNavigator");
             }}
             disabled={!request}
           >
