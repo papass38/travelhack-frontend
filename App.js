@@ -86,7 +86,7 @@ export default function App() {
           <Stack.Screen name="Recap" component={TravelRecapScreen} />
           <Stack.Screen name="Sign in" component={SignInScreen} />
           <Stack.Screen name="Sign up" component={SignUpScreen} />
-          <Stack.Screen name="TabNavigator" component={TabNavigator} />
+          <Stack.Screen name="TabNavigator" component={TabNavigator}  />
           <Stack.Screen name="Profil" component={ProfilScreen} />
           <Stack.Screen name="Favorites" component={FavoriteScreen} />
           <Stack.Screen name="Settings" component={SettingsScreen} />
