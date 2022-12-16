@@ -1,3 +1,5 @@
+import fetchIp from "../fetchIp.json";
+
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../reducers/user";
@@ -22,7 +24,7 @@ export default function SignInScreen({ navigation }) {
   const [messageError, setMessageError] = useState("");
 
   const handleConnection = () => {
-    fetch("http://172.16.190.140:3000/users/signin", {
+    fetch(`http://${fetchIp.myIp}:3000/users/signin`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
