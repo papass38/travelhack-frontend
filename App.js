@@ -86,8 +86,10 @@ export default function App() {
           <Stack.Screen name="CountrySearch" component={CountrySearchScreen} />
           <Stack.Screen name="Map" component={MapScreen} />
           <Stack.Screen name="Recap" component={TravelRecapScreen} />
-          <Stack.Screen name="Sign in" component={SignInScreen} />
-          <Stack.Screen name="Sign up" component={SignUpScreen} />
+          <Stack.Screen name="Sign in" component={SignInScreen} 
+          options={{ gestureEnabled: false }}/>
+          <Stack.Screen name="Sign up" component={SignUpScreen} 
+          options={{ gestureEnabled: false }}/>
           <Stack.Screen
             name="TabNavigator"
             component={TabNavigator}
