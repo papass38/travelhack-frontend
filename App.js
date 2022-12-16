@@ -5,7 +5,7 @@ import React from "react";
 import user from "./reducers/user";
 import todo from "./reducers/toDo";
 
-import SwipeButton from 'rn-swipe-button'
+import SwipeButton from "rn-swipe-button";
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -103,6 +103,8 @@ export default function App() {
     </NavigationContainer>
   );
 }
+
+// ok
 
 const styles = StyleSheet.create({
   container: {
