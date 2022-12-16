@@ -10,7 +10,6 @@ import {
   View,
   TouchableOpacity,
   TextInput,
-  Pressable,
   KeyboardAvoidingView,
   Platform,
 } from "react-native";
