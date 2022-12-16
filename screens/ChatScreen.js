@@ -115,8 +115,27 @@ export default function Chat() {
       usernameStyle = { textAlign: "right" };
     }
 
+    let dateOne;
+    if (i === 0) {
+      dateOne = (
+        <Text style={styles.dateStyle}>
+          {new Date(data.date).toLocaleDateString()}
+        </Text>
+      );
+    } else if (
+      new Date(new Date(data.date).getDate()).getTime() >
+      new Date(new Date(msgList[i - 1].date).getDate()).getTime()
+    ) {
+      dateOne = (
+        <Text style={styles.dateStyle}>
+          {new Date(data.date).toLocaleDateString()}
+        </Text>
+      );
+    }
+
     return (
       <View key={i}>
+        {dateOne}
         <View style={msgContainer}>
           <Image source={{ uri: profilImg }} style={styles.msgImg} />
           <View style={styles.usernameMsgContainer}>
@@ -207,6 +226,12 @@ const styles = StyleSheet.create({
     flex: 1,
     width: "90%",
     overflow: "hidden",
+  },
+  dateStyle: {
+    textAlign: "center",
+    marginTop: 20,
+    marginBottom: 20,
+    fontWeight: "bold",
   },
   msgContainer: {
     flexDirection: "row",
