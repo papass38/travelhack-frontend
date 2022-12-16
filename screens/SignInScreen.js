@@ -9,8 +9,17 @@ import {
   TouchableOpacity,
   TextInput,
   Pressable,
+  KeyboardAvoidingView,
+  Platform,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
+import * as WebBrowser from "expo-web-browser";
+import * as Google from "expo-auth-session/providers/google";
+import * as React from "react";
+import { AntDesign } from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
+
+WebBrowser.maybeCompleteAuthSession();
 
 export default function SignInScreen({ navigation }) {
   const dispatch = useDispatch();
@@ -18,9 +27,15 @@ export default function SignInScreen({ navigation }) {
   const [signInUsername, setSignInUsername] = useState("");
   const [signInPassword, setSignInPassword] = useState("");
   const [messageError, setMessageError] = useState("");
+  const [request, response, promptAsync] = Google.useAuthRequest({
+    clientId:
+      "90077612632-sqq87ue9rnpj7njp6abht7iv26gj2sg0.apps.googleusercontent.com",
+    iosClientId:
+      "90077612632-1fng2dqhhtvjc8d320p0ulv79j7mv00l.apps.googleusercontent.com",
+  });
 
   const handleConnection = () => {
-    fetch("http://172.16.191.12:3000/users/signin", {
+    fetch("http://172.16.191.7:3000/users/signin", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -39,74 +54,102 @@ export default function SignInScreen({ navigation }) {
         } else if (data.error === "Missing or empty fields") {
           setMessageError("Missing or empty fields");
         } else if (data.error === "User not found or wrong password") {
-          setMessageError("User not found");
+          setMessageError("User not found or incorrect password");
         }
       });
   };
 
+  React.useEffect(() => {
+    if (response?.type === "success") {
+      const { authentication } = response;
+    }
+  }, [response]);
+
   return (
-    <LinearGradient
-      colors={["#20B08E", "white"]}
-      start={{ x: 0, y: 0.2 }}
-      end={{ x: 0, y: 1.7 }}
+    <KeyboardAvoidingView
       style={styles.container}
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
     >
-      <View style={styles.titleSection}>
-        <Text style={styles.title}>Sign In</Text>
-        <Text style={styles.subtitle}>Access to your acount</Text>
-      </View>
+      <LinearGradient
+        colors={["#20B08E", "white"]}
+        start={{ x: 0, y: 0.2 }}
+        end={{ x: 0, y: 1.7 }}
+        style={styles.container}
+      >
+        <View style={styles.titleSection}>
+          <Text style={styles.title}>Sign In</Text>
+          <Text style={styles.subtitle}>Access to your acount</Text>
+        </View>
 
-      <View style={styles.connectionSection}>
-        <TextInput
-          style={styles.input}
-          placeholder="Username"
-          onChangeText={(e) => setSignInUsername(e)}
-          value={signInUsername}
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="Password"
-          onChangeText={(e) => setSignInPassword(e)}
-          value={signInPassword}
-          secureTextEntry={true}
-          textContentType={"password"}
-        />
-        <Text style={{ color: "red", fontWeight: "bold", textAlign: "center" }}>
-          {messageError}
-        </Text>
-        <TouchableOpacity
-          style={styles.buttonRadient}
-          onPress={() => handleConnection()}
-        >
-          <LinearGradient
-            colors={["#20B08E", "white"]}
-            start={{ x: 0, y: 0.2 }}
-            end={{ x: 0, y: 1.7 }}
-            style={styles.button}
+        <View style={styles.connectionSection}>
+          <TextInput
+            style={styles.input}
+            placeholder="Username"
+            onChangeText={(e) => setSignInUsername(e)}
+            value={signInUsername}
+          />
+          <TextInput
+            style={styles.input}
+            placeholder="Password"
+            onChangeText={(e) => setSignInPassword(e)}
+            value={signInPassword}
+            secureTextEntry={true}
+            textContentType={"password"}
+          />
+          <Text
+            style={{
+              color: "red",
+              fontWeight: "bold",
+              textAlign: "center",
+              paddingBottom: 15,
+            }}
           >
-            <Text style={styles.signInButton}>Sign In</Text>
-          </LinearGradient>
-        </TouchableOpacity>
-
-        <Text style={styles.orText}>Or Sign in With</Text>
-
-        <Text style={styles.text}>Don't have an account?</Text>
-
-        <TouchableOpacity
-          style={styles.buttonRadient}
-          onPress={() => navigation.navigate("Sign up")}
-        >
-          <LinearGradient
-            colors={["#20B08E", "white"]}
-            start={{ x: 0, y: 0.2 }}
-            end={{ x: 0, y: 1.7 }}
-            style={styles.button}
+            {messageError}
+          </Text>
+          <TouchableOpacity
+            style={styles.buttonRadient}
+            onPress={() => handleConnection()}
           >
-            <Text style={styles.signUpButton}>Sign up</Text>
-          </LinearGradient>
-        </TouchableOpacity>
-      </View>
-    </LinearGradient>
+            <LinearGradient
+              colors={["#20B08E", "white"]}
+              start={{ x: 0, y: 0.2 }}
+              end={{ x: 0, y: 1.7 }}
+              style={styles.button}
+            >
+              <Text style={styles.signInButton}>Sign In</Text>
+            </LinearGradient>
+          </TouchableOpacity>
+
+          <Text style={styles.orText}>Or Sign in With</Text>
+          <TouchableOpacity
+            style={styles.buttonGoogle}
+            onPress={() => {
+              promptAsync();
+              navigation.navigate("TabNavigator");
+            }}
+            disabled={!request}
+          >
+            <AntDesign name="google" size={32} color="black" title="Login" />
+            <Text> Sign In with Google</Text>
+          </TouchableOpacity>
+          <Text style={styles.text}>Don't have an account?</Text>
+
+          <TouchableOpacity
+            style={styles.buttonRadient}
+            onPress={() => navigation.navigate("Sign up")}
+          >
+            <LinearGradient
+              colors={["#20B08E", "white"]}
+              start={{ x: 0, y: 0.2 }}
+              end={{ x: 0, y: 1.7 }}
+              style={styles.button}
+            >
+              <Text style={styles.signUpButton}>Sign up</Text>
+            </LinearGradient>
+          </TouchableOpacity>
+        </View>
+      </LinearGradient>
+    </KeyboardAvoidingView>
   );
 }
 
@@ -177,5 +220,16 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "rgba(246, 246, 246, 0.7)",
+  },
+  buttonGoogle: {
+    backgroundColor: "white",
+    width: "80%",
+    paddingVertical: 0,
+    borderRadius: 10,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    color: "#black",
+    fontSize: 18,
   },
 });
