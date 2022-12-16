@@ -12,8 +12,10 @@ import {
 } from "react-native";
 import Header from "../components/Header";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import {addDateandBudget} from "../reducers/trips"
+import { useSelector, useDispatch } from "react-redux";
 import DestinationInfos from "../components/DestinationInfos";
+import TravelSummary from "./TravelSummary";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import moment from "moment";
 import { AntDesign } from "@expo/vector-icons";
@@ -26,6 +28,10 @@ export default function TravelRecapScreen({ navigation }) {
   const [departureDate, setDepartureDate] = useState("");
   const [numberOfDays, setNumberOfDays] = useState(0)
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+  const dispatch = useDispatch()
+
+  const storeTrips = useSelector((state) => state.trip.value)
+  console.log(storeTrips)
 
   // fait apparaitre le date picker
   const showDatePicker = (value) => {
@@ -70,6 +76,11 @@ export default function TravelRecapScreen({ navigation }) {
 
   // calcul du budget total
   const totalBudget = budget/tripList.length * numberOfDays
+
+  const handleValidation = () => {
+    dispatch(addDateandBudget({startDate : arrivalDate, endDate : departureDate, totalBudget : totalBudget}))
+   //navigation.navigate("Summary")
+  }
 
   return (
     <View style={styles.container}>
@@ -123,7 +134,7 @@ export default function TravelRecapScreen({ navigation }) {
             tripList.length > 0 && navigation.navigate("Recap");
           }}
         >
-          <AntDesign name="arrowright" size={34} color="white" />
+          <AntDesign name="arrowright" size={34} color="white" onPress={() => handleValidation() }/>
         </TouchableOpacity>
       </View>
     </View>
