@@ -1,5 +1,5 @@
 import fetchIp from "../fetchIp.json";
-
+import jwtDecode from "jwt-decode";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../reducers/user";
@@ -28,8 +28,7 @@ WebBrowser.maybeCompleteAuthSession();
 //android
 
 export default function SignUpScreen({ navigation }) {
-  const [accessToken, setAccessToken] = React.useState(null);
-  const [user, setUser] = React.useState(null);
+  const [user, setUser] = useState(null);
   const [request, response, promptAsync] = Google.useAuthRequest({
     clientId:
       "90077612632-sqq87ue9rnpj7njp6abht7iv26gj2sg0.apps.googleusercontent.com",
@@ -43,6 +42,11 @@ export default function SignUpScreen({ navigation }) {
   const [signUpFirstName, setSignUpFirstName] = useState("");
   const [signUpLastName, setSignUpLastName] = useState("");
   const [signUpEmail, setSignUpEmail] = useState("");
+
+  const handleLogin = (credentialResponse) => {
+    const userInfo = jwtDecode(credentialResponse.credential);
+    setUser(userInfo);
+  };
 
   const handleRegister = () => {
     fetch(`http://${fetchIp.myIp}:3000/users/signup`, {
@@ -167,6 +171,9 @@ export default function SignUpScreen({ navigation }) {
             onPress={() => {
               promptAsync();
               navigation.navigate("TabNavigator");
+            }}
+            onSuccess={(credentialResponse) => {
+              handleLogin(credentialResponse);
             }}
             disabled={!request}
           >
