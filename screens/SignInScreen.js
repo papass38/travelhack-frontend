@@ -9,6 +9,8 @@ import {
   TouchableOpacity,
   TextInput,
   Pressable,
+  KeyboardAvoidingView,
+  Platform
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 
@@ -17,9 +19,10 @@ export default function SignInScreen({ navigation }) {
 
   const [signInUsername, setSignInUsername] = useState("");
   const [signInPassword, setSignInPassword] = useState("");
+  const [messageError, setMessageError] = useState("");
 
   const handleConnection = () => {
-    fetch("http://192.168.1.15:3000/users/signin", {
+    fetch("http://172.16.188.138:3000/users/signin", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -30,18 +33,34 @@ export default function SignInScreen({ navigation }) {
       .then((response) => response.json())
       .then((data) => {
         if (data.result) {
+          setMessageError("");
           dispatch(login({ username: signInUsername, token: data.token }));
           navigation.navigate("TabNavigator");
           setSignInUsername("");
           setSignInPassword("");
+        } else if (data.error === "Missing or empty fields") {
+          setMessageError("Missing or empty fields");
+        } else if (data.error === "User not found or wrong password") {
+          setMessageError("User not found or incorrect password");
         }
       });
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Sign In</Text>
-      <Text style={styles.subtitle}>Access to your acount</Text>
+    <KeyboardAvoidingView style={styles.container} behavior={Platform.OS === 'ios' ? 'padding': 'height'}>
+
+    
+    <LinearGradient
+      colors={["#20B08E", "white"]}
+      start={{ x: 0, y: 0.2 }}
+      end={{ x: 0, y: 1.7 }}
+      style={styles.container}
+    >
+      <View style={styles.titleSection}>
+        <Text style={styles.title}>Sign In</Text>
+        <Text style={styles.subtitle}>Access to your acount</Text>
+      </View>
+
       <View style={styles.connectionSection}>
         <TextInput
           style={styles.input}
@@ -57,6 +76,9 @@ export default function SignInScreen({ navigation }) {
           secureTextEntry={true}
           textContentType={"password"}
         />
+        <Text style={{ color: "red", fontWeight: "bold", textAlign: "center", paddingBottom: 15 }}>
+          {messageError}
+        </Text>
         <TouchableOpacity
           style={styles.buttonRadient}
           onPress={() => handleConnection()}
@@ -70,25 +92,26 @@ export default function SignInScreen({ navigation }) {
             <Text style={styles.signInButton}>Sign In</Text>
           </LinearGradient>
         </TouchableOpacity>
-      </View>
-      <Text style={styles.orText}>Or Sign in With</Text>
 
-      <Text style={styles.text}>Don't have an account?</Text>
+        <Text style={styles.orText}>Or Sign in With</Text>
 
-      <TouchableOpacity
-        style={styles.buttonRadient}
-        onPress={() => navigation.navigate("Sign up")}
-      >
-        <LinearGradient
-          colors={["#20B08E", "white"]}
-          start={{ x: 0, y: 0.2 }}
-          end={{ x: 0, y: 1.7 }}
-          style={styles.button}
+        <Text style={styles.text}>Don't have an account?</Text>
+
+        <TouchableOpacity
+          style={styles.buttonRadient}
+          onPress={() => navigation.navigate("Sign up")}
         >
-          <Text style={styles.signUpButton}>Sign up</Text>
-        </LinearGradient>
-      </TouchableOpacity>
-    </View>
+          <LinearGradient
+            colors={["#20B08E", "white"]}
+            start={{ x: 0, y: 0.2 }}
+            end={{ x: 0, y: 1.7 }}
+            style={styles.button}
+          >
+            <Text style={styles.signUpButton}>Sign up</Text>
+          </LinearGradient>
+        </TouchableOpacity>
+      </View>
+    </LinearGradient></KeyboardAvoidingView>
   );
 }
 
@@ -96,39 +119,46 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    justifyContent: "center",
-    padding: 20,
+    justifyContent: "flex-end",
     width: "100%",
   },
-  title: {
+  titleSection: {
+    paddingTop: 150,
+    alignItems: "center",
+    justifyContent: "center",
     fontSize: 24,
-    marginBottom: 10,
+    marginBottom: 140,
+  },
+  title: {
+    fontSize: 40,
+  },
+  subtitle: {
+    fontSize: 25,
+    color: "grey",
   },
   buttonRadient: {
     backgroundColor: "#20B08E",
-    width: "100%",
+    width: "80%",
     borderRadius: 10,
     alignItems: "center",
   },
-  subtitle: {
-    fontSize: 18,
-    color: "grey",
-  },
+
   input: {
-    width: "100%",
+    width: "80%",
     height: 40,
     borderColor: "grey",
     borderWidth: 1,
     marginBottom: 20,
     padding: 10,
-    borderRadius: 20,
+    borderRadius: 10,
     backgroundColor: "#F6F6F6",
+    borderWidth: "none",
   },
   button: {
     backgroundColor: "#20B08E",
     paddingVertical: 10,
     width: "100%",
-    borderRadius: 20,
+    borderRadius: 10,
     alignItems: "center",
   },
   signUpButton: {
@@ -144,6 +174,13 @@ const styles = StyleSheet.create({
   },
 
   connectionSection: {
+    height: "50%",
+    paddingVertical: 30,
     width: "100%",
+    borderTopRightRadius: 40,
+    borderTopLeftRadius: 40,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "rgba(246, 246, 246, 0.7)",
   },
 });

@@ -38,6 +38,19 @@ export default function CountrySearchScreen({ navigation }) {
     <View style={styles.container}>
       <Header navigation={navigation} />
       <KeyboardAvoidingView style={styles.searchPlace}>
+
+      <TouchableOpacity
+        style={styles.header}
+        onPress={() => navigation.navigate("TabNavigator")}>
+        <Ionicons
+        
+          name="chevron-back"
+          size={50}
+          color="#20B08E"
+        />
+        <Text style={styles.text}>Accueil</Text>
+      </TouchableOpacity>
+
         <Text style={styles.title}>Select your destination</Text>
         <GooglePlacesAutocomplete
           placeholder="What is your destination ? "
@@ -113,5 +126,14 @@ const styles = StyleSheet.create({
     fontFamily: "Ubuntu",
     fontSize: 20,
     fontWeight: "bold",
+  },
+  header: {
+    flexDirection: "row",
+    alignItems: "center",
+    width: '35%',
+  },
+  text: {
+    color: "#20B08E",
+    fontSize: 30,
   },
 });
