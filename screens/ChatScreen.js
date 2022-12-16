@@ -86,9 +86,14 @@ export default function Chat() {
               date: i.date,
             });
           }
-          setMsgList(allMsg);
+          setMsgList(
+            allMsg.sort((a, b) => {
+              return new Date(b.date) + new Date(a.date);
+            })
+          );
         }
       });
+
     const subscription = pusher.subscribe(locationName);
     subscription.bind("pusher:subscription_succeeded", (data) => {
       subscription.bind("message", (data) => {
@@ -109,12 +114,15 @@ export default function Chat() {
       msgText = styles.myMsgText;
       usernameStyle = { textAlign: "right" };
     }
+
     return (
-      <View key={i} style={msgContainer}>
-        <Image source={{ uri: profilImg }} style={styles.msgImg} />
-        <View style={styles.usernameMsgContainer}>
-          <Text style={usernameStyle}>{data.name}</Text>
-          <Text style={msgText}>{data.message}</Text>
+      <View key={i}>
+        <View style={msgContainer}>
+          <Image source={{ uri: profilImg }} style={styles.msgImg} />
+          <View style={styles.usernameMsgContainer}>
+            <Text style={usernameStyle}>{data.name}</Text>
+            <Text style={msgText}>{data.message}</Text>
+          </View>
         </View>
       </View>
     );
@@ -188,11 +196,11 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   locationName: {
-    marginTop: 10,
-    marginBottom: 10,
+    margin: 10,
 
     fontSize: 20,
     fontWeight: "bold",
+    textAlign: "center",
   },
   //-----------------------------------Msg Content---------
   msgDisplay: {
@@ -216,6 +224,10 @@ const styles = StyleSheet.create({
     width: 50,
     height: 50,
     borderRadius: "50%",
+    borderWidth: 0.5,
+    marginTop: 15,
+    marginLeft: 5,
+    marginRight: 5,
   },
   msgText: {
     borderRadius: 5,

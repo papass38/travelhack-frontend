@@ -10,7 +10,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import FontAwesome from "react-native-vector-icons/FontAwesome";
-import { FontAwesome5 } from '@expo/vector-icons';
+import { FontAwesome5 } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 
 import { Provider } from "react-redux";
@@ -28,7 +28,7 @@ import SignInScreen from "./screens/SignInScreen";
 import SignUpScreen from "./screens/SignUpScreen";
 import FavoriteScreen from "./screens/FavoriteScreen";
 import SettingsScreen from "./screens/SettingsScreen";
-import TravelRecapScreen from "./screens/TravelRecapScreen"
+import TravelRecapScreen from "./screens/TravelRecapScreen";
 import WishlistScreen from "./screens/WishlistScreen";
 
 const Tab = createBottomTabNavigator();
@@ -48,19 +48,19 @@ const TabNavigator = () => {
 
             if (route.name === "Accueil") {
               iconName = "home-sharp";
-              return <Ionicons name={iconName} size={size} color={color} />
-            } 
+              return <Ionicons name={iconName} size={size} color={color} />;
+            }
             // if (route.name === "Itinéraires") {
             //   iconName = "route";
             //   return <FontAwesome5 name={iconName} size={size} color={color} />
             // }
             if (route.name === "Chat") {
               iconName = "chatbubble-ellipses";
-              return <Ionicons name={iconName} size={size} color={color} />
-            } 
+              return <Ionicons name={iconName} size={size} color={color} />;
+            }
           },
 
-          tabBarActiveTintColor: '#20B08E',
+          tabBarActiveTintColor: "#20B08E",
           tabBarInactiveTintColor: "black",
           headerShown: false,
         })}
@@ -86,7 +86,11 @@ export default function App() {
           <Stack.Screen name="Recap" component={TravelRecapScreen} />
           <Stack.Screen name="Sign in" component={SignInScreen} />
           <Stack.Screen name="Sign up" component={SignUpScreen} />
-          <Stack.Screen name="TabNavigator" component={TabNavigator}  />
+          <Stack.Screen
+            name="TabNavigator"
+            component={TabNavigator}
+            options={{ gestureEnabled: false }}
+          />
           <Stack.Screen name="Profil" component={ProfilScreen} />
           <Stack.Screen name="Favorites" component={FavoriteScreen} />
           <Stack.Screen name="Settings" component={SettingsScreen} />
