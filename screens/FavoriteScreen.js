@@ -16,19 +16,6 @@ import { useState } from "react";
 
 // comm for commit
 export default function FavoriteScreen({ navigation }) {
-  const user = useSelector((state) => state.user.value);
-  const [infoUser, setInfoUser] = useState({ username: null, email: null });
-
-  useEffect(() => {
-    fetch(`http://${fetchIp.myIp}:3000/users/${user.username}`)
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.result) {
-          setInfoUser({ username: data.user.username, email: data.user.email });
-        }
-      });
-  }, []);
-
   return (
     <SafeAreaView style={styles.container}>
       <TouchableOpacity
@@ -38,8 +25,6 @@ export default function FavoriteScreen({ navigation }) {
         <Ionicons name="chevron-back" size={50} color="#20B08E" />
         <Text style={styles.text}>Profil</Text>
       </TouchableOpacity>
-      <Text>Username :{infoUser.username}</Text>
-      <Text>Email : {infoUser.email}</Text>
     </SafeAreaView>
   );
 }
