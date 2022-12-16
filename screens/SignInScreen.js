@@ -1,3 +1,5 @@
+import fetchIp from "../fetchIp.json";
+
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../reducers/user";
@@ -9,6 +11,8 @@ import {
   TouchableOpacity,
   TextInput,
   Pressable,
+  KeyboardAvoidingView,
+  Platform,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 
@@ -20,7 +24,7 @@ export default function SignInScreen({ navigation }) {
   const [messageError, setMessageError] = useState("");
 
   const handleConnection = () => {
-    fetch("http://172.16.191.12:3000/users/signin", {
+    fetch(`http://${fetchIp.myIp}:3000/users/signin`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -39,74 +43,86 @@ export default function SignInScreen({ navigation }) {
         } else if (data.error === "Missing or empty fields") {
           setMessageError("Missing or empty fields");
         } else if (data.error === "User not found or wrong password") {
-          setMessageError("User not found");
+          setMessageError("User not found or incorrect password");
         }
       });
   };
 
   return (
-    <LinearGradient
-      colors={["#20B08E", "white"]}
-      start={{ x: 0, y: 0.2 }}
-      end={{ x: 0, y: 1.7 }}
+    <KeyboardAvoidingView
       style={styles.container}
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
     >
-      <View style={styles.titleSection}>
-        <Text style={styles.title}>Sign In</Text>
-        <Text style={styles.subtitle}>Access to your acount</Text>
-      </View>
+      <LinearGradient
+        colors={["#20B08E", "white"]}
+        start={{ x: 0, y: 0.2 }}
+        end={{ x: 0, y: 1.7 }}
+        style={styles.container}
+      >
+        <View style={styles.titleSection}>
+          <Text style={styles.title}>Sign In</Text>
+          <Text style={styles.subtitle}>Access to your acount</Text>
+        </View>
 
-      <View style={styles.connectionSection}>
-        <TextInput
-          style={styles.input}
-          placeholder="Username"
-          onChangeText={(e) => setSignInUsername(e)}
-          value={signInUsername}
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="Password"
-          onChangeText={(e) => setSignInPassword(e)}
-          value={signInPassword}
-          secureTextEntry={true}
-          textContentType={"password"}
-        />
-        <Text style={{ color: "red", fontWeight: "bold", textAlign: "center" }}>
-          {messageError}
-        </Text>
-        <TouchableOpacity
-          style={styles.buttonRadient}
-          onPress={() => handleConnection()}
-        >
-          <LinearGradient
-            colors={["#20B08E", "white"]}
-            start={{ x: 0, y: 0.2 }}
-            end={{ x: 0, y: 1.7 }}
-            style={styles.button}
+        <View style={styles.connectionSection}>
+          <TextInput
+            style={styles.input}
+            placeholder="Username"
+            onChangeText={(e) => setSignInUsername(e)}
+            value={signInUsername}
+          />
+          <TextInput
+            style={styles.input}
+            placeholder="Password"
+            onChangeText={(e) => setSignInPassword(e)}
+            value={signInPassword}
+            secureTextEntry={true}
+            textContentType={"password"}
+          />
+          <Text
+            style={{
+              color: "red",
+              fontWeight: "bold",
+              textAlign: "center",
+              paddingBottom: 15,
+            }}
           >
-            <Text style={styles.signInButton}>Sign In</Text>
-          </LinearGradient>
-        </TouchableOpacity>
-
-        <Text style={styles.orText}>Or Sign in With</Text>
-
-        <Text style={styles.text}>Don't have an account?</Text>
-
-        <TouchableOpacity
-          style={styles.buttonRadient}
-          onPress={() => navigation.navigate("Sign up")}
-        >
-          <LinearGradient
-            colors={["#20B08E", "white"]}
-            start={{ x: 0, y: 0.2 }}
-            end={{ x: 0, y: 1.7 }}
-            style={styles.button}
+            {messageError}
+          </Text>
+          <TouchableOpacity
+            style={styles.buttonRadient}
+            onPress={() => handleConnection()}
           >
-            <Text style={styles.signUpButton}>Sign up</Text>
-          </LinearGradient>
-        </TouchableOpacity>
-      </View>
-    </LinearGradient>
+            <LinearGradient
+              colors={["#20B08E", "white"]}
+              start={{ x: 0, y: 0.2 }}
+              end={{ x: 0, y: 1.7 }}
+              style={styles.button}
+            >
+              <Text style={styles.signInButton}>Sign In</Text>
+            </LinearGradient>
+          </TouchableOpacity>
+
+          <Text style={styles.orText}>Or Sign in With</Text>
+
+          <Text style={styles.text}>Don't have an account?</Text>
+
+          <TouchableOpacity
+            style={styles.buttonRadient}
+            onPress={() => navigation.navigate("Sign up")}
+          >
+            <LinearGradient
+              colors={["#20B08E", "white"]}
+              start={{ x: 0, y: 0.2 }}
+              end={{ x: 0, y: 1.7 }}
+              style={styles.button}
+            >
+              <Text style={styles.signUpButton}>Sign up</Text>
+            </LinearGradient>
+          </TouchableOpacity>
+        </View>
+      </LinearGradient>
+    </KeyboardAvoidingView>
   );
 }
 
