@@ -2,8 +2,6 @@ import { Button, StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import Header from "../components/Header";
 import { AntDesign } from "@expo/vector-icons";
 
-import SwipeButton from 'rn-swipe-button'
-
 export default function HomeScreen({ navigation }) {
   return (
     <View style={styles.container}>
