@@ -1,3 +1,4 @@
+import fetchIp from "../fetchIp.json";
 import {
   Button,
   StyleSheet,
@@ -19,7 +20,7 @@ export default function FavoriteScreen({ navigation }) {
   const [infoUser, setInfoUser] = useState({ username: null, email: null });
 
   useEffect(() => {
-    fetch(`http://172.16.190.140:3000/users/${user.username}`)
+    fetch(`http://${fetchIp.myIp}:3000/users/${user.username}`)
       .then((res) => res.json())
       .then((data) => {
         if (data.result) {
@@ -37,13 +38,8 @@ export default function FavoriteScreen({ navigation }) {
         <Ionicons name="chevron-back" size={50} color="#20B08E" />
         <Text style={styles.text}>Profil</Text>
       </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.header}
-        onPress={() => navigation.navigate("Wishlist")}
-      >
-        <Ionicons name="ios-heart" size={50} color="red" />
-        <Text style={styles.text}>Wishlist</Text>
-      </TouchableOpacity>
+      <Text>Username :{infoUser.username}</Text>
+      <Text>Email : {infoUser.email}</Text>
     </SafeAreaView>
   );
 }
