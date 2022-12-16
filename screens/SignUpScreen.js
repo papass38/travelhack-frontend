@@ -1,3 +1,5 @@
+import fetchIp from "../fetchIp.json";
+
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../reducers/user";
@@ -43,7 +45,7 @@ export default function SignUpScreen({ navigation }) {
   const [signUpEmail, setSignUpEmail] = useState("");
 
   const handleRegister = () => {
-    fetch("http://172.16.191.12:3000/users/signup", {
+    fetch(`http://${fetchIp.myIp}:3000/users/signup`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -86,12 +88,9 @@ export default function SignUpScreen({ navigation }) {
           <Text style={styles.signInBtnText}>Already have an account?</Text>
           <TouchableOpacity
             style={styles.signInBackBtn}
-            onPress={() => navigation.navigate("Sign in")}>
-            <Ionicons
-              name="chevron-back"
-              size={50}
-              color="white"
-            />
+            onPress={() => navigation.navigate("Sign in")}
+          >
+            <Ionicons name="chevron-back" size={50} color="white" />
             <Text style={styles.text}>Sign In</Text>
           </TouchableOpacity>
           {/* <TouchableOpacity
@@ -254,16 +253,14 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderRadius: 10,
     textAlign: "center",
-    width: '45%',
-   
+    width: "45%",
   },
   text: {
     color: "white",
     fontSize: 30,
-  
   },
   signInBtnText: {
-    color: 'white',
+    color: "white",
     fontWeight: "bold",
-  }
+  },
 });
