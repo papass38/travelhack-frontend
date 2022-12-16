@@ -13,6 +13,7 @@ import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { useState } from "react";
 
+// comm for commit
 export default function FavoriteScreen({ navigation }) {
   const user = useSelector((state) => state.user.value);
   const [infoUser, setInfoUser] = useState({ username: null, email: null });
