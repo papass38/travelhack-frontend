@@ -13,14 +13,12 @@ import {
   ScrollView,
 } from "react-native";
 import { useEffect, useState, useRef } from "react";
+import { useSelector } from "react-redux";
 
 import { FontAwesome } from "@expo/vector-icons";
 
-import Pusher from "pusher-js/react-native";
-
 import * as Location from "expo-location";
-
-import { useSelector } from "react-redux";
+import Pusher from "pusher-js/react-native";
 
 const PUSHER_KEY = "4dfa87353ff9a2ca6457";
 const PUSHER_CLUSTER = "eu";
