@@ -49,7 +49,11 @@ export default function Chat() {
 
       if (status === "granted") {
         Location.watchPositionAsync({ distanceInterval: 1000 }, (location) => {
+<<<<<<< HEAD
           fetch("http://172.16.188.138:3000/chat/location", {
+=======
+          fetch("http://172.16.190.137:3000/chat/location", {
+>>>>>>> frontBranch
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
@@ -71,7 +75,11 @@ export default function Chat() {
 
   //GET ALL MESSAGE FROM A CHANNEL
   useEffect(() => {
+<<<<<<< HEAD
     fetch(`http://172.16.188.138:3000/chat/channel/${locationName}`)
+=======
+    fetch(`http://172.16.190.137:3000/chat/channel/${locationName}`)
+>>>>>>> frontBranch
       .then((res) => res.json())
       .then((data) => {
         if (data.result) {
@@ -124,7 +132,11 @@ export default function Chat() {
       return;
     }
 
+<<<<<<< HEAD
     fetch("http://172.16.188.138:3000/chat/newChat", {
+=======
+    fetch("http://172.16.190.137:3000/chat/newChat", {
+>>>>>>> frontBranch
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

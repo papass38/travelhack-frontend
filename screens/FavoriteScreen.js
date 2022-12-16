@@ -8,8 +8,25 @@ import {
   Pressable,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import Header from "../components/Header";
+import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useState } from "react";
 
 export default function FavoriteScreen({ navigation }) {
+  const user = useSelector((state) => state.user.value);
+  const [infoUser, setInfoUser] = useState({ username: null, email: null });
+
+  useEffect(() => {
+    fetch(`http://172.16.190.137:3000/users/${user.username}`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.result) {
+          setInfoUser({ username: data.user.username, email: data.user.email });
+        }
+      });
+  }, []);
+
   return (
     <SafeAreaView style={styles.container}>
       <TouchableOpacity

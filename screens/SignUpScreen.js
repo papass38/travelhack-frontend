@@ -58,7 +58,12 @@ export default function SignUpScreen({ navigation }) {
       .then((data) => {
         if (data.result) {
           navigation.navigate("TabNavigator");
-          dispatch(login({ username: signUpUsername, token: data.token }));
+          dispatch(
+            login({
+              username: signUpUsername,
+              token: data.token,
+            })
+          );
           setSignUpUsername("");
           setSignUpFirstName("");
           setSignUpLastName("");
