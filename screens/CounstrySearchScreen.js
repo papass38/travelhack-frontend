@@ -108,7 +108,6 @@ const styles = StyleSheet.create({
   },
   title: {
     marginTop: 50,
-    fontFamily: "Ubuntu",
     fontSize: 55,
     color: "#20B08E",
   },
@@ -123,7 +122,6 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: "white",
-    fontFamily: "Ubuntu",
     fontSize: 20,
     fontWeight: "bold",
   },

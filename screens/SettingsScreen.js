@@ -45,15 +45,33 @@ export default function FavoriteScreen({ navigation }) {
   useEffect(() => {
     async () => {
       const galleryStatus =
+        //Cette ligne utilise l'API ImagePicker pour demander à
+        //l'utilisateur l'autorisation d'accéder à la bibliothèque de médias
         await ImagePicker.requestMediaLibraryPermissionsAsync();
       setHasGalleryPermission(galleryStatus.status === "granted");
+      //La variable galleryStatus est mise à jour avec
+      //le résultat de la demande de permission.
+      //Si la permission a été accordée,
+      //la valeur de hasGalleryPermission sera mise à true,
+      //sinon elle sera mise à false
     };
   }, []);
 
   const pickImage = async () => {
+    //let result =
+    //await ImagePicker.launchImageLibraryAsync
+    //({ - Cette ligne utilise l'API ImagePicker pour lancer la sélection de l'image
+    // à partir de la bibliothèque de l'utilisateur.
+    //Le résultat de la sélection est stocké dans la variable result
+
     let result = await ImagePicker.launchImageLibraryAsync({
+      //mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      //- Cette ligne indique que seules les images seront affichées
+      //dans la bibliothèque de médias.
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      //allowsEditing: true, - Cette ligne indique que l'utilisateur peut éditer l'image sélectionnée.
       allowsEditing: true,
+      //aspect: [4, 3], - Cette ligne indique que l'image sélectionnée doit avoir un ratio d'aspect de 4:3.
       aspect: [4, 3],
       quality: 1,
     });
