@@ -22,7 +22,7 @@ import { useSelector, useDispatch } from "react-redux";
 export default function FinalTravelScreen({ navigation }) {
   const trip = useSelector((state) => state.trip.value);
   const token = useSelector((state) => state.user.value.token);
-  const user = useSelector((state) => state.user.value.user);
+  const user = useSelector((state) => state.user.value.username);
 
   const handleValidation = () => {
     fetch(`http://${fetchIp.myIp}:3000/users/newtrip`, {
