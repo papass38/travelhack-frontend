@@ -33,8 +33,7 @@ export default function FavoriteScreen({ navigation }) {
         <Ionicons name="add-circle" size={50} color="#20B08E" />
       </View>
       <View style={styles.wishlistContainer}>
-      <View
-        style={styles.wishlist}>
+      <View style={styles.wishlist}>
         <TouchableOpacity
         onPress={() => navigation.navigate("Wishlist")}
          style={styles.wishlistContent}>
@@ -43,6 +42,7 @@ export default function FavoriteScreen({ navigation }) {
         </TouchableOpacity>
         <Ionicons name="trash" size={40} color="#DC143C"/>
       </View>
+      
       </View>
     </SafeAreaView>
   );
