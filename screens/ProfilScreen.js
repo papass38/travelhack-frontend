@@ -158,7 +158,6 @@ export default function ProfilScreen({ navigation }) {
       </View>
       <View style={styles.countries}>
         <View style={styles.flags}>{listingTrip}</View>
-        <Text>test</Text>
       </View>
     </View>
   );
