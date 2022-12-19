@@ -9,6 +9,7 @@ import {
   ScrollView,
   SafeAreaView,
   TouchableHighlight,
+  ImageBackground,
 } from "react-native";
 import fetchIp from "../fetchIp.json";
 import Header from "../components/Header";
@@ -22,7 +23,7 @@ import { useSelector, useDispatch } from "react-redux";
 export default function FinalTravelScreen({ navigation }) {
   const trip = useSelector((state) => state.trip.value);
   const token = useSelector((state) => state.user.value.token);
-  const user = useSelector((state) => state.user.value.user);
+  const user = useSelector((state) => state.user.value.username);
 
   const handleValidation = () => {
     fetch(`http://${fetchIp.myIp}:3000/users/newtrip`, {
@@ -30,7 +31,7 @@ export default function FinalTravelScreen({ navigation }) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         token: token,
-        username : user,
+        username: user,
         destination: trip.initialDestination.adress,
         steps: [],
         budget: trip.totalBudget.toFixed(2),
@@ -46,27 +47,33 @@ export default function FinalTravelScreen({ navigation }) {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
               token: token,
-              username : user,
+              username: user,
               name: step.name,
               latitude: step.coordinates.latitude,
               longitude: step.coordinates.longitude,
               mealBudget: step.budget.meal,
               roomBudget: step.budget.room,
-            })
-          }).then(res => res.json()).then(data => console.log(data))
+            }),
+          })
+            .then((res) => res.json())
+            .then((data) => console.log(data));
         }
       });
   };
 
-
-    
-
-
   return (
     <View style={styles.container}>
       <Header navigation={navigation} />
-      <Text>Hello</Text>
-      <Button title="Click!" onPress={() => sendDateToDb()} />
+      <ImageBackground source={require('../assets/plane.jpeg')} style={{width: '100%', height: '76%', flex: 1}}>
+      <View styles = {styles.content}>
+      <Button
+        title="Click!"
+        onPress={() => {
+          handleValidation();
+        }}
+      />
+      </View>
+      </ImageBackground>
       <View style={styles.footer}>
         <TouchableOpacity
           style={styles.arrowButton}
@@ -108,4 +115,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderColor: "white",
   },
+  // content : {
+  //   flex : 1,
+  //   height : "100%",
+    
+  // }
 });
