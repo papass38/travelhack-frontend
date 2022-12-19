@@ -32,6 +32,7 @@ import FavoriteScreen from "./screens/FavoriteScreen";
 import SettingsScreen from "./screens/SettingsScreen";
 import TravelRecapScreen from "./screens/TravelRecapScreen";
 import WishlistScreen from "./screens/WishlistScreen";
+import TravelSummary from "./screens/TravelSummary"
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -86,6 +87,7 @@ export default function App() {
           <Stack.Screen name="CountrySearch" component={CountrySearchScreen} />
           <Stack.Screen name="Map" component={MapScreen} />
           <Stack.Screen name="Recap" component={TravelRecapScreen} />
+          <Stack.Screen name="Summary" component={TravelSummary} />
           <Stack.Screen name="Sign in" component={SignInScreen} 
           options={{ gestureEnabled: false }}/>
           <Stack.Screen name="Sign up" component={SignUpScreen} 
