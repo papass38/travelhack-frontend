@@ -59,36 +59,11 @@ export default function SignInScreen({ navigation }) {
       });
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (response?.type === "success") {
       const email = response.params.email;
       const name = response.params.name;
       const profilePicture = response.params.picture;
-
-      // You can now send this information to your server using a
-      // fetch or axios request, for example:
-      fetch(`http://${fetchIp.myIp}:3000/users/signin`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          email,
-          name,
-          profilePicture,
-        }),
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          if (data.result) {
-            // Sign in successful, navigate to the home screen or
-            // perform any other desired actions
-            setMessageError("");
-            dispatch(login({ email, name, profilePicture }));
-            navigation.navigate("TabNavigator");
-          } else {
-            // Sign in failed, display an error message
-            setMessageError(data.error);
-          }
-        });
     }
   }, [response]);
 

@@ -23,10 +23,11 @@ import * as ImagePicker from "expo-image-picker";
 
 // comm for commit
 export default function FavoriteScreen({ navigation }) {
-  const [hasGalleryPermission, setHasGalleryPermission] = useState(null);
-  const [image, setImage] = useState();
-  const dispatch = useDispatch();
   const user = useSelector((state) => state.user.value);
+  const [hasGalleryPermission, setHasGalleryPermission] = useState(null);
+  const [image, setImage] = useState(user.photo);
+  const dispatch = useDispatch();
+
   const [infoUser, setInfoUser] = useState({ username: null, email: null });
   const [inputUsername, setInputUsername] = useState("");
   const [inputEmail, setInputEmail] = useState("");
@@ -59,7 +60,8 @@ export default function FavoriteScreen({ navigation }) {
     console.log(result);
     if (!result.canceled) {
       setImage(result.assets[0].uri);
-      console.log(result.assets[0].uri);
+      dispatch(addPhoto(result.assets[0].uri));
+      console.log(user.photo);
     }
   };
 

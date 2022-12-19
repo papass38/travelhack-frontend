@@ -59,9 +59,6 @@ export default function SignUpScreen({ navigation }) {
         lastname: signUpLastName,
         email: signUpEmail,
         password: signUpPassword,
-        googleId: user.sub,
-        googleName: user.name,
-        googleEmail: user.email,
       }),
     })
       .then((response) => response.json())

@@ -1,4 +1,4 @@
-import { View, StyleSheet, Text } from "react-native";
+import { View, StyleSheet, Text, Image, Pressable } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
 import { useSelector } from "react-redux";
@@ -13,12 +13,13 @@ export default function Header({ navigation }) {
   const dispatch = useDispatch();
   return (
     <View style={styles.container}>
-      <FontAwesome
-        name="user-circle-o"
-        size={38}
-        color="#fff"
-        onPress={() => navigation.navigate("Profil")}
-      />
+      <Pressable onPress={() => navigation.navigate("Profil")}>
+        <Image
+          source={{ uri: user.photo }}
+          style={{ width: 50, height: 50, borderRadius: "50%" }}
+        />
+      </Pressable>
+
       <View style={{ alignItems: "center" }}>
         <Text style={{ fontSize: 16, color: "#fff" }}>
           Welcome {user.username} !
