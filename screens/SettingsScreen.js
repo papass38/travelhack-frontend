@@ -61,7 +61,6 @@ export default function FavoriteScreen({ navigation }) {
     if (!result.canceled) {
       setImage(result.assets[0].uri);
       dispatch(addPhoto(result.assets[0].uri));
-      console.log(user.photo);
     }
   };
 
