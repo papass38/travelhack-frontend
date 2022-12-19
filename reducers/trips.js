@@ -34,6 +34,5 @@ export const tripSlice = createSlice({
   },
 });
 
-export const { initializeTrip, addTrip, removeTrip, addDateandBudget } =
-  tripSlice.actions;
+export const { initializeTrip, addTrip, removeTrip, addDateandBudget} = tripSlice.actions;
 export default tripSlice.reducer;
