@@ -37,14 +37,14 @@ export default function ProfilScreen({ navigation }) {
     },
   ];
 
-  const listingTrip = trip.trip.map((elmt) => {
-    return dataVaccins.map((count) => {
+  const listingTrip = trip.trip.map((elmt, index) => {
+    return dataVaccins.map((count, i) => {
       // console.log(`elmt : ${elmt.name.toUpperCase().split(" ")[1]}`);
       // console.log(count.country);
       if (count.country === elmt.name.toUpperCase().split(" ")[1]) {
         return (
-          <View style={{ alignItems: "center" }}>
-            <CountryFlag isoCode={count.code} size={40} />
+          <View style={{ alignItems: "center" }} key={index}>
+            <CountryFlag isoCode={count.code} size={40} key={i} />
           </View>
         );
       }

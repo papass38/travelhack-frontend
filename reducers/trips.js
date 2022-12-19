@@ -4,9 +4,9 @@ const initialState = {
   value: {
     initialDestination: {},
     trip: [],
-    startDate : "", 
-    endDate : "",
-    totalBudget : 0
+    startDate: "",
+    endDate: "",
+    totalBudget: 0,
   },
 };
 
@@ -26,14 +26,26 @@ export const tripSlice = createSlice({
         (e) => e.name !== action.payload
       );
     },
-    addDateandBudget:(state, action) => {
-      state.value.startDate = action.payload.startDate, 
-      state.value.endDate = action.payload.endDate, 
-      state.value.totalBudget = action.payload.budget
-    }
+    addDateandBudget: (state, action) => {
+      (state.value.startDate = action.payload.startDate),
+        (state.value.endDate = action.payload.endDate),
+        (state.value.totalBudget = action.payload.budget);
+    },
+    removeAll: (state, action) => {
+      (state.value.initialDestination = {}),
+        (state.value.trip = []),
+        (state.value.startDate = ""),
+        (state.value.endDate = ""),
+        (totalBudget = 0);
+    },
   },
 });
 
-export const { initializeTrip, addTrip, removeTrip, addDateandBudget } =
-  tripSlice.actions;
+export const {
+  initializeTrip,
+  addTrip,
+  removeTrip,
+  addDateandBudget,
+  removeAll,
+} = tripSlice.actions;
 export default tripSlice.reducer;

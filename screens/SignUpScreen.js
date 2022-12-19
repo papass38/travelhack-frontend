@@ -12,6 +12,7 @@ import {
   TextInput,
   Pressable,
   Image,
+  KeyboardAvoidingView,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { FontAwesome } from "@expo/vector-icons";
@@ -67,6 +68,7 @@ export default function SignUpScreen({ navigation }) {
           dispatch(
             login({
               username: signUpUsername,
+              email: signUpEmail,
               token: data.token,
             })
           );
@@ -118,7 +120,10 @@ export default function SignUpScreen({ navigation }) {
           <Text style={styles.title}>Travel Hack</Text>
         </View>
       </View>
-      <View style={styles.registerSection} activeOpacity={0.8}>
+
+       <View
+      style={styles.registerSection}
+    > 
         <View style={styles.buttonContainer}>
           <TextInput
             style={styles.input}
@@ -181,7 +186,7 @@ export default function SignUpScreen({ navigation }) {
             <Text> SignUp with Google</Text>
           </TouchableOpacity>
         </View>
-      </View>
+        </View>
     </LinearGradient>
   );
 }
