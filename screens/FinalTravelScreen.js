@@ -13,14 +13,12 @@ import {
 } from "react-native";
 import fetchIp from "../fetchIp.json";
 import Header from "../components/Header";
-import { useEffect, useState } from "react";
-import DestinationInfos from "../components/DestinationInfos";
-import DateTimePickerModal from "react-native-modal-datetime-picker";
 import moment from "moment";
 import { AntDesign, Ionicons } from "@expo/vector-icons";
 import { useSelector, useDispatch } from "react-redux";
 import { MaterialIcons } from "@expo/vector-icons";
 import { removeAll } from "../reducers/trips";
+
 
 export default function FinalTravelScreen({ navigation }) {
   const trip = useSelector((state) => state.trip.value);
@@ -50,28 +48,6 @@ export default function FinalTravelScreen({ navigation }) {
         navigation.navigate("TabNavigator")
         console.log(data);
       });
-    // .then(() => {
-    //   for (let step of trip.trip) {
-    //     fetch(`http://${fetchIp.myIp}:3000/users/newtrip/newstep`, {
-    //       method: "POST",
-    //       headers: { "Content-Type": "application/json" },
-    //       body: JSON.stringify({
-    //         token: token,
-    //         username: user,
-    //         name: step.name,
-    //         latitude: step.coordinates.latitude,
-    //         longitude: step.coordinates.longitude,
-    //         mealBudget: step.budget.meal,
-    //         roomBudget: step.budget.room,
-    //       }),
-    //     })
-    //       .then((res) => res.json())
-    //       .then((data) => {
-    //         console.log(data)
-    //         navigation.navigate("Home")
-    //       });
-    //   }
-    // });
   };
 
   return (
