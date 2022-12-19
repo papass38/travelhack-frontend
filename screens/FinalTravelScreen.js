@@ -47,7 +47,7 @@ export default function FinalTravelScreen({ navigation }) {
       .then((res) => res.json())
       .then((data) => {
         dispatch(removeAll())
-        navigation.navigate("Home")
+        navigation.navigate("TabNavigator")
         console.log(data);
       });
     // .then(() => {
