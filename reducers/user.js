@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  value: { token: null, username: null, email: null, photo: [] },
+  value: { token: null, username: null, email: null, photo: "" },
 };
 
 export const userSlice = createSlice({
@@ -19,7 +19,7 @@ export const userSlice = createSlice({
       state.value.email = null;
     },
     addPhoto: (state, action) => {
-      state.value.photo.push(action.payload);
+      state.value.photo = action.payload;
     },
   },
 });
