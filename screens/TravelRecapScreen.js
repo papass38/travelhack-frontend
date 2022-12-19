@@ -15,7 +15,6 @@ import { useEffect, useState } from "react";
 import {addDateandBudget} from "../reducers/trips"
 import { useSelector, useDispatch } from "react-redux";
 import DestinationInfos from "../components/DestinationInfos";
-import TravelSummary from "./TravelSummary";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import moment from "moment";
 import { AntDesign } from "@expo/vector-icons";
@@ -28,6 +27,7 @@ export default function TravelRecapScreen({ navigation }) {
   const [departureDate, setDepartureDate] = useState("");
   const [numberOfDays, setNumberOfDays] = useState(0)
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+  const [datesFilled, setDateFilled] = useState(true)
   const dispatch = useDispatch()
 
   const storeTrips = useSelector((state) => state.trip.value)
@@ -77,9 +77,17 @@ export default function TravelRecapScreen({ navigation }) {
   // calcul du budget total
   const totalBudget = budget/tripList.length * numberOfDays
 
+  const errorMessage = <Text style = {{color : "red", marginBottom : 10}}>please select your dates of travel</Text>
+
   const handleValidation = () => {
-    dispatch(addDateandBudget({startDate : arrivalDate, endDate : departureDate, totalBudget : totalBudget}))
-   //navigation.navigate("Summary")
+    if(arrivalDate && departureDate){
+      setDateFilled(true)
+      dispatch(addDateandBudget({startDate : arrivalDate, endDate : departureDate, budget : totalBudget}))
+      navigation.navigate("Summary")
+    }
+    else{
+      setDateFilled(false)
+    }
   }
 
   return (
@@ -118,6 +126,7 @@ export default function TravelRecapScreen({ navigation }) {
         <View></View>
       </View>
       <ScrollView>{destinationsList}</ScrollView>
+        {!datesFilled && errorMessage}
       <View style={styles.footer}>
         <TouchableOpacity
           style={styles.arrowButton}
@@ -131,7 +140,7 @@ export default function TravelRecapScreen({ navigation }) {
         <TouchableOpacity
           style={styles.arrowButton}
           onPress={() => {
-            tripList.length > 0 && navigation.navigate("Recap");
+            tripList.length > 0 && navigation.navigate("Map");
           }}
         >
           <AntDesign name="arrowright" size={34} color="white" onPress={() => handleValidation() }/>
