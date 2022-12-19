@@ -24,6 +24,8 @@ export default function FavoriteScreen({ navigation }) {
   const user = useSelector((state) => state.user.value);
   const [infoUser, setInfoUser] = useState({ username: null, email: null });
   const [inputUsername, setInputUsername] = useState("");
+  const [inputEmail, setInputEmail] = useState("");
+  const [changeSucces, setChangeSucces] = useState(false);
   useEffect(() => {
     fetch(`http://${fetchIp.myIp}:3000/users/${user.username}`)
       .then((res) => res.json())
@@ -47,6 +49,22 @@ export default function FavoriteScreen({ navigation }) {
       .then((data) => {
         if (data.result) {
           dispatch(login({ username: inputUsername }));
+          setChangeSucces(true);
+        }
+      });
+
+    fetch(`http://${fetchIp.myIp}:3000/users/email/${user.email}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        replaceEmail: inputEmail,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.result) {
+          dispatch(login({ email: inputEmail }));
+          console.log("hello");
         }
       });
   };
@@ -116,6 +134,11 @@ export default function FavoriteScreen({ navigation }) {
           justifyContent: "space-around",
         }}
       >
+        {changeSucces && (
+          <Text style={{ color: "#21A37C", fontWeight: "bold" }}>
+            change successfully completed
+          </Text>
+        )}
         <View>
           <Text>Username</Text>
           <TextInput
@@ -127,7 +150,12 @@ export default function FavoriteScreen({ navigation }) {
         </View>
         <View>
           <Text>Email</Text>
-          <TextInput placeholder={infoUser.email} style={styles.input} />
+          <TextInput
+            placeholder={infoUser.email}
+            style={styles.input}
+            value={inputEmail}
+            onChangeText={(value) => setInputEmail(value)}
+          />
         </View>
         <Pressable
           style={{

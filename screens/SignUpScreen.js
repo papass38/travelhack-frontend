@@ -67,6 +67,7 @@ export default function SignUpScreen({ navigation }) {
           dispatch(
             login({
               username: signUpUsername,
+              email: signUpEmail,
               token: data.token,
             })
           );
