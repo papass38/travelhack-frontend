@@ -1,5 +1,5 @@
 import fetchIp from "../fetchIp.json";
-
+import { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../reducers/user";
@@ -18,7 +18,6 @@ import * as WebBrowser from "expo-web-browser";
 import * as Google from "expo-auth-session/providers/google";
 import * as React from "react";
 import { AntDesign } from "@expo/vector-icons";
-import { Ionicons } from "@expo/vector-icons";
 
 WebBrowser.maybeCompleteAuthSession();
 
@@ -62,27 +61,54 @@ export default function SignInScreen({ navigation }) {
 
   React.useEffect(() => {
     if (response?.type === "success") {
-      const { authentication } = response;
+      const email = response.params.email;
+      const name = response.params.name;
+      const profilePicture = response.params.picture;
+
+      // You can now send this information to your server using a
+      // fetch or axios request, for example:
+      fetch(`http://${fetchIp.myIp}:3000/users/signin`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email,
+          name,
+          profilePicture,
+        }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.result) {
+            // Sign in successful, navigate to the home screen or
+            // perform any other desired actions
+            setMessageError("");
+            dispatch(login({ email, name, profilePicture }));
+            navigation.navigate("TabNavigator");
+          } else {
+            // Sign in failed, display an error message
+            setMessageError(data.error);
+          }
+        });
     }
   }, [response]);
 
   return (
-    <KeyboardAvoidingView
+    <LinearGradient
+      colors={["#20B08E", "white"]}
+      start={{ x: 0, y: 0.2 }}
+      end={{ x: 0, y: 1.7 }}
       style={styles.container}
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
     >
-      <LinearGradient
-        colors={["#20B08E", "white"]}
-        start={{ x: 0, y: 0.2 }}
-        end={{ x: 0, y: 1.7 }}
+      <KeyboardAvoidingView
         style={styles.container}
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
       >
         <View style={styles.titleSection}>
           <Text style={styles.title}>Sign In</Text>
           <Text style={styles.subtitle}>Access to your acount</Text>
         </View>
 
-        <View style={styles.connectionSection}>
+        <KeyboardAvoidingView style={styles.connectionSection}>
           <TextInput
             style={styles.input}
             placeholder="Username"
@@ -148,9 +174,9 @@ export default function SignInScreen({ navigation }) {
               <Text style={styles.signUpButton}>Sign up</Text>
             </LinearGradient>
           </TouchableOpacity>
-        </View>
-      </LinearGradient>
-    </KeyboardAvoidingView>
+        </KeyboardAvoidingView>
+      </KeyboardAvoidingView>
+    </LinearGradient>
   );
 }
 
