@@ -32,8 +32,8 @@ import FavoriteScreen from "./screens/FavoriteScreen";
 import SettingsScreen from "./screens/SettingsScreen";
 import TravelRecapScreen from "./screens/TravelRecapScreen";
 import WishlistScreen from "./screens/WishlistScreen";
-
 import FinalTravelScreen from "./screens/FinalTravelScreen";
+
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
