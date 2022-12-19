@@ -16,11 +16,21 @@ export default function Header({ navigation }) {
       <Pressable onPress={() => navigation.navigate("Profil")}>
         <Image
           source={{ uri: user.photo }}
-          style={{ width: 50, height: 50, borderRadius: "50%" }}
+          style={{
+            width: 50,
+            height: 50,
+            borderRadius: "50%",
+            borderWidth: 2,
+            borderColor: "#F6F6F6",
+          }}
         />
       </Pressable>
 
-      <View style={{ alignItems: "center" }}>
+      <View
+        style={{
+          alignItems: "center",
+        }}
+      >
         <Text style={{ fontSize: 16, color: "#fff" }}>
           Welcome {user.username} !
         </Text>

@@ -8,6 +8,7 @@ import {
 } from "react-native";
 import Header from "../components/Header";
 import { AntDesign } from "@expo/vector-icons";
+import { LinearGradient } from "expo-linear-gradient";
 
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
@@ -110,7 +111,7 @@ export default function HomeScreen({ navigation }) {
     <View style={styles.container}>
       <Modal visible={isModalVisible} style={styles.modal}>
         <View style={styles.modalContent}>
-          <View>
+          <View style={styles.modalText}>
             <Text style={{ fontWeight: "bold" }}>{modalData.destination}</Text>
             <Text>{new Date(modalData.startDate).toLocaleDateString()}</Text>
             <Text>{new Date(modalData.endDate).toLocaleDateString()}</Text>
@@ -120,6 +121,7 @@ export default function HomeScreen({ navigation }) {
               {stepsModal}
             </View>
           </View>
+
           <TouchableOpacity
             onPress={() => setModalVisible(!isModalVisible)}
             style={styles.modalButton}
@@ -201,8 +203,8 @@ const styles = StyleSheet.create({
     height: 190,
     width: 200,
     justifyContent: "space-between",
-    borderWidth: 1,
-    borderColor: "grey",
+    borderWidth: 4,
+    borderColor: "#20B08E",
     marginHorizontal: 10,
     borderRadius: 10,
     overflow: "hidden",
@@ -256,10 +258,17 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-around",
     backgroundColor: "white",
-    height: "80%",
+    height: "60%",
     width: "80%",
     padding: 20,
     borderRadius: 20,
+    borderWidth: 4,
+    borderColor: "#20B08E",
+  },
+  modalText: {
+    borderRadius: 20,
+    padding: 40,
+    height: "50%",
   },
   modalButton: {
     marginTop: 10,
