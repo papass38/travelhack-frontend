@@ -36,13 +36,12 @@ export default function FavoriteScreen({ navigation }) {
       <View style={styles.wishlist}>
         <TouchableOpacity
         onPress={() => navigation.navigate("Wishlist")}
-         style={styles.wishlistContent}>
+        style={styles.wishlistContent}>
         <Ionicons  name="bookmark" size={40} />
         <Text style={{fontSize: 30}}>List name</Text>
         </TouchableOpacity>
         <Ionicons name="trash" size={40} color="#DC143C"/>
       </View>
-      
       </View>
     </SafeAreaView>
   );
