@@ -120,11 +120,8 @@ export default function SignUpScreen({ navigation }) {
           <Text style={styles.title}>Travel Hack</Text>
         </View>
       </View>
-
-       <View
-      style={styles.registerSection}
-    > 
-        <View style={styles.buttonContainer}>
+      <KeyboardAvoidingView style={styles.registerSection} activeOpacity={0.8}>
+        <KeyboardAvoidingView style={styles.buttonContainer}>
           <TextInput
             style={styles.input}
             placeholder="Username"
@@ -185,8 +182,8 @@ export default function SignUpScreen({ navigation }) {
             <AntDesign name="google" size={32} color="black" title="Login" />
             <Text> SignUp with Google</Text>
           </TouchableOpacity>
-        </View>
-        </View>
+        </KeyboardAvoidingView>
+      </KeyboardAvoidingView>
     </LinearGradient>
   );
 }

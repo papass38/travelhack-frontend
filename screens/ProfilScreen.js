@@ -79,7 +79,16 @@ export default function ProfilScreen({ navigation }) {
       if (count.country === elmt.name.toUpperCase().split(" ")[1]) {
         return (
           <View style={{ alignItems: "center" }} key={index}>
-            <CountryFlag isoCode={count.code} size={40} key={i} />
+            <CountryFlag
+              style={{
+                borderRadius: 5,
+                borderWidth: 2,
+                borderColor: "#F6F6F6",
+              }}
+              isoCode={count.code}
+              size={40}
+              key={i}
+            />
           </View>
         );
       }
