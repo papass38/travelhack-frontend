@@ -9,34 +9,69 @@ import {
   Share,
 } from "react-native";
 import Header from "../components/Header";
-import { FontAwesome } from "@expo/vector-icons";
-import { FontAwesome5 } from "@expo/vector-icons";
-import { Feather } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import MapView, { Marker } from "react-native-maps";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import CountryFlag from "react-native-country-flag";
-
 const dataVaccins = require("../vaccins.json");
+import fecthIp from "../fetchIp.json";
 
 export default function ProfilScreen({ navigation }) {
   const [lat, setLat] = useState();
   const [long, setLong] = useState();
   const trip = useSelector((state) => state.trip.value);
-  const visitedCountries = [
-    {
-      latitude: 38,
-      longitude: 97,
-    },
-    {
-      latitude: 48.85,
-      longitude: 2.35,
-    },
-  ];
+  const user = useSelector((state) => state.user.value.username);
+  const [visitedCountries, setVisitedCountries] = useState([])
 
+  let markers = []
+
+  useEffect(() => {
+    fetch(`http://${fecthIp.myIp}:3000/users/alltrips/${user}`)
+      .then((res) => res.json()).then((data) => {
+        
+        for(let i = 0; i < data.trips.length; i++){
+          //console.log(travel)
+         for(let step of data.trips[i].steps){
+          console.log(step)
+          if(step.latitude){
+
+            setVisitedCountries([...visitedCountries, {name : step.name, coordinate : {latitude : step.latitude, longitude : step.longitude} }])
+            // console.log("VISITED", visitedCountries)
+          }
+         }
+          
+          // markers = travel.steps.map(e => {
+          //   if(e.latitude){
+          //     console.log(markers)
+          //     return <Marker
+          //       coordinate={{latitude : e.latitude, longitude : e.longitude}}
+          //       title={e.name}
+          //       description = {"description"}
+          //       // Set the opacity of the marker to 0.5 to make it appear greyed out
+          //       pinColor="red"
+          //     />
+          //   }
+          // })
+        }
+      })
+  }, [])
+
+  useEffect(() => {
+    
+    markers = visitedCountries.map((e, i) => {
+      return <Marker
+        key={i}
+        coordinate={e.coordinate}
+        title={e.name}
+        // Set the opacity of the marker to 0.5 to make it appear greyed out
+        pinColor="#20B08E"
+      />})
+  }, [visitedCountries])
+
+  console.log(visitedCountries)
   const listingTrip = trip.trip.map((elmt, index) => {
     return dataVaccins.map((count, i) => {
       // console.log(`elmt : ${elmt.name.toUpperCase().split(" ")[1]}`);
@@ -50,6 +85,8 @@ export default function ProfilScreen({ navigation }) {
       }
     });
   });
+
+  
 
   return (
     <View style={styles.container}>
@@ -115,15 +152,8 @@ export default function ProfilScreen({ navigation }) {
             setLat(e.nativeEvent.coordinate.latitude);
           }}
         >
-          {visitedCountries.map((country) => (
-            <Marker
-              coordinate={country}
-              title={country.name}
-              description={country.description}
-              // Set the opacity of the marker to 0.5 to make it appear greyed out
-              pinColor="#20B08E"
-            />
-          ))}
+
+          {markers}
         </MapView>
       </View>
       <View style={styles.countries}>
