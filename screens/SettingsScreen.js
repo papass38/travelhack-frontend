@@ -86,6 +86,7 @@ export default function FavoriteScreen({ navigation }) {
       //Cette ligne utilise la fonction setImage pour mettre à jour
       //la variable d'état image avec l'URI de l'image sélectionnée.
       dispatch(addPhoto(result.assets[0].uri));
+      console.log(result.assets[0].uri);
     }
   };
 
