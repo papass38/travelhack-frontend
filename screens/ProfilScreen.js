@@ -9,6 +9,8 @@ import { useSelector } from "react-redux";
 import CountryFlag from "react-native-country-flag";
 const dataVaccins = require("../vaccins.json");
 import fecthIp from "../fetchIp.json";
+import { Feather } from "@expo/vector-icons";
+import { MaterialIcons } from "@expo/vector-icons";
 
 export default function ProfilScreen({ navigation }) {
   // const [lat, setLat] = useState();
@@ -99,8 +101,8 @@ export default function ProfilScreen({ navigation }) {
       <Header navigation={navigation} />
       <View style={styles.navButtons}>
         <View style={styles.icon}>
-          <Ionicons
-            name="home-sharp"
+          <Feather
+            name="home"
             size={50}
             color="#20B08E"
             activeOpacity={0.8}
@@ -109,8 +111,8 @@ export default function ProfilScreen({ navigation }) {
           <Text style={styles.textIcon}>Home</Text>
         </View>
         <View style={styles.icon}>
-          <AntDesign
-            name="heart"
+          <MaterialIcons
+            name="favorite-border"
             size={50}
             color="#20B08E"
             activeOpacity={0.8}
@@ -118,9 +120,10 @@ export default function ProfilScreen({ navigation }) {
           />
           <Text style={styles.textIcon}>Favorites</Text>
         </View>
+
         <View style={styles.icon}>
-          <Ionicons
-            name="ios-settings-sharp"
+          <Feather
+            name="settings"
             size={50}
             color="#20B08E"
             activeOpacity={0.8}

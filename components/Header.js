@@ -46,7 +46,7 @@ export default function Header({ navigation }) {
       <View style={{ alignItems: "center" }}>
         <AntDesign
           name="logout"
-          size={30}
+          size={35}
           color="#F6F6F6"
           onPress={() => {
             dispatch(initializeTrip(""));
