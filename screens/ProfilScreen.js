@@ -135,7 +135,16 @@ export default function ProfilScreen({ navigation }) {
           //   setLat(e.nativeEvent.coordinate.latitude);
           // }}
         >
-          {markers}
+          {visitedCountries.map((country, index) => (
+            <Marker
+              key={index}
+              coordinate={country}
+              title={country.name}
+              description={country.description}
+              // Set the opacity of the marker to 0.5 to make it appear greyed out
+              pinColor="#20B08E"
+            />
+          ))}
         </MapView>
       </View>
       <View style={styles.countries}>
