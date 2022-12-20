@@ -9,7 +9,7 @@ import {
 import Header from "../components/Header";
 import { AntDesign } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
-
+import { useSelector } from "react-redux";
 import React, { useEffect, useState } from "react";
 import { useIsFocused } from "@react-navigation/native";
 
