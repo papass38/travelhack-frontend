@@ -90,7 +90,7 @@ export default function MapScreen({ navigation }) {
     )
       .then((response) => response.json())
       .then((data) => {
-        console.log(data)
+        console.log(data);
         // Si c'est un Pays, delta + elevé (zoom -) + pas de marker
         if (data.results[0].types.find((e) => e === "country")) {
           setRegion({

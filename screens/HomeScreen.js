@@ -10,7 +10,8 @@ import Header from "../components/Header";
 import { AntDesign } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
 
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useFocusEffect, useIsFocused } from "@react-navigation/native";
 import { useSelector } from "react-redux";
 
 import fecthIp from "../fetchIp.json";
@@ -32,13 +33,30 @@ export default function HomeScreen({ navigation }) {
     totalBudget: "522.19",
   });
 
+  const isFocused = useIsFocused();
+
   useEffect(() => {
     fetch(`http://${fecthIp.myIp}:3000/users/alltrips/${myUsername}`)
       .then((res) => res.json())
       .then((data) => {
-        setNewTripsList(data.trips);
+        const newTripTab = [];
+        const oldTripTab = [];
+        // console.log(data.trips);
+        for (let item of data.trips) {
+          if (new Date(item.endDate).getTime() > new Date().getTime()) {
+            console.log("new");
+            newTripTab.push(item);
+          } else {
+            console.log("old");
+
+            oldTripTab.push(item);
+          }
+        }
+        // console.log(oldTripTab);
+        setNewTripsList(newTripTab);
+        setOldTripsList(oldTripTab);
       });
-  }, []);
+  }, [isFocused]);
 
   let oldTripsExist = "No old trip yet";
   if (oldTripsList.length > 0) {
@@ -85,7 +103,20 @@ export default function HomeScreen({ navigation }) {
 
   const oldTripsDisplay = oldTripsList.map((data, i) => {
     return (
-      <View key={i} style={styles.oldTrip}>
+      <TouchableOpacity
+        key={i}
+        style={styles.oldTrip}
+        onPress={() => {
+          setModalVisible(!isModalVisible);
+          setModalData({
+            destination: data.destination,
+            startDate: data.startDate,
+            endDate: data.endDate,
+            steps: data.steps,
+            totalBudget: data.totalBudget,
+          });
+        }}
+      >
         <Image
           style={styles.imgOldTrip}
           source={{
@@ -95,11 +126,14 @@ export default function HomeScreen({ navigation }) {
 
         <View style={styles.textOldTrip}>
           <View>
-            <Text style={{ fontWeight: "bold" }}>{data.country}</Text>
-            <Text>{data.date}</Text>
+            <Text style={{ fontWeight: "bold" }}>{data.destination}</Text>
+            <Text>
+              {new Date(data.startDate).toLocaleDateString()} -
+              {new Date(data.endDate).toLocaleDateString()}{" "}
+            </Text>
           </View>
         </View>
-      </View>
+      </TouchableOpacity>
     );
   });
 

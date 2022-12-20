@@ -135,7 +135,7 @@ export default function TravelRecapScreen({ navigation }) {
           <AntDesign name="arrowleft" size={34} color="white" />
         </TouchableOpacity>
         <View style= {styles.total}>
-        {budget > 0&& <Text style={styles.totalText}> {totalBudget.toFixed(2)} € </Text>}
+        {budget > 0 && <Text style={styles.totalText}> {totalBudget.toFixed(2)} € </Text>}
         </View>
         <TouchableOpacity
           style={styles.arrowButton}
