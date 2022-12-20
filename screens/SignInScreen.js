@@ -1,5 +1,5 @@
 import fetchIp from "../fetchIp.json";
-
+import { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../reducers/user";
@@ -18,7 +18,6 @@ import * as WebBrowser from "expo-web-browser";
 import * as Google from "expo-auth-session/providers/google";
 import * as React from "react";
 import { AntDesign } from "@expo/vector-icons";
-import { Ionicons } from "@expo/vector-icons";
 
 WebBrowser.maybeCompleteAuthSession();
 
@@ -60,29 +59,31 @@ export default function SignInScreen({ navigation }) {
       });
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (response?.type === "success") {
-      const { authentication } = response;
+      const email = response.params.email;
+      const name = response.params.name;
+      const profilePicture = response.params.picture;
     }
   }, [response]);
 
   return (
-    <KeyboardAvoidingView
+    <LinearGradient
+      colors={["#20B08E", "white"]}
+      start={{ x: 0, y: 0.2 }}
+      end={{ x: 0, y: 1.7 }}
       style={styles.container}
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
     >
-      <LinearGradient
-        colors={["#20B08E", "white"]}
-        start={{ x: 0, y: 0.2 }}
-        end={{ x: 0, y: 1.7 }}
+      <KeyboardAvoidingView
         style={styles.container}
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
       >
         <View style={styles.titleSection}>
           <Text style={styles.title}>Sign In</Text>
           <Text style={styles.subtitle}>Access to your acount</Text>
         </View>
 
-        <View style={styles.connectionSection}>
+        <KeyboardAvoidingView style={styles.connectionSection}>
           <TextInput
             style={styles.input}
             placeholder="Username"
@@ -148,9 +149,9 @@ export default function SignInScreen({ navigation }) {
               <Text style={styles.signUpButton}>Sign up</Text>
             </LinearGradient>
           </TouchableOpacity>
-        </View>
-      </LinearGradient>
-    </KeyboardAvoidingView>
+        </KeyboardAvoidingView>
+      </KeyboardAvoidingView>
+    </LinearGradient>
   );
 }
 
