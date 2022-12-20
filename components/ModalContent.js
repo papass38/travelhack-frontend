@@ -29,21 +29,21 @@ export default function ModalContent(props) {
     setAround("");
     if (selected === "Restaurants") {
       fetch(
-        `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${place.coordinates.latitude}%2C${place.coordinates.longitude}&radius=2500&types=restaurant&key=AIzaSyCx5Hb0tUovjDU45HZUySMkSN7vz_RVGC4`
+        `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${place.latitude}%2C${place.longitude}&radius=2500&types=restaurant&key=AIzaSyCx5Hb0tUovjDU45HZUySMkSN7vz_RVGC4`
       )
         .then((res) => res.json())
         .then((data) => setAround(data.results));
     }
     if (selected === "Hotels") {
       fetch(
-        `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${place.coordinates.latitude}%2C${place.coordinates.longitude}&radius=2500&types=hotel&key=AIzaSyCx5Hb0tUovjDU45HZUySMkSN7vz_RVGC4`
+        `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${place.latitude}%2C${place.longitude}&radius=2500&types=hotel&key=AIzaSyCx5Hb0tUovjDU45HZUySMkSN7vz_RVGC4`
       )
         .then((res) => res.json())
         .then((data) => setAround(data.results.slice(1)));
     }
     if (selected === "Points of interests") {
       fetch(
-        `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${place.coordinates.latitude}%2C${place.coordinates.longitude}&radius=2500&types=tourist_attraction&key=AIzaSyCx5Hb0tUovjDU45HZUySMkSN7vz_RVGC4`
+        `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${place.latitude}%2C${place.longitude}&radius=2500&types=tourist_attraction&key=AIzaSyCx5Hb0tUovjDU45HZUySMkSN7vz_RVGC4`
       )
         .then((res) => res.json())
         .then((data) => setAround(data.results));
@@ -74,16 +74,16 @@ export default function ModalContent(props) {
           />
           <Text>
             {" "}
-            {place.budget.room > 0
-              ? `${place.budget.meal.toFixed(2)} €`
+            {place.mealBudget > 0
+              ? `${place.mealBudget.toFixed(2)} €`
               : "information unavailable"}{" "}
           </Text>
         </View>
         <View style={{ flexDirection: "row", alignItems: "center" }}>
           <MaterialCommunityIcons name="bed-empty" size={24} color="black" />
           <Text>
-            {place.budget.room > 0
-              ? `${place.budget.room.toFixed(2)} €`
+            {place.roomBudget > 0
+              ? `${place.roomBudget.toFixed(2)} €`
               : "information unavailable"}
           </Text>
         </View>
