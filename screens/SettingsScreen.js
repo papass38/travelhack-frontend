@@ -122,14 +122,14 @@ export default function FavoriteScreen({ navigation }) {
         style={styles.header}
         onPress={() => navigation.navigate("Profil")}
       >
-        <Ionicons name="chevron-back" size={50} color="#20B08E" />
+        <Ionicons name="ios-arrow-back-circle" size={40} color="#20B08E" />
         <Text style={styles.text}>Profil</Text>
       </TouchableOpacity>
       <View
         style={{
           alignItems: "center",
           height: "30%",
-          justifyContent: "space-evenly",
+          justifyContent: "space-around",
         }}
       >
         <Text>Your photo</Text>
@@ -138,10 +138,10 @@ export default function FavoriteScreen({ navigation }) {
             flex: 1,
             alignItems: "center",
             justifyContent: "center",
-            width: 200,
-            height: 200,
+            width: 150,
+            height: 150,
             borderRadius: "20%",
-            borderWidth: 2,
+            borderWidth: 0,
             borderColor: "#20B08E",
           }}
         >
@@ -149,9 +149,11 @@ export default function FavoriteScreen({ navigation }) {
             <Image
               source={{ uri: image }}
               style={{
-                width: 200,
-                height: 200,
+                width: 155,
+                height: 155,
                 borderRadius: "50%",
+                borderWidth: 1,
+                borderColor: "#20B08E",
               }}
             />
           )}
@@ -239,6 +241,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     width: "35%",
+    paddingLeft: 10,
   },
   text: {
     color: "#20B08E",

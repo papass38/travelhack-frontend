@@ -151,9 +151,10 @@ export default function ProfilScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "#F6F6F6",
     alignItems: "center",
   },
+
   map: {
     height: "100%",
     width: "100%",
@@ -164,6 +165,7 @@ const styles = StyleSheet.create({
     height: "10%",
     alignItems: "center",
     justifyContent: "space-around",
+    margin: 10,
   },
   icon: {
     flex: 1,
@@ -188,9 +190,9 @@ const styles = StyleSheet.create({
   countries: {
     width: "100%",
     backgroundColor: "#21A37C",
+    paddingTop: 30,
   },
   flags: {
-    marginTop: 20,
     flexDirection: "row",
     justifyContent: "space-around",
     alignItems: "center",
