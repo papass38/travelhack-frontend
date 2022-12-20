@@ -7,9 +7,16 @@ import {
   ImageBackground,
   SafeAreaView,
 } from "react-native";
+
 import SwipeButton from "rn-swipe-button";
 
+
+
+
 export default function WelcomeScreen({ navigation }) {
+  
+  
+
   let touchX;
   return (
     <View style={styles.container}>
@@ -69,13 +76,12 @@ const styles = StyleSheet.create({
     color: "black",
     fontSize: 15,
     fontWeight: "bold",
-    fontFamily: "Verdana",
   },
   title: {
     fontSize: "50",
     flex: 1,
     fontWeight: "bold",
-    fontFamily: "Verdana",
     letterSpacing: -1,
+
   },
 });

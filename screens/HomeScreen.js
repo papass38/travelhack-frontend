@@ -12,6 +12,7 @@ import { AntDesign } from "@expo/vector-icons";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
+
 import fecthIp from "../fetchIp.json";
 
 import Modal from "react-native-modal";

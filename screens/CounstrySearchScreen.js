@@ -123,7 +123,6 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: "white",
-    fontFamily: "Ubuntu",
     fontSize: 20,
     fontWeight: "bold",
   },
