@@ -75,8 +75,8 @@ export default function MapScreen({ navigation }) {
           .join(", "),
         latitude : coords.latitude,
         longitude : coords.longitude,
-        mealBudget : mealBudget, 
-        roomBudget : roomBudget,
+        mealBudget : typeof(mealBudget) !== NaN ? mealBudget.toFixed(2) : "?" , 
+        roomBudget : typeof(roomBudget) !== NaN ? roomBudget.toFixed(2) : "?",
         distanceFromPrevious: distance,
       })
     );

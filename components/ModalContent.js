@@ -75,7 +75,7 @@ export default function ModalContent(props) {
           <Text>
             {" "}
             {place.mealBudget > 0
-              ? `${place.mealBudget.toFixed(2)} €`
+              ? `${place.mealBudget} €`
               : "information unavailable"}{" "}
           </Text>
         </View>
@@ -83,7 +83,7 @@ export default function ModalContent(props) {
           <MaterialCommunityIcons name="bed-empty" size={24} color="black" />
           <Text>
             {place.roomBudget > 0
-              ? `${place.roomBudget.toFixed(2)} €`
+              ? `${place.roomBudget} €`
               : "information unavailable"}
           </Text>
         </View>

@@ -49,6 +49,8 @@ export default function FinalTravelScreen({ navigation }) {
       });
   };
 
+  console.log
+
   return (
     <View style={styles.container}>
       <Header navigation={navigation} />
@@ -76,7 +78,7 @@ export default function FinalTravelScreen({ navigation }) {
             <Text
               style={{ color: "#20B08E", fontWeight: "bold", fontSize: 16 }}
             >
-              {trip.totalBudget.toFixed(2)}€ /pers
+              {trip.totalBudget}€ /pers
             </Text>
           </View>
           {/* <Text style={{fontWeight:"bold", fontSize:16}}>

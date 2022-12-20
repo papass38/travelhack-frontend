@@ -12,7 +12,6 @@ import { LinearGradient } from "expo-linear-gradient";
 
 import React, { useEffect, useState } from "react";
 import { useIsFocused } from "@react-navigation/native";
-import { useSelector } from "react-redux";
 
 import fecthIp from "../fetchIp.json";
 
@@ -78,7 +77,7 @@ export default function HomeScreen({ navigation }) {
             endDate: data.endDate,
             steps: data.steps,
             totalBudget: data.totalBudget,
-          });
+          })
         }}
       >
         <Image
