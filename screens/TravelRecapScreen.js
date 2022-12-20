@@ -59,7 +59,7 @@ export default function TravelRecapScreen({ navigation }) {
 
   // generation des infos des destinations depuis les infos stockées dans le store
   const destinationsList = tripList.map((data, i) => {
-    budget += (parseFloat(data.mealBudget) + parseFloat(data.roomBudget))
+    budget += parseFloat(data.mealBudget) + parseFloat(data.roomBudget);
     return (
       <View style={styles.destinationsInfos} key={i}>
         <DestinationInfos props={data} index={i} />
@@ -84,28 +84,18 @@ export default function TravelRecapScreen({ navigation }) {
   );
 
   const handleValidation = () => {
-<<<<<<< HEAD
     if (arrivalDate && departureDate) {
       setDateFilled(true);
       dispatch(
         addDateandBudget({
           startDate: arrivalDate,
           endDate: departureDate,
-          budget: totalBudget,
+          budget: totalBudget.toFixed(2),
         })
       );
       navigation.navigate("Summary");
     } else {
       setDateFilled(false);
-=======
-    if(arrivalDate && departureDate){
-      setDateFilled(true)
-      dispatch(addDateandBudget({startDate : arrivalDate, endDate : departureDate, budget : totalBudget.toFixed(2)}))
-      navigation.navigate("Summary")
-    }
-    else{
-      setDateFilled(false)
->>>>>>> 57bf72985b410b96a19668233ed08109d35484ef
     }
   };
 
@@ -161,9 +151,9 @@ export default function TravelRecapScreen({ navigation }) {
         </View>
         <TouchableOpacity
           style={styles.arrowButton}
-          onPress={() => handleValidation() }
+          onPress={() => handleValidation()}
         >
-          <AntDesign name="arrowright" size={34} color="white"/>
+          <AntDesign name="arrowright" size={34} color="white" />
         </TouchableOpacity>
       </View>
     </View>
