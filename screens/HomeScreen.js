@@ -10,7 +10,8 @@ import Header from "../components/Header";
 import { AntDesign } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
 
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useFocusEffect, useIsFocused } from '@react-navigation/native';
 import { useSelector } from "react-redux";
 
 import fecthIp from "../fetchIp.json";
@@ -19,9 +20,11 @@ import Modal from "react-native-modal";
 
 export default function HomeScreen({ navigation }) {
   const myUsername = useSelector((state) => state.user.value.username);
+  const travel = useSelector((state) => state.trip.value.initialDestination)
 
   const [newTripsList, setNewTripsList] = useState([]);
   const [oldTripsList, setOldTripsList] = useState([]);
+  const [travelDestination, setTravelDestination ] = useState(travel)
 
   const [isModalVisible, setModalVisible] = useState(false);
   const [modalData, setModalData] = useState({
@@ -32,13 +35,16 @@ export default function HomeScreen({ navigation }) {
     totalBudget: "522.19",
   });
 
+  const isFocused = useIsFocused()
+
   useEffect(() => {
     fetch(`http://${fecthIp.myIp}:3000/users/alltrips/${myUsername}`)
-      .then((res) => res.json())
-      .then((data) => {
+    .then((res) => res.json())
+    .then((data) => {
+        console.log("data")
         setNewTripsList(data.trips);
       });
-  }, []);
+  }, [isFocused]);
 
   let oldTripsExist = "No old trip yet";
   if (oldTripsList.length > 0) {
@@ -49,6 +55,12 @@ export default function HomeScreen({ navigation }) {
   if (newTripsList.length > 0) {
     newTripsExist = "";
   }
+
+  useFocusEffect(
+    React.useCallback(() => {
+      return
+    })
+  , [])
 
   const newTripsDisplay = newTripsList.map((data, i) => {
     return (
