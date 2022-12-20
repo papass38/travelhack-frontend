@@ -23,7 +23,7 @@ export default function DestinationInfos({ props, index }) {
 
   // calcul du budget journalier par destination
   useEffect(() => {
-    const destinationBudget = (props.budget.meal + props.budget.room);
+    const destinationBudget = (props.mealBudget + props.roomBudget);
     setBudget(destinationBudget.toFixed(2));
   }, []);
 
