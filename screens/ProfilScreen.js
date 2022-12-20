@@ -24,10 +24,12 @@ export default function ProfilScreen({ navigation }) {
       .then((res) => res.json())
       .then((data) => {
         for (let i = 0; i < data.trips.length; i++) {
+          //console.log(travel)
           for (let step of data.trips[i].steps) {
+            console.log(step);
             if (step.latitude) {
-              setVisitedCountries((state) => [
-                ...state,
+              setVisitedCountries([
+                ...visitedCountries,
                 {
                   name: step.name,
                   coordinate: {
@@ -36,24 +38,41 @@ export default function ProfilScreen({ navigation }) {
                   },
                 },
               ]);
+              // console.log("VISITED", visitedCountries)
             }
           }
+
+          // markers = travel.steps.map(e => {
+          //   if(e.latitude){
+          //     console.log(markers)
+          //     return <Marker
+          //       coordinate={{latitude : e.latitude, longitude : e.longitude}}
+          //       title={e.name}
+          //       description = {"description"}
+          //       // Set the opacity of the marker to 0.5 to make it appear greyed out
+          //       pinColor="red"
+          //     />
+          //   }
+          // })
         }
       });
   }, []);
 
-  markers = visitedCountries.map((e, i) => {
-    return (
-      <Marker
-        key={i}
-        coordinate={e.coordinate}
-        title={e.name}
-        // Set the opacity of the marker to 0.5 to make it appear greyed out
-        pinColor="#20B08E"
-      />
-    );
-  });
-  console.log(markers);
+  useEffect(() => {
+    markers = visitedCountries.map((e, i) => {
+      return (
+        <Marker
+          key={i}
+          coordinate={e.coordinate}
+          title={e.name}
+          // Set the opacity of the marker to 0.5 to make it appear greyed out
+          pinColor="#20B08E"
+        />
+      );
+    });
+  }, [visitedCountries]);
+
+  console.log(visitedCountries);
   const listingTrip = trip.trip.map((elmt, index) => {
     return dataVaccins.map((count, i) => {
       if (count.country === elmt.name.toUpperCase().split(" ")[1]) {
@@ -148,7 +167,7 @@ export default function ProfilScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "#F6F6F6",
     alignItems: "center",
   },
   map: {

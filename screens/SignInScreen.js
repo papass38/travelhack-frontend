@@ -12,6 +12,8 @@ import {
   TextInput,
   KeyboardAvoidingView,
   Platform,
+  Image,
+  ImageBackground,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import * as WebBrowser from "expo-web-browser";
@@ -79,6 +81,10 @@ export default function SignInScreen({ navigation }) {
         behavior={Platform.OS === "ios" ? "padding" : "height"}
       >
         <View style={styles.titleSection}>
+          <ImageBackground
+            source={require("../assets/travelhacklogo.png")}
+            style={styles.image}
+          />
           <Text style={styles.title}>Sign In</Text>
           <Text style={styles.subtitle}>Access to your acount</Text>
         </View>
@@ -162,8 +168,9 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
     width: "100%",
   },
+  image: { flex: 1, height: "100%" },
   titleSection: {
-    paddingTop: 150,
+    flex: 1,
     alignItems: "center",
     justifyContent: "center",
     fontSize: 24,
