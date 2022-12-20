@@ -23,8 +23,9 @@ export default function DestinationInfos({ props, index }) {
 
   // calcul du budget journalier par destination
   useEffect(() => {
-    const destinationBudget = (props.mealBudget + props.roomBudget);
-    setBudget(destinationBudget.toFixed(2));
+    const destinationBudget = (parseFloat(props.mealBudget) + parseFloat(props.roomBudget));
+    console.log(typeof(destinationBudget))
+    setBudget(destinationBudget);
   }, []);
 
   const today = new Date()
@@ -36,7 +37,7 @@ export default function DestinationInfos({ props, index }) {
         <Text style={styles.text}>{index + 1} - {props.name}</Text>
       </View>
       <View style={styles.destinationDetails}>
-        <Text style={styles.text}>{budget }€ / day </Text>
+        <Text style={styles.text}>{budget.toFixed(2)}€ / day </Text>
       </View>
     </View>
   );

@@ -4,6 +4,7 @@ import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 import user from "./reducers/user";
 import todo from "./reducers/toDo";
+import array from "./reducers/array";
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -37,7 +38,7 @@ const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
 const store = configureStore({
-  reducer: { trip, user, todo },
+  reducer: { trip, user, todo, array },
 });
 
 const TabNavigator = () => {

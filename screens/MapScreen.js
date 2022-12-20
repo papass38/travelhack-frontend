@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { addTrip, removeTrip } from "../reducers/trips";
+import { addTrip, removeTrip, initializeTrip } from "../reducers/trips";
 import { StatusBar } from "expo-status-bar";
 import {
   StyleSheet,
@@ -41,7 +41,7 @@ export default function MapScreen({ navigation }) {
     (state) => state.trip.value.initialDestination
   );
   const tripList = useSelector((state) => state.trip.value.trip);
-  console.log(tripList);
+  //console.log(tripList);
   let coordMarkers;
   let way;
   let steps;
@@ -75,12 +75,14 @@ export default function MapScreen({ navigation }) {
           .join(", "),
         latitude : coords.latitude,
         longitude : coords.longitude,
-        mealBudget : mealBudget, 
-        roomBudget : roomBudget,
+        mealBudget : typeof(mealBudget) !== NaN ? mealBudget.toFixed(2) : "?" , 
+        roomBudget : typeof(roomBudget) !== NaN ? roomBudget.toFixed(2) : "?",
         distanceFromPrevious: distance,
       })
     );
   };
+
+
 
   // récupération des coordonées depuis l'adresse renseignées
   const getAdressFromString = (place) => {
@@ -89,7 +91,6 @@ export default function MapScreen({ navigation }) {
     )
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         // Si c'est un Pays, delta + elevé (zoom -) + pas de marker
         if (data.results[0].types.find((e) => e === "country")) {
           setRegion({
@@ -311,6 +312,7 @@ export default function MapScreen({ navigation }) {
       <TouchableOpacity
         style={styles.footer}
         onPress={() => {
+          dispatch(initializeTrip({adress : tripList[0].name}))
           tripList.length > 0 && navigation.navigate("Recap");
         }}
       >
