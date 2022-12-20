@@ -262,8 +262,8 @@ const styles = StyleSheet.create({
   oldTrip: {
     height: 100,
     width: "90%",
-    borderWidth: 1,
-    borderColor: "grey",
+    borderWidth: 4,
+    borderColor: "#20B08E",
     flexDirection: "row",
     alignItems: "center",
     marginVertical: 10,
@@ -278,6 +278,7 @@ const styles = StyleSheet.create({
     width: "60%",
     flexDirection: "row",
     alignItems: "center",
+    paddingLeft: 10,
   },
   modal: {
     flex: 1,
@@ -291,7 +292,7 @@ const styles = StyleSheet.create({
   modalContent: {
     alignItems: "center",
     justifyContent: "space-around",
-    backgroundColor: "#F6F6F6",
+    backgroundColor: "#E6E6E6",
     height: "60%",
     width: "80%",
     padding: 20,
