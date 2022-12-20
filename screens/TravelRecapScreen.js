@@ -59,7 +59,7 @@ export default function TravelRecapScreen({ navigation }) {
 
   // generation des infos des destinations depuis les infos stockées dans le store
   const destinationsList = tripList.map((data, i) => {
-    budget += (data.budget.meal + data.budget.room)
+    budget += (data.mealBudget + data.roomBudget)
     return (
       <View style={styles.destinationsInfos}>
         <DestinationInfos props={data} index = {i}/>
@@ -135,7 +135,7 @@ export default function TravelRecapScreen({ navigation }) {
           <AntDesign name="arrowleft" size={34} color="white" />
         </TouchableOpacity>
         <View style= {styles.total}>
-        {budget > 0&& <Text style={styles.totalText}> {totalBudget.toFixed(2)} € </Text>}
+        {budget > 0 && <Text style={styles.totalText}> {totalBudget.toFixed(2)} € </Text>}
         </View>
         <TouchableOpacity
           style={styles.arrowButton}

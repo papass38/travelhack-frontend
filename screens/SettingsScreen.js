@@ -29,8 +29,8 @@ export default function FavoriteScreen({ navigation }) {
   const dispatch = useDispatch();
 
   const [infoUser, setInfoUser] = useState({ username: null, email: null });
-  const [inputUsername, setInputUsername] = useState("");
-  const [inputEmail, setInputEmail] = useState("");
+  const [inputUsername, setInputUsername] = useState(user.username);
+  const [inputEmail, setInputEmail] = useState(user.email);
   const [changeSucces, setChangeSucces] = useState(false);
 
   useEffect(() => {
@@ -76,7 +76,7 @@ export default function FavoriteScreen({ navigation }) {
       aspect: [4, 3],
       quality: 1,
     });
-    console.log(result);
+    // console.log(result);
     if (!result.canceled) {
       //if (!result.canceled)
       //{ - Cette ligne vérifie si l'image sélectionnée n'a pas été annulée par l'utilisateur.
@@ -86,7 +86,7 @@ export default function FavoriteScreen({ navigation }) {
       //Cette ligne utilise la fonction setImage pour mettre à jour
       //la variable d'état image avec l'URI de l'image sélectionnée.
       dispatch(addPhoto(result.assets[0].uri));
-      console.log(result.assets[0].uri);
+      // console.log(result.assets);
     }
   };
 
@@ -108,11 +108,11 @@ export default function FavoriteScreen({ navigation }) {
           if (data.result) {
             dispatch(login({ username: inputUsername }));
             setChangeSucces(true);
-            console.log(inputUsername);
+            // console.log(inputUsername);
           }
         });
     } else {
-      console.log("error");
+      // console.log("error");
     }
   };
 
@@ -135,16 +135,24 @@ export default function FavoriteScreen({ navigation }) {
         <Text>Your photo</Text>
         <View
           style={{
-            marginTop: 30,
             flex: 1,
             alignItems: "center",
             justifyContent: "center",
+            width: 200,
+            height: 200,
+            borderRadius: "20%",
+            borderWidth: 2,
+            borderColor: "#20B08E",
           }}
         >
           {image && (
             <Image
               source={{ uri: image }}
-              style={{ width: 200, height: 200, borderRadius: "50%" }}
+              style={{
+                width: 200,
+                height: 200,
+                borderRadius: "50%",
+              }}
             />
           )}
         </View>
@@ -222,9 +230,10 @@ const styles = StyleSheet.create({
   },
   input: {
     borderWidth: 1,
-    borderColor: "#21A37C",
+    borderColor: "#20B08E",
     width: 300,
     padding: 10,
+    borderRadius: 5,
   },
   header: {
     flexDirection: "row",

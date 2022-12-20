@@ -92,6 +92,7 @@ export default function Chat() {
         }
       });
 
+    // WAITING A MESSAGE TO COME IN PUSHER AND START THE FUNCTION
     const subscription = pusher.subscribe(locationName);
     subscription.bind("pusher:subscription_succeeded", (data) => {
       subscription.bind("message", (data) => {
@@ -99,7 +100,6 @@ export default function Chat() {
       });
     });
   }, [locationName]);
-  // WAITING A MESSAGE TO COME IN PUSHER AND START THE FUNCTION
 
   // DISPLAY ALL MESSAGES
   const msgDisplay = msgList.map((data, i) => {

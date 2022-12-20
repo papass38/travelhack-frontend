@@ -10,9 +10,9 @@ import Header from "../components/Header";
 import { AntDesign } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
 
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useIsFocused } from "@react-navigation/native";
 import { useSelector } from "react-redux";
-
 
 import fecthIp from "../fetchIp.json";
 
@@ -33,13 +33,27 @@ export default function HomeScreen({ navigation }) {
     totalBudget: "522.19",
   });
 
+  const isFocused = useIsFocused();
+
   useEffect(() => {
     fetch(`http://${fecthIp.myIp}:3000/users/alltrips/${myUsername}`)
       .then((res) => res.json())
       .then((data) => {
-        setNewTripsList(data.trips);
+        const newTripTab = [];
+        const oldTripTab = [];
+        // console.log(data.trips);
+        for (let item of data.trips) {
+          if (new Date(item.endDate).getTime() > new Date().getTime()) {
+            newTripTab.push(item);
+          } else {
+            oldTripTab.push(item);
+          }
+        }
+        // console.log(oldTripTab);
+        setNewTripsList(newTripTab);
+        setOldTripsList(oldTripTab);
       });
-  }, []);
+  }, [isFocused]);
 
   let oldTripsExist = "No old trip yet";
   if (oldTripsList.length > 0) {
@@ -86,7 +100,20 @@ export default function HomeScreen({ navigation }) {
 
   const oldTripsDisplay = oldTripsList.map((data, i) => {
     return (
-      <View key={i} style={styles.oldTrip}>
+      <TouchableOpacity
+        key={i}
+        style={styles.oldTrip}
+        onPress={() => {
+          setModalVisible(!isModalVisible);
+          setModalData({
+            destination: data.destination,
+            startDate: data.startDate,
+            endDate: data.endDate,
+            steps: data.steps,
+            totalBudget: data.totalBudget,
+          });
+        }}
+      >
         <Image
           style={styles.imgOldTrip}
           source={{
@@ -96,11 +123,14 @@ export default function HomeScreen({ navigation }) {
 
         <View style={styles.textOldTrip}>
           <View>
-            <Text style={{ fontWeight: "bold" }}>{data.country}</Text>
-            <Text>{data.date}</Text>
+            <Text style={{ fontWeight: "bold" }}>{data.destination}</Text>
+            <Text>
+              {new Date(data.startDate).toLocaleDateString()} -
+              {new Date(data.endDate).toLocaleDateString()}{" "}
+            </Text>
           </View>
         </View>
-      </View>
+      </TouchableOpacity>
     );
   });
 
@@ -178,7 +208,7 @@ export default function HomeScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "#F6F6F6",
     alignItems: "center",
   },
   newTripBtn: {
@@ -201,8 +231,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   newTrip: {
-    height: 190,
-    width: 200,
+    height: 230,
+    width: 230,
     justifyContent: "space-between",
     borderWidth: 4,
     borderColor: "#20B08E",
@@ -229,8 +259,8 @@ const styles = StyleSheet.create({
   oldTrip: {
     height: 100,
     width: "90%",
-    borderWidth: 1,
-    borderColor: "grey",
+    borderWidth: 4,
+    borderColor: "#20B08E",
     flexDirection: "row",
     alignItems: "center",
     marginVertical: 10,
@@ -245,6 +275,7 @@ const styles = StyleSheet.create({
     width: "60%",
     flexDirection: "row",
     alignItems: "center",
+    paddingLeft: 10,
   },
   modal: {
     flex: 1,
@@ -258,7 +289,7 @@ const styles = StyleSheet.create({
   modalContent: {
     alignItems: "center",
     justifyContent: "space-around",
-    backgroundColor: "white",
+    backgroundColor: "#E6E6E6",
     height: "60%",
     width: "80%",
     padding: 20,

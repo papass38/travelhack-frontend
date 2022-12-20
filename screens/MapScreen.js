@@ -73,11 +73,10 @@ export default function MapScreen({ navigation }) {
           .split(", ")
           .slice(-2)
           .join(", "),
-        coordinates: coords,
-        budget: {
-          meal: mealBudget,
-          room: roomBudget,
-        },
+        latitude : coords.latitude,
+        longitude : coords.longitude,
+        mealBudget : mealBudget, 
+        roomBudget : roomBudget,
         distanceFromPrevious: distance,
       })
     );
@@ -90,7 +89,7 @@ export default function MapScreen({ navigation }) {
     )
       .then((response) => response.json())
       .then((data) => {
-        console.log(data)
+        console.log(data);
         // Si c'est un Pays, delta + elevé (zoom -) + pas de marker
         if (data.results[0].types.find((e) => e === "country")) {
           setRegion({
@@ -181,8 +180,8 @@ export default function MapScreen({ navigation }) {
           key={index}
           title={item.name}
           coordinate={{
-            latitude: item.coordinates.latitude,
-            longitude: item.coordinates.longitude,
+            latitude: item.latitude,
+            longitude: item.longitude,
           }}
           pinColor="#327A8A"
         />
@@ -198,12 +197,12 @@ export default function MapScreen({ navigation }) {
           <MapViewDirections
             key={index}
             origin={{
-              latitude: tripList[index - 1].coordinates.latitude,
-              longitude: tripList[index - 1].coordinates.longitude,
+              latitude: tripList[index - 1].latitude,
+              longitude: tripList[index - 1].longitude,
             }}
             destination={{
-              latitude: item.coordinates.latitude,
-              longitude: item.coordinates.longitude,
+              latitude: item.latitude,
+              longitude: item.longitude,
             }}
             apikey={GOOGLE_MAPS_APIKEY}
             strokeWidth={5}

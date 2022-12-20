@@ -1,13 +1,4 @@
-import {
-  Button,
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity,
-  Image,
-  SafeAreaView,
-  Share,
-} from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import Header from "../components/Header";
 import { Ionicons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
@@ -20,62 +11,51 @@ const dataVaccins = require("../vaccins.json");
 import fecthIp from "../fetchIp.json";
 
 export default function ProfilScreen({ navigation }) {
-  const [lat, setLat] = useState();
-  const [long, setLong] = useState();
+  // const [lat, setLat] = useState();
+  // const [long, setLong] = useState()
   const trip = useSelector((state) => state.trip.value);
   const user = useSelector((state) => state.user.value.username);
-  const [visitedCountries, setVisitedCountries] = useState([])
+  const [visitedCountries, setVisitedCountries] = useState([]);
 
-  let markers = []
+  let markers = [];
 
   useEffect(() => {
     fetch(`http://${fecthIp.myIp}:3000/users/alltrips/${user}`)
-      .then((res) => res.json()).then((data) => {
-        
-        for(let i = 0; i < data.trips.length; i++){
-          //console.log(travel)
-         for(let step of data.trips[i].steps){
-          console.log(step)
-          if(step.latitude){
-
-            setVisitedCountries([...visitedCountries, {name : step.name, coordinate : {latitude : step.latitude, longitude : step.longitude} }])
-            // console.log("VISITED", visitedCountries)
+      .then((res) => res.json())
+      .then((data) => {
+        for (let i = 0; i < data.trips.length; i++) {
+          for (let step of data.trips[i].steps) {
+            if (step.latitude) {
+              setVisitedCountries((state) => [
+                ...state,
+                {
+                  name: step.name,
+                  coordinate: {
+                    latitude: step.latitude,
+                    longitude: step.longitude,
+                  },
+                },
+              ]);
+            }
           }
-         }
-          
-          // markers = travel.steps.map(e => {
-          //   if(e.latitude){
-          //     console.log(markers)
-          //     return <Marker
-          //       coordinate={{latitude : e.latitude, longitude : e.longitude}}
-          //       title={e.name}
-          //       description = {"description"}
-          //       // Set the opacity of the marker to 0.5 to make it appear greyed out
-          //       pinColor="red"
-          //     />
-          //   }
-          // })
         }
-      })
-  }, [])
+      });
+  }, []);
 
-  useEffect(() => {
-    
-    markers = visitedCountries.map((e, i) => {
-      return <Marker
+  markers = visitedCountries.map((e, i) => {
+    return (
+      <Marker
         key={i}
         coordinate={e.coordinate}
         title={e.name}
         // Set the opacity of the marker to 0.5 to make it appear greyed out
         pinColor="#20B08E"
-      />})
-  }, [visitedCountries])
+      />
+    );
+  });
 
-  console.log(visitedCountries)
   const listingTrip = trip.trip.map((elmt, index) => {
     return dataVaccins.map((count, i) => {
-      // console.log(`elmt : ${elmt.name.toUpperCase().split(" ")[1]}`);
-      // console.log(count.country);
       if (count.country === elmt.name.toUpperCase().split(" ")[1]) {
         return (
           <View style={{ alignItems: "center" }} key={index}>
@@ -95,14 +75,8 @@ export default function ProfilScreen({ navigation }) {
     });
   });
 
-  
-
   return (
     <View style={styles.container}>
-      {/* <View style={styles.header}>
-            <FontAwesome name="user-circle-o" size={38} color="#fff" />
-            <Text style={styles.title}>Hello Name !</Text>
-            </View> */}
       <Header navigation={navigation} />
       <View style={styles.navButtons}>
         <View style={styles.icon}>
@@ -156,12 +130,11 @@ export default function ProfilScreen({ navigation }) {
             latitudeDelta: 180,
             longitudeDelta: 180,
           }}
-          onLongPress={(e) => {
-            setLong(e.nativeEvent.coordinate.longitude);
-            setLat(e.nativeEvent.coordinate.latitude);
-          }}
+          // onLongPress={(e) => {
+          //   setLong(e.nativeEvent.coordinate.longitude);
+          //   setLat(e.nativeEvent.coordinate.latitude);
+          // }}
         >
-
           {markers}
         </MapView>
       </View>
@@ -208,20 +181,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  image: {
-    width: "100%",
-    height: "80%",
-  },
+
   countries: {
     width: "100%",
     backgroundColor: "#21A37C",
-  },
-  textCountries: {
-    fontSize: 30,
-    fontWeight: "bold",
-    backgroundColor: "#20B08E",
-    overflow: "hidden",
-    textAlign: "center",
   },
   flags: {
     marginTop: 20,
