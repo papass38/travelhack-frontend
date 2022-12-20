@@ -11,9 +11,8 @@ import { AntDesign } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
 
 import React, { useEffect, useState } from "react";
-import { useFocusEffect, useIsFocused } from '@react-navigation/native';
+import { useFocusEffect, useIsFocused } from "@react-navigation/native";
 import { useSelector } from "react-redux";
-
 
 import fecthIp from "../fetchIp.json";
 
@@ -21,11 +20,9 @@ import Modal from "react-native-modal";
 
 export default function HomeScreen({ navigation }) {
   const myUsername = useSelector((state) => state.user.value.username);
-  const travel = useSelector((state) => state.trip.value.initialDestination)
 
   const [newTripsList, setNewTripsList] = useState([]);
   const [oldTripsList, setOldTripsList] = useState([]);
-  const [travelDestination, setTravelDestination ] = useState(travel)
 
   const [isModalVisible, setModalVisible] = useState(false);
   const [modalData, setModalData] = useState({
@@ -36,22 +33,28 @@ export default function HomeScreen({ navigation }) {
     totalBudget: "522.19",
   });
 
-  const isFocused = useIsFocused()
+  const isFocused = useIsFocused();
 
   useEffect(() => {
     fetch(`http://${fecthIp.myIp}:3000/users/alltrips/${myUsername}`)
-<<<<<<< HEAD
       .then((res) => res.json())
       .then((data) => {
-        if (data.result) {
-          setNewTripsList(data.trips);
+        const newTripTab = [];
+        const oldTripTab = [];
+        // console.log(data.trips);
+        for (let item of data.trips) {
+          if (new Date(item.endDate).getTime() > new Date().getTime()) {
+            console.log("new");
+            newTripTab.push(item);
+          } else {
+            console.log("old");
+
+            oldTripTab.push(item);
+          }
         }
-=======
-    .then((res) => res.json())
-    .then((data) => {
-        console.log("data")
-        setNewTripsList(data.trips);
->>>>>>> frontbranch
+        // console.log(oldTripTab);
+        setNewTripsList(newTripTab);
+        setOldTripsList(oldTripTab);
       });
   }, [isFocused]);
 
@@ -64,12 +67,6 @@ export default function HomeScreen({ navigation }) {
   if (newTripsList.length > 0) {
     newTripsExist = "";
   }
-
-  useFocusEffect(
-    React.useCallback(() => {
-      return
-    })
-  , [])
 
   const newTripsDisplay = newTripsList.map((data, i) => {
     return (
@@ -106,7 +103,20 @@ export default function HomeScreen({ navigation }) {
 
   const oldTripsDisplay = oldTripsList.map((data, i) => {
     return (
-      <View key={i} style={styles.oldTrip}>
+      <TouchableOpacity
+        key={i}
+        style={styles.oldTrip}
+        onPress={() => {
+          setModalVisible(!isModalVisible);
+          setModalData({
+            destination: data.destination,
+            startDate: data.startDate,
+            endDate: data.endDate,
+            steps: data.steps,
+            totalBudget: data.totalBudget,
+          });
+        }}
+      >
         <Image
           style={styles.imgOldTrip}
           source={{
@@ -116,11 +126,14 @@ export default function HomeScreen({ navigation }) {
 
         <View style={styles.textOldTrip}>
           <View>
-            <Text style={{ fontWeight: "bold" }}>{data.country}</Text>
-            <Text>{data.date}</Text>
+            <Text style={{ fontWeight: "bold" }}>{data.destination}</Text>
+            <Text>
+              {new Date(data.startDate).toLocaleDateString()} -
+              {new Date(data.endDate).toLocaleDateString()}{" "}
+            </Text>
           </View>
         </View>
-      </View>
+      </TouchableOpacity>
     );
   });
 
