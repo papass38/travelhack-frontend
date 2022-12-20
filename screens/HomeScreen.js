@@ -40,18 +40,11 @@ export default function HomeScreen({ navigation }) {
 
   useEffect(() => {
     fetch(`http://${fecthIp.myIp}:3000/users/alltrips/${myUsername}`)
-<<<<<<< HEAD
       .then((res) => res.json())
       .then((data) => {
         if (data.result) {
           setNewTripsList(data.trips);
         }
-=======
-    .then((res) => res.json())
-    .then((data) => {
-        console.log("data")
-        setNewTripsList(data.trips);
->>>>>>> frontbranch
       });
   }, [isFocused]);
 
@@ -64,12 +57,6 @@ export default function HomeScreen({ navigation }) {
   if (newTripsList.length > 0) {
     newTripsExist = "";
   }
-
-  useFocusEffect(
-    React.useCallback(() => {
-      return
-    })
-  , [])
 
   const newTripsDisplay = newTripsList.map((data, i) => {
     return (
