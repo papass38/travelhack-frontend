@@ -9,13 +9,10 @@ import {
 import Header from "../components/Header";
 import { AntDesign } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
-
+import { useSelector } from "react-redux";
 import React, { useEffect, useState } from "react";
 import { useIsFocused } from "@react-navigation/native";
-import { useSelector } from "react-redux";
-
 import fecthIp from "../fetchIp.json";
-
 import Modal from "react-native-modal";
 
 export default function HomeScreen({ navigation }) {
@@ -44,8 +41,11 @@ export default function HomeScreen({ navigation }) {
         // console.log(data.trips);
         for (let item of data.trips) {
           if (new Date(item.endDate).getTime() > new Date().getTime()) {
+            
             newTripTab.push(item);
           } else {
+            
+
             oldTripTab.push(item);
           }
         }
@@ -78,7 +78,7 @@ export default function HomeScreen({ navigation }) {
             endDate: data.endDate,
             steps: data.steps,
             totalBudget: data.totalBudget,
-          });
+          })
         }}
       >
         <Image
