@@ -11,6 +11,7 @@ import {
   Platform,
   SafeAreaView,
   ScrollView,
+  Header,
 } from "react-native";
 import { useEffect, useState, useRef } from "react";
 import { useSelector } from "react-redux";
@@ -177,6 +178,7 @@ export default function Chat() {
         <View style={styles.locationContainer}>
           <Text style={styles.locationName}>{locationName}</Text>
         </View>
+
         <ScrollView
           style={styles.msgDisplay}
           ref={scrollViewMsgRef}
@@ -205,16 +207,23 @@ export default function Chat() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    height: "100%",
     backgroundColor: "#E6E6E6",
+    justifyContent: "space-between",
+  },
+  locationContainer: {
+    width: "100%",
+    backgroundColor: "#20B08E",
+    borderRadius: 5,
   },
   containerChat: {
     flex: 1,
     alignItems: "center",
     justifyContent: "space-between",
+    height: 200,
   },
   locationName: {
     margin: 10,
-
     fontSize: 20,
     fontWeight: "bold",
     textAlign: "center",

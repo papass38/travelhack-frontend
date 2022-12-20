@@ -38,8 +38,8 @@ export default function CountrySearchScreen({ navigation }) {
           style={styles.header}
           onPress={() => navigation.navigate("TabNavigator")}
         >
-          <Ionicons name="chevron-back" size={50} color="#20B08E" />
-          <Text style={styles.text}>Accueil</Text>
+          <Ionicons name="ios-arrow-back-circle" size={40} color="#20B08E" />
+          <Text style={styles.text}>Home</Text>
         </TouchableOpacity>
 
         <Text style={styles.title}>Select your destination</Text>
@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
     height: "10%",
     justifyContent: "center",
     alignItems: "center",
-    width: "100%",
+    width: "50%",
     borderRadius: 15,
     marginBottom: 90,
   },
@@ -122,8 +122,10 @@ const styles = StyleSheet.create({
   },
   header: {
     flexDirection: "row",
+    justifyContent: "flex-start",
     alignItems: "center",
-    width: "35%",
+    width: "100%",
+    paddingTop: 10,
   },
   text: {
     color: "#20B08E",

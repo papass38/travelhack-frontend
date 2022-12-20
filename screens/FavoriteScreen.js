@@ -23,25 +23,24 @@ export default function FavoriteScreen({ navigation }) {
         style={styles.header}
         onPress={() => navigation.navigate("Profil")}
       >
-        <Ionicons name="chevron-back" size={50} color="#20B08E" />
+        <Ionicons name="ios-arrow-back-circle" size={40} color="#20B08E" />
         <Text style={styles.textHeader}>Profil</Text>
       </TouchableOpacity>
-      <View style={{flexDirection: "row", justifyContent: "center"}}>
-      <TextInput
-      placeholder="Enter your name list" 
-      style={styles.input}/>
+      <View style={{ flexDirection: "row", justifyContent: "center" }}>
+        <TextInput placeholder="Enter your name list" style={styles.input} />
         <Ionicons name="add-circle" size={50} color="#20B08E" />
       </View>
       <View style={styles.wishlistContainer}>
-      <View style={styles.wishlist}>
-        <TouchableOpacity
-        onPress={() => navigation.navigate("Wishlist")}
-        style={styles.wishlistContent}>
-        <Ionicons  name="bookmark" size={40} />
-        <Text style={{fontSize: 30}}>List name</Text>
-        </TouchableOpacity>
-        <Ionicons name="trash" size={40} color="#DC143C"/>
-      </View>
+        <View style={styles.wishlist}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate("Wishlist")}
+            style={styles.wishlistContent}
+          >
+            <Ionicons name="bookmark" size={40} />
+            <Text style={{ fontSize: 30 }}>List name</Text>
+          </TouchableOpacity>
+          <Ionicons name="trash" size={40} color="#DC143C" />
+        </View>
       </View>
     </SafeAreaView>
   );
@@ -56,10 +55,11 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     width: "35%",
+    paddingLeft: 10,
   },
   textHeader: {
     fontSize: 30,
-    color: '#20B08E',
+    color: "#20B08E",
   },
   wishlistContainer: {
     alignItems: "center",
@@ -69,8 +69,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     borderWidth: 1,
-    height: '10%',
-    width: '90%',
+    height: "10%",
+    width: "90%",
     justifyContent: "center",
     borderRadius: 15,
     marginTop: 50,
@@ -84,8 +84,8 @@ const styles = StyleSheet.create({
   input: {
     flexDirection: "row",
     fontSize: 20,
-    width: '80%',
+    width: "80%",
     padding: 5,
     borderBottomWidth: 2,
-  }
+  },
 });
