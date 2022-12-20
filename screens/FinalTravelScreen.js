@@ -26,7 +26,7 @@ export default function FinalTravelScreen({ navigation }) {
   const user = useSelector((state) => state.user.value.username);
   const dispatch = useDispatch();
 
-  console.log(trip);
+  console.log(trip.initialDestination.adress);
 
   const handleValidation = () => {
     fetch(`http://${fetchIp.myIp}:3000/users/newtrip`, {
@@ -37,18 +37,15 @@ export default function FinalTravelScreen({ navigation }) {
         username: user,
         destination: trip.initialDestination.adress,
         steps: trip.trip,
-        budget: trip.totalBudget.toFixed(2),
+        budget: trip.totalBudget,
         startDate: trip.startDate,
         endDate: trip.endDate,
       }),
     })
       .then((res) => res.json())
       .then((data) => {
-        setTimeout(() => {
           dispatch(removeAll())
-          console.log("hello")
           navigation.navigate("TabNavigator")
-        }, 1000);
       });
   };
 
