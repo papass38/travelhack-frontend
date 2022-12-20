@@ -12,7 +12,7 @@ import {
 } from "react-native";
 import Header from "../components/Header";
 import { useEffect, useState } from "react";
-import {addDateandBudget} from "../reducers/trips"
+import { addDateandBudget } from "../reducers/trips";
 import { useSelector, useDispatch } from "react-redux";
 import DestinationInfos from "../components/DestinationInfos";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
@@ -25,13 +25,13 @@ export default function TravelRecapScreen({ navigation }) {
   const [dateType, setDateType] = useState("");
   const [arrivalDate, setArrivalDate] = useState("");
   const [departureDate, setDepartureDate] = useState("");
-  const [numberOfDays, setNumberOfDays] = useState(0)
+  const [numberOfDays, setNumberOfDays] = useState(0);
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
-  const [datesFilled, setDateFilled] = useState(true)
-  const dispatch = useDispatch()
+  const [datesFilled, setDateFilled] = useState(true);
+  const dispatch = useDispatch();
 
-  const storeTrips = useSelector((state) => state.trip.value)
-  console.log(storeTrips)
+  const storeTrips = useSelector((state) => state.trip.value);
+  console.log(storeTrips);
 
   // fait apparaitre le date picker
   const showDatePicker = (value) => {
@@ -52,56 +52,66 @@ export default function TravelRecapScreen({ navigation }) {
     if (dateType === "end") {
       setDepartureDate(date);
     }
-    hideDatePicker()
+    hideDatePicker();
   };
 
-  let budget = 0
+  let budget = 0;
 
   // generation des infos des destinations depuis les infos stockées dans le store
   const destinationsList = tripList.map((data, i) => {
-    budget += (parseFloat(data.mealBudget) + parseFloat(data.roomBudget))
+    budget += parseFloat(data.mealBudget) + parseFloat(data.roomBudget);
     return (
-      <View style={styles.destinationsInfos}>
-        <DestinationInfos props={data} index = {i}/>
+      <View style={styles.destinationsInfos} key={i}>
+        <DestinationInfos props={data} index={i} />
       </View>
     );
   });
 
-  // calcul du nombre de jour de voyage à partir des dates renseignées 
+  // calcul du nombre de jour de voyage à partir des dates renseignées
   useEffect(() => {
-    if(departureDate){
-      setNumberOfDays((departureDate - arrivalDate) / (1000 * 60 * 60 * 24))
+    if (departureDate) {
+      setNumberOfDays((departureDate - arrivalDate) / (1000 * 60 * 60 * 24));
     }
-  }, [departureDate])
+  }, [departureDate]);
 
   // calcul du budget total
-  const totalBudget = budget/tripList.length * numberOfDays
+  const totalBudget = (budget / tripList.length) * numberOfDays;
 
-  const errorMessage = <Text style = {{color : "red", marginBottom : 10}}>please select your dates of travel</Text>
+  const errorMessage = (
+    <Text style={{ color: "red", marginBottom: 10 }}>
+      please select your dates of travel
+    </Text>
+  );
 
   const handleValidation = () => {
-    if(arrivalDate && departureDate){
-      setDateFilled(true)
-      dispatch(addDateandBudget({startDate : arrivalDate, endDate : departureDate, budget : totalBudget.toFixed(2)}))
-      navigation.navigate("Summary")
+    if (arrivalDate && departureDate) {
+      setDateFilled(true);
+      dispatch(
+        addDateandBudget({
+          startDate: arrivalDate,
+          endDate: departureDate,
+          budget: totalBudget.toFixed(2),
+        })
+      );
+      navigation.navigate("Summary");
+    } else {
+      setDateFilled(false);
     }
-    else{
-      setDateFilled(false)
-    }
-  }
+  };
 
   return (
     <View style={styles.container}>
       <Header navigation={navigation} />
-      <View style={{ flexDirection: "row", alignItems: "center", marginTop : 10 }}>
-        
+      <View
+        style={{ flexDirection: "row", alignItems: "center", marginTop: 10 }}
+      >
         <Button
           title={
             arrivalDate ? moment(arrivalDate).format("DD MMM YY") : "Start Date"
           }
           onPress={() => showDatePicker("start")}
         />
-         <AntDesign name="arrowright" size={18} color="black" />
+        <AntDesign name="arrowright" size={18} color="black" />
         <Button
           title={
             departureDate
@@ -126,7 +136,7 @@ export default function TravelRecapScreen({ navigation }) {
         <View></View>
       </View>
       <ScrollView>{destinationsList}</ScrollView>
-        {!datesFilled && errorMessage}
+      {!datesFilled && errorMessage}
       <View style={styles.footer}>
         <TouchableOpacity
           style={styles.arrowButton}
@@ -134,14 +144,16 @@ export default function TravelRecapScreen({ navigation }) {
         >
           <AntDesign name="arrowleft" size={34} color="white" />
         </TouchableOpacity>
-        <View style= {styles.total}>
-        {budget > 0 && <Text style={styles.totalText}> {totalBudget.toFixed(2)} € </Text>}
+        <View style={styles.total}>
+          {budget > 0 && (
+            <Text style={styles.totalText}> {totalBudget.toFixed(2)} € </Text>
+          )}
         </View>
         <TouchableOpacity
           style={styles.arrowButton}
-          onPress={() => handleValidation() }
+          onPress={() => handleValidation()}
         >
-          <AntDesign name="arrowright" size={34} color="white"/>
+          <AntDesign name="arrowright" size={34} color="white" />
         </TouchableOpacity>
       </View>
     </View>
@@ -192,13 +204,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderColor: "white",
   },
-  total : {
-    width : "33%", 
-    justifyContent : "center", 
-    alignItems : "center"
-  }, 
-  totalText : {
-    color : "white", 
-    fontSize : 25
-  }
+  total: {
+    width: "33%",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  totalText: {
+    color: "white",
+    fontSize: 25,
+  },
 });

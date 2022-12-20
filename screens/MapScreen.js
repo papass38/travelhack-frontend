@@ -57,8 +57,8 @@ export default function MapScreen({ navigation }) {
     const getBudgetCountry = dataCost.find((e) =>
       e.City.includes(splitAdress[splitAdress.length - 1])
     );
-    let mealBudget = "?";
-    let roomBudget = "?";
+    let mealBudget = 0;
+    let roomBudget = 0;
 
     if (getBudgetCountry) {
       mealBudget = getBudgetCountry["Meal, Inexpensive Restaurant"] * 2;
@@ -73,16 +73,14 @@ export default function MapScreen({ navigation }) {
           .split(", ")
           .slice(-2)
           .join(", "),
-        latitude : coords.latitude,
-        longitude : coords.longitude,
-        mealBudget : typeof(mealBudget) !== NaN ? mealBudget.toFixed(2) : "?" , 
-        roomBudget : typeof(roomBudget) !== NaN ? roomBudget.toFixed(2) : "?",
+        latitude: coords.latitude,
+        longitude: coords.longitude,
+        mealBudget: typeof mealBudget !== NaN ? mealBudget.toFixed(2) : "?",
+        roomBudget: typeof roomBudget !== NaN ? roomBudget.toFixed(2) : "?",
         distanceFromPrevious: distance,
       })
     );
   };
-
-
 
   // récupération des coordonées depuis l'adresse renseignées
   const getAdressFromString = (place) => {
@@ -312,7 +310,7 @@ export default function MapScreen({ navigation }) {
       <TouchableOpacity
         style={styles.footer}
         onPress={() => {
-          dispatch(initializeTrip({adress : tripList[0].name}))
+          dispatch(initializeTrip({ adress: tripList[0].name }));
           tripList.length > 0 && navigation.navigate("Recap");
         }}
       >
