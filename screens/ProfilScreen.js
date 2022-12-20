@@ -53,7 +53,7 @@ export default function ProfilScreen({ navigation }) {
       />
     );
   });
-  console.log(markers);
+
   const listingTrip = trip.trip.map((elmt, index) => {
     return dataVaccins.map((count, i) => {
       if (count.country === elmt.name.toUpperCase().split(" ")[1]) {
