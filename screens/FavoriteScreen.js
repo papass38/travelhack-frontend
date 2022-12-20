@@ -8,7 +8,7 @@ import {
   SafeAreaView,
   Pressable,
   TextInput,
-  ScrollView
+  ScrollView,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import Header from "../components/Header";
@@ -21,27 +21,62 @@ import { addArray, removeArray } from "../reducers/array";
 // comm for commit
 export default function FavoriteScreen({ navigation }) {
   const [input, setInput] = useState("");
-  const array = useSelector((state) => state.array.value);
+  const [array, setArray] = useState([]);
+  const user = useSelector((state) => state.user.value);
+
+  useEffect(() => {
+    fetch(`http://${fetchIp.myIp}:3000/users/${user.username}`)
+    .then(res => res.json())
+    .then(data => {
+    setArray(data.user.favorites)
+    
+  
+    })
+  }, [])
 
   const dispatch = useDispatch();
   const listing = array.map((e, i) => {
     return (
       <View key={i} style={styles.arrayResult}>
-        <Text style={{ fontSize: 25 }}>{e}</Text>
+        <Text style={{ fontSize: 25 }}>{e.name}</Text>
         <Ionicons
           name="ios-trash-outline"
           size={30}
           color="black"
-          onPress={() => dispatch(removeArray(e))}
+          onPress={() => handleRemove(e)}
         />
       </View>
     );
   });
 
+  const handleRemove = (e) => {
+    fetch(`http://${fetchIp.myIp}:3000/users/removeFavorite/${user.username}`, {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name: e.name }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+      });
+    setArray(array.filter(data => data.name !== e.name ))
+  }
+
   const handleClick = () => {
+    console.log(input)
     if (input) {
+    fetch(`http://${fetchIp.myIp}:3000/users/addFavorite/${user.username}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name: input }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+      });
+    
       setInput("");
-      dispatch(addArray(input));
+      setArray(e => [...e, {name: input}])
     }
   };
 
@@ -77,10 +112,7 @@ export default function FavoriteScreen({ navigation }) {
           }}
         />
       </View>
-      <ScrollView>
-      {listing}
-      </ScrollView>
-      
+      <ScrollView>{listing}</ScrollView>
     </SafeAreaView>
   );
 }
