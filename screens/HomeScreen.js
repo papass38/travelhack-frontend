@@ -177,7 +177,7 @@ export default function HomeScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "#F6F6F6",
     alignItems: "center",
   },
   newTripBtn: {
@@ -200,8 +200,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   newTrip: {
-    height: 190,
-    width: 200,
+    height: 230,
+    width: 230,
     justifyContent: "space-between",
     borderWidth: 4,
     borderColor: "#20B08E",
@@ -257,7 +257,7 @@ const styles = StyleSheet.create({
   modalContent: {
     alignItems: "center",
     justifyContent: "space-around",
-    backgroundColor: "white",
+    backgroundColor: "#F6F6F6",
     height: "60%",
     width: "80%",
     padding: 20,

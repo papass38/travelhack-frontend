@@ -5,8 +5,6 @@ import React from "react";
 import user from "./reducers/user";
 import todo from "./reducers/toDo";
 
-import SwipeButton from "rn-swipe-button";
-
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -35,12 +33,14 @@ import WishlistScreen from "./screens/WishlistScreen";
 import FinalTravelScreen from "./screens/FinalTravelScreen";
 
 
+
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
 const store = configureStore({
   reducer: { trip, user, todo },
 });
+
 
 const TabNavigator = () => {
   return (
@@ -118,5 +118,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginTop: 50,
+
   },
 });
