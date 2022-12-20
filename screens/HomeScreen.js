@@ -43,11 +43,8 @@ export default function HomeScreen({ navigation }) {
         // console.log(data.trips);
         for (let item of data.trips) {
           if (new Date(item.endDate).getTime() > new Date().getTime()) {
-            console.log("new");
             newTripTab.push(item);
           } else {
-            console.log("old");
-
             oldTripTab.push(item);
           }
         }
