@@ -35,7 +35,9 @@ export default function HomeScreen({ navigation }) {
     fetch(`http://${fecthIp.myIp}:3000/users/alltrips/${myUsername}`)
       .then((res) => res.json())
       .then((data) => {
-        setNewTripsList(data.trips);
+        if (data.result) {
+          setNewTripsList(data.trips);
+        }
       });
   }, []);
 
