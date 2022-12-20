@@ -57,8 +57,8 @@ export default function MapScreen({ navigation }) {
     const getBudgetCountry = dataCost.find((e) =>
       e.City.includes(splitAdress[splitAdress.length - 1])
     );
-    let mealBudget = "?";
-    let roomBudget = "?";
+    let mealBudget = 0;
+    let roomBudget = 0;
 
     if (getBudgetCountry) {
       mealBudget = getBudgetCountry["Meal, Inexpensive Restaurant"] * 2;
@@ -73,10 +73,10 @@ export default function MapScreen({ navigation }) {
           .split(", ")
           .slice(-2)
           .join(", "),
-        latitude : coords.latitude,
-        longitude : coords.longitude,
-        mealBudget : mealBudget, 
-        roomBudget : roomBudget,
+        latitude: coords.latitude,
+        longitude: coords.longitude,
+        mealBudget: mealBudget,
+        roomBudget: roomBudget,
         distanceFromPrevious: distance,
       })
     );
