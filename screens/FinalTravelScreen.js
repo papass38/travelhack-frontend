@@ -13,19 +13,18 @@ import {
 } from "react-native";
 import fetchIp from "../fetchIp.json";
 import Header from "../components/Header";
-import { useEffect, useState } from "react";
-import DestinationInfos from "../components/DestinationInfos";
-import DateTimePickerModal from "react-native-modal-datetime-picker";
 import moment from "moment";
 import { AntDesign, Ionicons } from "@expo/vector-icons";
 import { useSelector, useDispatch } from "react-redux";
 import { MaterialIcons } from "@expo/vector-icons";
+import { removeAll } from "../reducers/trips";
+
 
 export default function FinalTravelScreen({ navigation }) {
   const trip = useSelector((state) => state.trip.value);
   const token = useSelector((state) => state.user.value.token);
   const user = useSelector((state) => state.user.value.username);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   console.log(trip);
 
@@ -37,34 +36,17 @@ export default function FinalTravelScreen({ navigation }) {
         token: token,
         username: user,
         destination: trip.initialDestination.adress,
-        steps: [],
+        steps: trip.trip,
         budget: trip.totalBudget.toFixed(2),
         startDate: trip.startDate,
         endDate: trip.endDate,
       }),
     })
       .then((res) => res.json())
-      .then(() => {
-        for (let step of trip.trip) {
-          fetch(`http://${fetchIp.myIp}:3000/users/newtrip/newstep`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              token: token,
-              username: user,
-              name: step.name,
-              latitude: step.coordinates.latitude,
-              longitude: step.coordinates.longitude,
-              mealBudget: step.budget.meal,
-              roomBudget: step.budget.room,
-            }),
-          })
-            .then((res) => res.json())
-            .then((data) => {
-              console.log(data)
-              navigation.navigate("Home")
-            });
-        }
+      .then((data) => {
+        dispatch(removeAll())
+        navigation.navigate("TabNavigator")
+        console.log(data);
       });
   };
 
@@ -92,7 +74,11 @@ export default function FinalTravelScreen({ navigation }) {
             <Text style = {{fontSize : 15, }}> {trip.trip[trip.trip.length - 1].name}</Text> */}
           </View>
           <View style={styles.budgetBackground}>
-            <Text style={{color : "#20B08E", fontWeight : "bold", fontSize : 16}}>{trip.totalBudget.toFixed(2)}€ /pers</Text>
+            <Text
+              style={{ color: "#20B08E", fontWeight: "bold", fontSize: 16 }}
+            >
+              {trip.totalBudget.toFixed(2)}€ /pers
+            </Text>
           </View>
           {/* <Text style={{fontWeight:"bold", fontSize:16}}>
             From {moment(trip.startDate).format("L")} to{" "}
@@ -166,13 +152,13 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignContent: "space-between",
   },
-  budgetBackground : {
-    backgroundColor : "white",
-    height : "17%",
-    width : "40%", 
-    alignItems : "center", 
-    justifyContent : "center",
-    borderRadius : 30, 
-    color : "white"
-  }
+  budgetBackground: {
+    backgroundColor: "white",
+    height: "17%",
+    width: "40%",
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 30,
+    color: "white",
+  },
 });

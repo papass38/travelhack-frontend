@@ -8,6 +8,7 @@ import {
 } from "react-native";
 import Header from "../components/Header";
 import { AntDesign } from "@expo/vector-icons";
+import { LinearGradient } from "expo-linear-gradient";
 
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
@@ -78,7 +79,6 @@ export default function HomeScreen({ navigation }) {
             <Text style={{ fontWeight: "bold" }}>{data.destination}</Text>
             <Text>{new Date(data.startDate).toLocaleDateString()}</Text>
           </View>
-          <AntDesign name="info" size={20} color="black" />
         </View>
       </TouchableOpacity>
     );
@@ -90,7 +90,7 @@ export default function HomeScreen({ navigation }) {
         <Image
           style={styles.imgOldTrip}
           source={{
-            uri: data.img,
+            uri: "https://img.static-rmg.be/a/view/q75/w4000/h2667/4779070/2135445-jpg.jpg",
           }}
         />
 
@@ -99,7 +99,6 @@ export default function HomeScreen({ navigation }) {
             <Text style={{ fontWeight: "bold" }}>{data.country}</Text>
             <Text>{data.date}</Text>
           </View>
-          <AntDesign name="info" size={20} color="black" />
         </View>
       </View>
     );
@@ -113,11 +112,17 @@ export default function HomeScreen({ navigation }) {
     <View style={styles.container}>
       <Modal visible={isModalVisible} style={styles.modal}>
         <View style={styles.modalContent}>
-          <Text>{modalData.destination}</Text>
-          <Text>{modalData.startDate}</Text>
-          <Text>{modalData.endDate}</Text>
-          <Text>{modalData.totalBudget}€</Text>
-          {stepsModal}
+          <View style={styles.modalText}>
+            <Text style={{ fontWeight: "bold" }}>{modalData.destination}</Text>
+            <Text>{new Date(modalData.startDate).toLocaleDateString()}</Text>
+            <Text>{new Date(modalData.endDate).toLocaleDateString()}</Text>
+            <Text>{modalData.totalBudget}€</Text>
+            <View>
+              <Text>Steps :</Text>
+              {stepsModal}
+            </View>
+          </View>
+
           <TouchableOpacity
             onPress={() => setModalVisible(!isModalVisible)}
             style={styles.modalButton}
@@ -199,8 +204,8 @@ const styles = StyleSheet.create({
     height: 190,
     width: 200,
     justifyContent: "space-between",
-    borderWidth: 1,
-    borderColor: "grey",
+    borderWidth: 4,
+    borderColor: "#20B08E",
     marginHorizontal: 10,
     borderRadius: 10,
     overflow: "hidden",
@@ -211,7 +216,6 @@ const styles = StyleSheet.create({
   },
   textNewTrip: {
     flexDirection: "row",
-    justifyContent: "space-between",
     alignItems: "center",
     margin: 10,
   },
@@ -240,7 +244,6 @@ const styles = StyleSheet.create({
   textOldTrip: {
     width: "60%",
     flexDirection: "row",
-    justifyContent: "space-around",
     alignItems: "center",
   },
   modal: {
@@ -254,12 +257,19 @@ const styles = StyleSheet.create({
   },
   modalContent: {
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "space-around",
     backgroundColor: "white",
-    height: "80%",
+    height: "60%",
     width: "80%",
     padding: 20,
     borderRadius: 20,
+    borderWidth: 4,
+    borderColor: "#20B08E",
+  },
+  modalText: {
+    borderRadius: 20,
+    padding: 40,
+    height: "50%",
   },
   modalButton: {
     marginTop: 10,
@@ -269,5 +279,9 @@ const styles = StyleSheet.create({
     width: 100,
     height: "10%",
     borderRadius: 5,
+  },
+  buttonText: {
+    color: "white",
+    fontWeight: "bold",
   },
 });

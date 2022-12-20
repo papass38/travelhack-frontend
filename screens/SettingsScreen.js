@@ -32,6 +32,7 @@ export default function FavoriteScreen({ navigation }) {
   const [inputUsername, setInputUsername] = useState("");
   const [inputEmail, setInputEmail] = useState("");
   const [changeSucces, setChangeSucces] = useState(false);
+
   useEffect(() => {
     fetch(`http://${fetchIp.myIp}:3000/users/${user.username}`)
       .then((res) => res.json())
@@ -77,8 +78,15 @@ export default function FavoriteScreen({ navigation }) {
     });
     console.log(result);
     if (!result.canceled) {
+      //if (!result.canceled)
+      //{ - Cette ligne vérifie si l'image sélectionnée n'a pas été annulée par l'utilisateur.
+      //Si l'image n'a pas été annulée, le code à l'intérieur des accolades sera exécuté.
       setImage(result.assets[0].uri);
+      //setImage(result.assets[0].uri); -
+      //Cette ligne utilise la fonction setImage pour mettre à jour
+      //la variable d'état image avec l'URI de l'image sélectionnée.
       dispatch(addPhoto(result.assets[0].uri));
+      console.log(result.assets[0].uri);
     }
   };
 
@@ -87,20 +95,25 @@ export default function FavoriteScreen({ navigation }) {
   }
 
   const handleClick = () => {
-    fetch(`http://${fetchIp.myIp}:3000/users/${user.username}`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        replaceUsername: inputUsername,
-      }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.result) {
-          dispatch(login({ username: inputUsername }));
-          setChangeSucces(true);
-        }
-      });
+    if (inputUsername) {
+      fetch(`http://${fetchIp.myIp}:3000/users/${user.username}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          replaceUsername: inputUsername,
+        }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.result) {
+            dispatch(login({ username: inputUsername }));
+            setChangeSucces(true);
+            console.log(inputUsername);
+          }
+        });
+    } else {
+      console.log("error");
+    }
   };
 
   return (
@@ -153,15 +166,6 @@ export default function FavoriteScreen({ navigation }) {
             }}
           >
             <Text style={{ color: "#fff" }}>Upload</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={{
-              backgroundColor: "#21A37C",
-              padding: 10,
-              borderRadius: 10,
-            }}
-          >
-            <Text style={{ color: "#fff" }}>Remove</Text>
           </TouchableOpacity>
         </View>
       </View>
