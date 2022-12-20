@@ -5,17 +5,33 @@ import { useSelector } from "react-redux";
 // import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { addTodo, filterTodo } from "../reducers/toDo";
+import fetchIp from "../fetchIp.json";
 
 export default function CheckBoxData({ props }) {
   const dispatch = useDispatch();
   const todo = useSelector((state) => state.todo.value);
+  const user = useSelector((state) => state.user.value.username);
 
   const listingData = props.data.map((elmt, index) => {
     const [checked, setChecked] = useState(false);
     const handleClick = (e) => {
       if (e === elmt && checked === false) {
-        dispatch(addTodo(elmt));
-        setChecked(true);
+        // dispatch(addTodo(elmt));
+        // setChecked(true);
+        fetch(`http://${fetchIp.myIp}:3000/users/newTodo/${user}`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            username: user,
+            task: elmt,
+          }),
+        })
+          .then((res) => res.json())
+          .then(() => {
+            console.log(elmt);
+            dispatch(addTodo(elmt));
+            setChecked(true);
+          });
         // console.log(todo);
       } else {
         setChecked(false);

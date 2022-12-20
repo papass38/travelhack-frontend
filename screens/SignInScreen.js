@@ -63,7 +63,9 @@ export default function SignInScreen({ navigation }) {
 
   // React.useEffect(() => {
   //   if (response?.type === "success") {
-  //     const { authentication } = response;
+  //     const email = response.params.email;
+  //     const name = response.params.name;
+  //     const profilePicture = response.params.picture;
   //   }
   // }, [response]);
 
