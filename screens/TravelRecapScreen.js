@@ -139,11 +139,9 @@ export default function TravelRecapScreen({ navigation }) {
         </View>
         <TouchableOpacity
           style={styles.arrowButton}
-          onPress={() => {
-            tripList.length > 0 && navigation.navigate("Map");
-          }}
+          onPress={() => handleValidation() }
         >
-          <AntDesign name="arrowright" size={34} color="white" onPress={() => handleValidation() }/>
+          <AntDesign name="arrowright" size={34} color="white"/>
         </TouchableOpacity>
       </View>
     </View>
