@@ -59,21 +59,13 @@ export default function SignInScreen({ navigation }) {
       });
   };
 
-<<<<<<< HEAD
-  useEffect(() => {
-    if (response?.type === "success") {
-      const email = response.params.email;
-      const name = response.params.name;
-      const profilePicture = response.params.picture;
-    }
-  }, [response]);
-=======
-  // React.useEffect(() => {
+  // useEffect(() => {
   //   if (response?.type === "success") {
-  //     const { authentication } = response;
+  //     const email = response.params.email;
+  //     const name = response.params.name;
+  //     const profilePicture = response.params.picture;
   //   }
   // }, [response]);
->>>>>>> frontBranch
 
   return (
     <LinearGradient
