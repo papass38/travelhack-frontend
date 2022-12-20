@@ -29,8 +29,8 @@ export default function FavoriteScreen({ navigation }) {
   const dispatch = useDispatch();
 
   const [infoUser, setInfoUser] = useState({ username: null, email: null });
-  const [inputUsername, setInputUsername] = useState("");
-  const [inputEmail, setInputEmail] = useState("");
+  const [inputUsername, setInputUsername] = useState(user.username);
+  const [inputEmail, setInputEmail] = useState(user.email);
   const [changeSucces, setChangeSucces] = useState(false);
 
   useEffect(() => {
