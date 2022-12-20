@@ -44,9 +44,11 @@ export default function FinalTravelScreen({ navigation }) {
     })
       .then((res) => res.json())
       .then((data) => {
-        dispatch(removeAll())
-        navigation.navigate("TabNavigator")
-        console.log(data);
+        setTimeout(() => {
+          dispatch(removeAll())
+          console.log("hello")
+          navigation.navigate("TabNavigator")
+        }, 1000);
       });
   };
 
