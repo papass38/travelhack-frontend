@@ -135,16 +135,24 @@ export default function FavoriteScreen({ navigation }) {
         <Text>Your photo</Text>
         <View
           style={{
-            marginTop: 30,
             flex: 1,
             alignItems: "center",
             justifyContent: "center",
+            width: 200,
+            height: 200,
+            borderRadius: "20%",
+            borderWidth: 2,
+            borderColor: "#20B08E",
           }}
         >
           {image && (
             <Image
               source={{ uri: image }}
-              style={{ width: 200, height: 200, borderRadius: "50%" }}
+              style={{
+                width: 200,
+                height: 200,
+                borderRadius: "50%",
+              }}
             />
           )}
         </View>
@@ -222,9 +230,10 @@ const styles = StyleSheet.create({
   },
   input: {
     borderWidth: 1,
-    borderColor: "#21A37C",
+    borderColor: "#20B08E",
     width: 300,
     padding: 10,
+    borderRadius: 5,
   },
   header: {
     flexDirection: "row",
