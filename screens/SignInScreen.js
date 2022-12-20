@@ -14,13 +14,13 @@ import {
   Platform,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import * as WebBrowser from "expo-web-browser";
-import * as Google from "expo-auth-session/providers/google";
+// import * as WebBrowser from "expo-web-browser";
+// import * as Google from "expo-auth-session/providers/google";
 import * as React from "react";
 import { AntDesign } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 
-WebBrowser.maybeCompleteAuthSession();
+// WebBrowser.maybeCompleteAuthSession();
 
 export default function SignInScreen({ navigation }) {
   const dispatch = useDispatch();
@@ -28,12 +28,12 @@ export default function SignInScreen({ navigation }) {
   const [signInUsername, setSignInUsername] = useState("");
   const [signInPassword, setSignInPassword] = useState("");
   const [messageError, setMessageError] = useState("");
-  const [request, response, promptAsync] = Google.useAuthRequest({
-    clientId:
-      "90077612632-sqq87ue9rnpj7njp6abht7iv26gj2sg0.apps.googleusercontent.com",
-    iosClientId:
-      "90077612632-1fng2dqhhtvjc8d320p0ulv79j7mv00l.apps.googleusercontent.com",
-  });
+  // const [request, response, promptAsync] = Google.useAuthRequest({
+  //   clientId:
+  //     "90077612632-sqq87ue9rnpj7njp6abht7iv26gj2sg0.apps.googleusercontent.com",
+  //   iosClientId:
+  //     "90077612632-1fng2dqhhtvjc8d320p0ulv79j7mv00l.apps.googleusercontent.com",
+  // });
 
   const handleConnection = () => {
     fetch(`http://${fetchIp.myIp}:3000/users/signin`, {
@@ -60,11 +60,11 @@ export default function SignInScreen({ navigation }) {
       });
   };
 
-  React.useEffect(() => {
-    if (response?.type === "success") {
-      const { authentication } = response;
-    }
-  }, [response]);
+  // React.useEffect(() => {
+  //   if (response?.type === "success") {
+  //     const { authentication } = response;
+  //   }
+  // }, [response]);
 
   return (
     <KeyboardAvoidingView
@@ -122,7 +122,7 @@ export default function SignInScreen({ navigation }) {
           </TouchableOpacity>
 
           <Text style={styles.orText}>Or Sign in With</Text>
-          <TouchableOpacity
+          {/* <TouchableOpacity
             style={styles.buttonGoogle}
             onPress={() => {
               promptAsync();
@@ -132,7 +132,7 @@ export default function SignInScreen({ navigation }) {
           >
             <AntDesign name="google" size={32} color="black" title="Login" />
             <Text> Sign In with Google</Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
           <Text style={styles.text}>Don't have an account?</Text>
 
           <TouchableOpacity

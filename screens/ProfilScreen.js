@@ -115,8 +115,9 @@ export default function ProfilScreen({ navigation }) {
             setLat(e.nativeEvent.coordinate.latitude);
           }}
         >
-          {visitedCountries.map((country) => (
+          {visitedCountries.map((country, index) => (
             <Marker
+              key={index}
               coordinate={country}
               title={country.name}
               description={country.description}

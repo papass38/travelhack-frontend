@@ -16,13 +16,13 @@ import {
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { FontAwesome } from "@expo/vector-icons";
-import * as WebBrowser from "expo-web-browser";
-import * as Google from "expo-auth-session/providers/google";
+// import * as WebBrowser from "expo-web-browser";
+// import * as Google from "expo-auth-session/providers/google";
 import * as React from "react";
 import { AntDesign } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 
-WebBrowser.maybeCompleteAuthSession();
+// WebBrowser.maybeCompleteAuthSession();
 
 //web 90077612632-sqq87ue9rnpj7njp6abht7iv26gj2sg0.apps.googleusercontent.com
 //ios 90077612632-1fng2dqhhtvjc8d320p0ulv79j7mv00l.apps.googleusercontent.com
@@ -30,12 +30,12 @@ WebBrowser.maybeCompleteAuthSession();
 
 export default function SignUpScreen({ navigation }) {
   const [user, setUser] = useState(null);
-  const [request, response, promptAsync] = Google.useAuthRequest({
-    clientId:
-      "90077612632-sqq87ue9rnpj7njp6abht7iv26gj2sg0.apps.googleusercontent.com",
-    iosClientId:
-      "90077612632-1fng2dqhhtvjc8d320p0ulv79j7mv00l.apps.googleusercontent.com",
-  });
+  // const [request, response, promptAsync] = Google.useAuthRequest({
+  //   clientId:
+  //     "90077612632-sqq87ue9rnpj7njp6abht7iv26gj2sg0.apps.googleusercontent.com",
+  //   iosClientId:
+  //     "90077612632-1fng2dqhhtvjc8d320p0ulv79j7mv00l.apps.googleusercontent.com",
+  // });
   const dispatch = useDispatch();
 
   const [signUpUsername, setSignUpUsername] = useState("");
@@ -81,11 +81,11 @@ export default function SignUpScreen({ navigation }) {
       });
   };
 
-  React.useEffect(() => {
-    if (response?.type === "success") {
-      const { authentication } = response;
-    }
-  }, [response]);
+  // React.useEffect(() => {
+  //   if (response?.type === "success") {
+  //     const { authentication } = response;
+  //   }
+  // }, [response]);
 
   return (
     <LinearGradient
@@ -121,9 +121,7 @@ export default function SignUpScreen({ navigation }) {
         </View>
       </View>
 
-       <View
-      style={styles.registerSection}
-    > 
+      <View style={styles.registerSection}>
         <View style={styles.buttonContainer}>
           <TextInput
             style={styles.input}
@@ -171,7 +169,7 @@ export default function SignUpScreen({ navigation }) {
               <Text style={styles.buttonText}>Sign Up</Text>
             </LinearGradient>
           </TouchableOpacity>
-          <TouchableOpacity
+          {/* <TouchableOpacity
             style={styles.buttonGoogle}
             onPress={() => {
               promptAsync();
@@ -184,9 +182,9 @@ export default function SignUpScreen({ navigation }) {
           >
             <AntDesign name="google" size={32} color="black" title="Login" />
             <Text> SignUp with Google</Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
-        </View>
+      </View>
     </LinearGradient>
   );
 }

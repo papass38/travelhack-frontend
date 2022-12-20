@@ -76,7 +76,7 @@ export default function FavoriteScreen({ navigation }) {
       aspect: [4, 3],
       quality: 1,
     });
-    console.log(result);
+    // console.log(result);
     if (!result.canceled) {
       //if (!result.canceled)
       //{ - Cette ligne vérifie si l'image sélectionnée n'a pas été annulée par l'utilisateur.
@@ -86,7 +86,7 @@ export default function FavoriteScreen({ navigation }) {
       //Cette ligne utilise la fonction setImage pour mettre à jour
       //la variable d'état image avec l'URI de l'image sélectionnée.
       dispatch(addPhoto(result.assets[0].uri));
-      console.log(result.assets[0].uri);
+      // console.log(result.assets);
     }
   };
 
@@ -108,11 +108,11 @@ export default function FavoriteScreen({ navigation }) {
           if (data.result) {
             dispatch(login({ username: inputUsername }));
             setChangeSucces(true);
-            console.log(inputUsername);
+            // console.log(inputUsername);
           }
         });
     } else {
-      console.log("error");
+      // console.log("error");
     }
   };
 
