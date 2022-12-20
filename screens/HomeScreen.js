@@ -81,7 +81,7 @@ export default function HomeScreen({ navigation }) {
             endDate: data.endDate,
             steps: data.steps,
             totalBudget: data.totalBudget,
-          });
+          })
         }}
       >
         <Image
