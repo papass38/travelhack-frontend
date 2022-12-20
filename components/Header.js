@@ -44,17 +44,17 @@ export default function Header({ navigation }) {
       </View>
 
       <View style={{ alignItems: "center" }}>
-        <SimpleLineIcons
+        <AntDesign
           name="logout"
-          size={24}
-          color="#fff"
+          size={30}
+          color="#F6F6F6"
           onPress={() => {
             dispatch(initializeTrip(""));
             dispatch(logout());
             navigation.navigate("Sign in");
           }}
         />
-        <Text style={{ color: "#fff", fontSize: 12 }}>Logout</Text>
+        <Text style={{ color: "#F6F6F6", fontSize: 12 }}>Logout</Text>
       </View>
     </View>
   );

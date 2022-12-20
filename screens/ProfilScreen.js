@@ -12,7 +12,7 @@ import fecthIp from "../fetchIp.json";
 
 export default function ProfilScreen({ navigation }) {
   // const [lat, setLat] = useState();
-  // const [long, setLong] = useState();
+  // const [long, setLong] = useState()
   const trip = useSelector((state) => state.trip.value);
   const user = useSelector((state) => state.user.value.username);
   const [visitedCountries, setVisitedCountries] = useState([]);
