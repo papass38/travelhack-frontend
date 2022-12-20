@@ -11,8 +11,6 @@ import {
 import SwipeButton from "rn-swipe-button";
 
 
-
-
 export default function WelcomeScreen({ navigation }) {
   
   
@@ -36,9 +34,9 @@ export default function WelcomeScreen({ navigation }) {
           onSwipeSuccess={() => {
             navigation.navigate("Sign in");
           }}
-          railFillBackgroundColor="#20B08E"
+          railFillBackgroundColor="#20cb8e"
           thumbIconBackgroundColor="#20B08E"
-          thumbIconBorderColor="transparent"
+          thumbIconBorderColor="white"
           railBackgroundColor="white"
           railBorderColor="transparent"
           railFillBorderColor="transparent"
@@ -82,6 +80,5 @@ const styles = StyleSheet.create({
     flex: 1,
     fontWeight: "bold",
     letterSpacing: -1,
-
   },
 });
