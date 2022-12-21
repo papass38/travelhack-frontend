@@ -18,6 +18,7 @@ import DestinationInfos from "../components/DestinationInfos";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import moment from "moment";
 import { AntDesign } from "@expo/vector-icons";
+import { Feather } from "@expo/vector-icons";
 
 export default function TravelRecapScreen({ navigation }) {
   const tripList = useSelector((state) => state.trip.value.trip);
@@ -110,8 +111,9 @@ export default function TravelRecapScreen({ navigation }) {
             arrivalDate ? moment(arrivalDate).format("DD MMM YY") : "Start Date"
           }
           onPress={() => showDatePicker("start")}
+          style={{ color: "black" }}
         />
-        <AntDesign name="arrowright" size={18} color="black" />
+        <Feather name="arrow-right-circle" size={25} color="#20B08E" />
         <Button
           title={
             departureDate
@@ -119,6 +121,7 @@ export default function TravelRecapScreen({ navigation }) {
               : "End Date"
           }
           onPress={() => showDatePicker("end")}
+          style={styles.button}
         />
       </View>
       <View>
@@ -126,7 +129,6 @@ export default function TravelRecapScreen({ navigation }) {
           isVisible={isDatePickerVisible}
           minimumDate={arrivalDate}
           mode="date"
-          isDarkModeEnabled="false"
           onConfirm={handleConfirm}
           display={"inline"}
           onCancel={hideDatePicker}
@@ -167,12 +169,17 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     backgroundColor: "white",
   },
+  button: {
+    color: "green",
+  },
   datePick: {},
   text: {
     fontSize: 18,
   },
   destinationsInfos: {
-    //width : "100%"
+    borderRadius: 5,
+    shadowOffset: { width: 1, height: 1 },
+    shadowColor: "gray",
   },
   destinationName: {
     flexDirection: "row",
