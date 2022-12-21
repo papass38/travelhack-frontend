@@ -49,7 +49,14 @@ export default function SignInScreen({ navigation }) {
       .then((data) => {
         if (data.result) {
           setMessageError("");
-          dispatch(login({ username: signInUsername, token: data.token }));
+          dispatch(
+            login({
+              username: data.user.username,
+              email: data.user.email,
+              photo: data.user.photo,
+              token: data.user.token,
+            })
+          );
           navigation.navigate("TabNavigator");
           setSignInUsername("");
           setSignInPassword("");

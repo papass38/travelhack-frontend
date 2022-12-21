@@ -55,9 +55,11 @@ export default function SignUpScreen({ navigation }) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         username: signUpUsername,
-        firstname: signUpFirstName,
-        lastname: signUpLastName,
+        firstName: signUpFirstName,
+        lastName: signUpLastName,
         email: signUpEmail,
+        photo:
+          "https://media.istockphoto.com/id/1300845620/fr/vectoriel/appartement-dic%C3%B4ne-dutilisateur-isol%C3%A9-sur-le-fond-blanc-symbole-utilisateur.jpg?b=1&s=170667a&w=0&k=20&c=HEO2nP4_uEAn0_JzVTU6_Y5hyn-qHxyCrWWTirBvScs=",
         password: signUpPassword,
       }),
     })
@@ -67,9 +69,10 @@ export default function SignUpScreen({ navigation }) {
           navigation.navigate("TabNavigator");
           dispatch(
             login({
-              username: signUpUsername,
-              email: signUpEmail,
-              token: data.token,
+              username: data.user.username,
+              email: data.user.email,
+              photo: data.user.photo,
+              token: data.user.token,
             })
           );
           setSignUpUsername("");

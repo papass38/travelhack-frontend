@@ -39,9 +39,7 @@ export default function Chat() {
   );
   const [msgList, setMsgList] = useState([]);
   const [newMsg, setNewMsg] = useState("");
-  const [profilImg, setProfilImg] = useState(
-    "https://media.istockphoto.com/id/1300845620/fr/vectoriel/appartement-dic%C3%B4ne-dutilisateur-isol%C3%A9-sur-le-fond-blanc-symbole-utilisateur.jpg?b=1&s=170667a&w=0&k=20&c=HEO2nP4_uEAn0_JzVTU6_Y5hyn-qHxyCrWWTirBvScs="
-  );
+  const [allUsers, setAllUsers] = useState([]);
 
   // ASKING FOR LOCATION PERMISSION
   useEffect(() => {
@@ -68,6 +66,12 @@ export default function Chat() {
         });
       }
     })();
+
+    fetch(`http://${fetchIp.myIp}:3000/users/all`)
+      .then((res) => res.json())
+      .then((data) => {
+        setAllUsers(data);
+      });
   }, []);
 
   //GET ALL MESSAGE FROM A CHANNEL
@@ -130,6 +134,16 @@ export default function Chat() {
           {new Date(data.date).toLocaleDateString()}
         </Text>
       );
+    }
+
+    let profilImg =
+      "https://media.istockphoto.com/id/1300845620/fr/vectoriel/appartement-dic%C3%B4ne-dutilisateur-isol%C3%A9-sur-le-fond-blanc-symbole-utilisateur.jpg?b=1&s=170667a&w=0&k=20&c=HEO2nP4_uEAn0_JzVTU6_Y5hyn-qHxyCrWWTirBvScs=";
+
+    if (allUsers.some((e) => e.username === data.name)) {
+      const imgFound = allUsers.find((e) => e.username === data.name).photo;
+      if (imgFound) {
+        profilImg = imgFound;
+      }
     }
 
     return (

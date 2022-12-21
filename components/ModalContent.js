@@ -61,13 +61,12 @@ export default function ModalContent(props) {
   // if there is info in the arround State -> call the component PlaceAround (see /component/PlaceAround.js)
   if (around.length > 0) {
     aroundList = around.map((e, i) => {
-      return <PlaceAround placeId={e.place_id}></PlaceAround>;
+      return <PlaceAround key={i} placeId={e.place_id}></PlaceAround>;
     });
   }
 
- 
   return (
-    <View style={styles.container} >
+    <View style={styles.container}>
       <Text style={styles.modalTitle}>About {props.name}</Text>
       <View>
         <Text> Estimated Budget per day</Text>
@@ -102,8 +101,8 @@ export default function ModalContent(props) {
             save="value"
           />
         </View>
-        <View style ={{height : "78%", }}>
-        <ScrollView>{aroundList}</ScrollView>
+        <View style={{ height: "78%" }}>
+          <ScrollView>{aroundList}</ScrollView>
         </View>
       </View>
     </View>
@@ -114,7 +113,7 @@ const styles = StyleSheet.create({
   container: {
     //width : 300,
     flex: 1,
-    overflow : "hidden"
+    overflow: "hidden",
   },
   modalTitle: {
     fontSize: 25,
