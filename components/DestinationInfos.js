@@ -21,7 +21,7 @@ export default function DestinationInfos({ props, index }) {
   const tripList = useSelector((state) => state.trip.value.trip);
   const dispatch = useDispatch();
 
-  // calcul du budget journalier par destination
+  // when the component is mounted -, this function calculate the average daily price based on the meal budget and room budget per day
   useEffect(() => {
     const destinationBudget = (parseFloat(props.mealBudget) + parseFloat(props.roomBudget));
     console.log(typeof(destinationBudget))

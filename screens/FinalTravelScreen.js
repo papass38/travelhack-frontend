@@ -28,6 +28,7 @@ export default function FinalTravelScreen({ navigation }) {
 
   console.log(trip.initialDestination.adress);
 
+  // On validation -> Send all of the informations in the db 
   const handleValidation = () => {
     fetch(`http://${fetchIp.myIp}:3000/users/newtrip`, {
       method: "POST",
@@ -44,7 +45,9 @@ export default function FinalTravelScreen({ navigation }) {
     })
       .then((res) => res.json())
       .then((data) => {
+        // remove infos from the store
           dispatch(removeAll())
+        // redirect to the home page
           navigation.navigate("TabNavigator")
       });
   };
@@ -71,8 +74,6 @@ export default function FinalTravelScreen({ navigation }) {
               {" "}
               {trip.initialDestination.adress}
             </Text>
-            {/* <AntDesign name="arrowright" size={24} color="black" />
-            <Text style = {{fontSize : 15, }}> {trip.trip[trip.trip.length - 1].name}</Text> */}
           </View>
           <View style={styles.budgetBackground}>
             <Text
@@ -81,10 +82,6 @@ export default function FinalTravelScreen({ navigation }) {
               {trip.totalBudget}€ /pers
             </Text>
           </View>
-          {/* <Text style={{fontWeight:"bold", fontSize:16}}>
-            From {moment(trip.startDate).format("L")} to{" "}
-            {moment(trip.endDate).format("L")}
-          </Text> */}
           <View>
             <Text style={{ fontSize: 20 }}>
               Departure {moment(trip.startDate).endOf("day").fromNow()} !
@@ -116,10 +113,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     height: "100%",
-    // alignItems: "center",
-    // justifyContent: "flex-start",
-    // backgroundColor: "white",
-    // height: "100%",
   },
   content: {
     flex: 1,
@@ -145,7 +138,6 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 40,
     alignItems: "center",
     justifyContent: "space-evenly",
-    //justifyContent: "center",
     backgroundColor: "rgba(246, 246, 246, 0.80)",
   },
   textWithPin: {

@@ -27,7 +27,7 @@ export default function MapScreen({ navigation }) {
   const [newRegion, setRegion] = useState(initialMapView);
   const [isModalVisible, setModalVisible] = useState(false);
 
-  //region initial de la carte par defaut si problème au chargement : France
+  //in case of issue, the initial destination is set to the coords of France
 
   const initialMapView = {
     latitude: 48.866667,
@@ -36,24 +36,30 @@ export default function MapScreen({ navigation }) {
     longitudeDelta: 20,
   };
 
-  // récupération de la destination rensegnée dans le précédent screen (countrysearch)
+  // Get the initial destination selected by the user and the list of trips stored in the redux store.
+
   const initialSearch = useSelector(
     (state) => state.trip.value.initialDestination
   );
   const tripList = useSelector((state) => state.trip.value.trip);
-  //console.log(tripList);
+
   let coordMarkers;
   let way;
   let steps;
 
-  // fonction d'ajout des markers
+  // the function addPins is called when the user selects a destination from the search results.
+
   const addPins = (info, coords) => {
     const newAdress = info.results[0].formatted_address
       .split(", ")
       .slice(-2)
       .join(", ");
+
+    // updates the adress state variable with the address of the destination.
     setAdress(newAdress);
     const splitAdress = newAdress.split(" ");
+
+    // this function will check our cost database to see if there is informations for the country of the adress
     const getBudgetCountry = dataCost.find((e) =>
       e.City.includes(splitAdress[splitAdress.length - 1])
     );
@@ -61,12 +67,16 @@ export default function MapScreen({ navigation }) {
     let roomBudget = 0;
 
     if (getBudgetCountry) {
+      // here we use the cost database (costData.json) to set the meal budget. 
+      //This is not accurate as the places are not all available
+      // it does not handle the cost per city but per country
+      // Unfortunately we do not have the budget (200€ per month) to use the api from wich that data was exctracted (https://www.numbeo.com/)
       mealBudget = getBudgetCountry["Meal, Inexpensive Restaurant"] * 2;
       roomBudget =
         getBudgetCountry["Apartment (3 bedrooms) in City Centre"] / 31;
     }
 
-    // récupère les infos relatives au voyage pour les stocker dans le store
+    // adds a trip and details to the redux store using the addTrip action from the redux store.
     dispatch(
       addTrip({
         name: info.results[0].formatted_address
@@ -82,27 +92,31 @@ export default function MapScreen({ navigation }) {
     );
   };
 
-  // récupération des coordonées depuis l'adresse renseignées
+  //called when the user enters a destination in the search field.
+  //sends a request to the Google Maps API to get the coordinates of the destination
   const getAdressFromString = (place) => {
     fetch(
       `https://maps.googleapis.com/maps/api/geocode/json?address=${place}&key=${GOOGLE_MAPS_APIKEY}&language=en`
     )
       .then((response) => response.json())
       .then((data) => {
-        // Si c'est un Pays, delta + elevé (zoom -) + pas de marker
+        // if Country : zoom -- / no pin added
         if (data.results[0].types.find((e) => e === "country")) {
+          //updates the region state variable
           setRegion({
             latitude: data.results[0].geometry.location.lat,
             longitude: data.results[0].geometry.location.lng,
             latitudeDelta: 10,
             longitudeDelta: 10,
           });
-        } // Si route ou adresse précise : Gros Zoom + ajout du marker via la fonction addpin()
+        }
+        // road, precise adress : zoom ++ / pin added
         else if (
           data.results[0].types[0] === "street_number" ||
           data.results[0].types[0] === "route" ||
           data.results[0].types[0] === "street_address"
         ) {
+          //updates the region state variable
           setRegion({
             latitude: data.results[0].geometry.location.lat,
             longitude: data.results[0].geometry.location.lng,
@@ -114,8 +128,10 @@ export default function MapScreen({ navigation }) {
             longitude: data.results[0].geometry.location.lng,
           });
         }
-        //zoom par defaut + ajout du marker via la fonction addpin()
+
+        // else : default zoom & pin added
         else {
+          //updates the region state variable
           setRegion({
             latitude: data.results[0].geometry.location.lat,
             longitude: data.results[0].geometry.location.lng,
@@ -130,16 +146,18 @@ export default function MapScreen({ navigation }) {
       });
   };
 
-  // au chargement => récupération de l'adresse stockée dans le store + génération du premier marker
+  // when the component is mounted ir use the adress stocked in the store to set the Adress state. 
+  // It calls the get adressFromString function to create the first marker (if the adress was not a country)
   useEffect(() => {
     setAdress(initialSearch.adress);
     getAdressFromString(initialSearch.adress);
   }, []);
 
-  //generation des Views destination
+  // if there is trips in the this function générates the destination cards and the markers
   if (tripList.length > 0) {
     steps = tripList.map((e, i) => {
       return (
+        // generation of the cards
         <View style={styles.destinations} key={i}>
           <Text style={{ textAlign: "flex-start", width: "80%" }} key={i}>
             {i + 1} - {e.name}
@@ -172,7 +190,7 @@ export default function MapScreen({ navigation }) {
       );
     });
 
-    //generation des markers
+    // generation of the markers
     coordMarkers = tripList.map((item, index) => {
       return (
         <Marker
@@ -188,7 +206,7 @@ export default function MapScreen({ navigation }) {
     });
   }
 
-  // generation des chemins (par groupe de 2 marker)
+  //if there  is more than 2 destination in the store (steps) this functions generate the roads between the coordinates 
   if (tripList.length > 1) {
     way = tripList.map((item, index) => {
       if (index > 0) {
@@ -208,13 +226,9 @@ export default function MapScreen({ navigation }) {
             // Which transportation mode to use when calculating directions. Allowed values are "DRIVING", "BICYCLING", "WALKING", and "TRANSIT"
             mode="DRIVING"
             strokeColor="#46B1C9"
-            // onStart={(params) => {
-            //   console.log(`Started routing between "${params.origin}" and "${params.destination}"`);
-            // }}
             onReady={(result) => {
+              // To improve : I try to get the distance between the points but it does not properly when a marker is deleted. SO the feature was remove (for now)
               setDistance(distance + result.distance);
-              // console.log(`Duration: ${result.duration} min.`)
-              // console.log(`Distance: ${result.distance} min.`)
             }}
           />
         );
@@ -222,7 +236,7 @@ export default function MapScreen({ navigation }) {
     });
   }
 
-  // au clic sur la carte -> ajout du Pin + récupération de l'adresse depuis les coordonées (en EN pour communiquer avec la data (cost/country))
+  // this function use the google api to get the adress from the coords and call the addPins Function (l52 - l87)
   const handleLongPress = (newCoords) => {
     fetch(
       `https://maps.googleapis.com/maps/api/geocode/json?latlng=${newCoords.latitude},${newCoords.longitude}&key=${GOOGLE_MAPS_APIKEY}&language=en`
@@ -233,13 +247,13 @@ export default function MapScreen({ navigation }) {
       });
   };
 
-  // au clic sur le bouton -> changement de l'adress pour qu'elle s'adapte au parametre demandé par l'API google + appel a la fonction get adress from string
+  // this function change the adress and replace the spaces with % so the string send to the gateAdressfrom string matches the param needed for the google API fetch
   const handlePress = () => {
     const newAdress = adress.replace(" ", "%");
     getAdressFromString(newAdress);
   };
 
-  // fait apparaitre / disparaitre la modale
+  // show or hide the modal 
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
   };
@@ -248,8 +262,11 @@ export default function MapScreen({ navigation }) {
     <View style={styles.container}>
       <Header navigation={navigation} />
 
+      {/* component modal from react-native*/}
       <Modal visible={isModalVisible} style={styles.modal}>
         <View style={styles.modalContent}>
+
+          {/* see component ModalContent in the component file */}
           <ModalContent name={adress} />
           <TouchableOpacity
             onPress={() => toggleModal()}
