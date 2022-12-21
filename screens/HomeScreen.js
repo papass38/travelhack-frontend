@@ -34,23 +34,21 @@ export default function HomeScreen({ navigation }) {
 
   const fetchTrips = () => {
     fetch(`http://${fetchIp.myIp}:3000/users/alltrips/${myUsername}`)
-    .then((res) => res.json())
-    .then((data) => {
-      const newTripTab = []; 
-      const oldTripTab = [];
-      
-      for (let item of data.trips) {
-        if (new Date(item.endDate).getTime() > new Date().getTime()) {
-          
-          newTripTab.push(item);
-        } else {
-          
+      .then((res) => res.json())
+      .then((data) => {
+        const newTripTab = [];
+        const oldTripTab = [];
 
-          oldTripTab.push(item);
+        for (let item of data.trips) {
+          if (new Date(item.endDate).getTime() > new Date().getTime()) {
+            newTripTab.push(item);
+          } else {
+            oldTripTab.push(item);
+          }
+          // console.log(oldTripTab);
+          setNewTripsList(newTripTab);
+          setOldTripsList(oldTripTab);
         }
-        // console.log(oldTripTab);
-        setNewTripsList(newTripTab);
-        setOldTripsList(oldTripTab);
       });
   };
 
@@ -86,79 +84,87 @@ export default function HomeScreen({ navigation }) {
       });
   };
 
-  const newTripsDisplay = newTripsList.sort((a,b) => {return new Date(a.startDate) - new Date(b.startDate)}).map((data, i) => {
-    return (
-      <TouchableOpacity
-        key={i}
-        travelId={data._id}
-        style={styles.newTrip}
-        onPress={() => {
-          setModalVisible(!isModalVisible);
-          setModalData({
-            travelId: data["_id"],
-            destination: data.destination,
-            startDate: data.startDate,
-            endDate: data.endDate,
-            steps: data.steps,
-            totalBudget: data.totalBudget,
-          });
-        }}
-      >
-        <Image
-          style={styles.imgTrip}
-          source={{
-            uri: "https://img.static-rmg.be/a/view/q75/w4000/h2667/4779070/2135445-jpg.jpg",
+  const newTripsDisplay = newTripsList
+    .sort((a, b) => {
+      return new Date(a.startDate) - new Date(b.startDate);
+    })
+    .map((data, i) => {
+      return (
+        <TouchableOpacity
+          key={i}
+          travelId={data._id}
+          style={styles.newTrip}
+          onPress={() => {
+            setModalVisible(!isModalVisible);
+            setModalData({
+              travelId: data["_id"],
+              destination: data.destination,
+              startDate: data.startDate,
+              endDate: data.endDate,
+              steps: data.steps,
+              totalBudget: data.totalBudget,
+            });
           }}
-        />
+        >
+          <Image
+            style={styles.imgTrip}
+            source={{
+              uri: "https://img.static-rmg.be/a/view/q75/w4000/h2667/4779070/2135445-jpg.jpg",
+            }}
+          />
 
-        <View style={styles.textNewTrip}>
-          <View>
-            <Text style={{ fontWeight: "bold" }}>{data.destination}</Text>
-            <Text>{new Date(data.startDate).toLocaleDateString()}</Text>
+          <View style={styles.textNewTrip}>
+            <View>
+              <Text style={{ fontWeight: "bold" }}>{data.destination}</Text>
+              <Text>{new Date(data.startDate).toLocaleDateString()}</Text>
+            </View>
           </View>
-        </View>
-      </TouchableOpacity>
-    );
-  });
+        </TouchableOpacity>
+      );
+    });
 
-  const oldTripsDisplay = oldTripsList.sort((a,b) => {return new Date(b.startDate) - new Date(a.startDate)}).map((data, i) => {
-    console.log(data.startDate)
-    return (
-      <TouchableOpacity
-        key={i}
-        style={styles.oldTrip}
-        onPress={() => {
-          console.log(data["_id"]);
-          setModalVisible(!isModalVisible);
-          setModalData({
-            travelId: data["_id"],
-            destination: data.destination,
-            startDate: data.startDate,
-            endDate: data.endDate,
-            steps: data.steps,
-            totalBudget: data.totalBudget,
-          });
-        }}
-      >
-        <Image
-          style={styles.imgOldTrip}
-          source={{
-            uri: "https://img.static-rmg.be/a/view/q75/w4000/h2667/4779070/2135445-jpg.jpg",
+  const oldTripsDisplay = oldTripsList
+    .sort((a, b) => {
+      return new Date(b.startDate) - new Date(a.startDate);
+    })
+    .map((data, i) => {
+      console.log(data.startDate);
+      return (
+        <TouchableOpacity
+          key={i}
+          style={styles.oldTrip}
+          onPress={() => {
+            console.log(data["_id"]);
+            setModalVisible(!isModalVisible);
+            setModalData({
+              travelId: data["_id"],
+              destination: data.destination,
+              startDate: data.startDate,
+              endDate: data.endDate,
+              steps: data.steps,
+              totalBudget: data.totalBudget,
+            });
           }}
-        />
+        >
+          <Image
+            style={styles.imgOldTrip}
+            source={{
+              uri: "https://img.static-rmg.be/a/view/q75/w4000/h2667/4779070/2135445-jpg.jpg",
+            }}
+          />
 
-        <View style={styles.textOldTrip}>
-          <View>
-            <Text style={{ fontWeight: "bold" }}>{data.destination}</Text>
-            <Text>
-              {new Date(data.startDate).toLocaleDateString()} -
-              {new Date(data.endDate).toLocaleDateString()}{" "}
-            </Text>
+          <View style={styles.textOldTrip}>
+            <View>
+              <Text style={{ fontWeight: "bold" }}>{data.destination}</Text>
+              <Text>
+                {new Date(data.startDate).toLocaleDateString()} -
+                {new Date(data.endDate).toLocaleDateString()}{" "}
+              </Text>
+            </View>
           </View>
-        </View>
-      </TouchableOpacity>
-    );
-  });
+        </TouchableOpacity>
+      );
+    });
 
   const stepsModal = modalData.steps.map((data, i) => {
     return <Text key={i}>{data.name}</Text>;
