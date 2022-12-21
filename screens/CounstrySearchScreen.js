@@ -22,7 +22,10 @@ export default function CountrySearchScreen({ navigation }) {
   const [destination, setDestination] = useState();
   const GOOGLE_MAPS_APIKEY = "AIzaSyCx5Hb0tUovjDU45HZUySMkSN7vz_RVGC4";
 
-  // stock la destination saisie dans le store et redirige vers mapscreen
+  // checks if the destination state variable has a value
+  // dispatches the destination (name + coords) to the redux store using the dispatch function
+  //navigates to the Map screen using the navigate function from the navigation prop.
+
   const handleValidation = () => {
     if (destination) {
       dispatch(initializeTrip(destination));
@@ -43,6 +46,10 @@ export default function CountrySearchScreen({ navigation }) {
         </TouchableOpacity>
 
         <Text style={styles.title}>Select your destination</Text>
+
+        {/* allows the user to search for a destination using the GooglePlacesAutocomplete component. 
+        When the user selects a place from the search results, the setDestination function is called to update the destination state  */}
+
         <GooglePlacesAutocomplete
           placeholder="What is your destination ? "
           query={{ key: GOOGLE_MAPS_APIKEY }}
@@ -77,6 +84,8 @@ export default function CountrySearchScreen({ navigation }) {
             },
           }}
         />
+        {/* When the user clicks the submit button, the handleValidation function is called to dispatch the selected destination to the redux store and navigate to the Map screen. */}
+
         <TouchableOpacity
           style={styles.button}
           onPress={() => handleValidation()}
