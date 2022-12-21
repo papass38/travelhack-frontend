@@ -28,13 +28,13 @@ export default function FavoriteScreen({ navigation }) {
     fetch(`http://${fetchIp.myIp}:3000/users/${user.username}`)
     .then(res => res.json())
     .then(data => {
+
     setArray(data.user.favorites)
     
   
     })
   }, [])
 
-  const dispatch = useDispatch();
   const listing = array.map((e, i) => {
     return (
       <View key={i} style={styles.arrayResult}>
@@ -76,7 +76,7 @@ export default function FavoriteScreen({ navigation }) {
       });
     
       setInput("");
-      setArray(e => [...e, {name: input}])
+      setArray(e => [...e, {name: input}  ])
     }
   };
 
