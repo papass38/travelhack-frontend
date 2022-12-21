@@ -63,7 +63,9 @@ export default function SignInScreen({ navigation }) {
 
   // React.useEffect(() => {
   //   if (response?.type === "success") {
-  //     const { authentication } = response;
+  //     const email = response.params.email;
+  //     const name = response.params.name;
+  //     const profilePicture = response.params.picture;
   //   }
   // }, [response]);
 
@@ -79,10 +81,6 @@ export default function SignInScreen({ navigation }) {
         behavior={Platform.OS === "ios" ? "padding" : "height"}
       >
         <View style={styles.titleSection}>
-          <ImageBackground
-            source={require("../assets/travelhacklogo.png")}
-            style={styles.image}
-          />
           <Text style={styles.title}>Sign In</Text>
           <Text style={styles.subtitle}>Access to your acount</Text>
         </View>
@@ -166,7 +164,6 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
     width: "100%",
   },
-  image: { flex: 1, height: "100%" },
   titleSection: {
     flex: 1,
     alignItems: "center",

@@ -32,8 +32,7 @@ import SettingsScreen from "./screens/SettingsScreen";
 import TravelRecapScreen from "./screens/TravelRecapScreen";
 import WishlistScreen from "./screens/WishlistScreen";
 import FinalTravelScreen from "./screens/FinalTravelScreen";
-
-
+import { Feather } from "@expo/vector-icons";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -41,7 +40,6 @@ const Stack = createNativeStackNavigator();
 const store = configureStore({
   reducer: { trip, user, todo, array },
 });
-
 
 const TabNavigator = () => {
   return (
@@ -52,8 +50,8 @@ const TabNavigator = () => {
             let iconName = "";
 
             if (route.name === "Accueil") {
-              iconName = "home-sharp";
-              return <Ionicons name={iconName} size={size} color={color} />;
+              iconName = "home";
+              return <Feather name={iconName} size={size} color={color} />;
             }
             // if (route.name === "Itinéraires") {
             //   iconName = "route";
@@ -90,10 +88,16 @@ export default function App() {
           <Stack.Screen name="Map" component={MapScreen} />
           <Stack.Screen name="Recap" component={TravelRecapScreen} />
           <Stack.Screen name="Summary" component={FinalTravelScreen} />
-          <Stack.Screen name="Sign in" component={SignInScreen} 
-          options={{ gestureEnabled: false }}/>
-          <Stack.Screen name="Sign up" component={SignUpScreen} 
-          options={{ gestureEnabled: false }}/>
+          <Stack.Screen
+            name="Sign in"
+            component={SignInScreen}
+            options={{ gestureEnabled: false }}
+          />
+          <Stack.Screen
+            name="Sign up"
+            component={SignUpScreen}
+            options={{ gestureEnabled: false }}
+          />
           <Stack.Screen
             name="TabNavigator"
             component={TabNavigator}
@@ -119,6 +123,5 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginTop: 50,
-
   },
 });

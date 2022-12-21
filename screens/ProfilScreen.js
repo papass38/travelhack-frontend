@@ -9,6 +9,8 @@ import { useSelector } from "react-redux";
 import CountryFlag from "react-native-country-flag";
 const dataVaccins = require("../vaccins.json");
 import fecthIp from "../fetchIp.json";
+import { Feather } from "@expo/vector-icons";
+import { MaterialIcons } from "@expo/vector-icons";
 
 export default function ProfilScreen({ navigation }) {
   // const [lat, setLat] = useState();
@@ -80,8 +82,8 @@ export default function ProfilScreen({ navigation }) {
       <Header navigation={navigation} />
       <View style={styles.navButtons}>
         <View style={styles.icon}>
-          <Ionicons
-            name="home-sharp"
+          <Feather
+            name="home"
             size={50}
             color="#20B08E"
             activeOpacity={0.8}
@@ -90,8 +92,8 @@ export default function ProfilScreen({ navigation }) {
           <Text style={styles.textIcon}>Home</Text>
         </View>
         <View style={styles.icon}>
-          <AntDesign
-            name="heart"
+          <MaterialIcons
+            name="favorite-border"
             size={50}
             color="#20B08E"
             activeOpacity={0.8}
@@ -99,9 +101,10 @@ export default function ProfilScreen({ navigation }) {
           />
           <Text style={styles.textIcon}>Favorites</Text>
         </View>
+
         <View style={styles.icon}>
-          <Ionicons
-            name="ios-settings-sharp"
+          <Feather
+            name="settings"
             size={50}
             color="#20B08E"
             activeOpacity={0.8}
@@ -148,9 +151,10 @@ export default function ProfilScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "#F6F6F6",
     alignItems: "center",
   },
+
   map: {
     height: "100%",
     width: "100%",
@@ -161,6 +165,7 @@ const styles = StyleSheet.create({
     height: "10%",
     alignItems: "center",
     justifyContent: "space-around",
+    margin: 10,
   },
   icon: {
     flex: 1,
@@ -185,9 +190,9 @@ const styles = StyleSheet.create({
   countries: {
     width: "100%",
     backgroundColor: "#21A37C",
+    paddingTop: 30,
   },
   flags: {
-    marginTop: 20,
     flexDirection: "row",
     justifyContent: "space-around",
     alignItems: "center",

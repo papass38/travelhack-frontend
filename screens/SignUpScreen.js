@@ -193,7 +193,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    justifyContent: "flex-start",
+    justifyContent: "flex-end",
     width: "100%",
   },
   titleContainer: {
@@ -202,11 +202,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   signinHeaderSection: {
-    height: "50%",
+    height: "40%",
     width: "100%",
-    paddingTop: 60,
-    paddingRight: 20,
-    marginLeft: 10,
   },
   title: {
     fontSize: 40,

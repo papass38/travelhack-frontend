@@ -16,7 +16,7 @@ export default function Header({ navigation }) {
     <View style={styles.container}>
       <Pressable
         onPress={() => navigation.navigate("Profil")}
-        style={{ borderWidth: 2, borderRadius: "50%", borderColor: "#fff" }}
+        style={{ borderWidth: 1, borderRadius: "50%", borderColor: "#F6F6F6" }}
       >
         <Image
           source={{ uri: user.photo }}
@@ -24,7 +24,7 @@ export default function Header({ navigation }) {
             width: 50,
             height: 50,
             borderRadius: "50%",
-            borderWidth: 2,
+            borderWidth: 1,
             borderColor: "#F6F6F6",
           }}
         />
@@ -35,10 +35,10 @@ export default function Header({ navigation }) {
           alignItems: "center",
         }}
       >
-        <Text style={{ fontSize: 16, color: "#fff" }}>
+        <Text style={{ fontSize: 16, color: "#F6F6F6" }}>
           Welcome {user.username} !
         </Text>
-        <Text style={{ fontSize: 12 }}>
+        <Text style={{ fontSize: 12, color: "#F6F6F6" }}>
           Travel : {trip.initialDestination.adress}
         </Text>
       </View>
@@ -46,7 +46,7 @@ export default function Header({ navigation }) {
       <View style={{ alignItems: "center" }}>
         <AntDesign
           name="logout"
-          size={30}
+          size={35}
           color="#F6F6F6"
           onPress={() => {
             dispatch(initializeTrip(""));
@@ -64,10 +64,11 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: "space-around",
     alignItems: "center",
-    backgroundColor: "#21A37C",
+    backgroundColor: "#20B08E",
     flexDirection: "row",
     width: "100%",
     height: "14%",
     paddingTop: 40,
+    paddingBottom: 10,
   },
 });
