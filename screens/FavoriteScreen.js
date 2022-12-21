@@ -93,7 +93,7 @@ export default function FavoriteScreen({ navigation }) {
           paddingBottom: 20,
         }}
       >
-      <TextInput
+        <TextInput
           style={styles.input}
           value={input}
           onChangeText={(e) => setInput(e)}
@@ -105,8 +105,8 @@ export default function FavoriteScreen({ navigation }) {
           color="#20B08E"
           onPress={() => {
             handleClick();
-           }}
-         />
+          }}
+        />
       </View>
       <ScrollView>{listing}</ScrollView>
     </SafeAreaView>
@@ -138,9 +138,13 @@ const styles = StyleSheet.create({
   arrayResult: {
     flexDirection: "row",
     justifyContent: "space-between",
-    borderBottomWidth: 0.5,
-    padding: 5,
-    marginHorizontal: 10,
-    marginVertical: 2,
+    padding: 10,
+    marginHorizontal: 15,
+    marginVertical: 7,
+    backgroundColor: '#F5F5F5',
+    borderRadius: 7,
+    shadowOffset:{  width: 1,  height: 1,  },
+    shadowColor: 'gray',
+    shadowOpacity: 1.0,
   },
 });
