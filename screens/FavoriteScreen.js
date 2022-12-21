@@ -46,7 +46,7 @@ export default function FavoriteScreen({ navigation }) {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={styles.container}> 
       <TouchableOpacity
         style={styles.header}
         onPress={() => navigation.navigate("Profil")}
