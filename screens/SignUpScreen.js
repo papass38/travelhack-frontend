@@ -21,6 +21,7 @@ import { FontAwesome } from "@expo/vector-icons";
 import * as React from "react";
 import { AntDesign } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
+import { Feather } from "@expo/vector-icons";
 
 // WebBrowser.maybeCompleteAuthSession();
 
@@ -104,7 +105,7 @@ export default function SignUpScreen({ navigation }) {
             style={styles.signInBackBtn}
             onPress={() => navigation.navigate("Sign in")}
           >
-            <Ionicons name="chevron-back" size={50} color="white" />
+            <Ionicons name="ios-arrow-back-circle" size={50} color="black" />
             <Text style={styles.text}>Sign In</Text>
           </TouchableOpacity>
           {/* <TouchableOpacity
@@ -200,13 +201,15 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   titleContainer: {
-    paddingTop: 110,
+    paddingTop: 100,
     alignItems: "center",
     justifyContent: "center",
   },
   signinHeaderSection: {
     height: "40%",
     width: "100%",
+    padding: 20,
+    margin: 70,
   },
   title: {
     fontSize: 40,
@@ -254,7 +257,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   buttonGoogle: {
-    backgroundColor: "white",
+    backgroundColor: "black",
     width: "80%",
     paddingVertical: 0,
     borderRadius: 10,
@@ -272,11 +275,11 @@ const styles = StyleSheet.create({
     width: "45%",
   },
   text: {
-    color: "white",
+    color: "black",
     fontSize: 30,
   },
   signInBtnText: {
-    color: "white",
+    color: "black",
     fontWeight: "bold",
   },
 });
