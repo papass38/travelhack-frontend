@@ -1,6 +1,5 @@
 import fetchIp from "../fetchIp.json";
 import {
-  Button,
   StyleSheet,
   Text,
   View,
@@ -11,11 +10,9 @@ import {
   Image,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import Header from "../components/Header";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { useState } from "react";
-import { FontAwesome } from "@expo/vector-icons";
 import { login } from "../reducers/user";
 import { useDispatch } from "react-redux";
 import { addPhoto } from "../reducers/user";
@@ -28,71 +25,60 @@ export default function FavoriteScreen({ navigation }) {
   const [image, setImage] = useState(user.photo);
   const dispatch = useDispatch();
 
-  const [infoUser, setInfoUser] = useState({ username: null, email: null });
   const [inputUsername, setInputUsername] = useState(user.username);
   const [inputEmail, setInputEmail] = useState(user.email);
   const [changeSucces, setChangeSucces] = useState(false);
 
-  useEffect(() => {
-    fetch(`http://${fetchIp.myIp}:3000/users/${user.username}`)
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.result) {
-          setInfoUser({ username: data.user.username, email: data.user.email });
-        }
-      });
-  }, []);
+  // useEffect(() => {
+  //   async () => {
+  //     const galleryStatus =
+  //       //Cette ligne utilise l'API ImagePicker pour demander à
+  //       //l'utilisateur l'autorisation d'accéder à la bibliothèque de médias
+  //       await ImagePicker.requestMediaLibraryPermissionsAsync();
+  //     setHasGalleryPermission(galleryStatus.status === "granted");
+  //     //La variable galleryStatus est mise à jour avec
+  //     //le résultat de la demande de permission.
+  //     //Si la permission a été accordée,
+  //     //la valeur de hasGalleryPermission sera mise à true,
+  //     //sinon elle sera mise à false
+  //   };
+  // }, []);
 
-  useEffect(() => {
-    async () => {
-      const galleryStatus =
-        //Cette ligne utilise l'API ImagePicker pour demander à
-        //l'utilisateur l'autorisation d'accéder à la bibliothèque de médias
-        await ImagePicker.requestMediaLibraryPermissionsAsync();
-      setHasGalleryPermission(galleryStatus.status === "granted");
-      //La variable galleryStatus est mise à jour avec
-      //le résultat de la demande de permission.
-      //Si la permission a été accordée,
-      //la valeur de hasGalleryPermission sera mise à true,
-      //sinon elle sera mise à false
-    };
-  }, []);
+  // const pickImage = async () => {
+  //   //let result =
+  //   //await ImagePicker.launchImageLibraryAsync
+  //   //({ - Cette ligne utilise l'API ImagePicker pour lancer la sélection de l'image
+  //   // à partir de la bibliothèque de l'utilisateur.
+  //   //Le résultat de la sélection est stocké dans la variable result
 
-  const pickImage = async () => {
-    //let result =
-    //await ImagePicker.launchImageLibraryAsync
-    //({ - Cette ligne utilise l'API ImagePicker pour lancer la sélection de l'image
-    // à partir de la bibliothèque de l'utilisateur.
-    //Le résultat de la sélection est stocké dans la variable result
+  //   let result = await ImagePicker.launchImageLibraryAsync({
+  //     //mediaTypes: ImagePicker.MediaTypeOptions.Images,
+  //     //- Cette ligne indique que seules les images seront affichées
+  //     //dans la bibliothèque de médias.
+  //     mediaTypes: ImagePicker.MediaTypeOptions.Images,
+  //     //allowsEditing: true, - Cette ligne indique que l'utilisateur peut éditer l'image sélectionnée.
+  //     allowsEditing: true,
+  //     //aspect: [4, 3], - Cette ligne indique que l'image sélectionnée doit avoir un ratio d'aspect de 4:3.
+  //     aspect: [4, 3],
+  //     quality: 0.1,
+  //   });
+  //   // console.log(result);
+  //   if (!result.canceled) {
+  //     //if (!result.canceled)
+  //     //{ - Cette ligne vérifie si l'image sélectionnée n'a pas été annulée par l'utilisateur.
+  //     //Si l'image n'a pas été annulée, le code à l'intérieur des accolades sera exécuté.
+  //     setImage(result.assets[0].uri);
+  //     //setImage(result.assets[0].uri); -
+  //     //Cette ligne utilise la fonction setImage pour mettre à jour
+  //     //la variable d'état image avec l'URI de l'image sélectionnée.
+  //     dispatch(addPhoto(result.assets[0].uri));
+  //     // console.log(result.assets);
+  //   }
+  // };
 
-    let result = await ImagePicker.launchImageLibraryAsync({
-      //mediaTypes: ImagePicker.MediaTypeOptions.Images,
-      //- Cette ligne indique que seules les images seront affichées
-      //dans la bibliothèque de médias.
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
-      //allowsEditing: true, - Cette ligne indique que l'utilisateur peut éditer l'image sélectionnée.
-      allowsEditing: true,
-      //aspect: [4, 3], - Cette ligne indique que l'image sélectionnée doit avoir un ratio d'aspect de 4:3.
-      aspect: [4, 3],
-      quality: 1,
-    });
-    // console.log(result);
-    if (!result.canceled) {
-      //if (!result.canceled)
-      //{ - Cette ligne vérifie si l'image sélectionnée n'a pas été annulée par l'utilisateur.
-      //Si l'image n'a pas été annulée, le code à l'intérieur des accolades sera exécuté.
-      setImage(result.assets[0].uri);
-      //setImage(result.assets[0].uri); -
-      //Cette ligne utilise la fonction setImage pour mettre à jour
-      //la variable d'état image avec l'URI de l'image sélectionnée.
-      dispatch(addPhoto(result.assets[0].uri));
-      // console.log(result.assets);
-    }
-  };
-
-  if (hasGalleryPermission === false) {
-    return <Text>No access to internal storage</Text>;
-  }
+  // if (hasGalleryPermission === false) {
+  //   return <Text>No access to internal storage</Text>;
+  // }
 
   const handleClick = () => {
     if (inputUsername) {
@@ -101,12 +87,20 @@ export default function FavoriteScreen({ navigation }) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           replaceUsername: inputUsername,
+          photo: image,
         }),
       })
         .then((res) => res.json())
         .then((data) => {
           if (data.result) {
-            dispatch(login({ username: inputUsername }));
+            dispatch(
+              login({
+                username: data.user.username,
+                email: data.user.email,
+                photo: data.user.photo,
+                token: data.user.token,
+              })
+            );
             setChangeSucces(true);
             // console.log(inputUsername);
           }
@@ -132,7 +126,6 @@ export default function FavoriteScreen({ navigation }) {
           justifyContent: "space-around",
         }}
       >
-        <Text>Your photo</Text>
         <View
           style={{
             flex: 1,
@@ -167,7 +160,7 @@ export default function FavoriteScreen({ navigation }) {
             padding: 10,
           }}
         >
-          <TouchableOpacity
+          {/* <TouchableOpacity
             onPress={() => pickImage()}
             style={{
               backgroundColor: "#21A37C",
@@ -175,8 +168,11 @@ export default function FavoriteScreen({ navigation }) {
               borderRadius: 10,
             }}
           >
-            <Text style={{ color: "#fff" }}>Upload</Text>
-          </TouchableOpacity>
+            <Text style={{ color: "#fff", fontWeight: "bold" }}>
+              {" "}
+              DON'T CLICK HERE
+            </Text>
+          </TouchableOpacity> */}
         </View>
       </View>
       <View
@@ -194,7 +190,7 @@ export default function FavoriteScreen({ navigation }) {
         <View>
           <Text>Username</Text>
           <TextInput
-            placeholder={infoUser.username}
+            placeholder={user.username}
             style={styles.input}
             value={inputUsername}
             onChangeText={(value) => setInputUsername(value)}
@@ -203,10 +199,19 @@ export default function FavoriteScreen({ navigation }) {
         <View>
           <Text>Email</Text>
           <TextInput
-            placeholder={infoUser.email}
+            placeholder={user.email}
             style={styles.input}
             value={inputEmail}
             onChangeText={(value) => setInputEmail(value)}
+          />
+        </View>
+        <View>
+          <Text>Image Link</Text>
+          <TextInput
+            placeholder={user.photo}
+            style={styles.input}
+            value={image}
+            onChangeText={(value) => setImage(value)}
           />
         </View>
         <Pressable
