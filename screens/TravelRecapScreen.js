@@ -34,18 +34,18 @@ export default function TravelRecapScreen({ navigation }) {
   const storeTrips = useSelector((state) => state.trip.value);
   console.log(storeTrips);
 
-  // show the date picker
+  // fait apparaitre le date picker
   const showDatePicker = (value) => {
     setDateType(value);
     setDatePickerVisibility(true);
   };
 
-  // hide the date picker
+  // cache le datepicker
   const hideDatePicker = () => {
     setDatePickerVisibility(false);
   };
 
-  // change the date
+  // modifie la date
   const handleConfirm = (date) => {
     if (dateType === "start") {
       setArrivalDate(date);
@@ -58,9 +58,7 @@ export default function TravelRecapScreen({ navigation }) {
 
   let budget = 0;
 
-  // get the infos of the destination based on what is in the redux store and stock in triplist
-  // calculate the total budget per day, per destination and send it as props. 
-  // generate the component DestinationInfo for each destination 
+  // generation des infos des destinations depuis les infos stockées dans le store
   const destinationsList = tripList.map((data, i) => {
     budget += parseFloat(data.mealBudget) + parseFloat(data.roomBudget);
     return (
@@ -70,14 +68,14 @@ export default function TravelRecapScreen({ navigation }) {
     );
   });
 
-  // calcul of the number of travel day based on the selected dates
+  // calcul du nombre de jour de voyage à partir des dates renseignées
   useEffect(() => {
     if (departureDate) {
       setNumberOfDays((departureDate - arrivalDate) / (1000 * 60 * 60 * 24));
     }
   }, [departureDate]);
 
-  // calculate the total budget
+  // calcul du budget total
   const totalBudget = (budget / tripList.length) * numberOfDays;
 
   const errorMessage = (
@@ -86,7 +84,6 @@ export default function TravelRecapScreen({ navigation }) {
     </Text>
   );
 
-  // on validation -> if the start and end date were selected : adds to the store the start and end dates + total budget for the entire trip and redirect to the last travel screen
   const handleValidation = () => {
     if (arrivalDate && departureDate) {
       setDateFilled(true);
@@ -135,6 +132,7 @@ export default function TravelRecapScreen({ navigation }) {
           onConfirm={handleConfirm}
           display={"inline"}
           onCancel={hideDatePicker}
+          isDarkModeEnabled="true"
         />
       </View>
       <View>
