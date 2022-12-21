@@ -1,4 +1,5 @@
 import { useState } from "react";
+import fetchIp from "../fetchIp.json";
 import {
   View,
   StyleSheet,
@@ -33,6 +34,31 @@ export default function ToDoScreen({ navigation }) {
   const [vaccins, setVaccins] = useState();
   const todo = useSelector((state) => state.todo.value);
   const trip = useSelector((state) => state.trip.value);
+  const user = useSelector((state) => state.user.value);
+  const [task, setTask] = useState();
+
+  useEffect(() => {
+    fetch(`http://${fetchIp.myIp}:3000/users/newTrip/${user.username}`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.result) {
+          // console.log(data);
+          // console.log(data.newTrip._id);
+          // console.log("trip: ", trip.trip);
+        }
+      });
+  }, []);
+
+  useEffect(() => {
+    fetch(`http://${fetchIp.myIp}:3000/users/todo/${user.username}`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.result) {
+          console.log("data", data.data);
+          setTask(data.data);
+        }
+      });
+  }, []);
 
   useEffect(() => {
     if (trip.initialDestination.adress === undefined) {
@@ -69,6 +95,10 @@ export default function ToDoScreen({ navigation }) {
     }
   });
 
+  const handleClick = () => {
+    setModalVisible(true);
+  };
+
   return (
     <View style={styles.container}>
       <Header navigation={navigation} />
@@ -77,7 +107,7 @@ export default function ToDoScreen({ navigation }) {
         <ScrollView horizontal={true}>{listingDataCheckList}</ScrollView>
       </View>
 
-      <Pressable onPress={() => setModalVisible(true)}>
+      <Pressable onPress={() => handleClick()}>
         <Text style={{ color: "#21A37C" }}>See All Selections</Text>
       </Pressable>
 
@@ -123,13 +153,23 @@ export default function ToDoScreen({ navigation }) {
             </View>
           </View>
 
-          {todo.map((elmt, index) => {
+          {/* {todo.map((elmt, index) => {
             return (
               <View key={index} style={styles.modalChoice}>
                 <Text style={{ color: "#20B08E" }}>{elmt}</Text>
               </View>
             );
-          })}
+          })} */}
+          <View>
+            {task &&
+              task.map((e, i) => {
+                return (
+                  <View key={i} style={styles.modalChoice}>
+                    <Text style={{ color: "#20B08E" }}>{e.task}</Text>
+                  </View>
+                );
+              })}
+          </View>
         </View>
       </Modal>
 
