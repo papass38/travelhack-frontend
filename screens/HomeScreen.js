@@ -49,7 +49,6 @@ export default function HomeScreen({ navigation }) {
           oldTripTab.push(item);
         }
       }
-      // console.log(oldTripTab);
       setNewTripsList(newTripTab);
       setOldTripsList(oldTripTab);
     });
@@ -71,8 +70,6 @@ export default function HomeScreen({ navigation }) {
   }
 
   const deleteTrip = (myId, endDate) => {
-    console.log(myId, endDate)
-    console.log(myUsername)
     fetch(`http://${fetchIp.myIp}:3000/users/removeTrip/${myUsername}`, {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
@@ -122,13 +119,11 @@ export default function HomeScreen({ navigation }) {
   });
 
   const oldTripsDisplay = oldTripsList.sort((a,b) => {return new Date(b.startDate) - new Date(a.startDate)}).map((data, i) => {
-    console.log(data.startDate)
     return (
       <TouchableOpacity
         key={i}
         style={styles.oldTrip}
         onPress={() => {
-          console.log(data["_id"])
           setModalVisible(!isModalVisible);
           setModalData({
             travelId : data["_id"],
