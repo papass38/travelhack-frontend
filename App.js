@@ -33,6 +33,7 @@ import TravelRecapScreen from "./screens/TravelRecapScreen";
 import WishlistScreen from "./screens/WishlistScreen";
 import FinalTravelScreen from "./screens/FinalTravelScreen";
 import { Feather } from "@expo/vector-icons";
+import { LogBox } from "react-native";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -40,6 +41,8 @@ const Stack = createNativeStackNavigator();
 const store = configureStore({
   reducer: { trip, user, todo, array },
 });
+
+LogBox.ignoreAllLogs();
 
 const TabNavigator = () => {
   return (
@@ -49,7 +52,7 @@ const TabNavigator = () => {
           tabBarIcon: ({ color, size }) => {
             let iconName = "";
 
-            if (route.name === "Accueil") {
+            if (route.name === "Home") {
               iconName = "home";
               return <Feather name={iconName} size={size} color={color} />;
             }
@@ -68,7 +71,7 @@ const TabNavigator = () => {
           headerShown: false,
         })}
       >
-        <Tab.Screen name="Accueil" component={HomeScreen} />
+        <Tab.Screen name="Home" component={HomeScreen} />
         {/* <Tab.Screen name="Itinéraires" component={TripScreen} /> */}
         {/* <Tab.Screen name='Itinéraires' component={CountrySearchScreen}/> */}
         <Tab.Screen name="Chat" component={ChatScreen} />
