@@ -34,18 +34,18 @@ export default function TravelRecapScreen({ navigation }) {
   const storeTrips = useSelector((state) => state.trip.value);
   console.log(storeTrips);
 
-  // fait apparaitre le date picker
+  // show the date picker
   const showDatePicker = (value) => {
     setDateType(value);
     setDatePickerVisibility(true);
   };
 
-  // cache le datepicker
+  // hide the date picker
   const hideDatePicker = () => {
     setDatePickerVisibility(false);
   };
 
-  // modifie la date
+  // change the date
   const handleConfirm = (date) => {
     if (dateType === "start") {
       setArrivalDate(date);
@@ -58,7 +58,9 @@ export default function TravelRecapScreen({ navigation }) {
 
   let budget = 0;
 
-  // generation des infos des destinations depuis les infos stockées dans le store
+  // get the infos of the destination based on what is in the redux store and stock in triplist
+  // calculate the total budget per day, per destination and send it as props. 
+  // generate the component DestinationInfo for each destination 
   const destinationsList = tripList.map((data, i) => {
     budget += parseFloat(data.mealBudget) + parseFloat(data.roomBudget);
     return (
@@ -68,14 +70,14 @@ export default function TravelRecapScreen({ navigation }) {
     );
   });
 
-  // calcul du nombre de jour de voyage à partir des dates renseignées
+  // calcul of the number of travel day based on the selected dates
   useEffect(() => {
     if (departureDate) {
       setNumberOfDays((departureDate - arrivalDate) / (1000 * 60 * 60 * 24));
     }
   }, [departureDate]);
 
-  // calcul du budget total
+  // calculate the total budget
   const totalBudget = (budget / tripList.length) * numberOfDays;
 
   const errorMessage = (
@@ -84,6 +86,7 @@ export default function TravelRecapScreen({ navigation }) {
     </Text>
   );
 
+  // on validation -> if the start and end date were selected : adds to the store the start and end dates + total budget for the entire trip and redirect to the last travel screen
   const handleValidation = () => {
     if (arrivalDate && departureDate) {
       setDateFilled(true);

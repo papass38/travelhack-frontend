@@ -34,17 +34,19 @@ export default function HomeScreen({ navigation }) {
 
   const fetchTrips = () => {
     fetch(`http://${fetchIp.myIp}:3000/users/alltrips/${myUsername}`)
-      .then((res) => res.json())
-      .then((data) => {
-        const newTripTab = [];
-        const oldTripTab = [];
-        // console.log(data.trips);
-        for (let item of data.trips) {
-          if (new Date(item.endDate).getTime() > new Date().getTime()) {
-            newTripTab.push(item);
-          } else {
-            oldTripTab.push(item);
-          }
+    .then((res) => res.json())
+    .then((data) => {
+      const newTripTab = []; 
+      const oldTripTab = [];
+      
+      for (let item of data.trips) {
+        if (new Date(item.endDate).getTime() > new Date().getTime()) {
+          
+          newTripTab.push(item);
+        } else {
+          
+
+          oldTripTab.push(item);
         }
         // console.log(oldTripTab);
         setNewTripsList(newTripTab);
@@ -84,7 +86,7 @@ export default function HomeScreen({ navigation }) {
       });
   };
 
-  const newTripsDisplay = newTripsList.map((data, i) => {
+  const newTripsDisplay = newTripsList.sort((a,b) => {return new Date(a.startDate) - new Date(b.startDate)}).map((data, i) => {
     return (
       <TouchableOpacity
         key={i}
@@ -119,7 +121,8 @@ export default function HomeScreen({ navigation }) {
     );
   });
 
-  const oldTripsDisplay = oldTripsList.map((data, i) => {
+  const oldTripsDisplay = oldTripsList.sort((a,b) => {return new Date(b.startDate) - new Date(a.startDate)}).map((data, i) => {
+    console.log(data.startDate)
     return (
       <TouchableOpacity
         key={i}

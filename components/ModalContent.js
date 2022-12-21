@@ -9,8 +9,11 @@ export default function ModalContent(props) {
   const [selected, setSelected] = useState("");
   const [around, setAround] = useState([]);
   const [website, setWebsite] = useState([]);
+
+  //get the list of trips stored in the redux store.
   const tripList = useSelector((state) => state.trip.value.trip);
 
+  
   const place = tripList.find((e) => e.name.includes(props.name));
   const select = [
     {
@@ -23,8 +26,9 @@ export default function ModalContent(props) {
       value: "Points of interests",
     },
   ];
-
-  // récupération des données aux allentour dans un rayon de 2.5 km à partir du paramètre choisi par l'utlisateur
+  
+  // when the modal appear & the user select a value in the dropdown : 
+  // fetch the list of places around the selected place (2.5km radius) and set the arround state with the list sent by the api
   useEffect(() => {
     setAround("");
     if (selected === "Restaurants") {
@@ -54,6 +58,7 @@ export default function ModalContent(props) {
 
   let aroundList;
 
+  // if there is info in the arround State -> call the component PlaceAround (see /component/PlaceAround.js)
   if (around.length > 0) {
     aroundList = around.map((e, i) => {
       return <PlaceAround placeId={e.place_id}></PlaceAround>;
