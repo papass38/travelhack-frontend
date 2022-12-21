@@ -95,6 +95,15 @@ export default function ToDoScreen({ navigation }) {
 
   const handleClick = () => {
     setModalVisible(true);
+
+    fetch(`http://${fetchIp.myIp}:3000/users/todo/${user.username}`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.result) {
+          console.log("data", data.data);
+          setTask(data.data);
+        }
+      });
   };
 
   return (
@@ -221,7 +230,7 @@ const styles = StyleSheet.create({
   },
   modalChoice: {
     backgroundColor: "#fff",
-    width: "80%",
+
     marginTop: 5,
     padding: 10,
     borderRadius: 5,
