@@ -33,7 +33,7 @@ import TravelRecapScreen from "./screens/TravelRecapScreen";
 import WishlistScreen from "./screens/WishlistScreen";
 import FinalTravelScreen from "./screens/FinalTravelScreen";
 import { Feather } from "@expo/vector-icons";
-import { LogBox } from "react-native";
+// import { LogBox } from "react-native";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -42,7 +42,7 @@ const store = configureStore({
   reducer: { trip, user, todo, array },
 });
 
-LogBox.ignoreAllLogs();
+// LogBox.ignoreAllLogs();
 
 const TabNavigator = () => {
   return (
