@@ -83,7 +83,12 @@ export default function FavoriteScreen({ navigation }) {
         style={styles.header}
         onPress={() => navigation.navigate("Profil")}
       >
-        <Ionicons name="chevron-back" size={50} color="#20B08E" />
+        <Ionicons
+          style={{ paddingLeft: 10 }}
+          name="ios-arrow-back-circle"
+          size={40}
+          color="#20B08E"
+        />
         <Text style={styles.textHeader}>Profil</Text>
       </TouchableOpacity>
       <View
@@ -141,10 +146,10 @@ const styles = StyleSheet.create({
     padding: 10,
     marginHorizontal: 15,
     marginVertical: 7,
-    backgroundColor: '#F5F5F5',
+    backgroundColor: "#F5F5F5",
     borderRadius: 7,
-    shadowOffset:{  width: 1,  height: 1,  },
-    shadowColor: 'gray',
+    shadowOffset: { width: 1, height: 1 },
+    shadowColor: "gray",
     shadowOpacity: 1.0,
   },
 });
