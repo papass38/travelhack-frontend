@@ -13,6 +13,7 @@ import {
   Pressable,
   Image,
   KeyboardAvoidingView,
+  ImageBackground,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { FontAwesome } from "@expo/vector-icons";
@@ -98,17 +99,22 @@ export default function SignUpScreen({ navigation }) {
       end={{ x: 0, y: 1.7 }}
       style={styles.container}
     >
-      <View style={styles.signinHeaderSection}>
-        <View>
-          <Text style={styles.signInBtnText}>Already have an account?</Text>
-          <TouchableOpacity
-            style={styles.signInBackBtn}
-            onPress={() => navigation.navigate("Sign in")}
-          >
-            <Ionicons name="ios-arrow-back-circle" size={50} color="black" />
-            <Text style={styles.text}>Sign In</Text>
-          </TouchableOpacity>
-          {/* <TouchableOpacity
+      <ImageBackground
+        source={require("../assets/travelhack-logo.png")}
+        style={styles.imageBackground}
+        resizeMode="contain"
+      >
+        <View style={styles.signinHeaderSection}>
+          <View style={styles.sectionSignInBtnText}>
+            <Text style={styles.signInBtnText}>Already have an account?</Text>
+            <TouchableOpacity
+              style={styles.signInBackBtn}
+              onPress={() => navigation.navigate("Sign in")}
+            >
+              <Ionicons name="ios-arrow-back-circle" size={30} color="white" />
+              <Text style={styles.text}>Sign In</Text>
+            </TouchableOpacity>
+            {/* <TouchableOpacity
             style={styles.button}
             onPress={() => navigation.navigate("Sign in")}
           >
@@ -119,12 +125,9 @@ export default function SignUpScreen({ navigation }) {
               size={30}
             />
           </TouchableOpacity> */}
+          </View>
         </View>
-        <View style={styles.titleContainer}>
-          <Text style={styles.title}>Travel Hack</Text>
-        </View>
-      </View>
-
+      </ImageBackground>
       <View style={styles.registerSection}>
         <View style={styles.buttonContainer}>
           <TextInput
@@ -200,20 +203,33 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
     width: "100%",
   },
+  imageBackground: {
+    flex: 1,
+    height: "100%", // This can be adjusted based on your desired size
+    width: "100%",
+    alignItems: "center",
+    justifyContent: "center",
+    margin: 50,
+    marginBottom: 0,
+  },
   titleContainer: {
-    paddingTop: 100,
+    paddingTop: 80,
     alignItems: "center",
     justifyContent: "center",
   },
   signinHeaderSection: {
     height: "40%",
     width: "100%",
-    padding: 20,
-    margin: 70,
+    paddingLeft: 20,
+    marginBottom: 240,
+  },
+  sectionSignInBtnText: {
+    margin: 0,
   },
   title: {
     fontSize: 40,
     textAlign: "center",
+    color: "white",
   },
   buttonContainer: {
     width: "100%",
@@ -275,11 +291,11 @@ const styles = StyleSheet.create({
     width: "45%",
   },
   text: {
-    color: "black",
+    color: "white",
     fontSize: 30,
   },
   signInBtnText: {
-    color: "black",
+    color: "white",
     fontWeight: "bold",
   },
 });

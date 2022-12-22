@@ -28,8 +28,8 @@ export default function WelcomeScreen({ navigation }) {
         <SwipeButton
           disabled={false}
           swipeSuccessThreshold={90}
-          height={45}
-          width={330}
+          height={60}
+          width={350}
           title="Swipe to get started !"
           onSwipeSuccess={() => {
             navigation.navigate("Sign in");
@@ -41,6 +41,7 @@ export default function WelcomeScreen({ navigation }) {
           railBorderColor="transparent"
           railFillBorderColor="transparent"
           titleColor="#20B08E"
+          fontFamily='Ubuntu-Bold'
           titleStyles={{fontWeight: 'bold'}}
         ></SwipeButton>
       </SafeAreaView>
@@ -76,9 +77,10 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   title: {
-    fontSize: "50",
+    fontSize: "60",
     flex: 1,
     fontWeight: "bold",
     letterSpacing: -1,
+    fontFamily: 'Ubuntu-Bold',
   },
 });

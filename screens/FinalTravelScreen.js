@@ -19,7 +19,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { MaterialIcons } from "@expo/vector-icons";
 import { removeAll } from "../reducers/trips";
 
-
 export default function FinalTravelScreen({ navigation }) {
   const trip = useSelector((state) => state.trip.value);
   const token = useSelector((state) => state.user.value.token);
@@ -28,7 +27,7 @@ export default function FinalTravelScreen({ navigation }) {
 
   console.log(trip.initialDestination.adress);
 
-  // On validation -> Send all of the informations in the db 
+  // On validation -> Send all of the informations in the db
   const handleValidation = () => {
     fetch(`http://${fetchIp.myIp}:3000/users/newtrip`, {
       method: "POST",
@@ -46,13 +45,13 @@ export default function FinalTravelScreen({ navigation }) {
       .then((res) => res.json())
       .then((data) => {
         // remove infos from the store
-          dispatch(removeAll())
+        dispatch(removeAll());
         // redirect to the home page
-          navigation.navigate("TabNavigator")
+        navigation.navigate("TabNavigator");
       });
   };
 
-  console.log
+  console.log;
 
   return (
     <View style={styles.container}>
@@ -77,13 +76,18 @@ export default function FinalTravelScreen({ navigation }) {
           </View>
           <View style={styles.budgetBackground}>
             <Text
-              style={{ color: "#20B08E", fontWeight: "bold", fontSize: 16 }}
+              style={{
+                color: "#20B08E",
+                fontWeight: "bold",
+                fontSize: 16,
+                fontFamily: "Ubuntu-Regular",
+              }}
             >
               {trip.totalBudget}€ /pers
             </Text>
           </View>
           <View>
-            <Text style={{ fontSize: 20 }}>
+            <Text style={{ fontSize: 20, fontFamily: "Ubuntu-Regular" }}>
               Departure {moment(trip.startDate).endOf("day").fromNow()} !
             </Text>
           </View>

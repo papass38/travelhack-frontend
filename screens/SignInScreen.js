@@ -88,12 +88,15 @@ export default function SignInScreen({ navigation }) {
         style={styles.container}
         behavior={Platform.OS === "ios" ? "padding" : "height"}
       >
-        <View style={styles.titleSection}>
-          <Text style={styles.title}>Sign In</Text>
-          <Text style={styles.subtitle}>Access to your acount</Text>
-        </View>
-
+        <ImageBackground
+          source={require("../assets/travelhack-logo.png")}
+          style={styles.imageBackground}
+          resizeMode="contain"
+        ></ImageBackground>
         <KeyboardAvoidingView style={styles.connectionSection}>
+          <View>
+            <Text style={styles.title}>Access to your acount</Text>
+          </View>
           <TextInput
             style={styles.input}
             placeholder="Username"
@@ -169,8 +172,17 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    justifyContent: "flex-end",
+    justifyContent: "center",
     width: "100%",
+  },
+  imageBackground: {
+    flex: 1,
+    height: "100%", // This can be adjusted based on your desired size
+    width: "100%",
+    alignItems: "center",
+    justifyContent: "center",
+    margin: 50,
+    marginBottom: 0,
   },
   titleSection: {
     flex: 1,
@@ -180,11 +192,13 @@ const styles = StyleSheet.create({
     marginBottom: 140,
   },
   title: {
-    fontSize: 40,
+    fontSize: 35,
+    color: "black",
+    marginBottom: 20,
   },
   subtitle: {
     fontSize: 25,
-    color: "grey",
+    color: "white",
   },
   buttonRadient: {
     backgroundColor: "#20B08E",
