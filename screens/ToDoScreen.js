@@ -16,6 +16,7 @@ import Header from "../components/Header";
 import { Entypo } from "@expo/vector-icons";
 import { useEffect } from "react";
 import { FontAwesome5 } from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
 
 // get file data toDoData.json
 const dataCheckList = require("../toDoData.json");
@@ -188,7 +189,9 @@ export default function ToDoScreen({ navigation }) {
         activeOpacity={0.8}
         onPress={() => navigation.navigate("Profil")}
       >
-        <Text style={styles.textButton}>Retour au profil</Text>
+        <Ionicons name="ios-arrow-back-circle" size={40} color="#F6F6F6" />
+
+        <Text style={styles.textButton}>Profil</Text>
       </TouchableOpacity>
     </View>
   );
