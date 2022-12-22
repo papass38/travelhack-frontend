@@ -122,15 +122,18 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
+    fontFamily: "Ubuntu-Regular",
   },
   header: {
     flexDirection: "row",
     alignItems: "center",
     width: "35%",
+    fontFamily: "Ubuntu-Regular",
   },
   textHeader: {
     fontSize: 30,
     color: "#20B08E",
+    fontFamily: "Ubuntu-Regular",
   },
   input: {
     flexDirection: "row",
@@ -139,6 +142,7 @@ const styles = StyleSheet.create({
     padding: 5,
     borderBottomWidth: 1,
     marginRight: 10,
+    fontFamily: "Ubuntu-Regular",
   },
   arrayResult: {
     flexDirection: "row",
@@ -151,5 +155,6 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 1, height: 1 },
     shadowColor: "gray",
     shadowOpacity: 1.0,
+    fontFamily: "Ubuntu-Regular",
   },
 });

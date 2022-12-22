@@ -224,6 +224,7 @@ const styles = StyleSheet.create({
     height: "100%",
     backgroundColor: "#E6E6E6",
     justifyContent: "space-between",
+    fontFamily: "Ubuntu-Regular",
   },
   locationContainer: {
     width: "100%",
