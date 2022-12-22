@@ -64,7 +64,7 @@ export default function FavoriteScreen({ navigation }) {
     });
     // console.log(result);
     if (!result.canceled) {
-      console.log(result)
+      console.log(result);
       //if (!result.canceled)
       //{ - Cette ligne vérifie si l'image sélectionnée n'a pas été annulée par l'utilisateur.
       //Si l'image n'a pas été annulée, le code à l'intérieur des accolades sera exécuté.
@@ -74,7 +74,7 @@ export default function FavoriteScreen({ navigation }) {
       //la variable d'état image avec l'URI de l'image sélectionnée.
       dispatch(addPhoto(result.assets[0].uri));
       // console.log(result.assets);
-      handleClick("photo")
+      handleClick("photo", result.assets[0].uri);
     }
   };
 
@@ -82,39 +82,42 @@ export default function FavoriteScreen({ navigation }) {
     return <Text>No access to internal storage</Text>;
   }
 
-  const handleClick = (itemToUpdate) => {
+  const handleClick = (itemToUpdate, img) => {
+    if (itemToUpdate === "userInfo")
+      if (inputUsername) {
+        fetch(`http://${fetchIp.myIp}:3000/users/info/${user.username}`, {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            replaceUsername: inputUsername,
+            // photo: image,
+          }),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.result) {
+              dispatch(
+                login({
+                  username: data.user.username,
+                  email: data.user.email,
+                  photo: data.user.photo,
+                  token: data.user.token,
+                })
+              );
+              setChangeSucces(true);
+              // console.log(inputUsername);
+            }
+          });
+      }
+    if (itemToUpdate === "photo") {
+      console.log(image);
 
-    if(itemToUpdate === "userInfo")
-    if (inputUsername) {
-      fetch(`http://${fetchIp.myIp}:3000/users/info/${user.username}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          replaceUsername: inputUsername,
-          // photo: image,
-        }),
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          if (data.result) {
-            dispatch(
-              login({
-                username: data.user.username,
-                email: data.user.email,
-                photo: data.user.photo,
-                token: data.user.token,
-              })
-            );
-            setChangeSucces(true);
-            // console.log(inputUsername);
-          }
-        });
-    } 
-    if(itemToUpdate === "photo") {
-      console.log(image)
-      
-      const formData = new FormData()
-      formData.append("userPhoto", {uri:image, name : "photo.jpg", type : "image/jpeg"})
+      const formData = new FormData();
+      formData.append("userPhoto", {
+        uri: img,
+        name: "photo.jpg",
+        type: "image/jpeg",
+      });
 
       fetch(`http://${fetchIp.myIp}:3000/users/photo/${user.username}`, {
         method: "PUT",
@@ -136,10 +139,9 @@ export default function FavoriteScreen({ navigation }) {
             // console.log(inputUsername);
           }
         });
-    } 
-      // console.log("error");
     }
-
+    // console.log("error");
+  };
 
   return (
     <SafeAreaView style={styles.container}>
