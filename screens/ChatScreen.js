@@ -59,7 +59,7 @@ export default function Chat() {
             .then((res) => res.json())
             .then((data) =>
               setLocationName(
-                data.location.normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
+                data.location.normalize("NFD").replace(/[\u0300-\u036f ]/g, ""),
                 ""
               )
             );

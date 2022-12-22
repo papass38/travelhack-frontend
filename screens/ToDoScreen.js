@@ -17,6 +17,7 @@ import { Entypo } from "@expo/vector-icons";
 import { useEffect } from "react";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
+import { AntDesign } from "@expo/vector-icons";
 
 // get file data toDoData.json
 const dataCheckList = require("../toDoData.json");
@@ -34,7 +35,7 @@ export default function ToDoScreen({ navigation }) {
   const todo = useSelector((state) => state.todo.value);
   const trip = useSelector((state) => state.trip.value);
   const user = useSelector((state) => state.user.value);
-  const [task, setTask] = useState();
+  const [task, setTask] = useState([]);
 
   useEffect(() => {
     fetch(`http://${fetchIp.myIp}:3000/users/newTrip/${user.username}`)
@@ -47,6 +48,21 @@ export default function ToDoScreen({ navigation }) {
         }
       });
   }, []);
+
+  const handleRemove = (e) => {
+    fetch(`http://${fetchIp.myIp}:3000/users/removeTodo/${user.username}`, {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ task: e.task }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.result) {
+          setTask(task.filter((data) => data.task !== e.task));
+          console.log("data :", data);
+        }
+      });
+  };
 
   useEffect(() => {
     fetch(`http://${fetchIp.myIp}:3000/users/todo/${user.username}`)
@@ -174,6 +190,12 @@ export default function ToDoScreen({ navigation }) {
                 return (
                   <View key={i} style={styles.modalChoice}>
                     <Text style={{ color: "#20B08E" }}>{e.task}</Text>
+                    <AntDesign
+                      name="delete"
+                      size={24}
+                      color="black"
+                      onPress={() => handleRemove(e)}
+                    />
                   </View>
                 );
               })}
@@ -233,7 +255,8 @@ const styles = StyleSheet.create({
   },
   modalChoice: {
     backgroundColor: "#fff",
-
+    flexDirection: "row",
+    justifyContent: "space-between",
     marginTop: 5,
     padding: 10,
     borderRadius: 5,

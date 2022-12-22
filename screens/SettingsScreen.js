@@ -29,65 +29,69 @@ export default function FavoriteScreen({ navigation }) {
   const [inputEmail, setInputEmail] = useState(user.email);
   const [changeSucces, setChangeSucces] = useState(false);
 
-  // useEffect(() => {
-  //   async () => {
-  //     const galleryStatus =
-  //       //Cette ligne utilise l'API ImagePicker pour demander à
-  //       //l'utilisateur l'autorisation d'accéder à la bibliothèque de médias
-  //       await ImagePicker.requestMediaLibraryPermissionsAsync();
-  //     setHasGalleryPermission(galleryStatus.status === "granted");
-  //     //La variable galleryStatus est mise à jour avec
-  //     //le résultat de la demande de permission.
-  //     //Si la permission a été accordée,
-  //     //la valeur de hasGalleryPermission sera mise à true,
-  //     //sinon elle sera mise à false
-  //   };
-  // }, []);
+  useEffect(() => {
+    async () => {
+      const galleryStatus =
+        //Cette ligne utilise l'API ImagePicker pour demander à
+        //l'utilisateur l'autorisation d'accéder à la bibliothèque de médias
+        await ImagePicker.requestMediaLibraryPermissionsAsync();
+      setHasGalleryPermission(galleryStatus.status === "granted");
+      //La variable galleryStatus est mise à jour avec
+      //le résultat de la demande de permission.
+      //Si la permission a été accordée,
+      //la valeur de hasGalleryPermission sera mise à true,
+      //sinon elle sera mise à false
+    };
+  }, []);
 
-  // const pickImage = async () => {
-  //   //let result =
-  //   //await ImagePicker.launchImageLibraryAsync
-  //   //({ - Cette ligne utilise l'API ImagePicker pour lancer la sélection de l'image
-  //   // à partir de la bibliothèque de l'utilisateur.
-  //   //Le résultat de la sélection est stocké dans la variable result
+  const pickImage = async () => {
+    //let result =
+    //await ImagePicker.launchImageLibraryAsync
+    //({ - Cette ligne utilise l'API ImagePicker pour lancer la sélection de l'image
+    // à partir de la bibliothèque de l'utilisateur.
+    //Le résultat de la sélection est stocké dans la variable result
 
-  //   let result = await ImagePicker.launchImageLibraryAsync({
-  //     //mediaTypes: ImagePicker.MediaTypeOptions.Images,
-  //     //- Cette ligne indique que seules les images seront affichées
-  //     //dans la bibliothèque de médias.
-  //     mediaTypes: ImagePicker.MediaTypeOptions.Images,
-  //     //allowsEditing: true, - Cette ligne indique que l'utilisateur peut éditer l'image sélectionnée.
-  //     allowsEditing: true,
-  //     //aspect: [4, 3], - Cette ligne indique que l'image sélectionnée doit avoir un ratio d'aspect de 4:3.
-  //     aspect: [4, 3],
-  //     quality: 0.1,
-  //   });
-  //   // console.log(result);
-  //   if (!result.canceled) {
-  //     //if (!result.canceled)
-  //     //{ - Cette ligne vérifie si l'image sélectionnée n'a pas été annulée par l'utilisateur.
-  //     //Si l'image n'a pas été annulée, le code à l'intérieur des accolades sera exécuté.
-  //     setImage(result.assets[0].uri);
-  //     //setImage(result.assets[0].uri); -
-  //     //Cette ligne utilise la fonction setImage pour mettre à jour
-  //     //la variable d'état image avec l'URI de l'image sélectionnée.
-  //     dispatch(addPhoto(result.assets[0].uri));
-  //     // console.log(result.assets);
-  //   }
-  // };
+    let result = await ImagePicker.launchImageLibraryAsync({
+      //mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      //- Cette ligne indique que seules les images seront affichées
+      //dans la bibliothèque de médias.
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      //allowsEditing: true, - Cette ligne indique que l'utilisateur peut éditer l'image sélectionnée.
+      allowsEditing: true,
+      //aspect: [4, 3], - Cette ligne indique que l'image sélectionnée doit avoir un ratio d'aspect de 4:3.
+      aspect: [4, 3],
+      quality: 0.1,
+    });
+    // console.log(result);
+    if (!result.canceled) {
+      console.log(result)
+      //if (!result.canceled)
+      //{ - Cette ligne vérifie si l'image sélectionnée n'a pas été annulée par l'utilisateur.
+      //Si l'image n'a pas été annulée, le code à l'intérieur des accolades sera exécuté.
+      setImage(result.assets[0].uri);
+      //setImage(result.assets[0].uri); -
+      //Cette ligne utilise la fonction setImage pour mettre à jour
+      //la variable d'état image avec l'URI de l'image sélectionnée.
+      dispatch(addPhoto(result.assets[0].uri));
+      // console.log(result.assets);
+      handleClick("photo")
+    }
+  };
 
-  // if (hasGalleryPermission === false) {
-  //   return <Text>No access to internal storage</Text>;
-  // }
+  if (hasGalleryPermission === false) {
+    return <Text>No access to internal storage</Text>;
+  }
 
-  const handleClick = () => {
+  const handleClick = (itemToUpdate) => {
+
+    if(itemToUpdate === "userInfo")
     if (inputUsername) {
-      fetch(`http://${fetchIp.myIp}:3000/users/${user.username}`, {
+      fetch(`http://${fetchIp.myIp}:3000/users/info/${user.username}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           replaceUsername: inputUsername,
-          photo: image,
+          // photo: image,
         }),
       })
         .then((res) => res.json())
@@ -105,10 +109,37 @@ export default function FavoriteScreen({ navigation }) {
             // console.log(inputUsername);
           }
         });
-    } else {
+    } 
+    if(itemToUpdate === "photo") {
+      console.log(image)
+      
+      const formData = new FormData()
+      formData.append("userPhoto", {uri:image, name : "photo.jpg", type : "image/jpeg"})
+
+      fetch(`http://${fetchIp.myIp}:3000/users/photo/${user.username}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: formData,
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.result) {
+            dispatch(
+              login({
+                username: data.user.username,
+                email: data.user.email,
+                photo: data.user.photo,
+                token: data.user.token,
+              })
+            );
+            setChangeSucces(true);
+            // console.log(inputUsername);
+          }
+        });
+    } 
       // console.log("error");
     }
-  };
+
 
   return (
     <SafeAreaView style={styles.container}>
@@ -160,7 +191,7 @@ export default function FavoriteScreen({ navigation }) {
             padding: 10,
           }}
         >
-          {/* <TouchableOpacity
+          <TouchableOpacity
             onPress={() => pickImage()}
             style={{
               backgroundColor: "#21A37C",
@@ -170,9 +201,9 @@ export default function FavoriteScreen({ navigation }) {
           >
             <Text style={{ color: "#fff", fontWeight: "bold" }}>
               {" "}
-              DON'T CLICK HERE
+              Update Photo
             </Text>
-          </TouchableOpacity> */}
+          </TouchableOpacity>
         </View>
       </View>
       <View
@@ -205,15 +236,6 @@ export default function FavoriteScreen({ navigation }) {
             onChangeText={(value) => setInputEmail(value)}
           />
         </View>
-        <View>
-          <Text>Image Link</Text>
-          <TextInput
-            placeholder={user.photo}
-            style={styles.input}
-            value={image}
-            onChangeText={(value) => setImage(value)}
-          />
-        </View>
         <Pressable
           style={{
             backgroundColor: "#21A37C",
@@ -221,8 +243,8 @@ export default function FavoriteScreen({ navigation }) {
             borderRadius: 10,
           }}
         >
-          <TouchableOpacity onPress={() => handleClick()}>
-            <Text style={{ color: "#fff" }}>Change</Text>
+          <TouchableOpacity onPress={() => handleClick("userInfo")}>
+            <Text style={{ color: "#fff" }}>Update Infos</Text>
           </TouchableOpacity>
         </Pressable>
       </View>
