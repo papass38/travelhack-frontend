@@ -103,17 +103,20 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "flex-start",
     backgroundColor: "white",
+    fontFamily: "Ubuntu-Regular",
   },
   searchPlace: {
     flex: 1,
     width: "80%",
     justifyContent: "center",
     alignItems: "center",
+    fontFamily: "Ubuntu-Regular",
   },
   title: {
     marginTop: 50,
     fontSize: 55,
     color: "#20B08E",
+    fontFamily: "Ubuntu-Regular",
   },
   button: {
     backgroundColor: "#20B08E",
@@ -128,6 +131,7 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 20,
     fontWeight: "bold",
+    fontFamily: "Ubuntu-Regular",
   },
   header: {
     flexDirection: "row",
@@ -135,9 +139,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
     width: "100%",
     paddingTop: 10,
+    fontFamily: "Ubuntu-Regular",
   },
   text: {
     color: "#20B08E",
     fontSize: 30,
+    fontFamily: "Ubuntu-Regular",
   },
 });
