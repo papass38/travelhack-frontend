@@ -16,8 +16,6 @@ import Header from "../components/Header";
 import { Entypo } from "@expo/vector-icons";
 import { useEffect } from "react";
 import { FontAwesome5 } from "@expo/vector-icons";
-import { Button } from "react-native-elements";
-import { Ionicons } from "@expo/vector-icons";
 
 // get file data toDoData.json
 const dataCheckList = require("../toDoData.json");
@@ -97,6 +95,15 @@ export default function ToDoScreen({ navigation }) {
 
   const handleClick = () => {
     setModalVisible(true);
+
+    fetch(`http://${fetchIp.myIp}:3000/users/todo/${user.username}`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.result) {
+          console.log("data", data.data);
+          setTask(data.data);
+        }
+      });
   };
 
   return (
@@ -181,9 +188,7 @@ export default function ToDoScreen({ navigation }) {
         activeOpacity={0.8}
         onPress={() => navigation.navigate("Profil")}
       >
-        <Ionicons name="ios-arrow-back-circle" size={50} color="white" />
-
-        <Text style={styles.textButton}>Profil</Text>
+        <Text style={styles.textButton}>Retour au profil</Text>
       </TouchableOpacity>
     </View>
   );
@@ -225,7 +230,7 @@ const styles = StyleSheet.create({
   },
   modalChoice: {
     backgroundColor: "#fff",
-    width: "80%",
+
     marginTop: 5,
     padding: 10,
     borderRadius: 5,
