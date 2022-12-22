@@ -28,8 +28,8 @@ export default function WelcomeScreen({ navigation }) {
         <SwipeButton
           disabled={false}
           swipeSuccessThreshold={90}
-          height={45}
-          width={330}
+          height={60}
+          width={350}
           title="Swipe to get started !"
           onSwipeSuccess={() => {
             navigation.navigate("Sign in");
