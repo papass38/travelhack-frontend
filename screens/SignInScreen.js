@@ -74,12 +74,7 @@ export default function SignInScreen({ navigation }) {
   // }, [response]);
 
   return (
-    <LinearGradient
-      colors={["#20B08E", "white"]}
-      start={{ x: 0, y: 0.2 }}
-      end={{ x: 0, y: 1.7 }}
-      style={styles.container}
-    >
+    <View style={styles.container}>
       <KeyboardAvoidingView
         style={styles.container}
         behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -89,9 +84,9 @@ export default function SignInScreen({ navigation }) {
           style={styles.imageBackground}
           resizeMode="contain"
         ></ImageBackground>
-        <KeyboardAvoidingView style={styles.connectionSection}>
+        <View style={styles.connectionSection}>
           <View>
-            <Text style={styles.title}>Access to your acount</Text>
+            <Text style={styles.title}>Welcome back !</Text>
           </View>
           <TextInput
             style={styles.input}
@@ -121,14 +116,9 @@ export default function SignInScreen({ navigation }) {
             style={styles.buttonRadient}
             onPress={() => handleConnection()}
           >
-            <LinearGradient
-              colors={["#20B08E", "white"]}
-              start={{ x: 0, y: 0.2 }}
-              end={{ x: 0, y: 1.7 }}
-              style={styles.button}
-            >
+            <View style={styles.button}>
               <Text style={styles.signInButton}>Sign In</Text>
-            </LinearGradient>
+            </View>
           </TouchableOpacity>
 
           {/* <Text style={styles.orText}>Or Sign in With</Text>
@@ -149,18 +139,13 @@ export default function SignInScreen({ navigation }) {
             style={styles.buttonRadient}
             onPress={() => navigation.navigate("Sign up")}
           >
-            <LinearGradient
-              colors={["#20B08E", "white"]}
-              start={{ x: 0, y: 0.2 }}
-              end={{ x: 0, y: 1.7 }}
-              style={styles.button}
-            >
+            <View style={styles.button}>
               <Text style={styles.signUpButton}>Sign up</Text>
-            </LinearGradient>
+            </View>
           </TouchableOpacity>
-        </KeyboardAvoidingView>
+        </View>
       </KeyboardAvoidingView>
-    </LinearGradient>
+    </View>
   );
 }
 
@@ -170,6 +155,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     width: "100%",
+    backgroundColor: "#20B08E",
   },
   imageBackground: {
     flex: 1,
@@ -188,9 +174,10 @@ const styles = StyleSheet.create({
     marginBottom: 140,
   },
   title: {
-    fontSize: 35,
+    fontSize: 25,
     color: "black",
     marginBottom: 20,
+    fontWeight: "bold",
   },
   subtitle: {
     fontSize: 25,
@@ -222,8 +209,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   signUpButton: {
-    color: "F6F6F6",
+    color: "white",
     fontSize: 18,
+    fontWeight: "bold",
   },
   orText: {
     marginVertical: 10,
@@ -231,17 +219,18 @@ const styles = StyleSheet.create({
   signInButton: {
     color: "F6F6F6",
     fontSize: 18,
+    color: "white",
+    fontWeight: "bold",
   },
 
   connectionSection: {
-    height: "50%",
-    paddingVertical: 30,
     width: "100%",
     borderTopRightRadius: 40,
     borderTopLeftRadius: 40,
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "rgba(246, 246, 246, 0.7)",
+    paddingVertical: 50,
   },
   buttonGoogle: {
     backgroundColor: "white",
@@ -253,5 +242,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     color: "#black",
     fontSize: 18,
+  },
+  text: {
+    marginVertical: 10,
   },
 });

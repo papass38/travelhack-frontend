@@ -10,6 +10,8 @@ import {
   TouchableOpacity,
   TextInput,
   ImageBackground,
+  KeyboardAvoidingView,
+  Platform,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import * as React from "react";
@@ -84,12 +86,7 @@ export default function SignUpScreen({ navigation }) {
   // }, [response]);
 
   return (
-    <LinearGradient
-      colors={["#20B08E", "white"]}
-      start={{ x: 0, y: 0.2 }}
-      end={{ x: 0, y: 1.7 }}
-      style={styles.container}
-    >
+    <View style={styles.container}>
       <ImageBackground
         source={require("../assets/travelhack-logo.png")}
         style={styles.imageBackground}
@@ -119,7 +116,10 @@ export default function SignUpScreen({ navigation }) {
           </View>
         </View>
       </ImageBackground>
-      <View style={styles.registerSection}>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        style={styles.registerSection}
+      >
         <View style={styles.buttonContainer}>
           <TextInput
             style={styles.input}
@@ -158,14 +158,9 @@ export default function SignUpScreen({ navigation }) {
             style={styles.buttonRadient}
             onPress={() => handleRegister()}
           >
-            <LinearGradient
-              colors={["#20B08E", "white"]}
-              start={{ x: 0, y: 0.2 }}
-              end={{ x: 0, y: 1.7 }}
-              style={styles.button}
-            >
+            <View style={styles.button}>
               <Text style={styles.buttonText}>Sign Up</Text>
-            </LinearGradient>
+            </View>
           </TouchableOpacity>
           {/* <TouchableOpacity
             style={styles.buttonGoogle}
@@ -182,8 +177,8 @@ export default function SignUpScreen({ navigation }) {
             <Text> SignUp with Google</Text>
           </TouchableOpacity> */}
         </View>
-      </View>
-    </LinearGradient>
+      </KeyboardAvoidingView>
+    </View>
   );
 }
 
@@ -193,6 +188,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "flex-end",
     width: "100%",
+    backgroundColor: "#20B08E",
   },
   imageBackground: {
     flex: 1,
@@ -209,6 +205,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   signinHeaderSection: {
+    position: "absolute",
+    top: 20,
     height: "40%",
     width: "100%",
     paddingLeft: 20,
@@ -253,15 +251,21 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: "#black",
+    fontWeight: "bold",
+    color: "white",
     fontSize: 18,
   },
 
   button: {
-    width: "80%",
+    width: "70%",
+    height: 40,
     paddingVertical: 5,
     borderRadius: 10,
     alignItems: "center",
+    justifyContent: "center",
     marginBottom: 10,
+    backgroundColor: "#20B08E",
+    marginBottom: 50,
   },
   buttonGoogle: {
     backgroundColor: "black",
