@@ -63,18 +63,18 @@ export default function FavoriteScreen({ navigation }) {
       quality: 0.1,
     });
     // console.log(result);
+    console.log("hello")
     if (!result.canceled) {
-      console.log(result)
       //if (!result.canceled)
       //{ - Cette ligne vérifie si l'image sélectionnée n'a pas été annulée par l'utilisateur.
       //Si l'image n'a pas été annulée, le code à l'intérieur des accolades sera exécuté.
-      setImage(result.assets[0].uri);
-      //setImage(result.assets[0].uri); -
+      // setImage(result.assets[0].uri);
+      setImage(result.assets[0].uri); -
       //Cette ligne utilise la fonction setImage pour mettre à jour
       //la variable d'état image avec l'URI de l'image sélectionnée.
       dispatch(addPhoto(result.assets[0].uri));
-      // console.log(result.assets);
-      handleClick("photo")
+      console.log(result.assets);
+      handleClick("photo", result.assets[0].uri)
     }
   };
 
@@ -82,7 +82,7 @@ export default function FavoriteScreen({ navigation }) {
     return <Text>No access to internal storage</Text>;
   }
 
-  const handleClick = (itemToUpdate) => {
+  const handleClick = (itemToUpdate, img) => {
 
     if(itemToUpdate === "userInfo")
     if (inputUsername) {
@@ -114,7 +114,7 @@ export default function FavoriteScreen({ navigation }) {
       console.log(image)
       
       const formData = new FormData()
-      formData.append("userPhoto", {uri:image, name : "photo.jpg", type : "image/jpeg"})
+      formData.append("userPhoto", {uri:img, name : "photo.jpg", type : "image/jpeg"})
 
       fetch(`http://${fetchIp.myIp}:3000/users/photo/${user.username}`, {
         method: "PUT",
