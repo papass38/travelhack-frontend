@@ -164,7 +164,11 @@ export default function HomeScreen({ navigation }) {
     });
 
   const stepsModal = modalData.steps.map((data, i) => {
-    return <Text key={i}>&#8594; {data.name}</Text>;
+    return (
+      <Text key={i} style={{ marginVertical: 2 }}>
+        &#8594; {data.name}
+      </Text>
+    );
   });
 
   return (
@@ -172,9 +176,9 @@ export default function HomeScreen({ navigation }) {
       <Modal visible={isModalVisible} style={styles.modal}>
         <View style={styles.modalContent}>
           <ImageBackground
-            source={require("../assets/planeModalBg.jpeg")}
+            source={require("../assets/cloudModalBg.jpeg")}
             style={styles.modalBgImg}
-            imageStyle={{ opacity: 0.9 }}
+            imageStyle={{ opacity: 0.7 }}
           >
             <View style={styles.modalText}>
               <Text style={{ textAlign: "center" }}>
@@ -195,8 +199,6 @@ export default function HomeScreen({ navigation }) {
                   style={{
                     fontWeight: "bold",
                     fontSize: 18,
-                    marginTop: 40,
-                    marginBottom: 10,
                   }}
                 >
                   Steps :
@@ -420,5 +422,8 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     textAlign: "center",
   },
-  stepsModal: {},
+  stepsModal: {
+    marginTop: 40,
+    marginBottom: 10,
+  },
 });
