@@ -177,6 +177,9 @@ export default function ToDoScreen({ navigation }) {
                 );
               })}
           </View>
+          <TouchableOpacity style={{ padding: 20 }}>
+            <Text>Delete All</Text>
+          </TouchableOpacity>
         </View>
       </Modal>
 
