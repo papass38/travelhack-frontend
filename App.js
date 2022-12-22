@@ -33,7 +33,18 @@ import TravelRecapScreen from "./screens/TravelRecapScreen";
 import WishlistScreen from "./screens/WishlistScreen";
 import FinalTravelScreen from "./screens/FinalTravelScreen";
 import { Feather } from "@expo/vector-icons";
-// import { LogBox } from "react-native";
+import { LogBox } from "react-native";
+
+// ------------------ CUSTOM FONTS ---------------------
+
+import * as Font from 'expo-font';
+import AppLoading from "expo-app-loading";
+import { useState } from 'react';
+
+import useFonts from "./hooks/useFonts";
+
+// ------------------ CUSTOM FONTS ----------------------
+
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -42,7 +53,7 @@ const store = configureStore({
   reducer: { trip, user, todo, array },
 });
 
-// LogBox.ignoreAllLogs();
+LogBox.ignoreAllLogs();
 
 const TabNavigator = () => {
   return (
@@ -81,6 +92,28 @@ const TabNavigator = () => {
 };
 
 export default function App() {
+
+// --------- CUSTOM FONTS -----------
+
+const [IsReady, SetIsReady] = useState(false);
+
+  const LoadFonts = async () => {
+    await useFonts();
+  };
+
+  if (!IsReady) {
+    return (
+      <AppLoading
+        startAsync={LoadFonts}
+        onFinish={() => SetIsReady(true)}
+        onError={() => {}}
+      />
+    );
+  }
+
+  // ------- CUSTOM FONTS ---------
+
+
   return (
     <NavigationContainer>
       <Provider store={store}>

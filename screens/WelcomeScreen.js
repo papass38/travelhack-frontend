@@ -80,5 +80,6 @@ const styles = StyleSheet.create({
     flex: 1,
     fontWeight: "bold",
     letterSpacing: -1,
+    fontFamily: 'Ubuntu-Regular',
   },
 });
