@@ -1,40 +1,27 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  TextInput,
-  Button,
-  KeyboardAvoidingView,
-  TouchableOpacity,
-  ScrollView,
-  SafeAreaView,
-  TouchableHighlight,
-} from "react-native";
-import { addDate } from "../reducers/trips";
+import { StyleSheet, Text, View } from "react-native";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-
 export default function DestinationInfos({ props, index }) {
-  console.log(props)
+  console.log(props);
   const [budget, setBudget] = useState(0);
-  const tripList = useSelector((state) => state.trip.value.trip);
-  const dispatch = useDispatch();
 
   // when the component is mounted -, this function calculate the average daily price based on the meal budget and room budget per day
   useEffect(() => {
-    const destinationBudget = (parseFloat(props.mealBudget) + parseFloat(props.roomBudget));
-    console.log(typeof(destinationBudget))
+    const destinationBudget =
+      parseFloat(props.mealBudget) + parseFloat(props.roomBudget);
+    console.log(typeof destinationBudget);
     setBudget(destinationBudget);
   }, []);
 
-  const today = new Date()
-
+  const today = new Date();
 
   return (
     <View>
       <View style={styles.destinationName}>
-        <Text style={styles.text}>{index + 1} - {props.name}</Text>
+        <Text style={styles.text}>
+          {index + 1} - {props.name}
+        </Text>
       </View>
       <View style={styles.destinationDetails}>
         <Text style={styles.text}>{budget.toFixed(2)}€ / day </Text>

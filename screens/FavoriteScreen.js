@@ -1,22 +1,18 @@
 import fetchIp from "../fetchIp.json";
 import {
-  Button,
   StyleSheet,
   Text,
   View,
   TouchableOpacity,
   SafeAreaView,
-  Pressable,
   TextInput,
   ScrollView,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import Header from "../components/Header";
 
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { useState } from "react";
-import { addArray, removeArray } from "../reducers/array";
 
 // comm for commit
 export default function FavoriteScreen({ navigation }) {

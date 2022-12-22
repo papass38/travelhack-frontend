@@ -2,13 +2,9 @@ import {
   StyleSheet,
   Text,
   View,
-  TextInput,
   Button,
-  KeyboardAvoidingView,
   TouchableOpacity,
   ScrollView,
-  SafeAreaView,
-  TouchableHighlight,
 } from "react-native";
 import Header from "../components/Header";
 import { useEffect, useState } from "react";
@@ -22,7 +18,6 @@ import { Feather } from "@expo/vector-icons";
 
 export default function TravelRecapScreen({ navigation }) {
   const tripList = useSelector((state) => state.trip.value.trip);
-  const user = useSelector((state) => state.user.value.username);
   const [dateType, setDateType] = useState("");
   const [arrivalDate, setArrivalDate] = useState("");
   const [departureDate, setDepartureDate] = useState("");

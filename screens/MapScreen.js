@@ -1,6 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
 import { addTrip, removeTrip, initializeTrip } from "../reducers/trips";
-import { StatusBar } from "expo-status-bar";
 import {
   StyleSheet,
   Text,
@@ -67,7 +66,7 @@ export default function MapScreen({ navigation }) {
     let roomBudget = 0;
 
     if (getBudgetCountry) {
-      // here we use the cost database (costData.json) to set the meal budget. 
+      // here we use the cost database (costData.json) to set the meal budget.
       //This is not accurate as the places are not all available
       // it does not handle the cost per city but per country
       // Unfortunately we do not have the budget (200€ per month) to use the api from wich that data was exctracted (https://www.numbeo.com/)
@@ -146,7 +145,7 @@ export default function MapScreen({ navigation }) {
       });
   };
 
-  // when the component is mounted ir use the adress stocked in the store to set the Adress state. 
+  // when the component is mounted ir use the adress stocked in the store to set the Adress state.
   // It calls the get adressFromString function to create the first marker (if the adress was not a country)
   useEffect(() => {
     setAdress(initialSearch.adress);
@@ -206,7 +205,7 @@ export default function MapScreen({ navigation }) {
     });
   }
 
-  //if there  is more than 2 destination in the store (steps) this functions generate the roads between the coordinates 
+  //if there  is more than 2 destination in the store (steps) this functions generate the roads between the coordinates
   if (tripList.length > 1) {
     way = tripList.map((item, index) => {
       if (index > 0) {
@@ -253,7 +252,7 @@ export default function MapScreen({ navigation }) {
     getAdressFromString(newAdress);
   };
 
-  // show or hide the modal 
+  // show or hide the modal
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
   };
@@ -265,7 +264,6 @@ export default function MapScreen({ navigation }) {
       {/* component modal from react-native*/}
       <Modal visible={isModalVisible} style={styles.modal}>
         <View style={styles.modalContent}>
-
           {/* see component ModalContent in the component file */}
           <ModalContent name={adress} />
           <TouchableOpacity
