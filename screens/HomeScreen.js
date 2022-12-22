@@ -254,6 +254,7 @@ const styles = StyleSheet.create({
     fontSize: 30,
     marginLeft: 10,
     fontWeight: "bold",
+    fontFamily: 'Ubuntu-Regular',
   },
   newScrollContainer: {
     height: "30%",

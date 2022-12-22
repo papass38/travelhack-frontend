@@ -201,7 +201,7 @@ export default function FavoriteScreen({ navigation }) {
           >
             <Text style={{ color: "#fff", fontWeight: "bold" }}>
               {" "}
-              DON'T CLICK HERE
+              Update Photo
             </Text>
           </TouchableOpacity>
         </View>
@@ -236,15 +236,6 @@ export default function FavoriteScreen({ navigation }) {
             onChangeText={(value) => setInputEmail(value)}
           />
         </View>
-        <View>
-          <Text>Image Link</Text>
-          <TextInput
-            placeholder={user.photo}
-            style={styles.input}
-            value={image}
-            onChangeText={(value) => setImage(value)}
-          />
-        </View>
         <Pressable
           style={{
             backgroundColor: "#21A37C",
@@ -253,7 +244,7 @@ export default function FavoriteScreen({ navigation }) {
           }}
         >
           <TouchableOpacity onPress={() => handleClick("userInfo")}>
-            <Text style={{ color: "#fff" }}>Change</Text>
+            <Text style={{ color: "#fff" }}>Update Infos</Text>
           </TouchableOpacity>
         </Pressable>
       </View>
