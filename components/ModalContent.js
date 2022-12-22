@@ -8,12 +8,10 @@ import { useEffect, useState } from "react";
 export default function ModalContent(props) {
   const [selected, setSelected] = useState("");
   const [around, setAround] = useState([]);
-  const [website, setWebsite] = useState([]);
 
   //get the list of trips stored in the redux store.
   const tripList = useSelector((state) => state.trip.value.trip);
 
-  
   const place = tripList.find((e) => e.name.includes(props.name));
   const select = [
     {
@@ -26,8 +24,8 @@ export default function ModalContent(props) {
       value: "Points of interests",
     },
   ];
-  
-  // when the modal appear & the user select a value in the dropdown : 
+
+  // when the modal appear & the user select a value in the dropdown :
   // fetch the list of places around the selected place (2.5km radius) and set the arround state with the list sent by the api
   useEffect(() => {
     setAround("");

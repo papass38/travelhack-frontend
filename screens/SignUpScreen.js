@@ -1,28 +1,19 @@
 import fetchIp from "../fetchIp.json";
 import jwtDecode from "jwt-decode";
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { login } from "../reducers/user";
 import {
-  Button,
   StyleSheet,
   Text,
   View,
   TouchableOpacity,
   TextInput,
-  Pressable,
-  Image,
-  KeyboardAvoidingView,
   ImageBackground,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import { FontAwesome } from "@expo/vector-icons";
-// import * as WebBrowser from "expo-web-browser";
-// import * as Google from "expo-auth-session/providers/google";
 import * as React from "react";
-import { AntDesign } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
-import { Feather } from "@expo/vector-icons";
 
 // WebBrowser.maybeCompleteAuthSession();
 

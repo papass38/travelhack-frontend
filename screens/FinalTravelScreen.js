@@ -2,13 +2,7 @@ import {
   StyleSheet,
   Text,
   View,
-  TextInput,
-  Button,
-  KeyboardAvoidingView,
   TouchableOpacity,
-  ScrollView,
-  SafeAreaView,
-  TouchableHighlight,
   ImageBackground,
 } from "react-native";
 import fetchIp from "../fetchIp.json";

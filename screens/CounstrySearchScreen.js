@@ -2,13 +2,8 @@ import {
   StyleSheet,
   Text,
   View,
-  TextInput,
-  Button,
   KeyboardAvoidingView,
   TouchableOpacity,
-  ScrollView,
-  SafeAreaView,
-  TouchableHighlight,
 } from "react-native";
 import Header from "../components/Header";
 import { useState } from "react";

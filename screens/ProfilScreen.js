@@ -1,7 +1,5 @@
 import { StyleSheet, Text, View } from "react-native";
 import Header from "../components/Header";
-import { Ionicons } from "@expo/vector-icons";
-import { AntDesign } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import MapView, { Marker } from "react-native-maps";
 import { useEffect, useState } from "react";

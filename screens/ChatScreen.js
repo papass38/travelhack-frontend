@@ -11,7 +11,6 @@ import {
   Platform,
   SafeAreaView,
   ScrollView,
-  Header,
 } from "react-native";
 import { useEffect, useState, useRef } from "react";
 import { useSelector } from "react-redux";

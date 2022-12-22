@@ -1,5 +1,4 @@
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet } from "react-native";
 
 import React from "react";
 import user from "./reducers/user";
@@ -10,8 +9,6 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
-import FontAwesome from "react-native-vector-icons/FontAwesome";
-import { FontAwesome5 } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 
 import { Provider } from "react-redux";
@@ -37,14 +34,12 @@ import { LogBox } from "react-native";
 
 // ------------------ CUSTOM FONTS ---------------------
 
-import * as Font from 'expo-font';
 import AppLoading from "expo-app-loading";
-import { useState } from 'react';
+import { useState } from "react";
 
 import useFonts from "./hooks/useFonts";
 
 // ------------------ CUSTOM FONTS ----------------------
-
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -92,10 +87,9 @@ const TabNavigator = () => {
 };
 
 export default function App() {
+  // --------- CUSTOM FONTS -----------
 
-// --------- CUSTOM FONTS -----------
-
-const [IsReady, SetIsReady] = useState(false);
+  const [IsReady, SetIsReady] = useState(false);
 
   const LoadFonts = async () => {
     await useFonts();
@@ -112,7 +106,6 @@ const [IsReady, SetIsReady] = useState(false);
   }
 
   // ------- CUSTOM FONTS ---------
-
 
   return (
     <NavigationContainer>

@@ -1,21 +1,14 @@
 import {
-  Button,
   StyleSheet,
   Text,
   View,
-  TouchableOpacity,
   ImageBackground,
   SafeAreaView,
 } from "react-native";
 
 import SwipeButton from "rn-swipe-button";
 
-
 export default function WelcomeScreen({ navigation }) {
-  
-  
-
-  let touchX;
   return (
     <View style={styles.container}>
       <ImageBackground
@@ -41,8 +34,8 @@ export default function WelcomeScreen({ navigation }) {
           railBorderColor="transparent"
           railFillBorderColor="transparent"
           titleColor="#20B08E"
-          fontFamily='Ubuntu-Bold'
-          titleStyles={{fontWeight: 'bold'}}
+          fontFamily="Ubuntu-Bold"
+          titleStyles={{ fontWeight: "bold" }}
         ></SwipeButton>
       </SafeAreaView>
     </View>
@@ -81,6 +74,6 @@ const styles = StyleSheet.create({
     flex: 1,
     fontWeight: "bold",
     letterSpacing: -1,
-    fontFamily: 'Ubuntu-Bold',
+    fontFamily: "Ubuntu-Bold",
   },
 });

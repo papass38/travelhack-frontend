@@ -5,10 +5,10 @@ import {
   View,
   TouchableOpacity,
   ScrollView,
+  ImageBackground,
 } from "react-native";
 import Header from "../components/Header";
 import { AntDesign } from "@expo/vector-icons";
-import { LinearGradient } from "expo-linear-gradient";
 import { useSelector } from "react-redux";
 import React, { useEffect, useState } from "react";
 import { useIsFocused } from "@react-navigation/native";
@@ -164,35 +164,64 @@ export default function HomeScreen({ navigation }) {
     });
 
   const stepsModal = modalData.steps.map((data, i) => {
-    return <Text key={i}>{data.name}</Text>;
+    return <Text key={i}>&#8594; {data.name}</Text>;
   });
 
   return (
     <View style={styles.container}>
       <Modal visible={isModalVisible} style={styles.modal}>
         <View style={styles.modalContent}>
-          <View style={styles.modalText}>
-            <Text style={{ fontWeight: "bold" }}>{modalData.destination}</Text>
-            <Text>{new Date(modalData.startDate).toLocaleDateString()}</Text>
-            <Text>{new Date(modalData.endDate).toLocaleDateString()}</Text>
-            <Text>{modalData.totalBudget}€</Text>
-            <View>
-              <Text>Steps :</Text>
-              {stepsModal}
-            </View>
-            <TouchableOpacity
-              onPress={() => deleteTrip(modalData.travelId, modalData.endDate)}
-            >
-              <Text>Delete</Text>
-            </TouchableOpacity>
-          </View>
-
-          <TouchableOpacity
-            onPress={() => setModalVisible(!isModalVisible)}
-            style={styles.modalButton}
+          <ImageBackground
+            source={require("../assets/planeModalBg.jpeg")}
+            style={styles.modalBgImg}
+            imageStyle={{ opacity: 0.9 }}
           >
-            <Text style={styles.buttonText}>Close</Text>
-          </TouchableOpacity>
+            <View style={styles.modalText}>
+              <Text style={{ textAlign: "center" }}>
+                {new Date(modalData.startDate).toLocaleDateString()} -{" "}
+                {new Date(modalData.endDate).toLocaleDateString()}
+              </Text>
+
+              <Text
+                style={{ fontWeight: "bold", fontSize: 25, marginVertical: 10 }}
+              >
+                {modalData.destination}
+              </Text>
+              <Text style={{ textAlign: "center", fontWeight: "bold" }}>
+                ≈ {modalData.totalBudget}€
+              </Text>
+              <View style={styles.stepsModal}>
+                <Text
+                  style={{
+                    fontWeight: "bold",
+                    fontSize: 18,
+                    marginTop: 40,
+                    marginBottom: 10,
+                  }}
+                >
+                  Steps :
+                </Text>
+                {stepsModal}
+              </View>
+            </View>
+            <View style={styles.btnModal}>
+              <TouchableOpacity
+                style={styles.modalButtonDelete}
+                onPress={() =>
+                  deleteTrip(modalData.travelId, modalData.endDate)
+                }
+              >
+                <Text style={styles.buttonText}>Delete</Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                onPress={() => setModalVisible(!isModalVisible)}
+                style={styles.modalButton}
+              >
+                <Text style={styles.buttonText}>Close</Text>
+              </TouchableOpacity>
+            </View>
+          </ImageBackground>
         </View>
       </Modal>
 
@@ -254,7 +283,7 @@ const styles = StyleSheet.create({
     fontSize: 30,
     marginLeft: 10,
     fontWeight: "bold",
-    fontFamily: 'Ubuntu-Regular',
+    fontFamily: "Ubuntu-Regular",
   },
   newScrollContainer: {
     height: "30%",
@@ -346,32 +375,50 @@ const styles = StyleSheet.create({
     elevation: 60,
   },
   modalContent: {
-    alignItems: "center",
-    justifyContent: "space-around",
     backgroundColor: "#E6E6E6",
     height: "60%",
     width: "80%",
-    padding: 20,
     borderRadius: 20,
-    borderWidth: 0.3,
+    borderWidth: 2,
     borderColor: "#20B08E",
+    overflow: "hidden",
+  },
+  modalBgImg: {
+    height: "100%",
+    width: "100%",
+    alignItems: "center",
+    justifyContent: "space-between",
   },
   modalText: {
+    marginTop: "20%",
     borderRadius: 20,
-    padding: 40,
-    height: "50%",
   },
   modalButton: {
-    marginTop: 10,
     backgroundColor: "#20B08E",
     justifyContent: "center",
     alignItems: "center",
     width: 100,
-    height: "10%",
+    height: "50%",
     borderRadius: 5,
+  },
+  modalButtonDelete: {
+    backgroundColor: "#BF0000",
+    justifyContent: "center",
+    alignItems: "center",
+    width: 100,
+    height: "50%",
+    borderRadius: 5,
+  },
+  btnModal: {
+    flexDirection: "row",
+    width: "100%",
+    justifyContent: "space-around",
+    height: "20%",
   },
   buttonText: {
     color: "white",
     fontWeight: "bold",
+    textAlign: "center",
   },
+  stepsModal: {},
 });

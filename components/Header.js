@@ -1,8 +1,5 @@
 import { View, StyleSheet, Text, Image, Pressable } from "react-native";
-import { FontAwesome } from "@expo/vector-icons";
-import { Feather } from "@expo/vector-icons";
 import { useSelector } from "react-redux";
-import { SimpleLineIcons } from "@expo/vector-icons";
 import { logout } from "../reducers/user";
 import { useDispatch } from "react-redux";
 import { initializeTrip } from "../reducers/trips";
@@ -10,7 +7,6 @@ import { AntDesign } from "@expo/vector-icons";
 
 export default function Header({ navigation }) {
   const user = useSelector((state) => state.user.value);
-  const trip = useSelector((state) => state.trip.value);
   const dispatch = useDispatch();
   return (
     <View style={styles.container}>
@@ -35,11 +31,15 @@ export default function Header({ navigation }) {
           alignItems: "center",
         }}
       >
-        <Text style={{ fontSize: 16, color: "#F6F6F6" }}>
+        <Text
+          style={{
+            marginTop: 10,
+            fontSize: 18,
+            color: "#F6F6F6",
+            fontWeight: "bold",
+          }}
+        >
           Welcome {user.username} !
-        </Text>
-        <Text style={{ fontSize: 12, color: "#F6F6F6" }}>
-          Travel : {trip.initialDestination.adress}
         </Text>
       </View>
 

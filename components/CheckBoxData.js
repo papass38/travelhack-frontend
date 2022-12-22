@@ -1,16 +1,13 @@
 import { useState } from "react";
-import { View, Text, Pressable, StyleSheet } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import { CheckBox } from "react-native-elements";
 import { useSelector } from "react-redux";
-// import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { addTodo, filterTodo } from "../reducers/toDo";
 import fetchIp from "../fetchIp.json";
-import { useEffect } from "react";
 
 export default function CheckBoxData({ props }) {
   const dispatch = useDispatch();
-  const todo = useSelector((state) => state.todo.value);
   const user = useSelector((state) => state.user.value.username);
 
   const listingData = props.data.map((elmt, index) => {

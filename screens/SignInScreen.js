@@ -1,10 +1,8 @@
 import fetchIp from "../fetchIp.json";
-import { useEffect } from "react";
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { login } from "../reducers/user";
 import {
-  Button,
   StyleSheet,
   Text,
   View,
@@ -12,14 +10,12 @@ import {
   TextInput,
   KeyboardAvoidingView,
   Platform,
-  Image,
   ImageBackground,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 // import * as WebBrowser from "expo-web-browser";
 // import * as Google from "expo-auth-session/providers/google";
 import * as React from "react";
-import { AntDesign } from "@expo/vector-icons";
 
 // WebBrowser.maybeCompleteAuthSession();
 
@@ -134,8 +130,8 @@ export default function SignInScreen({ navigation }) {
             </LinearGradient>
           </TouchableOpacity>
 
-          <Text style={styles.orText}>Or Sign in With</Text>
-          {/* <TouchableOpacity
+          {/* <Text style={styles.orText}>Or Sign in With</Text>
+         <TouchableOpacity
             style={styles.buttonGoogle}
             onPress={() => {
               promptAsync();
