@@ -38,7 +38,6 @@ export default function Chat() {
   );
   const [msgList, setMsgList] = useState([]);
   const [newMsg, setNewMsg] = useState("");
-  const [allUsers, setAllUsers] = useState([]);
 
   // ASKING FOR LOCATION PERMISSION
   useEffect(() => {
@@ -65,12 +64,6 @@ export default function Chat() {
         });
       }
     })();
-
-    fetch(`http://${fetchIp.myIp}:3000/users/all`)
-      .then((res) => res.json())
-      .then((data) => {
-        setAllUsers(data);
-      });
   }, []);
 
   //GET ALL MESSAGE FROM A CHANNEL
