@@ -4,23 +4,18 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import MapView, { Marker } from "react-native-maps";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import CountryFlag from "react-native-country-flag";
-const dataVaccins = require("../vaccins.json");
 import fecthIp from "../fetchIp.json";
 import { Feather } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 
 export default function ProfilScreen({ navigation }) {
-  // const [lat, setLat] = useState();
-  // const [long, setLong] = useState()
-  const trip = useSelector((state) => state.trip.value);
-  const user = useSelector((state) => state.user.value.username);
+  const user = useSelector((state) => state.user.value);
   const [visitedCountries, setVisitedCountries] = useState([]);
 
   let markers = [];
 
   useEffect(() => {
-    fetch(`http://${fecthIp.myIp}:3000/users/alltrips/${user}`)
+    fetch(`http://${fecthIp.myIp}:3000/users/alltrips/${user.token}`)
       .then((res) => res.json())
       .then((data) => {
         for (let i = 0; i < data.trips.length; i++) {
@@ -52,27 +47,6 @@ export default function ProfilScreen({ navigation }) {
         pinColor="#20B08E"
       />
     );
-  });
-
-  const listingTrip = trip.trip.map((elmt, index) => {
-    return dataVaccins.map((count, i) => {
-      if (count.country === elmt.name.toUpperCase().split(" ")[1]) {
-        return (
-          <View style={{ alignItems: "center" }} key={index}>
-            <CountryFlag
-              style={{
-                borderRadius: 5,
-                borderWidth: 2,
-                borderColor: "#F6F6F6",
-              }}
-              isoCode={count.code}
-              size={40}
-              key={i}
-            />
-          </View>
-        );
-      }
-    });
   });
 
   return (
@@ -131,16 +105,9 @@ export default function ProfilScreen({ navigation }) {
             latitudeDelta: 180,
             longitudeDelta: 180,
           }}
-          // onLongPress={(e) => {
-          //   setLong(e.nativeEvent.coordinate.longitude);
-          //   setLat(e.nativeEvent.coordinate.latitude);
-          // }}
         >
           {markers}
         </MapView>
-      </View>
-      <View style={styles.countries}>
-        <View style={styles.flags}>{listingTrip}</View>
       </View>
     </View>
   );
@@ -183,17 +150,5 @@ const styles = StyleSheet.create({
     height: "100%",
     alignItems: "center",
     justifyContent: "center",
-  },
-
-  countries: {
-    width: "100%",
-    backgroundColor: "#21A37C",
-    paddingTop: 30,
-  },
-  flags: {
-    flexDirection: "row",
-    justifyContent: "space-around",
-    alignItems: "center",
-    marginBottom: 30,
   },
 });

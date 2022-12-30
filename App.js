@@ -30,7 +30,7 @@ import TravelRecapScreen from "./screens/TravelRecapScreen";
 import WishlistScreen from "./screens/WishlistScreen";
 import FinalTravelScreen from "./screens/FinalTravelScreen";
 import { Feather } from "@expo/vector-icons";
-import { LogBox } from "react-native";
+// import { LogBox } from "react-native";
 
 // ------------------ CUSTOM FONTS ---------------------
 
@@ -48,7 +48,7 @@ const store = configureStore({
   reducer: { trip, user, todo, array },
 });
 
-LogBox.ignoreAllLogs();
+// LogBox.ignoreAllLogs();
 
 const TabNavigator = () => {
   return (
@@ -62,10 +62,6 @@ const TabNavigator = () => {
               iconName = "home";
               return <Feather name={iconName} size={size} color={color} />;
             }
-            // if (route.name === "Itinéraires") {
-            //   iconName = "route";
-            //   return <FontAwesome5 name={iconName} size={size} color={color} />
-            // }
             if (route.name === "Chat") {
               iconName = "chatbubble-ellipses";
               return <Ionicons name={iconName} size={size} color={color} />;
@@ -78,8 +74,6 @@ const TabNavigator = () => {
         })}
       >
         <Tab.Screen name="Home" component={HomeScreen} />
-        {/* <Tab.Screen name="Itinéraires" component={TripScreen} /> */}
-        {/* <Tab.Screen name='Itinéraires' component={CountrySearchScreen}/> */}
         <Tab.Screen name="Chat" component={ChatScreen} />
       </Tab.Navigator>
     </Provider>

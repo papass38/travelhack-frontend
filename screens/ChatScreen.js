@@ -31,7 +31,7 @@ const pusher = new Pusher(PUSHER_KEY, {
 export default function Chat() {
   const scrollViewMsgRef = useRef(null);
 
-  const myUsername = useSelector((state) => state.user.value.username);
+  const user = useSelector((state) => state.user.value);
 
   const [locationName, setLocationName] = useState(
     "Allow location in settings to get access to this feature"
@@ -79,17 +79,8 @@ export default function Chat() {
       .then((res) => res.json())
       .then((data) => {
         if (data.result) {
-          const allMsg = [];
-          for (let i of data.message) {
-            allMsg.push({
-              name: i.name,
-              channel: i.channel,
-              message: i.message,
-              date: i.date,
-            });
-          }
           setMsgList(
-            allMsg.sort((a, b) => {
+            data.message.sort((a, b) => {
               return new Date(b.date) + new Date(a.date);
             })
           );
@@ -98,7 +89,7 @@ export default function Chat() {
 
     // WAITING A MESSAGE TO COME IN PUSHER AND START THE FUNCTION
     const subscription = pusher.subscribe(locationName);
-    subscription.bind("pusher:subscription_succeeded", (data) => {
+    subscription.bind("pusher:subscription_succeeded", () => {
       subscription.bind("message", (data) => {
         setMsgList((prevState) => [...prevState, data]);
       });
@@ -111,7 +102,7 @@ export default function Chat() {
     let msgText = styles.msgText;
     let usernameStyle = { textAlign: "left" };
 
-    if (data.name === myUsername) {
+    if (data.user.username === user.username) {
       msgContainer = styles.myMsgContainer;
       msgText = styles.myMsgText;
       usernameStyle = { textAlign: "right" };
@@ -138,20 +129,16 @@ export default function Chat() {
     let profilImg =
       "https://media.istockphoto.com/id/1300845620/fr/vectoriel/appartement-dic%C3%B4ne-dutilisateur-isol%C3%A9-sur-le-fond-blanc-symbole-utilisateur.jpg?b=1&s=170667a&w=0&k=20&c=HEO2nP4_uEAn0_JzVTU6_Y5hyn-qHxyCrWWTirBvScs=";
 
-    if (allUsers.some((e) => e.username === data.name)) {
-      const imgFound = allUsers.find((e) => e.username === data.name).photo;
-      if (imgFound) {
-        profilImg = imgFound;
-      }
+    if (data.user.photo) {
+      profilImg = data.user.photo;
     }
-
     return (
       <View key={i}>
         {dateOne}
         <View style={msgContainer}>
           <Image source={{ uri: profilImg }} style={styles.msgImg} />
           <View style={styles.usernameMsgContainer}>
-            <Text style={usernameStyle}>{data.name}</Text>
+            <Text style={usernameStyle}>{data.user.username}</Text>
             <Text style={msgText}>{data.message}</Text>
           </View>
         </View>
@@ -165,11 +152,10 @@ export default function Chat() {
       return;
     }
 
-    fetch(`http://${fetchIp.myIp}:3000/chat/newChat`, {
+    fetch(`http://${fetchIp.myIp}:3000/chat/newChat/${user.token}`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        name: myUsername,
         message: newMsg,
         channel: locationName,
         date: new Date(),

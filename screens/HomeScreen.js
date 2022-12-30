@@ -16,37 +16,31 @@ import fetchIp from "../fetchIp.json";
 import Modal from "react-native-modal";
 
 export default function HomeScreen({ navigation }) {
-  const myUsername = useSelector((state) => state.user.value.username);
+  const user = useSelector((state) => state.user.value);
 
   const [newTripsList, setNewTripsList] = useState([]);
   const [oldTripsList, setOldTripsList] = useState([]);
 
   const [isModalVisible, setModalVisible] = useState(false);
-  const [modalData, setModalData] = useState({
-    destination: "Londres",
-    startDate: "20/12/2022",
-    endDate: "27/12/2022",
-    steps: [{ name: "Manchester" }, { name: "Chelsea" }, { name: "Liverpool" }],
-    totalBudget: "522.19",
-  });
+  const [modalData, setModalData] = useState({});
 
   const TravelImage = [
-    "https://images.unsplash.com/photo-1583653319049-4db347571740?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8MTZ8MTQwMTcxMnx8ZW58MHx8fHw%3D&w=1000&q=80", 
-    "https://img.static-rmg.be/a/view/q75/w4000/h2667/4779070/2135445-jpg.jpg", 
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSY3TCE94CXtQ2wAs1kTVLg6fRym18e9-6fiw&usqp=CAU", 
-    "https://i.pinimg.com/564x/82/f0/97/82f0979c0934212e303af2fe6707e1dd.jpg", 
-    "https://i.pinimg.com/564x/74/f3/ad/74f3ada6009269bb8f359f5c0a0a6601.jpg", 
+    "https://images.unsplash.com/photo-1583653319049-4db347571740?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8MTZ8MTQwMTcxMnx8ZW58MHx8fHw%3D&w=1000&q=80",
+    "https://img.static-rmg.be/a/view/q75/w4000/h2667/4779070/2135445-jpg.jpg",
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSY3TCE94CXtQ2wAs1kTVLg6fRym18e9-6fiw&usqp=CAU",
+    "https://i.pinimg.com/564x/82/f0/97/82f0979c0934212e303af2fe6707e1dd.jpg",
+    "https://i.pinimg.com/564x/74/f3/ad/74f3ada6009269bb8f359f5c0a0a6601.jpg",
     "https://i.pinimg.com/564x/ed/dd/27/eddd279b5b74950e3590cc1a92bb4ba7.jpg",
-    "https://i.pinimg.com/474x/31/31/a5/3131a51d5077aaae22d46d69eace1bfc.jpg", 
-    "https://i.pinimg.com/564x/03/a8/9e/03a89ecf6b1aa248e56c2fda651b7d92.jpg", 
-    "https://i.pinimg.com/564x/b6/9d/e6/b69de628eb90bf5502d6869eaac1f178.jpg", 
-    "https://i.pinimg.com/736x/0b/8c/0a/0b8c0a5340d62457ff521598a9fdd9a7.jpg"
-  ]
+    "https://i.pinimg.com/474x/31/31/a5/3131a51d5077aaae22d46d69eace1bfc.jpg",
+    "https://i.pinimg.com/564x/03/a8/9e/03a89ecf6b1aa248e56c2fda651b7d92.jpg",
+    "https://i.pinimg.com/564x/b6/9d/e6/b69de628eb90bf5502d6869eaac1f178.jpg",
+    "https://i.pinimg.com/736x/0b/8c/0a/0b8c0a5340d62457ff521598a9fdd9a7.jpg",
+  ];
 
   const isFocused = useIsFocused();
 
   const fetchTrips = () => {
-    fetch(`http://${fetchIp.myIp}:3000/users/alltrips/${myUsername}`)
+    fetch(`http://${fetchIp.myIp}:3000/users/alltrips/${user.token}`)
       .then((res) => res.json())
       .then((data) => {
         const newTripTab = [];
@@ -78,12 +72,11 @@ export default function HomeScreen({ navigation }) {
     newTripsExist = "";
   }
 
-  const deleteTrip = (myId, endDate) => {
-    fetch(`http://${fetchIp.myIp}:3000/users/removeTrip/${myUsername}`, {
+  const deleteTrip = (myId) => {
+    fetch(`http://${fetchIp.myIp}:3000/users/removeTrip/${user.token}`, {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        username: myUsername,
         id: myId,
       }),
     })
@@ -119,14 +112,17 @@ export default function HomeScreen({ navigation }) {
           <Image
             style={styles.imgTrip}
             source={{
-              uri: TravelImage[Math.floor(Math.random()*TravelImage.length)],
+              uri: TravelImage[Math.floor(Math.random() * TravelImage.length)],
             }}
           />
 
           <View style={styles.textNewTrip}>
             <View>
               <Text style={{ fontWeight: "bold" }}>{data.destination}</Text>
-              <Text>{new Date(data.startDate).toLocaleDateString()}</Text>
+              <Text>
+                {new Date(data.startDate).toLocaleDateString()} -{" "}
+                {new Date(data.endDate).toLocaleDateString()}
+              </Text>
             </View>
           </View>
         </TouchableOpacity>
@@ -159,7 +155,7 @@ export default function HomeScreen({ navigation }) {
           <Image
             style={styles.imgOldTrip}
             source={{
-              uri: TravelImage[Math.floor(Math.random()*TravelImage.length)],
+              uri: TravelImage[Math.floor(Math.random() * TravelImage.length)],
             }}
           />
 
@@ -167,8 +163,8 @@ export default function HomeScreen({ navigation }) {
             <View>
               <Text style={{ fontWeight: "bold" }}>{data.destination}</Text>
               <Text>
-                {new Date(data.startDate).toLocaleDateString()} -
-                {new Date(data.endDate).toLocaleDateString()}{" "}
+                {new Date(data.startDate).toLocaleDateString()} -{" "}
+                {new Date(data.endDate).toLocaleDateString()}
               </Text>
             </View>
           </View>
@@ -176,13 +172,16 @@ export default function HomeScreen({ navigation }) {
       );
     });
 
-  const stepsModal = modalData.steps.map((data, i) => {
-    return (
-      <Text key={i} style={{ marginVertical: 2 }}>
-        &#8594; {data.name}
-      </Text>
-    );
-  });
+  let stepsModal;
+  if (modalData.steps) {
+    stepsModal = modalData.steps.map((data, i) => {
+      return (
+        <Text key={i} style={{ marginVertical: 2 }}>
+          &#8594; {data.name}
+        </Text>
+      );
+    });
+  }
 
   return (
     <View style={styles.container}>

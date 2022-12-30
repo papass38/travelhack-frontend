@@ -21,7 +21,7 @@ export default function FavoriteScreen({ navigation }) {
   const user = useSelector((state) => state.user.value);
 
   useEffect(() => {
-    fetch(`http://${fetchIp.myIp}:3000/users/${user.username}`)
+    fetch(`http://${fetchIp.myIp}:3000/users/${user.token}`)
       .then((res) => res.json())
       .then((data) => {
         setArray(data.user.favorites);
@@ -43,7 +43,7 @@ export default function FavoriteScreen({ navigation }) {
   });
 
   const handleRemove = (e) => {
-    fetch(`http://${fetchIp.myIp}:3000/users/removeFavorite/${user.username}`, {
+    fetch(`http://${fetchIp.myIp}:3000/users/removeFavorite/${user.token}`, {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ name: e.name }),
@@ -58,7 +58,7 @@ export default function FavoriteScreen({ navigation }) {
   const handleClick = () => {
     console.log(input);
     if (input) {
-      fetch(`http://${fetchIp.myIp}:3000/users/addFavorite/${user.username}`, {
+      fetch(`http://${fetchIp.myIp}:3000/users/addFavorite/${user.token}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name: input }),
