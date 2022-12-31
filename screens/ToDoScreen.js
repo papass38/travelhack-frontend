@@ -23,10 +23,6 @@ import { AntDesign } from "@expo/vector-icons";
 const dataCheckList = require("../toDoData.json");
 const dataVaccins = require("../vaccins.json");
 
-// dataCheckList.map((elmt) => {
-//   console.log(elmt.documents);
-// });
-
 export default function ToDoScreen({ navigation }) {
   const [modalVisible, setModalVisible] = useState(false);
   const [dataId, setDataId] = useState(0);
@@ -38,34 +34,7 @@ export default function ToDoScreen({ navigation }) {
   const [task, setTask] = useState([]);
 
   useEffect(() => {
-    fetch(`http://${fetchIp.myIp}:3000/users/newTrip/${user.username}`)
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.result) {
-          // console.log(data);
-          // console.log(data.newTrip._id);
-          // console.log("trip: ", trip.trip);
-        }
-      });
-  }, []);
-
-  const handleRemove = (e) => {
-    fetch(`http://${fetchIp.myIp}:3000/users/removeTodo/${user.username}`, {
-      method: "DELETE",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ task: e.task }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.result) {
-          setTask(task.filter((data) => data.task !== e.task));
-          console.log("data :", data);
-        }
-      });
-  };
-
-  useEffect(() => {
-    fetch(`http://${fetchIp.myIp}:3000/users/todo/${user.username}`)
+    fetch(`http://${fetchIp.myIp}:3000/users/todo/${user.token}`)
       .then((res) => res.json())
       .then((data) => {
         if (data.result) {
@@ -83,15 +52,41 @@ export default function ToDoScreen({ navigation }) {
     } else if (trip.initialDestination.adress.split(" ").length === 1) {
       setTripData(trip.initialDestination.adress.split(" ")[0].toUpperCase());
     }
-  });
 
-  useEffect(() => {
     dataVaccins.map((elmt) => {
       if (tripData === elmt.country) {
         setVaccins(elmt.vaccinations.name);
       }
     });
   });
+
+  const handleClick = () => {
+    setModalVisible(true);
+
+    fetch(`http://${fetchIp.myIp}:3000/users/todo/${user.token}`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.result) {
+          console.log("data", data.data);
+          setTask(data.data);
+        }
+      });
+  };
+
+  const handleRemove = (e) => {
+    fetch(`http://${fetchIp.myIp}:3000/users/removeTodo/${user.token}`, {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ task: e.task }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.result) {
+          setTask(task.filter((data) => data.task !== e.task));
+          console.log("data :", data);
+        }
+      });
+  };
 
   const listingDataCheckList = dataCheckList.map((elmt) => {
     return (
@@ -109,19 +104,6 @@ export default function ToDoScreen({ navigation }) {
       return <CheckBoxData props={elmt} key={dataId} />;
     }
   });
-
-  const handleClick = () => {
-    setModalVisible(true);
-
-    fetch(`http://${fetchIp.myIp}:3000/users/todo/${user.username}`)
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.result) {
-          console.log("data", data.data);
-          setTask(data.data);
-        }
-      });
-  };
 
   return (
     <View style={styles.container}>
@@ -176,14 +158,6 @@ export default function ToDoScreen({ navigation }) {
               </View>
             </View>
           </View>
-
-          {/* {todo.map((elmt, index) => {
-            return (
-              <View key={index} style={styles.modalChoice}>
-                <Text style={{ color: "#20B08E" }}>{elmt}</Text>
-              </View>
-            );
-          })} */}
           <View>
             {task &&
               task.map((e, i) => {

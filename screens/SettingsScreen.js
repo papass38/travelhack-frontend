@@ -87,7 +87,7 @@ export default function FavoriteScreen({ navigation }) {
   const handleClick = (itemToUpdate, img) => {
     if (itemToUpdate === "userInfo")
       if (inputUsername) {
-        fetch(`http://${fetchIp.myIp}:3000/users/info/${user.username}`, {
+        fetch(`http://${fetchIp.myIp}:3000/users/info/${user.token}`, {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -121,7 +121,7 @@ export default function FavoriteScreen({ navigation }) {
         type: "image/jpeg",
       });
 
-      fetch(`http://${fetchIp.myIp}:3000/users/photo/${user.username}`, {
+      fetch(`http://${fetchIp.myIp}:3000/users/photo/${user.token}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: formData,
