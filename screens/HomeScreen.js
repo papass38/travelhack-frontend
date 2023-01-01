@@ -9,13 +9,16 @@ import {
 } from "react-native";
 import Header from "../components/Header";
 import { AntDesign } from "@expo/vector-icons";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import React, { useEffect, useState } from "react";
 import { useIsFocused } from "@react-navigation/native";
 import fetchIp from "../fetchIp.json";
 import Modal from "react-native-modal";
+import { addTodoId } from "../reducers/toDo";
+import { FontAwesome5 } from "@expo/vector-icons";
 
 export default function HomeScreen({ navigation }) {
+  const dispatch = useDispatch();
   const user = useSelector((state) => state.user.value);
 
   const [newTripsList, setNewTripsList] = useState([]);
@@ -128,19 +131,16 @@ export default function HomeScreen({ navigation }) {
         </TouchableOpacity>
       );
     });
-
   const oldTripsDisplay = oldTripsList
     .sort((a, b) => {
       return new Date(b.startDate) - new Date(a.startDate);
     })
     .map((data, i) => {
-      console.log(data.startDate);
       return (
         <TouchableOpacity
           key={i}
           style={styles.oldTrip}
           onPress={() => {
-            console.log(data["_id"]);
             setModalVisible(!isModalVisible);
             setModalData({
               travelId: data["_id"],
@@ -182,7 +182,6 @@ export default function HomeScreen({ navigation }) {
       );
     });
   }
-
   return (
     <View style={styles.container}>
       <Modal visible={isModalVisible} style={styles.modal}>
@@ -218,12 +217,41 @@ export default function HomeScreen({ navigation }) {
                 {stepsModal}
               </View>
             </View>
+            <View>
+              <TouchableOpacity
+                onPress={() => {
+                  setModalVisible(false);
+                  dispatch(
+                    addTodoId({
+                      name: modalData.destination,
+                      todoId: modalData.travelId,
+                    })
+                  );
+                  navigation.navigate("To Do");
+                }}
+                style={{
+                  flexDirection: "row",
+                  alignItems: "center",
+                  backgroundColor: "#20B08E",
+                  padding: 10,
+                  borderRadius: 10,
+                }}
+              >
+                <FontAwesome5 name="list" size={18} color="white" />
+                <Text
+                  style={{
+                    marginLeft: 10,
+                    color: "white",
+                  }}
+                >
+                  To-Do
+                </Text>
+              </TouchableOpacity>
+            </View>
             <View style={styles.btnModal}>
               <TouchableOpacity
                 style={styles.modalButtonDelete}
-                onPress={() =>
-                  deleteTrip(modalData.travelId, modalData.endDate)
-                }
+                onPress={() => deleteTrip(modalData.travelId)}
               >
                 <Text style={styles.buttonText}>Delete</Text>
               </TouchableOpacity>

@@ -3,26 +3,12 @@ import { FontAwesome5 } from "@expo/vector-icons";
 import { useState } from "react";
 
 export default function ChoiceCheckList({ props, setDataId }) {
-  const [color, setColor] = useState(false);
-
-  const handleSubmit = (e) => {
-    if (e !== props.name) {
-      setColor(false);
-    } else {
-      setColor(true);
-    }
-
-    setTimeout(() => {
-      setColor(false);
-    }, 2000);
-  };
   return (
     <View style={styles.card}>
       <View style={styles.containerCard}>
         <Pressable
           onPress={() => {
             setDataId(props.id);
-            handleSubmit(props.name);
           }}
         >
           <FontAwesome5 name={props.icone} size={36} color="#fff" />
@@ -31,9 +17,9 @@ export default function ChoiceCheckList({ props, setDataId }) {
       <Text
         style={{
           textAlign: "center",
-          color: color ? "#21A37C" : "#7F7F7F",
+          color: "#7F7F7F",
           fontSize: 12,
-          fontWeight: color ? "bold" : "",
+          fontWeight: "bold",
         }}
       >
         {props.name.toUpperCase()}
