@@ -84,7 +84,7 @@ export default function ProfilScreen({ navigation }) {
           />
           <Text style={styles.textIcon}>Settings</Text>
         </View>
-        <View style={styles.icon}>
+        {/* <View style={styles.icon}>
           <MaterialCommunityIcons
             name="format-list-checks"
             size={50}
@@ -93,7 +93,7 @@ export default function ProfilScreen({ navigation }) {
             onPress={() => navigation.navigate("To Do")}
           />
           <Text style={styles.textIcon}>To-do List</Text>
-        </View>
+        </View> */}
       </View>
       <View style={styles.imageContainer}>
         <MapView

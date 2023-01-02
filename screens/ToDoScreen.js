@@ -24,84 +24,74 @@ const dataCheckList = require("../toDoData.json");
 const dataVaccins = require("../vaccins.json");
 
 export default function ToDoScreen({ navigation }) {
-  const [modalVisible, setModalVisible] = useState(false);
+  const [modalVisible, setModalVisible] = useState(true);
   const [dataId, setDataId] = useState(0);
   const [tripData, setTripData] = useState("");
   const [vaccins, setVaccins] = useState();
-  const todo = useSelector((state) => state.todo.value);
-  const trip = useSelector((state) => state.trip.value);
+  const todoId = useSelector((state) => state.todo.value.todoId);
   const user = useSelector((state) => state.user.value);
   const [task, setTask] = useState([]);
 
+  // FOR VACCINE DATA
   useEffect(() => {
-    fetch(`http://${fetchIp.myIp}:3000/users/todo/${user.token}`)
+    fetch(`http://${fetchIp.myIp}:3000/users/todo/${user.token}/${todoId}`)
       .then((res) => res.json())
       .then((data) => {
         if (data.result) {
-          console.log("data", data.data);
-          setTask(data.data);
+          setTask(data.todo);
         }
       });
-  }, []);
-
-  useEffect(() => {
-    if (trip.initialDestination.adress === undefined) {
-      setTripData("");
-    } else if (trip.initialDestination.adress.split(" ").length === 2) {
-      setTripData(trip.initialDestination.adress.split(" ")[1].toUpperCase());
-    } else if (trip.initialDestination.adress.split(" ").length === 1) {
-      setTripData(trip.initialDestination.adress.split(" ")[0].toUpperCase());
-    }
 
     dataVaccins.map((elmt) => {
       if (tripData === elmt.country) {
         setVaccins(elmt.vaccinations.name);
       }
     });
-  });
+  }, []);
 
+  // FOR GETTING TODO DATA IN MODAL
   const handleClick = () => {
     setModalVisible(true);
-
-    fetch(`http://${fetchIp.myIp}:3000/users/todo/${user.token}`)
+    setDataId(0);
+    fetch(`http://${fetchIp.myIp}:3000/users/todo/${user.token}/${todoId}`)
       .then((res) => res.json())
       .then((data) => {
         if (data.result) {
-          console.log("data", data.data);
-          setTask(data.data);
+          setTask(data.todo);
         }
       });
   };
 
+  // REMOVE TODO
   const handleRemove = (e) => {
-    fetch(`http://${fetchIp.myIp}:3000/users/removeTodo/${user.token}`, {
-      method: "DELETE",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ task: e.task }),
-    })
+    fetch(
+      `http://${fetchIp.myIp}:3000/users/removeTodo/${user.token}/${todoId}`,
+      {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ newTodo: e.task }),
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
-        if (data.result) {
-          setTask(task.filter((data) => data.task !== e.task));
-          console.log("data :", data);
-        }
+        setTask(data.todoData);
       });
   };
 
-  const listingDataCheckList = dataCheckList.map((elmt) => {
+  const listingDataCheckList = dataCheckList.map((elmt, i) => {
     return (
       <ChoiceCheckList
         props={elmt}
-        key={elmt.id}
+        key={i}
         dataId={dataId}
         setDataId={setDataId}
       />
     );
   });
 
-  const listingCheckBox = dataCheckList.map((elmt) => {
+  const listingCheckBox = dataCheckList.map((elmt, i) => {
     if (elmt.id === dataId) {
-      return <CheckBoxData props={elmt} key={dataId} />;
+      return <CheckBoxData props={elmt} key={i} />;
     }
   });
 
@@ -183,11 +173,11 @@ export default function ToDoScreen({ navigation }) {
       <TouchableOpacity
         style={styles.button}
         activeOpacity={0.8}
-        onPress={() => navigation.navigate("Profil")}
+        onPress={() => navigation.navigate("TabNavigator")}
       >
         <Ionicons name="ios-arrow-back-circle" size={40} color="#F6F6F6" />
 
-        <Text style={styles.textButton}>Profil</Text>
+        <Text style={styles.textButton}>Home</Text>
       </TouchableOpacity>
     </View>
   );
