@@ -19,9 +19,7 @@ import { FontAwesome } from "@expo/vector-icons";
 
 import * as Location from "expo-location";
 import Pusher from "pusher-js/react-native";
-
-const PUSHER_KEY = "4dfa87353ff9a2ca6457";
-const PUSHER_CLUSTER = "eu";
+import { PUSHER_KEY, PUSHER_CLUSTER } from "@env";
 
 const pusher = new Pusher(PUSHER_KEY, {
   cluster: PUSHER_CLUSTER,
@@ -87,7 +85,7 @@ export default function Chat() {
         setMsgList((prevState) => [...prevState, data]);
       });
     });
-  }, [locationName]);
+  }, [locationName, pusher]);
 
   // DISPLAY ALL MESSAGES
   const msgDisplay = msgList.map((data, i) => {
