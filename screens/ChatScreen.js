@@ -85,6 +85,8 @@ export default function Chat() {
         setMsgList((prevState) => [...prevState, data]);
       });
     });
+
+    return () => pusher.unsubscribe(locationName);
   }, [locationName, pusher]);
 
   // DISPLAY ALL MESSAGES
